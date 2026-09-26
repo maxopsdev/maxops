@@ -1,0 +1,136 @@
+{
+  "service": "dynamodb",
+  "profile": "default",
+  "region": "us-east-1",
+  "state_file": "tests_generator/dynamodb/.dynamodb_capture_state.json",
+  "placeholder_values": {
+    "ACCOUNT_ID": "123456789012",
+    "REGION": "us-east-1",
+    "PROVISIONED_TABLE_NAME": "maxops-payload-dynamodb-provisioned",
+    "ONDEMAND_TABLE_NAME": "maxops-payload-dynamodb-ondemand",
+    "ACTION_CAPACITY_TABLE_NAME": "maxops-payload-dynamodb-action-capacity",
+    "ACTION_BACKUP_TABLE_NAME": "maxops-payload-dynamodb-action-backup",
+    "UNUSED_GSI_NAME": "maxops_payload_unused_gsi"
+  },
+  "capture_window_days": 7,
+  "table_definitions": {
+    "provisioned_capture": {
+      "table_name_placeholder_key": "PROVISIONED_TABLE_NAME",
+      "billing_mode": "PROVISIONED",
+      "provisioned_throughput": {
+        "ReadCapacityUnits": 1,
+        "WriteCapacityUnits": 1
+      },
+      "key_schema": [
+        {
+          "AttributeName": "id",
+          "KeyType": "HASH"
+        }
+      ],
+      "attribute_definitions": [
+        {
+          "AttributeName": "id",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "gsi_key",
+          "AttributeType": "S"
+        }
+      ],
+      "global_secondary_indexes": [
+        {
+          "index_name_placeholder_key": "UNUSED_GSI_NAME",
+          "KeySchema": [
+            {
+              "AttributeName": "gsi_key",
+              "KeyType": "HASH"
+            }
+          ],
+          "Projection": {
+            "ProjectionType": "ALL"
+          },
+          "ProvisionedThroughput": {
+            "ReadCapacityUnits": 1,
+            "WriteCapacityUnits": 1
+          }
+        }
+      ],
+      "tags": {
+        "Name": "{{PROVISIONED_TABLE_NAME}}",
+        "maxops_test": "true",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "provisioned_capture"
+      }
+    },
+    "ondemand_capture": {
+      "table_name_placeholder_key": "ONDEMAND_TABLE_NAME",
+      "billing_mode": "PAY_PER_REQUEST",
+      "key_schema": [
+        {
+          "AttributeName": "id",
+          "KeyType": "HASH"
+        }
+      ],
+      "attribute_definitions": [
+        {
+          "AttributeName": "id",
+          "AttributeType": "S"
+        }
+      ],
+      "tags": {
+        "Name": "{{ONDEMAND_TABLE_NAME}}",
+        "maxops_test": "true",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "ondemand_capture"
+      }
+    },
+    "action_capacity_capture": {
+      "table_name_placeholder_key": "ACTION_CAPACITY_TABLE_NAME",
+      "billing_mode": "PROVISIONED",
+      "provisioned_throughput": {
+        "ReadCapacityUnits": 4,
+        "WriteCapacityUnits": 4
+      },
+      "key_schema": [
+        {
+          "AttributeName": "id",
+          "KeyType": "HASH"
+        }
+      ],
+      "attribute_definitions": [
+        {
+          "AttributeName": "id",
+          "AttributeType": "S"
+        }
+      ],
+      "tags": {
+        "Name": "{{ACTION_CAPACITY_TABLE_NAME}}",
+        "maxops_test": "true",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "action_capacity_capture"
+      }
+    },
+    "action_backup_capture": {
+      "table_name_placeholder_key": "ACTION_BACKUP_TABLE_NAME",
+      "billing_mode": "PAY_PER_REQUEST",
+      "key_schema": [
+        {
+          "AttributeName": "id",
+          "KeyType": "HASH"
+        }
+      ],
+      "attribute_definitions": [
+        {
+          "AttributeName": "id",
+          "AttributeType": "S"
+        }
+      ],
+      "tags": {
+        "Name": "{{ACTION_BACKUP_TABLE_NAME}}",
+        "maxops_test": "true",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "action_backup_capture"
+      }
+    }
+  }
+}

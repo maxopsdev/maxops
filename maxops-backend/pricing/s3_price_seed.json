@@ -1,0 +1,624 @@
+{
+  "us-east-1": {
+    "data_transfer_out.gb": {
+      "as_of": "2026-09-22",
+      "price": null,
+      "status": "not_applicable",
+      "unit": "GB"
+    },
+    "early_delete.DEEP_ARCHIVE.gb": {
+      "as_of": "2026-09-22",
+      "price": 0.00099,
+      "sku": "8ZYWU9F4Z22T53BY",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "tier": "first",
+      "unit": "GB-month"
+    },
+    "early_delete.GLACIER.gb": {
+      "as_of": "2026-09-22",
+      "price": 0.0036,
+      "sku": "AVHPNKWHP35GZ5ZH",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "tier": "first",
+      "unit": "GB-month"
+    },
+    "early_delete.GLACIER_IR.gb": {
+      "as_of": "2026-09-22",
+      "price": 0.004,
+      "sku": "GCDNDUMKKKSY8SH8",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "tier": "first",
+      "unit": "GB-month"
+    },
+    "early_delete.ONEZONE_IA.gb": {
+      "as_of": "2026-09-22",
+      "price": 0.01,
+      "sku": "YQHTRZZKTT737SRB",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "tier": "first",
+      "unit": "GB-month"
+    },
+    "early_delete.STANDARD_IA.gb": {
+      "as_of": "2026-09-22",
+      "price": 0.0125,
+      "sku": "26EY5Q656QEFV8J2",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "tier": "first",
+      "unit": "GB-month"
+    },
+    "it_monitoring.per_1000_objects": {
+      "as_of": "2026-09-22",
+      "price": 0.0025,
+      "sku": "7DR3RFK9W2W43KSC",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "objects/1000"
+    },
+    "request.DEEP_ARCHIVE.config.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.05,
+      "sku": "4F9PAAFX7KA47MVJ",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.DEEP_ARCHIVE.data_read.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.00039999999999999996,
+      "sku": "WDAC2WRXVNRSNQS6",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.DEEP_ARCHIVE.data_write.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.05,
+      "sku": "4F9PAAFX7KA47MVJ",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.DEEP_ARCHIVE.list.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.005,
+      "sku": "E9YHNFENF4XQBZR6",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.DEEP_ARCHIVE.tier_unsplit.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.05,
+      "sku": "4F9PAAFX7KA47MVJ",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.GLACIER.config.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.030000000000000002,
+      "sku": "ETMMA5922DBD756V",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.GLACIER.data_read.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.00039999999999999996,
+      "sku": "MCSM8FJDHGJSZXJQ",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.GLACIER.data_write.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.030000000000000002,
+      "sku": "ETMMA5922DBD756V",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.GLACIER.list.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.005,
+      "sku": "E9YHNFENF4XQBZR6",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.GLACIER.tier_unsplit.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.030000000000000002,
+      "sku": "ETMMA5922DBD756V",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.GLACIER_IR.config.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.02,
+      "sku": "YAXYB5WAVB7U5BRN",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.GLACIER_IR.data_read.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.01,
+      "sku": "6WKRC2AMC45PNCVZ",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.GLACIER_IR.data_write.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.02,
+      "sku": "YAXYB5WAVB7U5BRN",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.GLACIER_IR.list.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.005,
+      "sku": "E9YHNFENF4XQBZR6",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.GLACIER_IR.tier_unsplit.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.02,
+      "sku": "YAXYB5WAVB7U5BRN",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.INTELLIGENT_TIERING.config.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.005,
+      "sku": "CH95C5M2W4QQF3RY",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.INTELLIGENT_TIERING.data_read.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.00039999999999999996,
+      "sku": "AUXZJX5BGC5ZKGGU",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.INTELLIGENT_TIERING.data_write.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.005,
+      "sku": "CH95C5M2W4QQF3RY",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.INTELLIGENT_TIERING.list.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.005,
+      "sku": "E9YHNFENF4XQBZR6",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.INTELLIGENT_TIERING.tier_unsplit.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.005,
+      "sku": "CH95C5M2W4QQF3RY",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.ONEZONE_IA.config.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.01,
+      "sku": "B7AD99B3N6FTT9TR",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.ONEZONE_IA.data_read.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.001,
+      "sku": "Q8UHH97856JSTGFA",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.ONEZONE_IA.data_write.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.01,
+      "sku": "B7AD99B3N6FTT9TR",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.ONEZONE_IA.list.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.005,
+      "sku": "E9YHNFENF4XQBZR6",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.ONEZONE_IA.tier_unsplit.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.01,
+      "sku": "B7AD99B3N6FTT9TR",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.STANDARD.config.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.005,
+      "sku": "E9YHNFENF4XQBZR6",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.STANDARD.data_read.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.00039999999999999996,
+      "sku": "ZWQ6Q48CRJXX4FXE",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.STANDARD.data_write.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.005,
+      "sku": "E9YHNFENF4XQBZR6",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.STANDARD.list.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.005,
+      "sku": "E9YHNFENF4XQBZR6",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.STANDARD.tier_unsplit.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.005,
+      "sku": "E9YHNFENF4XQBZR6",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.STANDARD_IA.config.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.01,
+      "sku": "FNYHUPR3T466JJYM",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.STANDARD_IA.data_read.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.001,
+      "sku": "GWU4HUHFNSRYMYNK",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.STANDARD_IA.data_write.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.01,
+      "sku": "FNYHUPR3T466JJYM",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.STANDARD_IA.list.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.005,
+      "sku": "E9YHNFENF4XQBZR6",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "request.STANDARD_IA.tier_unsplit.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.01,
+      "sku": "FNYHUPR3T466JJYM",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "restore_request.DEEP_ARCHIVE.bulk.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.025,
+      "sku": "JKJJ28K7NEVPDS24",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "restore_request.DEEP_ARCHIVE.expedited.per_1000": {
+      "as_of": "2026-09-22",
+      "price": null,
+      "status": "not_applicable",
+      "unit": "requests/1000"
+    },
+    "restore_request.DEEP_ARCHIVE.standard.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.1,
+      "sku": "SBYTEPUF7PY2UDK2",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "restore_request.GLACIER.bulk.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.0,
+      "sku": "PGJ6CQV6AFUUNQTU",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "restore_request.GLACIER.expedited.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 10.0,
+      "sku": "UZVPN9AWBCUHZHXM",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "restore_request.GLACIER.standard.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.05,
+      "sku": "XMSYDEX5BP3Q5UJE",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "retrieval.DEEP_ARCHIVE.bulk.gb": {
+      "as_of": "2026-09-22",
+      "price": 0.0025,
+      "sku": "QWQS66QW8DACXQD2",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "GB"
+    },
+    "retrieval.DEEP_ARCHIVE.expedited.gb": {
+      "as_of": "2026-09-22",
+      "price": null,
+      "status": "not_applicable",
+      "unit": "GB"
+    },
+    "retrieval.DEEP_ARCHIVE.standard.gb": {
+      "as_of": "2026-09-22",
+      "price": 0.02,
+      "sku": "XEWBRUYWR8PSDPD3",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "GB"
+    },
+    "retrieval.GLACIER.bulk.gb": {
+      "as_of": "2026-09-22",
+      "price": 0.0,
+      "sku": "DJVU2QGWTTYMPVET",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "GB"
+    },
+    "retrieval.GLACIER.expedited.gb": {
+      "as_of": "2026-09-22",
+      "price": 0.03,
+      "sku": "893YY33ZT2VG9JGZ",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "GB"
+    },
+    "retrieval.GLACIER.standard.gb": {
+      "as_of": "2026-09-22",
+      "price": 0.01,
+      "sku": "RWFBVGMQR3SY34J8",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "GB"
+    },
+    "retrieval.GLACIER_IR.bulk.gb": {
+      "as_of": "2026-09-22",
+      "price": null,
+      "status": "not_applicable",
+      "unit": "GB"
+    },
+    "retrieval.GLACIER_IR.expedited.gb": {
+      "as_of": "2026-09-22",
+      "price": null,
+      "status": "not_applicable",
+      "unit": "GB"
+    },
+    "retrieval.GLACIER_IR.instant.gb": {
+      "as_of": "2026-09-22",
+      "price": 0.03,
+      "sku": "CN3DWKRWAMMHWCA3",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "GB"
+    },
+    "retrieval.GLACIER_IR.standard.gb": {
+      "as_of": "2026-09-22",
+      "price": null,
+      "status": "not_applicable",
+      "unit": "GB"
+    },
+    "retrieval.ONEZONE_IA.bulk.gb": {
+      "as_of": "2026-09-22",
+      "price": null,
+      "status": "not_applicable",
+      "unit": "GB"
+    },
+    "retrieval.ONEZONE_IA.expedited.gb": {
+      "as_of": "2026-09-22",
+      "price": null,
+      "status": "not_applicable",
+      "unit": "GB"
+    },
+    "retrieval.ONEZONE_IA.instant.gb": {
+      "as_of": "2026-09-22",
+      "price": 0.01,
+      "sku": "2C7JEQ54QWYYWGZ6",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "GB"
+    },
+    "retrieval.ONEZONE_IA.standard.gb": {
+      "as_of": "2026-09-22",
+      "price": null,
+      "status": "not_applicable",
+      "unit": "GB"
+    },
+    "retrieval.STANDARD_IA.bulk.gb": {
+      "as_of": "2026-09-22",
+      "price": null,
+      "status": "not_applicable",
+      "unit": "GB"
+    },
+    "retrieval.STANDARD_IA.expedited.gb": {
+      "as_of": "2026-09-22",
+      "price": null,
+      "status": "not_applicable",
+      "unit": "GB"
+    },
+    "retrieval.STANDARD_IA.instant.gb": {
+      "as_of": "2026-09-22",
+      "price": 0.01,
+      "sku": "7594RTQEE8ND34GA",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "GB"
+    },
+    "retrieval.STANDARD_IA.standard.gb": {
+      "as_of": "2026-09-22",
+      "price": null,
+      "status": "not_applicable",
+      "unit": "GB"
+    },
+    "storage.DEEP_ARCHIVE.gb_month": {
+      "as_of": "2026-09-22",
+      "price": 0.00099,
+      "sku": "SKAKWE8C8SPXCVHA",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "tier": "first",
+      "unit": "GB-month"
+    },
+    "storage.GLACIER.gb_month": {
+      "as_of": "2026-09-22",
+      "price": 0.0036,
+      "sku": "ZGASJWMFVH7NM8RK",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "tier": "first",
+      "unit": "GB-month"
+    },
+    "storage.GLACIER_IR.gb_month": {
+      "as_of": "2026-09-22",
+      "price": 0.004,
+      "sku": "NMJQ7TNW84EMBGZM",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "tier": "first",
+      "unit": "GB-month"
+    },
+    "storage.INTELLIGENT_TIERING.gb_month": {
+      "as_of": "2026-09-22",
+      "price": 0.023,
+      "sku": "T5CD4UDRVV44YE2T",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "tier": "first",
+      "unit": "GB-month"
+    },
+    "storage.ONEZONE_IA.gb_month": {
+      "as_of": "2026-09-22",
+      "price": 0.01,
+      "sku": "KRY2B57FKTA8GJW7",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "tier": "first",
+      "unit": "GB-month"
+    },
+    "storage.STANDARD.gb_month": {
+      "as_of": "2026-09-22",
+      "price": 0.023,
+      "sku": "WP9ANXZGBYYSGJEA",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "tier": "first",
+      "unit": "GB-month"
+    },
+    "storage.STANDARD_IA.gb_month": {
+      "as_of": "2026-09-22",
+      "price": 0.0125,
+      "sku": "379GYJUQ5WFBUYGM",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "tier": "first",
+      "unit": "GB-month"
+    },
+    "transition.DEEP_ARCHIVE.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.05,
+      "sku": "GQYN2VTWYJQVTWHQ",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "transition.GLACIER.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.030000000000000002,
+      "sku": "M2EZ4Q623R8XZ29A",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "transition.GLACIER_IR.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.02,
+      "sku": "GMZJHKZDB9NQ9KKY",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "transition.INTELLIGENT_TIERING.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.01,
+      "sku": "BUS5A6KXQNHDMERS",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "transition.ONEZONE_IA.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.01,
+      "sku": "7Q8ZATUMRNWEPNWW",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    },
+    "transition.STANDARD_IA.per_1000": {
+      "as_of": "2026-09-22",
+      "price": 0.01,
+      "sku": "JS3WNUP3WAZ96Q9X",
+      "source_url": "aws-pricing-api",
+      "status": "resolved",
+      "unit": "requests/1000"
+    }
+  }
+}

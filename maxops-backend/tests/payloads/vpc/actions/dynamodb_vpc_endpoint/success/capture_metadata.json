@@ -1,0 +1,121 @@
+{
+  "account_id": "123456789012",
+  "action_key": "dynamodb_vpc_endpoint",
+  "calls": [
+    {
+      "kwargs": {
+        "VpcIds": [
+          "vpc-ENDPOINT"
+        ]
+      },
+      "operation": "describe_vpcs",
+      "raises_client_error": false,
+      "response_file": "01_ec2__describe_vpcs__response.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {
+        "Filters": [
+          {
+            "Name": "vpc-id",
+            "Values": [
+              "vpc-ENDPOINT"
+            ]
+          },
+          {
+            "Name": "service-name",
+            "Values": [
+              "com.amazonaws.us-east-1.dynamodb"
+            ]
+          }
+        ]
+      },
+      "operation": "describe_vpc_endpoints",
+      "raises_client_error": false,
+      "response_file": "02_ec2__describe_vpc_endpoints__response.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {
+        "RouteTableIds": [
+          "rtb-ENDPOINT"
+        ],
+        "ServiceName": "com.amazonaws.us-east-1.dynamodb",
+        "VpcEndpointType": "Gateway",
+        "VpcId": "vpc-ENDPOINT"
+      },
+      "operation": "create_vpc_endpoint",
+      "raises_client_error": false,
+      "response_file": "03_ec2__create_vpc_endpoint__response.json",
+      "service": "ec2"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "vpc_no_dynamodb_vpc_endpoint",
+  "expected_message": "DynamoDB VPC endpoint creation submitted",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "dynamodb_vpc_endpoint",
+    "check_id": "vpc_no_dynamodb_vpc_endpoint",
+    "details": {
+      "region": "us-east-1",
+      "response": {
+        "ResponseMetadata": {
+          "HTTPHeaders": {
+            "cache-control": "no-cache, no-store",
+            "content-type": "text/xml;charset=UTF-8",
+            "date": "Sun, 14 Jun 2026 17:23:46 GMT",
+            "server": "AmazonEC2",
+            "strict-transport-security": "max-age=31536000; includeSubDomains",
+            "transfer-encoding": "chunked",
+            "vary": "accept-encoding",
+            "x-amzn-requestid": "48a5ec16-6053-4639-9af8-c98bf2fae989"
+          },
+          "HTTPStatusCode": 200,
+          "RequestId": "48a5ec16-6053-4639-9af8-c98bf2fae989",
+          "RetryAttempts": 0
+        },
+        "VpcEndpoint": {
+          "CreationTimestamp": "2026-06-14T17:23:46+00:00",
+          "DnsEntries": [],
+          "DnsOptions": {
+            "DnsRecordIpType": "service-defined"
+          },
+          "Groups": [],
+          "IpAddressType": "ipv4",
+          "NetworkInterfaceIds": [],
+          "OwnerId": "123456789012",
+          "PolicyDocument": "{\"Version\":\"2008-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"*\",\"Resource\":\"*\"}]}",
+          "PrivateDnsEnabled": false,
+          "RequesterManaged": false,
+          "RouteTableIds": [
+            "rtb-ENDPOINT"
+          ],
+          "ServiceName": "com.amazonaws.us-east-1.dynamodb",
+          "State": "available",
+          "SubnetIds": [],
+          "VpcEndpointId": "vpce-PLACEHOLDER-2",
+          "VpcEndpointType": "Gateway",
+          "VpcId": "vpc-ENDPOINT"
+        }
+      },
+      "route_table_ids": [
+        "rtb-ENDPOINT"
+      ],
+      "service_name": "com.amazonaws.us-east-1.dynamodb",
+      "vpc_endpoint_id": "vpce-PLACEHOLDER-2",
+      "vpc_id": "vpc-ENDPOINT"
+    },
+    "message": "DynamoDB VPC endpoint creation submitted",
+    "status": "submitted"
+  },
+  "parameters": {
+    "route_table_ids": [
+      "rtb-ENDPOINT"
+    ]
+  },
+  "region": "us-east-1",
+  "resource_id": "vpc-ENDPOINT",
+  "resource_ref": "endpoint_vpc",
+  "scenario": "success"
+}

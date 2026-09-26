@@ -1,0 +1,27 @@
+{
+  "Pages": [
+    {
+      "EncodingType": "url",
+      "IsTruncated": false,
+      "KeyMarker": "",
+      "MaxKeys": 1000,
+      "Name": "maxops-payload-s3-replication-dest",
+      "Prefix": "",
+      "ResponseMetadata": {
+        "HTTPHeaders": {
+          "content-type": "application/xml",
+          "date": "Sun, 14 Jun 2026 20:10:10 GMT",
+          "server": "AmazonS3",
+          "transfer-encoding": "chunked",
+          "x-amz-id-2": "O6XuJKCJyi71FS0QBuaPSmQmItou9LyaVXvBIhpt4h7fuAzT7ywXSRQiilJhMBbvB23FlmFZ6x4=",
+          "x-amz-request-id": "VAG9CCVEB6MNM1PQ"
+        },
+        "HTTPStatusCode": 200,
+        "HostId": "O6XuJKCJyi71FS0QBuaPSmQmItou9LyaVXvBIhpt4h7fuAzT7ywXSRQiilJhMBbvB23FlmFZ6x4=",
+        "RequestId": "VAG9CCVEB6MNM1PQ",
+        "RetryAttempts": 0
+      },
+      "VersionIdMarker": ""
+    }
+  ]
+}

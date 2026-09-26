@@ -1,0 +1,128 @@
+{
+  "account_id": "123456789012",
+  "action_key": "vpc_flow_logs_disabling_with_bucket_deletion",
+  "calls": [
+    {
+      "kwargs": {
+        "VpcIds": [
+          "vpc-DELETION"
+        ]
+      },
+      "operation": "describe_vpcs",
+      "raises_client_error": false,
+      "response_file": "01_ec2__describe_vpcs__response.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {
+        "FlowLogIds": [
+          "fl-DELETION"
+        ]
+      },
+      "operation": "describe_flow_logs",
+      "raises_client_error": false,
+      "response_file": "02_ec2__describe_flow_logs__response.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {},
+      "operation": "describe_flow_logs",
+      "raises_client_error": false,
+      "response_file": "03_ec2__describe_flow_logs__response.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {
+        "FlowLogIds": [
+          "fl-DELETION"
+        ]
+      },
+      "operation": "delete_flow_logs",
+      "raises_client_error": false,
+      "response_file": "04_ec2__delete_flow_logs__response.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-vpc-deletion"
+      },
+      "operation": "list_object_versions",
+      "raises_client_error": false,
+      "response_file": "05_s3__list_object_versions__response.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-vpc-deletion",
+        "Delete": {
+          "Objects": [
+            {
+              "Key": "AWSLogs/123456789012/",
+              "VersionId": "o1KLi2hGxI2_xWSj1DiZdrbcI2Cm1z24"
+            },
+            {
+              "Key": "AWSLogs/123456789012/",
+              "VersionId": "WneDosmdEOBs1g7VmbrQfRvf8LF9pjPh"
+            }
+          ],
+          "Quiet": true
+        }
+      },
+      "operation": "delete_objects",
+      "raises_client_error": false,
+      "response_file": "06_s3__delete_objects__response.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-vpc-deletion"
+      },
+      "operation": "list_objects_v2",
+      "raises_client_error": false,
+      "response_file": "07_s3__list_objects_v2__response.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-vpc-deletion"
+      },
+      "operation": "delete_bucket",
+      "raises_client_error": false,
+      "response_file": "08_s3__delete_bucket__response.json",
+      "service": "s3"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "vpc_flow_logs_enabled",
+  "expected_message": "VPC flow logs and approved destination buckets deleted",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "vpc_flow_logs_disabling_with_bucket_deletion",
+    "check_id": "vpc_flow_logs_enabled",
+    "details": {
+      "deleted_bucket_names": [
+        "maxops-payload-vpc-deletion"
+      ],
+      "deleted_flow_log_ids": [
+        "fl-DELETION"
+      ],
+      "region": "us-east-1",
+      "vpc_id": "vpc-DELETION"
+    },
+    "message": "VPC flow logs and approved destination buckets deleted",
+    "status": "submitted"
+  },
+  "parameters": {
+    "bucket_names": [
+      "maxops-payload-vpc-deletion"
+    ],
+    "confirm_delete_buckets": true,
+    "flow_log_ids": [
+      "fl-DELETION"
+    ]
+  },
+  "region": "us-east-1",
+  "resource_id": "vpc-DELETION",
+  "resource_ref": "deletion_vpc",
+  "scenario": "success"
+}

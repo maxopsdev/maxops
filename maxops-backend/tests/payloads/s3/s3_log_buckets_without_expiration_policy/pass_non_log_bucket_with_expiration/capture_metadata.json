@@ -1,0 +1,40 @@
+{
+  "bucket_placeholders": {
+    "compliant_nonversioned": "maxops-payload-s3-compliant-nonversioned"
+  },
+  "calls": [
+    {
+      "operation": "list_buckets",
+      "response_file": "list_buckets.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "compliant_nonversioned",
+      "bucket_name": "maxops-payload-s3-compliant-nonversioned",
+      "operation": "get_bucket_location",
+      "response_file": "get_bucket_location__compliant_nonversioned.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "compliant_nonversioned",
+      "bucket_name": "maxops-payload-s3-compliant-nonversioned",
+      "operation": "get_bucket_tagging",
+      "response_file": "get_bucket_tagging__compliant_nonversioned.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "compliant_nonversioned",
+      "bucket_name": "maxops-payload-s3-compliant-nonversioned",
+      "operation": "get_bucket_lifecycle_configuration",
+      "response_file": "get_bucket_lifecycle_configuration__compliant_nonversioned.json",
+      "service": "s3"
+    }
+  ],
+  "check_id": "s3_log_buckets_without_expiration_policy",
+  "check_parameters": {
+    "region": "us-east-1"
+  },
+  "description": "Use a non-log bucket with expiration configured so the check returns no results.",
+  "expected_matches": [],
+  "scenario": "pass_non_log_bucket_with_expiration"
+}

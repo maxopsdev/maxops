@@ -1,0 +1,42 @@
+{
+  "bucket_placeholders": {
+    "plain_no_lifecycle": "maxops-payload-s3-plain-no-lifecycle"
+  },
+  "calls": [
+    {
+      "operation": "list_buckets",
+      "response_file": "list_buckets.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "plain_no_lifecycle",
+      "bucket_name": "maxops-payload-s3-plain-no-lifecycle",
+      "operation": "get_bucket_location",
+      "response_file": "get_bucket_location__plain_no_lifecycle.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "plain_no_lifecycle",
+      "bucket_name": "maxops-payload-s3-plain-no-lifecycle",
+      "operation": "get_bucket_tagging",
+      "response_file": "get_bucket_tagging__plain_no_lifecycle.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "plain_no_lifecycle",
+      "bucket_name": "maxops-payload-s3-plain-no-lifecycle",
+      "operation": "get_bucket_lifecycle_configuration",
+      "response_file": "get_bucket_lifecycle_configuration__plain_no_lifecycle.json",
+      "service": "s3"
+    }
+  ],
+  "check_id": "s3_no_lifecycle_policy",
+  "check_parameters": {
+    "region": "us-east-1"
+  },
+  "description": "Use a bucket with no lifecycle configuration.",
+  "expected_matches": [
+    "maxops-payload-s3-plain-no-lifecycle"
+  ],
+  "scenario": "flag_bucket_without_lifecycle"
+}

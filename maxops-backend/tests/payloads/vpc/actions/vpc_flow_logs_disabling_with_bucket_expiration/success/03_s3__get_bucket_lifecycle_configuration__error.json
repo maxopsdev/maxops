@@ -1,0 +1,21 @@
+{
+  "Error": {
+    "BucketName": "maxops-payload-vpc-expiration",
+    "Code": "NoSuchLifecycleConfiguration",
+    "Message": "The lifecycle configuration does not exist"
+  },
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "314",
+      "content-type": "application/xml",
+      "date": "Sun, 14 Jun 2026 17:25:56 GMT",
+      "server": "AmazonS3",
+      "x-amz-id-2": "gPK3MYCPJYX9AiIStiEJadTd/u/CgEvCVqAXxEfw6AI7gv+UUVeY6l9Tuj4DicV5DbjPdbNuuuQ=",
+      "x-amz-request-id": "K9BC0MWJT4A7NKMP"
+    },
+    "HTTPStatusCode": 404,
+    "HostId": "gPK3MYCPJYX9AiIStiEJadTd/u/CgEvCVqAXxEfw6AI7gv+UUVeY6l9Tuj4DicV5DbjPdbNuuuQ=",
+    "RequestId": "K9BC0MWJT4A7NKMP",
+    "RetryAttempts": 0
+  }
+}

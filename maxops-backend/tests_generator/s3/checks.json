@@ -1,0 +1,464 @@
+{
+  "s3_no_lifecycle_policy": {
+    "scenarios": {
+      "flag_bucket_without_lifecycle": {
+        "description": "Use a bucket with no lifecycle configuration.",
+        "capture_buckets": [
+          "plain_no_lifecycle"
+        ],
+        "expected_matches": [
+          "{{PLAIN_NO_LIFECYCLE_BUCKET}}"
+        ],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__plain_no_lifecycle.json",
+          "get_bucket_tagging__plain_no_lifecycle.json",
+          "get_bucket_lifecycle_configuration__plain_no_lifecycle.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_bucket_with_lifecycle": {
+        "description": "Use a non-versioned bucket with a valid current-object lifecycle policy.",
+        "capture_buckets": [
+          "compliant_nonversioned"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__compliant_nonversioned.json",
+          "get_bucket_tagging__compliant_nonversioned.json",
+          "get_bucket_lifecycle_configuration__compliant_nonversioned.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "s3_no_expiration_policy": {
+    "scenarios": {
+      "flag_bucket_without_expiration": {
+        "description": "Use a bucket with lifecycle rules that omit current-object expiration.",
+        "capture_buckets": [
+          "lifecycle_no_expiration"
+        ],
+        "expected_matches": [
+          "{{LIFECYCLE_NO_EXPIRATION_BUCKET}}"
+        ],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__lifecycle_no_expiration.json",
+          "get_bucket_tagging__lifecycle_no_expiration.json",
+          "get_bucket_lifecycle_configuration__lifecycle_no_expiration.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_bucket_with_expiration": {
+        "description": "Use a bucket with Expiration configured for current objects.",
+        "capture_buckets": [
+          "compliant_nonversioned"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__compliant_nonversioned.json",
+          "get_bucket_tagging__compliant_nonversioned.json",
+          "get_bucket_lifecycle_configuration__compliant_nonversioned.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "s3_inventory_enabled": {
+    "scenarios": {
+      "flag_bucket_with_inventory": {
+        "description": "Use a bucket with inventory configuration enabled.",
+        "capture_buckets": [
+          "inventory_source"
+        ],
+        "expected_matches": [
+          "{{INVENTORY_SOURCE_BUCKET}}"
+        ],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__inventory_source.json",
+          "get_bucket_tagging__inventory_source.json",
+          "get_bucket_lifecycle_configuration__inventory_source.json",
+          "list_bucket_inventory_configurations__inventory_source.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_bucket_without_inventory": {
+        "description": "Use a bucket with no inventory configuration.",
+        "capture_buckets": [
+          "compliant_nonversioned"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__compliant_nonversioned.json",
+          "get_bucket_tagging__compliant_nonversioned.json",
+          "get_bucket_lifecycle_configuration__compliant_nonversioned.json",
+          "list_bucket_inventory_configurations__compliant_nonversioned.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "s3_logging_enabled": {
+    "scenarios": {
+      "flag_bucket_with_logging": {
+        "description": "Use a bucket with server access logging enabled.",
+        "capture_buckets": [
+          "logging_source"
+        ],
+        "expected_matches": [
+          "{{LOGGING_SOURCE_BUCKET}}"
+        ],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__logging_source.json",
+          "get_bucket_tagging__logging_source.json",
+          "get_bucket_lifecycle_configuration__logging_source.json",
+          "get_bucket_logging__logging_source.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_bucket_without_logging": {
+        "description": "Use a bucket with logging disabled.",
+        "capture_buckets": [
+          "compliant_nonversioned"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__compliant_nonversioned.json",
+          "get_bucket_tagging__compliant_nonversioned.json",
+          "get_bucket_lifecycle_configuration__compliant_nonversioned.json",
+          "get_bucket_logging__compliant_nonversioned.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "s3_log_buckets_without_expiration_policy": {
+    "scenarios": {
+      "flag_log_bucket_without_expiration": {
+        "description": "Use a log-like bucket name with no lifecycle expiration.",
+        "capture_buckets": [
+          "logging_target"
+        ],
+        "expected_matches": [
+          "{{LOGGING_TARGET_BUCKET}}"
+        ],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__logging_target.json",
+          "get_bucket_tagging__logging_target.json",
+          "get_bucket_lifecycle_configuration__logging_target.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_non_log_bucket_with_expiration": {
+        "description": "Use a non-log bucket with expiration configured so the check returns no results.",
+        "capture_buckets": [
+          "compliant_nonversioned"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__compliant_nonversioned.json",
+          "get_bucket_tagging__compliant_nonversioned.json",
+          "get_bucket_lifecycle_configuration__compliant_nonversioned.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "s3_no_archival_policy": {
+    "scenarios": {
+      "flag_bucket_without_archival": {
+        "description": "Use a bucket with expiration but no archival transition.",
+        "capture_buckets": [
+          "lifecycle_no_archival"
+        ],
+        "expected_matches": [
+          "{{LIFECYCLE_NO_ARCHIVAL_BUCKET}}"
+        ],
+        "check_parameters": {
+          "region": "{{REGION}}",
+          "include_infrequent_access": false
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__lifecycle_no_archival.json",
+          "get_bucket_tagging__lifecycle_no_archival.json",
+          "get_bucket_lifecycle_configuration__lifecycle_no_archival.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_bucket_with_archival": {
+        "description": "Use a bucket with archival transitions configured.",
+        "capture_buckets": [
+          "compliant_nonversioned"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "region": "{{REGION}}",
+          "include_infrequent_access": false
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__compliant_nonversioned.json",
+          "get_bucket_tagging__compliant_nonversioned.json",
+          "get_bucket_lifecycle_configuration__compliant_nonversioned.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "s3_no_mpu_policy": {
+    "scenarios": {
+      "flag_bucket_without_abort_mpu": {
+        "description": "Use a bucket with lifecycle rules but no AbortIncompleteMultipartUpload clause.",
+        "capture_buckets": [
+          "lifecycle_no_mpu"
+        ],
+        "expected_matches": [
+          "{{LIFECYCLE_NO_MPU_BUCKET}}"
+        ],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__lifecycle_no_mpu.json",
+          "get_bucket_tagging__lifecycle_no_mpu.json",
+          "get_bucket_lifecycle_configuration__lifecycle_no_mpu.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_bucket_with_abort_mpu": {
+        "description": "Use a bucket with AbortIncompleteMultipartUpload configured.",
+        "capture_buckets": [
+          "compliant_nonversioned"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__compliant_nonversioned.json",
+          "get_bucket_tagging__compliant_nonversioned.json",
+          "get_bucket_lifecycle_configuration__compliant_nonversioned.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "s3_no_noncurrent_expiration": {
+    "scenarios": {
+      "flag_versioned_bucket_missing_noncurrent_expiration": {
+        "description": "Use a versioned bucket missing NoncurrentVersionExpiration.",
+        "capture_buckets": [
+          "versioned_missing_noncurrent_controls"
+        ],
+        "expected_matches": [
+          "{{VERSIONED_MISSING_NONCURRENT_BUCKET}}"
+        ],
+        "check_parameters": {
+          "region": "{{REGION}}",
+          "require_versioning_enabled": true
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__versioned_missing_noncurrent_controls.json",
+          "get_bucket_tagging__versioned_missing_noncurrent_controls.json",
+          "get_bucket_lifecycle_configuration__versioned_missing_noncurrent_controls.json",
+          "get_bucket_versioning__versioned_missing_noncurrent_controls.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_versioned_bucket_with_noncurrent_expiration": {
+        "description": "Use a versioned bucket with NoncurrentVersionExpiration configured.",
+        "capture_buckets": [
+          "compliant_versioned"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "region": "{{REGION}}",
+          "require_versioning_enabled": true
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__compliant_versioned.json",
+          "get_bucket_tagging__compliant_versioned.json",
+          "get_bucket_lifecycle_configuration__compliant_versioned.json",
+          "get_bucket_versioning__compliant_versioned.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "s3_no_delete_marker_expiration": {
+    "scenarios": {
+      "flag_versioned_bucket_missing_delete_marker_cleanup": {
+        "description": "Use a versioned bucket missing ExpiredObjectDeleteMarker cleanup.",
+        "capture_buckets": [
+          "versioned_missing_noncurrent_controls"
+        ],
+        "expected_matches": [
+          "{{VERSIONED_MISSING_NONCURRENT_BUCKET}}"
+        ],
+        "check_parameters": {
+          "region": "{{REGION}}",
+          "require_versioning_enabled": true
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__versioned_missing_noncurrent_controls.json",
+          "get_bucket_tagging__versioned_missing_noncurrent_controls.json",
+          "get_bucket_lifecycle_configuration__versioned_missing_noncurrent_controls.json",
+          "get_bucket_versioning__versioned_missing_noncurrent_controls.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_versioned_bucket_with_delete_marker_cleanup": {
+        "description": "Use a versioned bucket with ExpiredObjectDeleteMarker cleanup configured.",
+        "capture_buckets": [
+          "compliant_versioned"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "region": "{{REGION}}",
+          "require_versioning_enabled": true
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__compliant_versioned.json",
+          "get_bucket_tagging__compliant_versioned.json",
+          "get_bucket_lifecycle_configuration__compliant_versioned.json",
+          "get_bucket_versioning__compliant_versioned.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "s3_no_noncurrent_version_transition": {
+    "scenarios": {
+      "flag_versioned_bucket_missing_noncurrent_transition": {
+        "description": "Use a versioned bucket missing NoncurrentVersionTransition.",
+        "capture_buckets": [
+          "versioned_missing_noncurrent_controls"
+        ],
+        "expected_matches": [
+          "{{VERSIONED_MISSING_NONCURRENT_BUCKET}}"
+        ],
+        "check_parameters": {
+          "region": "{{REGION}}",
+          "require_versioning_enabled": true,
+          "include_infrequent_access": false
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__versioned_missing_noncurrent_controls.json",
+          "get_bucket_tagging__versioned_missing_noncurrent_controls.json",
+          "get_bucket_lifecycle_configuration__versioned_missing_noncurrent_controls.json",
+          "get_bucket_versioning__versioned_missing_noncurrent_controls.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_versioned_bucket_with_noncurrent_transition": {
+        "description": "Use a versioned bucket with NoncurrentVersionTransition configured.",
+        "capture_buckets": [
+          "compliant_versioned"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "region": "{{REGION}}",
+          "require_versioning_enabled": true,
+          "include_infrequent_access": false
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__compliant_versioned.json",
+          "get_bucket_tagging__compliant_versioned.json",
+          "get_bucket_lifecycle_configuration__compliant_versioned.json",
+          "get_bucket_versioning__compliant_versioned.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "s3_replication_enabled": {
+    "scenarios": {
+      "flag_bucket_with_replication": {
+        "description": "Use a bucket with replication rules configured.",
+        "capture_buckets": [
+          "replication_source"
+        ],
+        "expected_matches": [
+          "{{REPLICATION_SOURCE_BUCKET}}"
+        ],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__replication_source.json",
+          "get_bucket_tagging__replication_source.json",
+          "get_bucket_lifecycle_configuration__replication_source.json",
+          "get_bucket_replication__replication_source.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_bucket_without_replication": {
+        "description": "Use a bucket without replication rules configured.",
+        "capture_buckets": [
+          "compliant_nonversioned"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "list_buckets.json",
+          "get_bucket_location__compliant_nonversioned.json",
+          "get_bucket_tagging__compliant_nonversioned.json",
+          "get_bucket_lifecycle_configuration__compliant_nonversioned.json",
+          "get_bucket_replication__compliant_nonversioned.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  }
+}

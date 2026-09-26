@@ -1,0 +1,323 @@
+{
+  "generator": {
+    "seed": 20260419,
+    "instance_count": 72,
+    "account_id": "999999999999",
+    "default_region": "us-east-1",
+    "output_dir": "synthetic_data/generated/rds"
+  },
+  "regions": [
+    {
+      "name": "us-east-1",
+      "weight": 0.58,
+      "azs": ["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d"]
+    },
+    {
+      "name": "us-west-2",
+      "weight": 0.27,
+      "azs": ["us-west-2a", "us-west-2b", "us-west-2c"]
+    },
+    {
+      "name": "eu-west-1",
+      "weight": 0.15,
+      "azs": ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+    }
+  ],
+  "distributions": {
+    "environments": {
+      "prod": 0.41,
+      "dev": 0.18,
+      "uat": 0.12,
+      "qa": 0.1,
+      "sandbox": 0.1,
+      "shared": 0.09
+    },
+    "teams": {
+      "payments": 0.16,
+      "commerce": 0.13,
+      "platform": 0.15,
+      "data": 0.11,
+      "risk": 0.1,
+      "identity": 0.08,
+      "support": 0.08,
+      "growth": 0.08,
+      "core-infra": 0.11
+    },
+    "owners": {
+      "alice.chen": 0.09,
+      "miguel.santos": 0.09,
+      "priya.shah": 0.1,
+      "noah.reed": 0.09,
+      "fatima.khan": 0.08,
+      "jordan.kim": 0.08,
+      "sarah.lee": 0.11,
+      "olivia.ng": 0.09,
+      "liam.patel": 0.1,
+      "maya.garcia": 0.09,
+      "ethan.wong": 0.08
+    },
+    "cost_centers": {
+      "CC-1001": 0.15,
+      "CC-1014": 0.13,
+      "CC-1020": 0.12,
+      "CC-1105": 0.18,
+      "CC-1202": 0.11,
+      "CC-1308": 0.1,
+      "CC-1420": 0.11,
+      "CC-1507": 0.1
+    },
+    "business_units": {
+      "consumer": 0.32,
+      "enterprise": 0.21,
+      "operations": 0.13,
+      "risk": 0.12,
+      "data": 0.1,
+      "platform": 0.12
+    },
+    "engine_families": {
+      "postgres": 0.42,
+      "mysql": 0.34,
+      "mariadb": 0.24
+    },
+    "instance_class_families": {
+      "graviton_burstable": 0.28,
+      "non_graviton_burstable": 0.34,
+      "non_graviton_general": 0.22,
+      "non_graviton_memory": 0.16
+    },
+    "usage_profiles": {
+      "steady_healthy": 0.35,
+      "idle_candidate": 0.22,
+      "busy_healthy": 0.18,
+      "non_graviton_candidate": 0.17,
+      "idle_missing_metrics": 0.08
+    }
+  },
+  "tag_dimensions": {
+    "criticality": ["tier1", "tier2", "tier3"],
+    "compliance": ["pci", "sox", "gdpr", "none"],
+    "backup_tiers": ["bronze", "silver", "gold"],
+    "data_classification": ["internal", "confidential", "restricted"]
+  },
+  "naming": {
+    "org_prefix": "maxops-demo",
+    "apps": [
+      "payments",
+      "ledger",
+      "catalog",
+      "pricing",
+      "risk",
+      "auth",
+      "orders",
+      "inventory",
+      "support",
+      "fraud",
+      "analytics",
+      "billing"
+    ],
+    "roles": [
+      "primary",
+      "reporting",
+      "ops",
+      "etl",
+      "warehouse",
+      "serving"
+    ]
+  },
+  "engine_profiles": {
+    "postgres": {
+      "engine_version": "16.3",
+      "port": 5432,
+      "license_model": "postgresql-license",
+      "parameter_group": "default.postgres16",
+      "option_group": "default:postgres-16",
+      "storage_type": "gp3",
+      "allocated_storage_range": [80, 800],
+      "iops_range": [3000, 12000],
+      "throughput_range": [125, 500]
+    },
+    "mysql": {
+      "engine_version": "8.4.8",
+      "port": 3306,
+      "license_model": "general-public-license",
+      "parameter_group": "default.mysql8.4",
+      "option_group": "default:mysql-8-4",
+      "storage_type": "gp2",
+      "allocated_storage_range": [20, 400],
+      "iops_range": [3000, 8000],
+      "throughput_range": [0, 0]
+    },
+    "mariadb": {
+      "engine_version": "11.4.3",
+      "port": 3306,
+      "license_model": "general-public-license",
+      "parameter_group": "default.mariadb11.4",
+      "option_group": "default:mariadb-11-4",
+      "storage_type": "gp3",
+      "allocated_storage_range": [40, 500],
+      "iops_range": [3000, 9000],
+      "throughput_range": [125, 375]
+    }
+  },
+  "instance_class_profiles": {
+    "graviton_burstable": {
+      "classes": {
+        "db.t4g.micro": 0.44,
+        "db.t4g.small": 0.34,
+        "db.t4g.medium": 0.22
+      },
+      "finding_profile": null
+    },
+    "non_graviton_burstable": {
+      "classes": {
+        "db.t3.micro": 0.42,
+        "db.t3.small": 0.32,
+        "db.t3.medium": 0.26
+      },
+      "finding_profile": "rds_non_graviton_instance_class"
+    },
+    "non_graviton_general": {
+      "classes": {
+        "db.m5.large": 0.55,
+        "db.m5.xlarge": 0.45
+      },
+      "finding_profile": "rds_non_graviton_instance_class"
+    },
+    "non_graviton_memory": {
+      "classes": {
+        "db.r5.large": 0.56,
+        "db.r5.xlarge": 0.44
+      },
+      "finding_profile": "rds_non_graviton_instance_class"
+    }
+  },
+  "usage_profiles": {
+    "steady_healthy": {
+      "cpu_range": [18.0, 52.0],
+      "memory_range": [34.0, 68.0],
+      "connections_range": [18, 120],
+      "read_iops_range": [120, 1400],
+      "write_iops_range": [80, 950],
+      "metric_history_pattern": "steady",
+      "finding_profile": null
+    },
+    "idle_candidate": {
+      "cpu_range": [0.3, 4.2],
+      "memory_range": [8.0, 24.0],
+      "connections_range": [0, 3],
+      "read_iops_range": [0, 12],
+      "write_iops_range": [0, 8],
+      "metric_history_pattern": "idle",
+      "finding_profile": "rds_idle_databases"
+    },
+    "busy_healthy": {
+      "cpu_range": [34.0, 82.0],
+      "memory_range": [58.0, 88.0],
+      "connections_range": [40, 260],
+      "read_iops_range": [800, 4200],
+      "write_iops_range": [350, 1800],
+      "metric_history_pattern": "bursty",
+      "finding_profile": null
+    },
+    "non_graviton_candidate": {
+      "cpu_range": [8.0, 38.0],
+      "memory_range": [26.0, 64.0],
+      "connections_range": [10, 80],
+      "read_iops_range": [60, 900],
+      "write_iops_range": [40, 540],
+      "metric_history_pattern": "steady",
+      "finding_profile": "rds_non_graviton_instance_class"
+    },
+    "idle_missing_metrics": {
+      "cpu_range": [0.0, 0.0],
+      "memory_range": [0.0, 0.0],
+      "connections_range": [0, 0],
+      "read_iops_range": [0, 0],
+      "write_iops_range": [0, 0],
+      "metric_history_pattern": "empty",
+      "finding_profile": null
+    }
+  },
+  "finding_profiles": {
+    "rds_idle_databases": {
+      "check_id": "rds_idle_databases",
+      "title": "Idle RDS Database",
+      "finding_type": "idle",
+      "severity": "medium",
+      "confidence_range": [0.82, 0.96],
+      "risk_score_range": [0.07, 0.24],
+      "recommended_action": "stop",
+      "alternative_actions": ["review_workload", "downsize_instance"],
+      "savings_factor": 0.7,
+      "reason_template": "Average CPU {avg_cpu_utilization:.1f}% and {avg_connections:.1f} connections indicate this database is idle."
+    },
+    "rds_non_graviton_instance_class": {
+      "check_id": "rds_non_graviton_instance_class",
+      "title": "Non-Graviton RDS Instance Class",
+      "finding_type": "cost_efficiency",
+      "severity": "low",
+      "confidence_range": [0.74, 0.9],
+      "risk_score_range": [0.12, 0.3],
+      "recommended_action": "migrate_to_graviton_instance_class",
+      "alternative_actions": ["compare_price_performance", "review_workload"],
+      "savings_factor": 0.15,
+      "reason_template": "Instance class {db_instance_class} is not Graviton-based and may be a migration candidate."
+    }
+  },
+  "action_catalog": {
+    "stop": {
+      "label": "Stop Database",
+      "description": "Stop the DB instance during inactive periods to reduce spend.",
+      "parameters": {
+        "mode": "stop"
+      }
+    },
+    "review_workload": {
+      "label": "Review Workload",
+      "description": "Validate whether the database still serves an active workload.",
+      "parameters": {}
+    },
+    "downsize_instance": {
+      "label": "Downsize Instance",
+      "description": "Move to a smaller DB instance class for lower baseline cost.",
+      "parameters": {}
+    },
+    "migrate_to_graviton_instance_class": {
+      "label": "Migrate To Graviton",
+      "description": "Move the workload to the closest Graviton-based DB instance class.",
+      "parameters": {}
+    },
+    "compare_price_performance": {
+      "label": "Compare Price Performance",
+      "description": "Benchmark current and Graviton-based classes before migration.",
+      "parameters": {}
+    }
+  },
+  "seed_profiles": {
+    "idle_graviton_capture": {
+      "seed_check_id": "rds_idle_databases",
+      "seed_scenario": "flag_idle_database",
+      "seed_db_alias": "idle_graviton_capture"
+    },
+    "busy_graviton_capture": {
+      "seed_check_id": "rds_idle_databases",
+      "seed_scenario": "pass_busy_database",
+      "seed_db_alias": "idle_graviton_capture"
+    },
+    "idle_no_metrics_capture": {
+      "seed_check_id": "rds_idle_databases",
+      "seed_scenario": "edge_no_metric_datapoints",
+      "seed_db_alias": "idle_graviton_capture"
+    },
+    "non_graviton_capture": {
+      "seed_check_id": "rds_non_graviton_instance_class",
+      "seed_scenario": "flag_non_graviton_instance",
+      "seed_db_alias": "non_graviton_capture"
+    },
+    "graviton_compliant_capture": {
+      "seed_check_id": "rds_non_graviton_instance_class",
+      "seed_scenario": "pass_graviton_instance",
+      "seed_db_alias": "idle_graviton_capture"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+name: Development Environment Idle Resources
+description: Identify idle EC2 instances in development environments that can be safely stopped or terminated during non-business hours.
+resource: aws.ec2
+filters:
+  - type: tag
+    key: Environment
+    value: Development
+  - type: idle
+    days: 3
+    metrics: [CPUUtilization]
+

@@ -1,0 +1,102 @@
+{
+  "account_id": "123456789012",
+  "action_key": "add_noncurrent_archival_transition",
+  "calls": [
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-versioned-missing-noncurrent"
+      },
+      "operation": "get_bucket_lifecycle_configuration",
+      "raises_client_error": false,
+      "response_file": "01_s3__get_bucket_lifecycle_configuration__response.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-versioned-missing-noncurrent",
+        "LifecycleConfiguration": {
+          "Rules": [
+            {
+              "AbortIncompleteMultipartUpload": {
+                "DaysAfterInitiation": 7
+              },
+              "Expiration": {
+                "Days": 60
+              },
+              "Filter": {
+                "Prefix": ""
+              },
+              "ID": "current-only-controls",
+              "Status": "Enabled",
+              "Transitions": [
+                {
+                  "Days": 30,
+                  "StorageClass": "GLACIER"
+                }
+              ]
+            },
+            {
+              "Expiration": {
+                "ExpiredObjectDeleteMarker": true
+              },
+              "Filter": {
+                "Prefix": ""
+              },
+              "ID": "maxops-delete-marker-cleanup-{{ANY_INT}}",
+              "Status": "Enabled"
+            },
+            {
+              "Filter": {
+                "Prefix": ""
+              },
+              "ID": "maxops-noncurrent-expiration-{{ANY_INT}}",
+              "NoncurrentVersionExpiration": {
+                "NoncurrentDays": 30
+              },
+              "Status": "Enabled"
+            },
+            {
+              "Filter": {
+                "Prefix": ""
+              },
+              "ID": "maxops-noncurrent-archival-{{ANY_INT}}",
+              "NoncurrentVersionTransitions": [
+                {
+                  "NoncurrentDays": 30,
+                  "StorageClass": "GLACIER"
+                }
+              ],
+              "Status": "Enabled"
+            }
+          ]
+        }
+      },
+      "operation": "put_bucket_lifecycle_configuration",
+      "raises_client_error": false,
+      "response_file": "02_s3__put_bucket_lifecycle_configuration__response.json",
+      "service": "s3"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "s3_no_noncurrent_version_transition",
+  "expected_message": "Noncurrent archival transition lifecycle policy added.",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "add_noncurrent_archival_transition",
+    "check_id": "s3_no_noncurrent_version_transition",
+    "details": {
+      "bucket": "maxops-payload-s3-versioned-missing-noncurrent",
+      "days": 30,
+      "rule_id": "maxops-noncurrent-archival-{{ANY_INT}}"
+    },
+    "message": "Noncurrent archival transition lifecycle policy added.",
+    "status": "submitted"
+  },
+  "parameters": {
+    "noncurrent_transition_days": 30
+  },
+  "region": "us-east-1",
+  "resource_id": "maxops-payload-s3-versioned-missing-noncurrent",
+  "resource_ref": "versioned_missing_noncurrent_controls",
+  "scenario": "success"
+}

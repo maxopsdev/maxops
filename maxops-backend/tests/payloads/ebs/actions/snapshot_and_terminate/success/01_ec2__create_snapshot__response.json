@@ -1,0 +1,26 @@
+{
+  "Description": "Snapshot before deleting volume vol-UNATTACHED",
+  "Encrypted": false,
+  "OwnerId": "123456789012",
+  "Progress": "",
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "cache-control": "no-cache, no-store",
+      "content-length": "551",
+      "content-type": "text/xml;charset=UTF-8",
+      "date": "Sun, 14 Jun 2026 20:26:10 GMT",
+      "server": "AmazonEC2",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-amzn-requestid": "d2fc3651-1f88-4783-94b2-818d2c66ac38"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "d2fc3651-1f88-4783-94b2-818d2c66ac38",
+    "RetryAttempts": 0
+  },
+  "SnapshotId": "snap-0980f50d997c38d86",
+  "StartTime": "2026-06-14T20:26:10.579000+00:00",
+  "State": "pending",
+  "Tags": [],
+  "VolumeId": "vol-UNATTACHED",
+  "VolumeSize": 1
+}

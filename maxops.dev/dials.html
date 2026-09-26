@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Dials | MaxOps Adventures №4</title>
+  <meta name="description" content="A page-by-page comic guide to tuning MaxOps: what the defaults are for, the three presets, overriding a single check, what over-tuning feels like, and the one setting that erases your history.">
+  <link rel="icon" type="image/svg+xml" href="./assets/brand/maxops-mark.svg">
+  <link rel="stylesheet" href="./setup-guide.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="masthead">
+  <a class="brand" href="./docs.html"><img src="./assets/brand/maxops-mark.svg" alt="" width="26" height="26">MAXOPS <span>ADVENTURES</span></a>
+  <a class="masthead-back" href="./docs.html">‹ All issues</a>
+  <div class="counter">PAGE <b id="counterNow">1</b> / <span id="counterTotal">1</span></div>
+</header>
+
+<main class="pager" id="pager">
+
+  <!-- ============================================================ 1 COVER -->
+  <section class="page" data-page="1" data-slug="cover" data-chapter="Cover">
+    <div class="spread">
+      <div class="rail" style="align-items:center;">
+        <div class="panel" style="width:100%;">
+          <div class="panel-inner">
+            <img src="./assets/comic/dl-cover.jpg" alt="The Cost Sentinel stands at a large curved control console covered in glowing dials, sliders and toggles." />
+            <div class="halftone"></div>
+            <div class="vignette"></div>
+          </div>
+          <div class="fig-tag">FIG. 01 — COVER</div>
+        </div>
+        <div class="kicker">MaxOps Adventures <b>· Issue №4</b></div>
+        <h1 class="title">THE<br /><em>DIALS</em></h1>
+        <div class="subtitle">Tuning Without Losing Trust</div>
+        <p class="caption" style="border:none; padding-left:0; max-width:58ch;">
+          Tune too hard and every scan becomes noise you learn to ignore. Tune too softly and you quietly
+          miss the savings you installed this for. Here is how to find the middle.
+        </p>
+        <button class="cta" onclick="goTo(2)">Begin the walkthrough ▸</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= 2 DEFAULTS -->
+  <section class="page" data-page="2" data-slug="defaults" data-chapter="Why defaults exist">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">How much of MaxOps is adjustable</span>
+            <div class="mock-tiles">
+              <div class="mock-tile hero"><span>Checks with a dial</span><strong>84</strong></div>
+              <div class="mock-tile hero"><span>Of a total</span><strong>112</strong></div>
+            </div>
+            <div class="mock-tile"><span>Distinct settings behind them</span><strong>119</strong></div>
+            <p class="mock-note ok">Every one ships with a value that already works. You are adjusting, never configuring from scratch.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT A — THE SURFACE</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The starting point <b>· Opinions, not blanks</b></div>
+        <h2 class="title title--sm">WHY THERE ARE<br /><em>DEFAULTS</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Eighty-four of my hundred and three questions have a dial on them. Not one of them starts empty — every dial arrives at a value I already think is right for most accounts.</p>
+        </div>
+        <p class="caption">
+          That matters more than it sounds. A tool that asks you to define "idle" before it will tell you
+          anything is a tool nobody finishes setting up. MaxOps takes a position first — <strong>an instance
+          under 5% CPU for a week is idle</strong> — and lets you argue with it afterwards.
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>So should I be changing these at all?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Not on day one. Run a scan, read what comes back, and change a dial only when a finding is <em>wrong about your workload</em>. Tuning ahead of evidence is just guessing with extra steps.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================== 3 PRESETS -->
+  <section class="page" data-page="3" data-slug="presets" data-chapter="The three presets">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/dl-presets.jpg" alt="A three-position lever labelled Conservative, Normal and Aggressive, with the Sentinel's hand on it and Normal glowing." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 02 — THE LEVER</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The big lever <b>· One control, everything moves</b></div>
+        <h2 class="title title--sm">THE THREE<br /><em>PRESETS</em></h2>
+        <div class="mock-tiles">
+          <div class="mock-tile"><span>Conservative</span><strong>fewer, surer</strong></div>
+          <div class="mock-tile hero"><span>Normal</span><strong>the defaults</strong></div>
+          <div class="mock-tile"><span>Aggressive</span><strong>more, noisier</strong></div>
+        </div>
+        <p class="caption">
+          <strong>Normal</strong> is not a compromise — it is literally the shipped defaults, untouched.
+          <strong>Conservative</strong> makes every check harder to trigger: it waits longer and demands
+          stronger evidence, so you see fewer findings and trust them more.
+          <strong>Aggressive</strong> does the opposite — it surfaces more, sooner, and expects you to do
+          the filtering.
+        </p>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Pick by appetite, not by ambition. Conservative in production where a wrong call is expensive; aggressive in a sandbox where you actually want to see everything.</p>
+        </div>
+        <p class="caption">
+          The preset is the first thing to reach for and the only one most accounts ever need.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================ 4 HOW PRESETS WORK -->
+  <section class="page" data-page="4" data-slug="how-presets-work" data-chapter="What a preset does">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/dl-multiplier.jpg" alt="The Sentinel turns one large master dial while a bank of smaller dials responds, some needles swinging up and others down." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 03 — ONE TURN, TWO DIRECTIONS</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The clever part <b>· Direction matters</b></div>
+        <h2 class="title title--sm">A PRESET DOESN'T<br />REPLACE YOUR<br /><em>NUMBERS</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>It scales them. And it knows which way each one points — because for some settings "aggressive" means a <em>bigger</em> number, and for others it means a <em>smaller</em> one.</p>
+        </div>
+        <p class="caption">
+          Take one check — <strong>idle EC2 instances</strong> — and move the lever. Watch the two columns
+          go opposite ways:
+        </p>
+        <div class="rulebook-wrap">
+          <table class="rulebook">
+            <thead>
+              <tr><th scope="col">Setting</th><th scope="col">Conservative</th><th scope="col">Normal</th><th scope="col">Aggressive</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Days idle</td><td><em>12</em></td><td><em>7</em></td><td><em>4</em></td></tr>
+              <tr><td>CPU under</td><td><em>3.5%</em></td><td><em>5.0%</em></td><td><em>7.0%</em></td></tr>
+              <tr><td>Network under</td><td><em>700</em></td><td><em>1000</em></td><td><em>1350</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="caption">
+          Going aggressive shortens the wait to <strong>4 days</strong> but raises the CPU bar to
+          <strong>7%</strong>. Both changes point the same way — catch more instances — even though one
+          number went down and the other went up. That is the whole trick.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================== 5 PRESETS VS TIERS -->
+  <section class="page" data-page="5" data-slug="presets-vs-tiers" data-chapter="Presets vs tiers">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Settings preset — account-wide</span>
+            <div class="mock-row">
+              <span class="mock-pill">Conservative</span>
+              <span class="mock-pill on">Normal</span>
+              <span class="mock-pill">Aggressive</span>
+            </div>
+            <p class="mock-note">Decides how eagerly <strong>every check</strong> reports. Set once, in Settings.</p>
+            <span class="mock-label gap">Rightsizing tier — per recommendation</span>
+            <div class="mock-row">
+              <span class="mock-pill">Conservative</span>
+              <span class="mock-pill on">Balanced</span>
+              <span class="mock-pill">Aggressive</span>
+            </div>
+            <p class="mock-note">Decides how much headroom <strong>one instance</strong> keeps. Chosen on the recommendation itself.</p>
+            <p class="mock-note bad">Different controls. Note the middle name differs — Normal here, Balanced there.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT B — TWO SLIDERS</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">A confusable pair <b>· Worth ten seconds</b></div>
+        <h2 class="title title--sm">THE PRESET IS NOT<br />THE <em>TIER</em></h2>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>I've seen conservative and aggressive in two different places. Same thing?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>No — and they're worth keeping straight. The <strong>preset</strong> in Settings decides how eagerly every check speaks up. The <strong>tier</strong> on a rightsizing recommendation decides how much breathing room one instance keeps after being resized.</p>
+        </div>
+        <p class="caption">
+          You can sit on the Conservative preset and still choose the Aggressive tier on a particular
+          instance you know is over-provisioned. They answer different questions and never override each
+          other.
+        </p>
+        <p class="caption">
+          The giveaway is the middle option: the preset's is <strong>Normal</strong>, the tier's is
+          <strong>Balanced</strong>. If the word in front of you is "Balanced", you are looking at a
+          rightsizing recommendation.
+        </p>
+        <div class="chips">
+          <a class="chip alt" href="./rightsizer.html#tiers">Tiers explained — Issue №2</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== 6 OVERRIDES -->
+  <section class="page" data-page="6" data-slug="overrides" data-chapter="Overriding one check">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/dl-override.jpg" alt="A row of matching dials with one turned differently, glowing amber, as the Sentinel adjusts it." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 04 — ONE DIAL, MOVED</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Fine tuning <b>· One check at a time</b></div>
+        <h2 class="title title--sm">WHEN ONE CHECK<br />IS <em>WRONG</em> ABOUT YOU</h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>The preset moves everything. Sometimes only one question is wrong — your batch box really is idle for three weeks a month, and that's fine. Change that one dial and leave the rest alone.</p>
+        </div>
+        <p class="caption">
+          Any check can be adjusted individually, and an adjusted check <strong>stops following the
+          preset</strong> for the settings you changed — your value stands until you clear it. Settings
+          shows a running count of how many checks you've customised, so it's always visible how far you've
+          drifted from the shipped behaviour.
+        </p>
+        <div class="mock-tiles">
+          <div class="mock-tile"><span>Settings shows</span><strong>Checks tuned — 3 / 112</strong></div>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Keep that number small and you can still reason about your own configuration. Once it's forty, nobody remembers why any of them are what they are.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================== 7 READING A THRESHOLD -->
+  <section class="page" data-page="7" data-slug="reading-a-threshold" data-chapter="Reading a threshold">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Idle EC2 instances — three of its dials</span>
+            <div class="mock-tile"><span>Days idle</span><strong>7</strong></div>
+            <p class="mock-note">How long the quiet must last before it counts.</p>
+            <div class="mock-tile"><span>CPU under</span><strong>5.0 %</strong></div>
+            <p class="mock-note">Quiet enough to call idle.</p>
+            <div class="mock-tile"><span>Network under</span><strong>1000</strong></div>
+            <p class="mock-note">Because a box can be idle on CPU and still busy on the wire.</p>
+            <p class="mock-note ok">Every one must hold. A check's dials are joined by AND, never OR.</p>
+            <p class="mock-note">This check has more CPU dials than the three shown — peak, 90th and 95th percentile too.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT C — ONE CHECK'S DIALS</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Reading them <b>· All, not any</b></div>
+        <h2 class="title title--sm">WHAT A THRESHOLD<br /><em>ACTUALLY</em> ASKS</h2>
+        <p class="caption">
+          The single most useful thing to know about a check's dials: <strong>they combine with AND.</strong>
+          An instance is only idle if it is under 5% CPU <em>and</em> under its peak and percentile limits
+          <em>and</em> under the network floor <em>and</em> has been for seven days. Loosening one dial does
+          not open the floodgates — every other one still has to agree.
+        </p>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Which is why raising CPU from 5% to 7% is safer than it sounds, and why dropping the days from 7 to 1 is more dangerous than it sounds. Time is the dial that protects you from transients.</p>
+        </div>
+        <p class="caption">
+          Each control also has limits. Values are held inside a sensible range and snapped to sensible
+          increments, so a preset can never push a setting somewhere the check cannot use — and neither
+          can a slip of the mouse.
+        </p>
+        <div class="chips">
+          <a class="chip alt" href="./checks.html#grace-periods">Grace periods — Issue №3</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================== 8 TOO AGGRESSIVE -->
+  <section class="page" data-page="8" data-slug="too-aggressive" data-chapter="Tuned too hard">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/dl-noise.jpg" alt="The Sentinel half-buried in a swirling blizzard of glowing alert cards, shielding itself with one hand." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 05 — THE BLIZZARD</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The failure mode <b>· Nobody notices it happening</b></div>
+        <h2 class="title title--sm">TUNED TOO<br /><em>HARD</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>This is the way tuning actually goes wrong. Not an outage — just three hundred findings on Monday morning, and a team that quietly stops opening the dashboard.</p>
+        </div>
+        <p class="caption">
+          Over-tuning is seductive because it feels like diligence. More findings look like more value, right
+          up until the ratio of real to trivial tips over and the whole list becomes something to dismiss.
+          <strong>A tool you have learned to ignore saves nothing.</strong>
+        </p>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">The symptom</div><div class="ops-d">Findings you close without reading. If you're skimming rather than deciding, the dials are wrong.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">02</div><div><div class="ops-h">The fix</div><div class="ops-d">Move back toward Conservative and clear your per-check overrides. Fewer, better findings beat complete coverage nobody acts on.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">The other failure</div><div class="ops-d">Rarer but real: tuned so gently that a scan comes back nearly empty and you conclude there's nothing to save. If findings look suspiciously few, check the lever before believing them.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================= 9 UNSAVED CHANGES -->
+  <section class="page" data-page="9" data-slug="unsaved-changes" data-chapter="Unsaved changes">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">The dialog you will meet</span>
+            <div class="mock-tile"><span>Unsaved changes</span><strong>Save them before changing the optimization profile, or continue without saving and replace the current tuning.</strong></div>
+            <div class="mock-row">
+              <span class="mock-btn primary">Save</span>
+              <span class="mock-btn secondary">Continue without saving</span>
+              <span class="mock-btn dead">Cancel</span>
+            </div>
+            <p class="mock-note bad">"Replace the current tuning" is the phrase to read twice.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT D — THE GUARD</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">A guard rail <b>· Two different warnings</b></div>
+        <h2 class="title title--sm">BEFORE YOU<br /><em>LOSE</em> IT</h2>
+        <p class="caption">
+          Settings warns you in two situations, and they are not the same warning.
+        </p>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">Switching resource type</div><div class="ops-d">You edited the EBS dials and clicked over to RDS. Mild — save, or carry on and lose those edits.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">02</div><div><div class="ops-h">Switching preset</div><div class="ops-d">Sterner, and worth stopping for. Changing the profile with unsaved edits <strong>replaces the tuning you were working on</strong> — the preset recomputes the values underneath you.</div></div></div>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>The order that saves you grief: pick the preset <em>first</em>, look at what it produced, and only then adjust individual dials. Doing it the other way round means watching your work get recalculated away.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================ 10 CHANGING ACCOUNT -->
+  <section class="page" data-page="10" data-slug="changing-account" data-chapter="Changing the account">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/dl-reset.jpg" alt="The Sentinel's hand hovers over a large red warning button while charts and server boxes dissolve into particles behind it." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 06 — THE RED BUTTON</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The destructive one <b>· Read the dialog</b></div>
+        <h2 class="title title--sm">CHANGING THE<br /><em>ACCOUNT</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Every other setting on this page is reversible. This one is not. Changing the AWS account number doesn't re-point me at a new account — it wipes everything I learned about the old one.</p>
+        </div>
+        <p class="caption">Confirming that dialog removes, for the current account:</p>
+        <div class="mock-tiles">
+          <div class="mock-tile"><span>Gone</span><strong>All scanned inventory</strong></div>
+          <div class="mock-tile"><span>Gone</span><strong>All scan results</strong></div>
+          <div class="mock-tile"><span>Gone</span><strong>Resource snapshots</strong></div>
+          <div class="mock-tile"><span>Gone</span><strong>Every per-resource snooze</strong></div>
+        </div>
+        <p class="caption">
+          That last one stings most. Months of decisions about which findings were legitimate exceptions —
+          and the reasons written beside them — are attached to the account they were made in.
+          <strong>Continue only if you genuinely want to start fresh.</strong>
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>What if I just typed the wrong number?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Then cancel. The dialog exists precisely because a typo and a deliberate migration look identical to me — only you can tell them apart.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================== 11 WHICH DIALS -->
+  <section class="page" data-page="11" data-slug="which-dials" data-chapter="Which dials matter">
+    <div class="spread spread--solo">
+      <div class="rail">
+        <div class="kicker">Appendix <b>· Where to start</b></div>
+        <h2 class="title title--sm">THE DIALS WORTH<br /><em>TOUCHING</em></h2>
+        <p class="caption">
+          Of the 119 settings, a handful account for nearly every adjustment a real account needs.
+        </p>
+        <div class="rulebook-wrap">
+          <table class="rulebook">
+            <thead>
+              <tr><th scope="col">Dial</th><th scope="col">Found on</th><th scope="col">Turn it when</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Days idle</td><td><em>idle instances</em></td><td>Your workloads are genuinely quiet for long stretches — batch, seasonal, dev boxes.</td></tr>
+              <tr><td>CPU under</td><td><em>idle instances</em></td><td>Your "busy" baseline is unusually low, so 5% never triggers on real waste.</td></tr>
+              <tr><td>Minimum age</td><td><em>unattached volumes</em></td><td>Maintenance routinely leaves volumes detached for longer than a week.</td></tr>
+              <tr><td>Days stopped</td><td><em>unused instances</em></td><td>You keep instances stopped deliberately, for longer than a month.</td></tr>
+              <tr><td>Network under</td><td><em>idle instances</em></td><td>Chatty agents keep quiet boxes above the floor and hide real idleness.</td></tr>
+              <tr><td>Excluded names</td><td><em>various</em></td><td>A known set of resources should never be considered at all.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="caption">
+          Everything else is best left where it is until a finding proves it wrong. That is the whole
+          method: <strong>change a dial to answer a specific complaint, not to explore.</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 12 END -->
+  <section class="page" data-page="12" data-slug="end" data-chapter="The end">
+    <div class="spread spread--solo">
+      <div class="rail" style="align-items:center; text-align:center;">
+        <div class="kicker">MaxOps Adventures <b>· Issue №4 · The End</b></div>
+        <h2 class="title">PRESET FIRST.<br />OVERRIDE ONLY<br />WHAT'S <em>WRONG</em>.</h2>
+        <p class="caption" style="border:none; padding-left:0; max-width:60ch;">
+          The defaults are an opinion, the preset is an appetite, and a per-check override is an argument
+          you won against a specific finding. Keep them in that order and the dashboard stays worth reading.
+        </p>
+        <div class="chips" style="justify-content:center;">
+          <a class="chip" href="./docs.html">All issues</a>
+          <a class="chip alt" href="./setup-guide.html">№1 — The Onboarding Run</a>
+          <a class="chip alt" href="./rightsizer.html">№2 — The Rightsizer</a>
+          <a class="chip alt" href="./checks.html">№3 — The Checks</a>
+        </div>
+        <button class="cta" onclick="goTo(1)">◂ Back to the cover</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="navbar">
+  <button class="navbtn" id="prevBtn" aria-label="Previous page">‹</button>
+  <div class="dots" id="dots"></div>
+  <button class="navbtn" id="nextBtn" aria-label="Next page">›</button>
+</nav>
+
+<script>
+  const pager = document.getElementById('pager');
+  const pages = Array.from(document.querySelectorAll('.page'));
+  const TOTAL = pages.length;
+  const dotsWrap = document.getElementById('dots');
+  const counterNow = document.getElementById('counterNow');
+  document.getElementById('counterTotal').textContent = TOTAL;
+  let current = 1;
+
+  pages.forEach((page, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Go to page ' + (i + 1) + ': ' + (page.dataset.chapter || ''));
+    d.title = (i + 1) + '. ' + (page.dataset.chapter || '');
+    d.addEventListener('click', () => goTo(i + 1));
+    dotsWrap.appendChild(d);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function setActive(n) {
+    current = n;
+    counterNow.textContent = n;
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === n - 1));
+    const slug = pages[n - 1]?.dataset.slug;
+    if (slug && decodeURIComponent((location.hash || '').replace(/^#/, '')) !== slug) {
+      history.replaceState(null, '', n === 1 ? location.pathname : '#' + slug);
+    }
+  }
+
+  window.goTo = function (n) {
+    n = Math.min(Math.max(n, 1), TOTAL);
+    pages[n - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  function pageFromHash() {
+    const raw = decodeURIComponent((location.hash || '').replace(/^#/, '')).trim();
+    if (!raw) return null;
+    const byPage = /^(?:page|panel)-(\d+)$/.exec(raw);
+    if (byPage) return Math.min(Math.max(Number(byPage[1]), 1), TOTAL);
+    const idx = pages.findIndex((p) => p.dataset.slug === raw);
+    return idx >= 0 ? idx + 1 : null;
+  }
+
+  function jumpToHash(smooth) {
+    const n = pageFromHash();
+    if (n === null) return false;
+    pages[n - 1].scrollIntoView({ behavior: smooth ? 'smooth' : 'instant', block: 'start' });
+    setActive(n);
+    return true;
+  }
+
+  window.addEventListener('hashchange', () => jumpToHash(true));
+
+  document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); goTo(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goTo(current - 1); }
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+        setActive(Number(entry.target.dataset.page));
+      }
+    });
+  }, { root: pager, threshold: [0.5] });
+  pages.forEach((p) => io.observe(p));
+
+  if (!jumpToHash(false)) setActive(1);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+{
+  "account_id": "123456789012",
+  "action_key": "vpc_flow_logs_disabling",
+  "calls": [
+    {
+      "kwargs": {
+        "VpcIds": [
+          "vpc-DISABLE"
+        ]
+      },
+      "operation": "describe_vpcs",
+      "raises_client_error": false,
+      "response_file": "01_ec2__describe_vpcs__response.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {
+        "FlowLogIds": [
+          "fl-DISABLE"
+        ]
+      },
+      "operation": "delete_flow_logs",
+      "raises_client_error": false,
+      "response_file": "02_ec2__delete_flow_logs__response.json",
+      "service": "ec2"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "vpc_flow_logs_enabled",
+  "expected_message": "VPC flow logs deletion submitted",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "vpc_flow_logs_disabling",
+    "check_id": "vpc_flow_logs_enabled",
+    "details": {
+      "flow_log_ids": [
+        "fl-DISABLE"
+      ],
+      "region": "us-east-1",
+      "response": {
+        "ResponseMetadata": {
+          "HTTPHeaders": {
+            "cache-control": "no-cache, no-store",
+            "content-type": "text/xml;charset=UTF-8",
+            "date": "Sun, 14 Jun 2026 17:23:47 GMT",
+            "server": "AmazonEC2",
+            "strict-transport-security": "max-age=31536000; includeSubDomains",
+            "transfer-encoding": "chunked",
+            "vary": "accept-encoding",
+            "x-amzn-requestid": "e780c1b4-3a0d-4c00-89ba-8d0bef6f7b94"
+          },
+          "HTTPStatusCode": 200,
+          "RequestId": "e780c1b4-3a0d-4c00-89ba-8d0bef6f7b94",
+          "RetryAttempts": 0
+        },
+        "Unsuccessful": []
+      },
+      "vpc_id": "vpc-DISABLE"
+    },
+    "message": "VPC flow logs deletion submitted",
+    "status": "submitted"
+  },
+  "parameters": {
+    "flow_log_ids": [
+      "fl-DISABLE"
+    ]
+  },
+  "region": "us-east-1",
+  "resource_id": "vpc-DISABLE",
+  "resource_ref": "disable_vpc",
+  "scenario": "success"
+}

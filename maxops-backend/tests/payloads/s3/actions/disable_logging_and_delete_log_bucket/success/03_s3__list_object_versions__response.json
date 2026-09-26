@@ -1,0 +1,27 @@
+{
+  "Pages": [
+    {
+      "EncodingType": "url",
+      "IsTruncated": false,
+      "KeyMarker": "",
+      "MaxKeys": 1000,
+      "Name": "maxops-payload-s3-logging-target",
+      "Prefix": "",
+      "ResponseMetadata": {
+        "HTTPHeaders": {
+          "content-type": "application/xml",
+          "date": "Sun, 14 Jun 2026 20:10:08 GMT",
+          "server": "AmazonS3",
+          "transfer-encoding": "chunked",
+          "x-amz-id-2": "TAQjYzHhsiu3AEjvG8iGP6iGNLf3muZDImy6qXm7Aw5X/pnZhLg06RRaEbdKP4MDH8tnN1E/p+U=",
+          "x-amz-request-id": "XXK2PNR374THYKYP"
+        },
+        "HTTPStatusCode": 200,
+        "HostId": "TAQjYzHhsiu3AEjvG8iGP6iGNLf3muZDImy6qXm7Aw5X/pnZhLg06RRaEbdKP4MDH8tnN1E/p+U=",
+        "RequestId": "XXK2PNR374THYKYP",
+        "RetryAttempts": 0
+      },
+      "VersionIdMarker": ""
+    }
+  ]
+}

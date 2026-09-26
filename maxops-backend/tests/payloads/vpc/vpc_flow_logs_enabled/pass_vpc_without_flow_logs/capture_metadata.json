@@ -1,0 +1,24 @@
+{
+  "calls": [
+    {
+      "operation": "describe_vpcs",
+      "response_file": "describe_vpcs.json",
+      "service": "ec2"
+    },
+    {
+      "operation": "describe_flow_logs",
+      "response_file": "describe_flow_logs.json",
+      "service": "ec2"
+    }
+  ],
+  "check_id": "vpc_flow_logs_enabled",
+  "check_parameters": {
+    "region": "us-east-1"
+  },
+  "description": "Reuse the endpoint VPC before any flow logs or endpoints are created.",
+  "expected_matches": [],
+  "resource_placeholders": {
+    "endpoint_vpc": "vpc-ENDPOINT"
+  },
+  "scenario": "pass_vpc_without_flow_logs"
+}

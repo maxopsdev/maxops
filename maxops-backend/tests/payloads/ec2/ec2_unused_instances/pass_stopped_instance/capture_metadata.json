@@ -1,0 +1,32 @@
+{
+  "base_capture": "stopped",
+  "calls": [
+    {
+      "kwargs": {
+        "Filters": [
+          {
+            "Name": "instance-state-name",
+            "Values": [
+              "stopped"
+            ]
+          }
+        ]
+      },
+      "operation": "describe_instances",
+      "response_file": "describe_instances.json",
+      "service": "ec2"
+    }
+  ],
+  "captured_at": "2026-06-15T01:21:45.390384+00:00",
+  "check_id": "ec2_unused_instances",
+  "check_parameters": {
+    "region": "us-east-1",
+    "stopped_days": 30
+  },
+  "description": "Reuse the same captured instance after stopping it.",
+  "expected_matches": [
+    "i-PLACEHOLDER-INSTANCE"
+  ],
+  "instance_overrides": {},
+  "scenario": "pass_stopped_instance"
+}

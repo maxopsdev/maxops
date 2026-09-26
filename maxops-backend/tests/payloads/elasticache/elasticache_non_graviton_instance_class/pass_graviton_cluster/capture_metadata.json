@@ -1,0 +1,22 @@
+{
+  "calls": [
+    {
+      "operation": "describe_cache_clusters",
+      "response_file": "describe_cache_clusters.json",
+      "service": "elasticache"
+    }
+  ],
+  "check_id": "elasticache_non_graviton_instance_class",
+  "check_parameters": {
+    "region": "us-east-1"
+  },
+  "description": "Use the captured cache.t4g.micro cluster for the negative path.",
+  "expected_matches": [],
+  "resource_placeholders": {
+    "low_items_graviton_cluster": "maxops-payload-elasticache-low-items"
+  },
+  "resource_types": {
+    "low_items_graviton_cluster": "elasticache_cluster"
+  },
+  "scenario": "pass_graviton_cluster"
+}

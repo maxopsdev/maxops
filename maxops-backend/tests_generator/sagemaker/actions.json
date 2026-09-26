@@ -1,0 +1,4 @@
+{
+  "stop_notebook": {"scenario": "success", "check_id": "sagemaker_notebook_idle", "description": "Stop a captured notebook", "resource_ref": "notebook_cpu", "parameters": {}, "expected_status": "submitted", "expected_message": "SageMaker notebook stop request submitted.", "expected_calls": [{"service": "sagemaker", "operation": "stop_notebook_instance"}]},
+  "delete_endpoint": {"scenario": "success", "check_id": "sagemaker_endpoint_idle", "description": "Delete only the endpoint", "resource_ref": "endpoint_cpu", "parameters": {}, "expected_status": "submitted", "expected_message": "SageMaker endpoint delete request submitted.", "expected_calls": [{"service": "sagemaker", "operation": "delete_endpoint"}]}
+}

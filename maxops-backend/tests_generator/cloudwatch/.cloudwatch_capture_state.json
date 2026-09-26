@@ -1,0 +1,52 @@
+{
+  "account_id": "123456789012",
+  "placeholder_map": {
+    "/maxops/payload/no-retention": "/maxops/payload/no-retention-1781456537",
+    "/maxops/payload/retained": "/maxops/payload/retained-1781456537",
+    "123456789012": "123456789012",
+    "maxops-payload-actionful": "maxops-payload-actionful-1781456537",
+    "maxops-payload-duplicate-delete": "maxops-payload-duplicate-delete-1781456537",
+    "maxops-payload-duplicate-keeper": "maxops-payload-duplicate-keeper-1781456537",
+    "maxops-payload-no-action": "maxops-payload-no-action-1781456537",
+    "maxops-payload-noisy": "maxops-payload-noisy-1781456537"
+  },
+  "region": "us-east-1",
+  "resources": {
+    "actionful_alarm": {
+      "kind": "alarm",
+      "placeholder_key": "ACTIONFUL_ALARM",
+      "resource_id": "maxops-payload-actionful-1781456537"
+    },
+    "duplicate_delete_alarm": {
+      "kind": "alarm",
+      "placeholder_key": "DUPLICATE_DELETE_ALARM",
+      "resource_id": "maxops-payload-duplicate-delete-1781456537"
+    },
+    "duplicate_keeper_alarm": {
+      "kind": "alarm",
+      "placeholder_key": "DUPLICATE_KEEPER_ALARM",
+      "resource_id": "maxops-payload-duplicate-keeper-1781456537"
+    },
+    "log_group_no_retention": {
+      "kind": "log_group",
+      "placeholder_key": "LOG_GROUP_NO_RETENTION",
+      "resource_id": "/maxops/payload/no-retention-1781456537"
+    },
+    "log_group_retained": {
+      "kind": "log_group",
+      "placeholder_key": "LOG_GROUP_RETAINED",
+      "resource_id": "/maxops/payload/retained-1781456537"
+    },
+    "no_action_alarm": {
+      "kind": "alarm",
+      "placeholder_key": "NO_ACTION_ALARM",
+      "resource_id": "maxops-payload-no-action-1781456537"
+    },
+    "noisy_alarm": {
+      "kind": "alarm",
+      "placeholder_key": "NOISY_ALARM",
+      "resource_id": "maxops-payload-noisy-1781456537"
+    }
+  },
+  "service": "cloudwatch"
+}

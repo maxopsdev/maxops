@@ -1,0 +1,121 @@
+{
+  "account_id": "123456789012",
+  "action_key": "vpc_flow_logs_disabling_with_bucket_expiration",
+  "calls": [
+    {
+      "kwargs": {
+        "VpcIds": [
+          "vpc-EXPIRATION"
+        ]
+      },
+      "operation": "describe_vpcs",
+      "raises_client_error": false,
+      "response_file": "01_ec2__describe_vpcs__response.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {
+        "FlowLogIds": [
+          "fl-EXPIRATION"
+        ]
+      },
+      "operation": "describe_flow_logs",
+      "raises_client_error": false,
+      "response_file": "02_ec2__describe_flow_logs__response.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-vpc-expiration"
+      },
+      "operation": "get_bucket_lifecycle_configuration",
+      "raises_client_error": true,
+      "response_file": "03_s3__get_bucket_lifecycle_configuration__error.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-vpc-expiration",
+        "LifecycleConfiguration": {
+          "Rules": [
+            {
+              "Expiration": {
+                "Days": 30
+              },
+              "Filter": {
+                "Prefix": ""
+              },
+              "ID": "maxops-vpc-flow-logs-expiration",
+              "Status": "Enabled"
+            }
+          ]
+        }
+      },
+      "operation": "put_bucket_lifecycle_configuration",
+      "raises_client_error": false,
+      "response_file": "04_s3__put_bucket_lifecycle_configuration__response.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "FlowLogIds": [
+          "fl-EXPIRATION"
+        ]
+      },
+      "operation": "delete_flow_logs",
+      "raises_client_error": false,
+      "response_file": "05_ec2__delete_flow_logs__response.json",
+      "service": "ec2"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "vpc_flow_logs_enabled",
+  "expected_message": "VPC flow logs deletion submitted",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "vpc_flow_logs_disabling_with_bucket_expiration",
+    "check_id": "vpc_flow_logs_enabled",
+    "details": {
+      "expiration_days": 30,
+      "flow_log_ids": [
+        "fl-EXPIRATION"
+      ],
+      "lifecycle_rule_id": "maxops-vpc-flow-logs-expiration",
+      "log_buckets": [
+        "maxops-payload-vpc-expiration"
+      ],
+      "region": "us-east-1",
+      "response": {
+        "ResponseMetadata": {
+          "HTTPHeaders": {
+            "cache-control": "no-cache, no-store",
+            "content-type": "text/xml;charset=UTF-8",
+            "date": "Sun, 14 Jun 2026 17:25:55 GMT",
+            "server": "AmazonEC2",
+            "strict-transport-security": "max-age=31536000; includeSubDomains",
+            "transfer-encoding": "chunked",
+            "vary": "accept-encoding",
+            "x-amzn-requestid": "fae1b745-b880-4ed0-8e32-8eb1efb4a01f"
+          },
+          "HTTPStatusCode": 200,
+          "RequestId": "fae1b745-b880-4ed0-8e32-8eb1efb4a01f",
+          "RetryAttempts": 0
+        },
+        "Unsuccessful": []
+      },
+      "vpc_id": "vpc-EXPIRATION"
+    },
+    "message": "VPC flow logs deletion submitted",
+    "status": "submitted"
+  },
+  "parameters": {
+    "expiration_days": 30,
+    "flow_log_ids": [
+      "fl-EXPIRATION"
+    ]
+  },
+  "region": "us-east-1",
+  "resource_id": "vpc-EXPIRATION",
+  "resource_ref": "expiration_vpc",
+  "scenario": "success"
+}

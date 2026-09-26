@@ -1,0 +1,18 @@
+{
+  "Error": {
+    "Code": "ReplicationGroupNotFoundFault",
+    "Message": "ReplicationGroup maxops-payload-elasticache-non-graviton not found.",
+    "Type": "Sender"
+  },
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "346",
+      "content-type": "text/xml",
+      "date": "Sun, 14 Jun 2026 18:13:20 GMT",
+      "x-amzn-requestid": "e93cce63-ff11-4128-a955-63f79154ef4e"
+    },
+    "HTTPStatusCode": 404,
+    "RequestId": "e93cce63-ff11-4128-a955-63f79154ef4e",
+    "RetryAttempts": 0
+  }
+}

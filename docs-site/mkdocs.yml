@@ -1,0 +1,58 @@
+site_name: MaxOps Docs
+site_description: Local-first FinOps control plane for AWS — docs and quickstart
+site_url: https://maxopsdev.github.io/maxops/
+repo_url: https://github.com/maxopsdev/maxops
+repo_name: maxopsdev/maxops
+edit_uri: edit/main/docs-site/docs/
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - content.code.copy
+    - search.suggest
+
+nav:
+  - Home: index.md
+  - Quickstart (Docker): quickstart.md
+  - Manual Installation: installation.md
+  - Configuration: configuration.md
+  - AWS Setup & Permissions: aws-setup.md
+  - Onboarding Walkthrough: onboarding.md
+  - Concepts:
+      - Checks: concepts/checks.md
+      - Actions: concepts/actions.md
+      - Policies: concepts/policies.md
+      - Rightsizer: concepts/rightsizer.md
+  - MCP Server: mcp-server.md
+  - Troubleshooting: troubleshooting.md
+  - Security Model: security.md
+  - Contributing: contributing.md
+  - License: license.md
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - toc:
+      permalink: true

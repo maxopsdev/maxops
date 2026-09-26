@@ -1,0 +1,439 @@
+{
+  "base_capture": "running",
+  "calls": [
+    {
+      "kwargs": {
+        "Filters": [
+          {
+            "Name": "instance-state-name",
+            "Values": [
+              "running"
+            ]
+          }
+        ]
+      },
+      "operation": "describe_instances",
+      "response_file": "describe_instances.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {
+        "EndTime": "2026-06-15T01:21:12.911491+00:00",
+        "MetricDataQueries": [
+          {
+            "Id": "cpu_average",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "CPUUtilization",
+                "Namespace": "AWS/EC2"
+              },
+              "Period": 2592000,
+              "Stat": "Average"
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "cpu_maximum",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "CPUUtilization",
+                "Namespace": "AWS/EC2"
+              },
+              "Period": 2592000,
+              "Stat": "Maximum"
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "cpu_p90",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "CPUUtilization",
+                "Namespace": "AWS/EC2"
+              },
+              "Period": 2592000,
+              "Stat": "p90"
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "cpu_p95",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "CPUUtilization",
+                "Namespace": "AWS/EC2"
+              },
+              "Period": 2592000,
+              "Stat": "p95"
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "cpu_p99",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "CPUUtilization",
+                "Namespace": "AWS/EC2"
+              },
+              "Period": 2592000,
+              "Stat": "p99"
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "network_in_average",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "NetworkIn",
+                "Namespace": "AWS/EC2"
+              },
+              "Period": 2592000,
+              "Stat": "Average"
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "network_in_maximum",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "NetworkIn",
+                "Namespace": "AWS/EC2"
+              },
+              "Period": 2592000,
+              "Stat": "Maximum"
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "network_in_p90",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "NetworkIn",
+                "Namespace": "AWS/EC2"
+              },
+              "Period": 2592000,
+              "Stat": "p90"
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "network_in_p95",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "NetworkIn",
+                "Namespace": "AWS/EC2"
+              },
+              "Period": 2592000,
+              "Stat": "p95"
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "network_in_p99",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "NetworkIn",
+                "Namespace": "AWS/EC2"
+              },
+              "Period": 2592000,
+              "Stat": "p99"
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "network_out_average",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "NetworkOut",
+                "Namespace": "AWS/EC2"
+              },
+              "Period": 2592000,
+              "Stat": "Average"
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "network_out_maximum",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "NetworkOut",
+                "Namespace": "AWS/EC2"
+              },
+              "Period": 2592000,
+              "Stat": "Maximum"
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "network_out_p90",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "NetworkOut",
+                "Namespace": "AWS/EC2"
+              },
+              "Period": 2592000,
+              "Stat": "p90"
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "network_out_p95",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "NetworkOut",
+                "Namespace": "AWS/EC2"
+              },
+              "Period": 2592000,
+              "Stat": "p95"
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "network_out_p99",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "NetworkOut",
+                "Namespace": "AWS/EC2"
+              },
+              "Period": 2592000,
+              "Stat": "p99"
+            },
+            "ReturnData": true
+          }
+        ],
+        "ScanBy": "TimestampDescending",
+        "StartTime": "2026-06-14T01:21:12.911491+00:00"
+      },
+      "operation": "get_metric_data",
+      "response_file": "get_metric_data_ec2.json",
+      "service": "cloudwatch",
+      "synthetic_override": {
+        "CPUUtilization": {
+          "Unit": "Percent",
+          "empty": true
+        },
+        "NetworkIn": {
+          "Unit": "Bytes",
+          "empty": true
+        },
+        "NetworkOut": {
+          "Unit": "Bytes",
+          "empty": true
+        }
+      }
+    },
+    {
+      "kwargs": {
+        "EndTime": "2026-06-15T01:21:12.911491+00:00",
+        "MetricDataQueries": [
+          {
+            "Id": "memory_average",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "mem_used_percent",
+                "Namespace": "CWAgent"
+              },
+              "Period": 2592000,
+              "Stat": "Average"
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "memory_maximum",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "mem_used_percent",
+                "Namespace": "CWAgent"
+              },
+              "Period": 2592000,
+              "Stat": "Maximum"
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "memory_p90",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "mem_used_percent",
+                "Namespace": "CWAgent"
+              },
+              "Period": 2592000,
+              "Stat": "p90"
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "memory_p95",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "mem_used_percent",
+                "Namespace": "CWAgent"
+              },
+              "Period": 2592000,
+              "Stat": "p95"
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "memory_p99",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "InstanceId",
+                    "Value": "i-PLACEHOLDER-INSTANCE"
+                  }
+                ],
+                "MetricName": "mem_used_percent",
+                "Namespace": "CWAgent"
+              },
+              "Period": 2592000,
+              "Stat": "p99"
+            },
+            "ReturnData": true
+          }
+        ],
+        "ScanBy": "TimestampDescending",
+        "StartTime": "2026-06-14T01:21:12.911491+00:00"
+      },
+      "operation": "get_metric_data",
+      "response_file": "get_metric_data_memory.json",
+      "service": "cloudwatch",
+      "synthetic_override": {
+        "mem_used_percent": {
+          "Unit": "Percent",
+          "empty": true
+        }
+      }
+    }
+  ],
+  "captured_at": "2026-06-15T01:21:45.384882+00:00",
+  "check_id": "ec2_idle_instances",
+  "check_parameters": {
+    "cpu_max_threshold": 15.0,
+    "cpu_p90_threshold": 6.0,
+    "cpu_p95_threshold": 8.0,
+    "cpu_p99_threshold": 10.0,
+    "cpu_threshold": 5.0,
+    "idle_days": 7,
+    "region": "us-east-1"
+  },
+  "description": "Use the captured running instance but emit empty values for every metric/stat series. Absent metrics are unknown, not idle: the check must skip this instance (docs/EC2_TELEMETRY.md \u00a76).",
+  "expected_matches": [],
+  "instance_overrides": {},
+  "scenario": "edge_no_datapoints"
+}

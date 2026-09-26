@@ -1,0 +1,84 @@
+{
+  "account_id": "123456789012",
+  "action_key": "snapshot_and_terminate",
+  "calls": [
+    {
+      "kwargs": {
+        "Description": "Snapshot before deleting volume vol-UNATTACHED",
+        "VolumeId": "vol-UNATTACHED"
+      },
+      "operation": "create_snapshot",
+      "raises_client_error": false,
+      "response_file": "01_ec2__create_snapshot__response.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {
+        "VolumeId": "vol-UNATTACHED"
+      },
+      "operation": "delete_volume",
+      "raises_client_error": false,
+      "response_file": "02_ec2__delete_volume__response.json",
+      "service": "ec2"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "ebs_unattached_volumes",
+  "expected_message": "Snapshot created and delete volume request submitted",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "snapshot_and_terminate",
+    "check_id": "ebs_unattached_volumes",
+    "details": {
+      "delete_volume": {
+        "ResponseMetadata": {
+          "HTTPHeaders": {
+            "cache-control": "no-cache, no-store",
+            "content-length": "213",
+            "content-type": "text/xml;charset=UTF-8",
+            "date": "Sun, 14 Jun 2026 20:26:11 GMT",
+            "server": "AmazonEC2",
+            "strict-transport-security": "max-age=31536000; includeSubDomains",
+            "x-amzn-requestid": "f69324bd-ffd0-4242-b1e6-e1bb70f75a12"
+          },
+          "HTTPStatusCode": 200,
+          "RequestId": "f69324bd-ffd0-4242-b1e6-e1bb70f75a12",
+          "RetryAttempts": 0
+        }
+      },
+      "snapshot": {
+        "Description": "Snapshot before deleting volume vol-UNATTACHED",
+        "Encrypted": false,
+        "OwnerId": "123456789012",
+        "Progress": "",
+        "ResponseMetadata": {
+          "HTTPHeaders": {
+            "cache-control": "no-cache, no-store",
+            "content-length": "551",
+            "content-type": "text/xml;charset=UTF-8",
+            "date": "Sun, 14 Jun 2026 20:26:10 GMT",
+            "server": "AmazonEC2",
+            "strict-transport-security": "max-age=31536000; includeSubDomains",
+            "x-amzn-requestid": "d2fc3651-1f88-4783-94b2-818d2c66ac38"
+          },
+          "HTTPStatusCode": 200,
+          "RequestId": "d2fc3651-1f88-4783-94b2-818d2c66ac38",
+          "RetryAttempts": 0
+        },
+        "SnapshotId": "snap-0980f50d997c38d86",
+        "StartTime": "2026-06-14T20:26:10.579000+00:00",
+        "State": "pending",
+        "Tags": [],
+        "VolumeId": "vol-UNATTACHED",
+        "VolumeSize": 1
+      }
+    },
+    "message": "Snapshot created and delete volume request submitted",
+    "status": "submitted"
+  },
+  "parameters": {},
+  "region": "us-east-1",
+  "resource_id": "vol-UNATTACHED",
+  "resource_ref": "unattached_gp3",
+  "scenario": "success"
+}

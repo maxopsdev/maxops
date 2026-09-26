@@ -1,0 +1,48 @@
+{
+  "ebs_reduce_iops": {
+    "scenario": "success",
+    "check_id": "ebs_underutilized_provisioned_iops",
+    "description": "Reduce the provisioned io1 capture volume from 200 to 100 IOPS.",
+    "resource_ref": "provisioned_io1",
+    "parameters": {"iops": 100},
+    "expected_status": "submitted",
+    "expected_message": "EBS volume IOPS modification submitted.",
+    "expected_calls": [
+      {"service": "ec2", "operation": "describe_volumes"},
+      {"service": "ec2", "operation": "modify_volume"}
+    ]
+  },
+  "ebs_lifecycle_policy": {
+    "scenario": "success",
+    "check_id": "ebs_unattached_volumes",
+    "description": "Tag the unattached volume and create a DLM snapshot lifecycle policy.",
+    "resource_ref": "unattached_gp3",
+    "parameters": {
+      "policy_name": "maxops-payload-ebs-lifecycle",
+      "interval_hours": 24,
+      "retain_count": 2,
+      "tag_key": "maxops_payload_lifecycle",
+      "tag_value": "enabled",
+      "role_arn": "{{DLM_ROLE_ARN}}"
+    },
+    "expected_status": "submitted",
+    "expected_message": "EBS lifecycle policy created.",
+    "expected_calls": [
+      {"service": "ec2", "operation": "create_tags"},
+      {"service": "dlm", "operation": "create_lifecycle_policy"}
+    ]
+  },
+  "snapshot_and_terminate": {
+    "scenario": "success",
+    "check_id": "ebs_unattached_volumes",
+    "description": "Snapshot and delete the unattached capture volume as the final EBS action.",
+    "resource_ref": "unattached_gp3",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "Snapshot created and delete volume request submitted",
+    "expected_calls": [
+      {"service": "ec2", "operation": "create_snapshot"},
+      {"service": "ec2", "operation": "delete_volume"}
+    ]
+  }
+}

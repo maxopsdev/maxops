@@ -1,0 +1,12 @@
+{
+  "Error": {
+    "Code": "InvalidDBInstanceState",
+    "Message": "Database instance is not in available state.",
+    "Type": "Sender"
+  },
+  "ResponseMetadata": {
+    "HTTPStatusCode": 400,
+    "RequestId": "00000000-0000-0000-0000-000000000062",
+    "RetryAttempts": 0
+  }
+}

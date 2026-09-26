@@ -1,0 +1,52 @@
+version: 1
+vars:
+  instance_type: t3.micro
+  idle_days: 1
+  stopped_days: 1
+resource_types:
+  ec2:
+    create_script: scripts/create_ec2_test_instances.py
+    create_args:
+      - --profile
+      - "{profile}"
+      - --region
+      - "{region}"
+      - --prefix
+      - "{prefix}"
+      - --instance-type
+      - "{instance_type}"
+    create_output: python_dict
+    destroy_script: scripts/cleanup_ec2_test_instances.py
+    destroy_args:
+      - --profile
+      - "{profile}"
+      - --region
+      - "{region}"
+      - --prefix
+      - "{prefix}"
+      - --force
+    wait_seconds: 300
+    checks:
+      - id: ec2_idle_instances
+        parameters:
+          idle_days: "{idle_days}"
+          cpu_threshold: 5.0
+          network_threshold: 1000
+          region: "{region}"
+      - id: ec2_unused_instances
+        parameters:
+          stopped_days: "{stopped_days}"
+          region: "{region}"
+    actions:
+      - check_id: ec2_idle_instances
+        action_key: stop
+        resource_selector:
+          source: created
+          key: idle_instance_id
+          fallback: first
+      - check_id: ec2_unused_instances
+        action_key: terminate
+        resource_selector:
+          source: created
+          key: stopped_instance_id
+          fallback: first

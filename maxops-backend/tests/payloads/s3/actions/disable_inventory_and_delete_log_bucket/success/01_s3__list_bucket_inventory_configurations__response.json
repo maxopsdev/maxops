@@ -1,0 +1,39 @@
+{
+  "InventoryConfigurationList": [
+    {
+      "Destination": {
+        "S3BucketDestination": {
+          "AccountId": "123456789012",
+          "Bucket": "arn:aws:s3:::maxops-payload-s3-inventory-dest",
+          "Format": "CSV",
+          "Prefix": "inventory/"
+        }
+      },
+      "Id": "daily-inventory",
+      "IncludedObjectVersions": "Current",
+      "IsEnabled": true,
+      "OptionalFields": [
+        "Size",
+        "LastModifiedDate",
+        "StorageClass"
+      ],
+      "Schedule": {
+        "Frequency": "Daily"
+      }
+    }
+  ],
+  "IsTruncated": false,
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "729",
+      "date": "Sun, 14 Jun 2026 20:10:09 GMT",
+      "server": "AmazonS3",
+      "x-amz-id-2": "hVsE21OcczmYwM5ktVcZeOkGlmfoUnacfVIa2j5tCkP500PN8zlhFd63U6TrKsI6LFTqov4L358=",
+      "x-amz-request-id": "S1V3JBJE3MET4RGV"
+    },
+    "HTTPStatusCode": 200,
+    "HostId": "hVsE21OcczmYwM5ktVcZeOkGlmfoUnacfVIa2j5tCkP500PN8zlhFd63U6TrKsI6LFTqov4L358=",
+    "RequestId": "S1V3JBJE3MET4RGV",
+    "RetryAttempts": 0
+  }
+}

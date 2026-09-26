@@ -1,0 +1,37 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "462",
+      "date": "Thu, 16 Apr 2026 21:33:49 GMT",
+      "server": "AmazonS3",
+      "x-amz-id-2": "DhYXUbtR64U6FohdkTUJ4f1Vu+/W4y4odopXBdMZRk1WHncLQ5LQH7ym4r0bYdAKerH0+SopDxGpQx0eKvGPyA==",
+      "x-amz-request-id": "244JTXJV41W6H1MS",
+      "x-amz-transition-default-minimum-object-size": "all_storage_classes_128K"
+    },
+    "HTTPStatusCode": 200,
+    "HostId": "DhYXUbtR64U6FohdkTUJ4f1Vu+/W4y4odopXBdMZRk1WHncLQ5LQH7ym4r0bYdAKerH0+SopDxGpQx0eKvGPyA==",
+    "RequestId": "244JTXJV41W6H1MS",
+    "RetryAttempts": 0
+  },
+  "Rules": [
+    {
+      "AbortIncompleteMultipartUpload": {
+        "DaysAfterInitiation": 7
+      },
+      "Expiration": {
+        "Days": 60
+      },
+      "Filter": {
+        "Prefix": ""
+      },
+      "ID": "current-only-controls",
+      "Status": "Enabled",
+      "Transitions": [
+        {
+          "Days": 30,
+          "StorageClass": "GLACIER"
+        }
+      ]
+    }
+  ]
+}

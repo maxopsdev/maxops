@@ -1,0 +1,30 @@
+{
+  "calls": [
+    {
+      "operation": "describe_cache_clusters",
+      "response_file": "describe_cache_clusters.json",
+      "service": "elasticache"
+    },
+    {
+      "operation": "describe_replication_groups",
+      "response_file": "describe_replication_groups.json",
+      "service": "elasticache"
+    }
+  ],
+  "check_id": "elasticache_redis_convertible_to_valkey",
+  "check_parameters": {
+    "eligible_min_redis_version": "6.0",
+    "region": "us-east-1"
+  },
+  "description": "Use the captured Redis replication group with an eligible engine version.",
+  "expected_matches": [
+    "maxops-payload-elasticache-redis-valkey"
+  ],
+  "resource_placeholders": {
+    "redis_replication_group": "maxops-payload-elasticache-redis-valkey"
+  },
+  "resource_types": {
+    "redis_replication_group": "elasticache_replication_group"
+  },
+  "scenario": "flag_redis_replication_group"
+}

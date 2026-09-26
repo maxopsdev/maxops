@@ -1,0 +1,20 @@
+{
+  "LoggingEnabled": {
+    "TargetBucket": "maxops-payload-s3-logging-target",
+    "TargetPrefix": "access-logs/"
+  },
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-type": "application/xml",
+      "date": "Thu, 16 Apr 2026 21:33:48 GMT",
+      "server": "AmazonS3",
+      "transfer-encoding": "chunked",
+      "x-amz-id-2": "7KSqEdhw7txNrqZ2kRz2jQfL9cfcBI5LiqnWNGYOvOk8p8WgtOXFhjq5j8zl0hm90M4JNSn6vQQ6YPmnMhjKii6lJQgUnfS0",
+      "x-amz-request-id": "GR22752021PSSA5R"
+    },
+    "HTTPStatusCode": 200,
+    "HostId": "7KSqEdhw7txNrqZ2kRz2jQfL9cfcBI5LiqnWNGYOvOk8p8WgtOXFhjq5j8zl0hm90M4JNSn6vQQ6YPmnMhjKii6lJQgUnfS0",
+    "RequestId": "GR22752021PSSA5R",
+    "RetryAttempts": 0
+  }
+}

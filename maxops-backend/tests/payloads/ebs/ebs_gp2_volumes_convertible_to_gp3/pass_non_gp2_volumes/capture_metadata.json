@@ -1,0 +1,21 @@
+{
+  "calls": [
+    {
+      "operation": "describe_volumes",
+      "response_file": "describe_volumes.json",
+      "service": "ec2"
+    }
+  ],
+  "check_id": "ebs_gp2_volumes_convertible_to_gp3",
+  "check_parameters": {
+    "min_size_gb": 1,
+    "region": "us-east-1"
+  },
+  "description": "Use non-gp2 volumes so gp2-to-gp3 has no match.",
+  "expected_matches": [],
+  "scenario": "pass_non_gp2_volumes",
+  "volume_placeholders": {
+    "provisioned_io1": "vol-PROVISIONEDIO1",
+    "unattached_gp3": "vol-UNATTACHED"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "cache-control": "no-cache, no-store",
+      "content-length": "411",
+      "content-type": "text/xml;charset=UTF-8",
+      "date": "Mon, 15 Jun 2026 01:22:03 GMT",
+      "server": "AmazonEC2",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-amzn-requestid": "8460c661-9d88-4c11-ba77-558f56ff453b"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "8460c661-9d88-4c11-ba77-558f56ff453b",
+    "RetryAttempts": 0
+  },
+  "StoppingInstances": [
+    {
+      "CurrentState": {
+        "Code": 64,
+        "Name": "stopping"
+      },
+      "InstanceId": "i-PLACEHOLDER-INSTANCE",
+      "PreviousState": {
+        "Code": 16,
+        "Name": "running"
+      }
+    }
+  ]
+}

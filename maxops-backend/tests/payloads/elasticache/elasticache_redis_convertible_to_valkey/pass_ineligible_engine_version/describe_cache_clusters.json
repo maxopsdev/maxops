@@ -1,0 +1,105 @@
+{
+  "CacheClusters": [
+    {
+      "ARN": "arn:aws:elasticache:us-east-1:123456789012:cluster:maxops-payload-elasticache-redis-ineligible-001",
+      "AtRestEncryptionEnabled": false,
+      "AuthTokenEnabled": false,
+      "AutoMinorVersionUpgrade": true,
+      "CacheClusterCreateTime": "2026-06-14T03:55:23.353000+00:00",
+      "CacheClusterId": "maxops-payload-elasticache-redis-ineligible-001",
+      "CacheClusterStatus": "available",
+      "CacheNodeType": "cache.t4g.micro",
+      "CacheNodes": [
+        {
+          "CacheNodeCreateTime": "2026-06-14T03:55:23.353000+00:00",
+          "CacheNodeId": "0001",
+          "CacheNodeStatus": "available",
+          "CustomerAvailabilityZone": "us-east-1f",
+          "Endpoint": {
+            "Address": "maxops-payload-elasticache-redis-ineligible-001.uudkh8.0001.use1.cache.amazonaws.com",
+            "Port": 6379
+          },
+          "ParameterGroupStatus": "in-sync"
+        }
+      ],
+      "CacheParameterGroup": {
+        "CacheNodeIdsToReboot": [],
+        "CacheParameterGroupName": "default.redis5.0",
+        "ParameterApplyStatus": "in-sync"
+      },
+      "CacheSecurityGroups": [],
+      "CacheSubnetGroupName": "default",
+      "ClientDownloadLandingPage": "https://console.aws.amazon.com/elasticache/home#client-download:",
+      "Engine": "redis",
+      "EngineVersion": "5.0.6",
+      "IpDiscovery": "ipv4",
+      "LogDeliveryConfigurations": [],
+      "NetworkType": "ipv4",
+      "NumCacheNodes": 1,
+      "PendingModifiedValues": {},
+      "PreferredAvailabilityZone": "us-east-1f",
+      "PreferredMaintenanceWindow": "tue:06:00-tue:07:00",
+      "ReplicationGroupId": "maxops-payload-elasticache-redis-ineligible",
+      "ReplicationGroupLogDeliveryEnabled": false,
+      "SnapshotRetentionLimit": 0,
+      "SnapshotWindow": "04:30-05:30",
+      "TransitEncryptionEnabled": false
+    },
+    {
+      "ARN": "arn:aws:elasticache:us-east-1:123456789012:cluster:maxops-payload-elasticache-redis-ineligible-002",
+      "AtRestEncryptionEnabled": false,
+      "AuthTokenEnabled": false,
+      "AutoMinorVersionUpgrade": true,
+      "CacheClusterCreateTime": "2026-06-14T03:55:23.353000+00:00",
+      "CacheClusterId": "maxops-payload-elasticache-redis-ineligible-002",
+      "CacheClusterStatus": "available",
+      "CacheNodeType": "cache.t4g.micro",
+      "CacheNodes": [
+        {
+          "CacheNodeCreateTime": "2026-06-14T03:55:23.353000+00:00",
+          "CacheNodeId": "0001",
+          "CacheNodeStatus": "available",
+          "CustomerAvailabilityZone": "us-east-1b",
+          "Endpoint": {
+            "Address": "maxops-payload-elasticache-redis-ineligible-002.uudkh8.0001.use1.cache.amazonaws.com",
+            "Port": 6379
+          },
+          "ParameterGroupStatus": "in-sync"
+        }
+      ],
+      "CacheParameterGroup": {
+        "CacheNodeIdsToReboot": [],
+        "CacheParameterGroupName": "default.redis5.0",
+        "ParameterApplyStatus": "in-sync"
+      },
+      "CacheSecurityGroups": [],
+      "CacheSubnetGroupName": "default",
+      "ClientDownloadLandingPage": "https://console.aws.amazon.com/elasticache/home#client-download:",
+      "Engine": "redis",
+      "EngineVersion": "5.0.6",
+      "IpDiscovery": "ipv4",
+      "LogDeliveryConfigurations": [],
+      "NetworkType": "ipv4",
+      "NumCacheNodes": 1,
+      "PendingModifiedValues": {},
+      "PreferredAvailabilityZone": "us-east-1b",
+      "PreferredMaintenanceWindow": "tue:06:00-tue:07:00",
+      "ReplicationGroupId": "maxops-payload-elasticache-redis-ineligible",
+      "ReplicationGroupLogDeliveryEnabled": false,
+      "SnapshotRetentionLimit": 0,
+      "SnapshotWindow": "04:30-05:30",
+      "TransitEncryptionEnabled": false
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "15264",
+      "content-type": "text/xml",
+      "date": "Sun, 14 Jun 2026 03:55:57 GMT",
+      "x-amzn-requestid": "0d68e326-646f-4b27-a7c3-842be5fa1e4c"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "0d68e326-646f-4b27-a7c3-842be5fa1e4c",
+    "RetryAttempts": 0
+  }
+}

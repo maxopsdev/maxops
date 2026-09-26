@@ -1,0 +1,89 @@
+{
+  "account_id": "123456789012",
+  "action_key": "terminate_leave_volume",
+  "calls": [
+    {
+      "kwargs": {
+        "InstanceIds": [
+          "i-PLACEHOLDER-LEAVE-VOLUME"
+        ]
+      },
+      "operation": "describe_instances",
+      "raises_client_error": false,
+      "response_file": "01_ec2__describe_instances__response.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {
+        "BlockDeviceMappings": [
+          {
+            "DeviceName": "/dev/xvda",
+            "Ebs": {
+              "DeleteOnTermination": false
+            }
+          }
+        ],
+        "InstanceId": "i-PLACEHOLDER-LEAVE-VOLUME"
+      },
+      "operation": "modify_instance_attribute",
+      "raises_client_error": false,
+      "response_file": "02_ec2__modify_instance_attribute__response.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {
+        "InstanceIds": [
+          "i-PLACEHOLDER-LEAVE-VOLUME"
+        ]
+      },
+      "operation": "terminate_instances",
+      "raises_client_error": false,
+      "response_file": "03_ec2__terminate_instances__response.json",
+      "service": "ec2"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "ec2_unused_instances",
+  "expected_message": "Terminate instance request submitted (volumes preserved)",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "terminate_leave_volume",
+    "check_id": "ec2_unused_instances",
+    "details": {
+      "ResponseMetadata": {
+        "HTTPHeaders": {
+          "cache-control": "no-cache, no-store",
+          "content-length": "426",
+          "content-type": "text/xml;charset=UTF-8",
+          "date": "Mon, 15 Jun 2026 01:23:08 GMT",
+          "server": "AmazonEC2",
+          "strict-transport-security": "max-age=31536000; includeSubDomains",
+          "x-amzn-requestid": "287d04e2-11a8-4658-9fb9-ead35dea59ad"
+        },
+        "HTTPStatusCode": 200,
+        "RequestId": "287d04e2-11a8-4658-9fb9-ead35dea59ad",
+        "RetryAttempts": 0
+      },
+      "TerminatingInstances": [
+        {
+          "CurrentState": {
+            "Code": 32,
+            "Name": "shutting-down"
+          },
+          "InstanceId": "i-PLACEHOLDER-LEAVE-VOLUME",
+          "PreviousState": {
+            "Code": 16,
+            "Name": "running"
+          }
+        }
+      ]
+    },
+    "message": "Terminate instance request submitted (volumes preserved)",
+    "status": "submitted"
+  },
+  "parameters": {},
+  "region": "us-east-1",
+  "resource_id": "i-PLACEHOLDER-LEAVE-VOLUME",
+  "resource_ref": "leave_volume_instance",
+  "scenario": "success"
+}

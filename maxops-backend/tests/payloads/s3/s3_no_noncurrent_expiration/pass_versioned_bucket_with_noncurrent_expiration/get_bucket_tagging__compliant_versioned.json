@@ -1,0 +1,29 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "date": "Thu, 16 Apr 2026 21:33:45 GMT",
+      "server": "AmazonS3",
+      "transfer-encoding": "chunked",
+      "x-amz-id-2": "NhK2GKWdk4MWPkzG4wBbvtwcF4lZfaw+Ef3mAzaxraV23HLIV9VEFdYdMzxz4VSiXkgCav7QfCg=",
+      "x-amz-request-id": "ZK42WQ8Q28KT5VWE"
+    },
+    "HTTPStatusCode": 200,
+    "HostId": "NhK2GKWdk4MWPkzG4wBbvtwcF4lZfaw+Ef3mAzaxraV23HLIV9VEFdYdMzxz4VSiXkgCav7QfCg=",
+    "RequestId": "ZK42WQ8Q28KT5VWE",
+    "RetryAttempts": 0
+  },
+  "TagSet": [
+    {
+      "Key": "maxops_payload_profile",
+      "Value": "compliant_versioned"
+    },
+    {
+      "Key": "maxops_payload_capture",
+      "Value": "true"
+    },
+    {
+      "Key": "Name",
+      "Value": "maxops-payload-s3-compliant-versioned"
+    }
+  ]
+}

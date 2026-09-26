@@ -1,0 +1,21 @@
+{
+  "Datapoints": [
+    {
+      "Average": 80.0,
+      "Timestamp": "2026-04-19T22:36:59.351281+00:00",
+      "Unit": "Count"
+    }
+  ],
+  "Label": "ReadIOPS",
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "510",
+      "content-type": "text/xml",
+      "date": "Sun, 19 Apr 2026 22:37:02 GMT",
+      "x-amzn-requestid": "902ed2db-eaaf-4009-8515-9d509368f6cf"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "902ed2db-eaaf-4009-8515-9d509368f6cf",
+    "RetryAttempts": 0
+  }
+}

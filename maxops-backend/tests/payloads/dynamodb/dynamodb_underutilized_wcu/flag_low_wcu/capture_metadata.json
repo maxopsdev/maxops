@@ -1,0 +1,56 @@
+{
+  "calls": [
+    {
+      "operation": "list_tables",
+      "response_file": "list_tables.json",
+      "service": "dynamodb"
+    },
+    {
+      "operation": "describe_table",
+      "response_file": "describe_table__provisioned_capture.json",
+      "service": "dynamodb",
+      "table_alias": "provisioned_capture",
+      "table_name": "maxops-payload-dynamodb-provisioned"
+    },
+    {
+      "metric_name": "ConsumedWriteCapacityUnits",
+      "operation": "get_metric_statistics",
+      "response_file": "get_metric_statistics__provisioned_capture__consumedwritecapacityunits.json",
+      "service": "cloudwatch",
+      "table_alias": "provisioned_capture",
+      "table_name": "maxops-payload-dynamodb-provisioned"
+    },
+    {
+      "metric_name": "ProvisionedReadCapacityUnits",
+      "operation": "get_metric_statistics",
+      "response_file": "get_metric_statistics__provisioned_capture__provisionedreadcapacityunits.json",
+      "service": "cloudwatch",
+      "table_alias": "provisioned_capture",
+      "table_name": "maxops-payload-dynamodb-provisioned"
+    },
+    {
+      "metric_name": "ProvisionedWriteCapacityUnits",
+      "operation": "get_metric_statistics",
+      "response_file": "get_metric_statistics__provisioned_capture__provisionedwritecapacityunits.json",
+      "service": "cloudwatch",
+      "table_alias": "provisioned_capture",
+      "table_name": "maxops-payload-dynamodb-provisioned"
+    }
+  ],
+  "check_id": "dynamodb_underutilized_wcu",
+  "check_parameters": {
+    "lookback_days": 14,
+    "min_provisioned_wcu": 1,
+    "region": "us-east-1",
+    "wcu_utilization_threshold": 10.0
+  },
+  "description": "Use the captured 1/1 provisioned table and synthesize very low write utilization.",
+  "expected_matches": [
+    "maxops-payload-dynamodb-provisioned"
+  ],
+  "gsi_placeholders": {},
+  "scenario": "flag_low_wcu",
+  "table_placeholders": {
+    "provisioned_capture": "maxops-payload-dynamodb-provisioned"
+  }
+}

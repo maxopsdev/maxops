@@ -1,0 +1,27 @@
+{
+  "calls": [
+    {
+      "operation": "describe_alarms",
+      "response_file": "describe_alarms.json",
+      "service": "cloudwatch"
+    },
+    {
+      "operation": "describe_alarm_history",
+      "resource_alias": "actionful_alarm",
+      "response_file": "describe_alarm_history__actionful_alarm.json",
+      "service": "cloudwatch"
+    }
+  ],
+  "check_id": "cloudwatch_high_volume_alerts_triggered",
+  "check_parameters": {
+    "lookback_days": 7,
+    "region": "us-east-1",
+    "trigger_count_threshold": 50
+  },
+  "description": "Use an alarm with no captured ALARM transitions.",
+  "expected_matches": [],
+  "resource_placeholders": {
+    "actionful_alarm": "maxops-payload-actionful"
+  },
+  "scenario": "pass_alarm_without_triggers"
+}

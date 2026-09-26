@@ -1,0 +1,37 @@
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.venv/
+venv/
+.env
+*.db
+*.db-journal
+*.db-wal
+*.db.bak*
+
+# Node
+node_modules/
+dist/
+coverage/
+
+# Local build/cache
+.cache/
+backups/
+synthetic_data/generated/
+docs-site/site/
+
+# AI coding tool local state
+.claude/
+.codex/
+.cursor/
+.aider*
+maxops.dev/.deploy-stage/
+.logo-samples/

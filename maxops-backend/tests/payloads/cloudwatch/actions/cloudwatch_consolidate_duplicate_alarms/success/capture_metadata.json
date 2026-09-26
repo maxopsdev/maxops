@@ -1,0 +1,55 @@
+{
+  "account_id": "123456789012",
+  "action_key": "cloudwatch_consolidate_duplicate_alarms",
+  "calls": [
+    {
+      "kwargs": {
+        "AlarmNames": [
+          "maxops-payload-duplicate-keeper",
+          "maxops-payload-duplicate-delete"
+        ]
+      },
+      "operation": "describe_alarms",
+      "raises_client_error": false,
+      "response_file": "01_cloudwatch__describe_alarms__response.json",
+      "service": "cloudwatch"
+    },
+    {
+      "kwargs": {
+        "AlarmNames": [
+          "maxops-payload-duplicate-delete"
+        ]
+      },
+      "operation": "delete_alarms",
+      "raises_client_error": false,
+      "response_file": "02_cloudwatch__delete_alarms__response.json",
+      "service": "cloudwatch"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "cloudwatch_duplicate_alarms",
+  "expected_message": "Duplicate CloudWatch alarms deleted",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "cloudwatch_consolidate_duplicate_alarms",
+    "check_id": "cloudwatch_duplicate_alarms",
+    "details": {
+      "deleted_alarm_names": [
+        "maxops-payload-duplicate-delete"
+      ],
+      "keeper_alarm_name": "maxops-payload-duplicate-keeper",
+      "region": "us-east-1"
+    },
+    "message": "Duplicate CloudWatch alarms deleted",
+    "status": "submitted"
+  },
+  "parameters": {
+    "duplicate_alarm_names": [
+      "maxops-payload-duplicate-delete"
+    ]
+  },
+  "region": "us-east-1",
+  "resource_id": "maxops-payload-duplicate-keeper",
+  "resource_ref": "duplicate_keeper_alarm",
+  "scenario": "success"
+}

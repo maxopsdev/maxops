@@ -1,0 +1,6 @@
+name: Unused Elastic IPs
+description: Find Elastic IP addresses that are not associated with any running instance. Unassociated Elastic IPs incur charges.
+resource: aws.elastic-ip
+filters:
+  - type: unused
+

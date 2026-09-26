@@ -1,0 +1,15 @@
+{
+  "Datapoints": [],
+  "Label": "KeyCount",
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "331",
+      "content-type": "text/xml",
+      "date": "Sun, 19 Apr 2026 23:13:30 GMT",
+      "x-amzn-requestid": "7d66dcdf-edeb-4894-944f-fb69b0f57673"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "7d66dcdf-edeb-4894-944f-fb69b0f57673",
+    "RetryAttempts": 0
+  }
+}

@@ -1,0 +1,394 @@
+{
+  "dynamodb_gsi_unused": {
+    "scenarios": {
+      "flag_unused_gsi": {
+        "description": "Use the captured provisioned table GSI and synthesize zero read traffic.",
+        "capture_tables": [
+          "provisioned_capture"
+        ],
+        "capture_gsis": [
+          "provisioned_capture:maxops_payload_unused_gsi"
+        ],
+        "expected_matches": [
+          "{{PROVISIONED_TABLE_NAME}}/{{UNUSED_GSI_NAME}}"
+        ],
+        "check_parameters": {
+          "lookback_days": 30,
+          "period_seconds": 86400,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "provisioned_capture:maxops_payload_unused_gsi": {
+            "ConsumedReadCapacityUnits": {
+              "Sum": 0.0
+            },
+            "ConsumedWriteCapacityUnits": {
+              "Sum": 0.0
+            }
+          }
+        },
+        "payload_files": [
+          "list_tables.json",
+          "describe_table__provisioned_capture.json",
+          "list_tags_of_resource__provisioned_capture.json",
+          "get_metric_statistics__provisioned_capture__maxops_payload_unused_gsi__consumedreadcapacityunits.json",
+          "get_metric_statistics__provisioned_capture__maxops_payload_unused_gsi__consumedwritecapacityunits.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_gsi_with_reads": {
+        "description": "Use the captured provisioned table GSI and synthesize positive read traffic.",
+        "capture_tables": [
+          "provisioned_capture"
+        ],
+        "capture_gsis": [
+          "provisioned_capture:maxops_payload_unused_gsi"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "lookback_days": 30,
+          "period_seconds": 86400,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "provisioned_capture:maxops_payload_unused_gsi": {
+            "ConsumedReadCapacityUnits": {
+              "Sum": 4.0
+            },
+            "ConsumedWriteCapacityUnits": {
+              "Sum": 0.0
+            }
+          }
+        },
+        "payload_files": [
+          "list_tables.json",
+          "describe_table__provisioned_capture.json",
+          "get_metric_statistics__provisioned_capture__maxops_payload_unused_gsi__consumedreadcapacityunits.json",
+          "get_metric_statistics__provisioned_capture__maxops_payload_unused_gsi__consumedwritecapacityunits.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "dynamodb_underutilized_rcu": {
+    "scenarios": {
+      "flag_low_rcu": {
+        "description": "Use the captured 1/1 provisioned table and synthesize very low read utilization.",
+        "capture_tables": [
+          "provisioned_capture"
+        ],
+        "expected_matches": [
+          "{{PROVISIONED_TABLE_NAME}}"
+        ],
+        "check_parameters": {
+          "lookback_days": 14,
+          "rcu_utilization_threshold": 10.0,
+          "min_provisioned_rcu": 1,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "provisioned_capture": {
+            "ConsumedReadCapacityUnits": {
+              "Sum": 180.0
+            },
+            "ConsumedWriteCapacityUnits": {
+              "Sum": 180.0
+            },
+            "ProvisionedReadCapacityUnits": {
+              "Average": 1.0
+            },
+            "ProvisionedWriteCapacityUnits": {
+              "Average": 1.0
+            }
+          }
+        },
+        "payload_files": [
+          "list_tables.json",
+          "describe_table__provisioned_capture.json",
+          "get_metric_statistics__provisioned_capture__consumedreadcapacityunits.json",
+          "get_metric_statistics__provisioned_capture__consumedwritecapacityunits.json",
+          "get_metric_statistics__provisioned_capture__provisionedreadcapacityunits.json",
+          "get_metric_statistics__provisioned_capture__provisionedwritecapacityunits.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_busy_rcu": {
+        "description": "Use the captured 1/1 provisioned table and synthesize read utilization above threshold.",
+        "capture_tables": [
+          "provisioned_capture"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "lookback_days": 14,
+          "rcu_utilization_threshold": 10.0,
+          "min_provisioned_rcu": 1,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "provisioned_capture": {
+            "ConsumedReadCapacityUnits": {
+              "Sum": 900.0
+            },
+            "ProvisionedReadCapacityUnits": {
+              "Average": 1.0
+            }
+          }
+        },
+        "payload_files": [
+          "list_tables.json",
+          "describe_table__provisioned_capture.json",
+          "get_metric_statistics__provisioned_capture__consumedreadcapacityunits.json",
+          "get_metric_statistics__provisioned_capture__provisionedreadcapacityunits.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "dynamodb_underutilized_wcu": {
+    "scenarios": {
+      "flag_low_wcu": {
+        "description": "Use the captured 1/1 provisioned table and synthesize very low write utilization.",
+        "capture_tables": [
+          "provisioned_capture"
+        ],
+        "expected_matches": [
+          "{{PROVISIONED_TABLE_NAME}}"
+        ],
+        "check_parameters": {
+          "lookback_days": 14,
+          "wcu_utilization_threshold": 10.0,
+          "min_provisioned_wcu": 1,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "provisioned_capture": {
+            "ConsumedWriteCapacityUnits": {
+              "Sum": 180.0
+            },
+            "ProvisionedReadCapacityUnits": {
+              "Average": 1.0
+            },
+            "ProvisionedWriteCapacityUnits": {
+              "Average": 1.0
+            }
+          }
+        },
+        "payload_files": [
+          "list_tables.json",
+          "describe_table__provisioned_capture.json",
+          "get_metric_statistics__provisioned_capture__consumedwritecapacityunits.json",
+          "get_metric_statistics__provisioned_capture__provisionedreadcapacityunits.json",
+          "get_metric_statistics__provisioned_capture__provisionedwritecapacityunits.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_busy_wcu": {
+        "description": "Use the captured 1/1 provisioned table and synthesize write utilization above threshold.",
+        "capture_tables": [
+          "provisioned_capture"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "lookback_days": 14,
+          "wcu_utilization_threshold": 10.0,
+          "min_provisioned_wcu": 1,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "provisioned_capture": {
+            "ConsumedWriteCapacityUnits": {
+              "Sum": 900.0
+            },
+            "ProvisionedWriteCapacityUnits": {
+              "Average": 1.0
+            }
+          }
+        },
+        "payload_files": [
+          "list_tables.json",
+          "describe_table__provisioned_capture.json",
+          "get_metric_statistics__provisioned_capture__consumedwritecapacityunits.json",
+          "get_metric_statistics__provisioned_capture__provisionedwritecapacityunits.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "dynamodb_underutilized_tables": {
+    "scenarios": {
+      "flag_low_item_table": {
+        "description": "Use the captured empty on-demand table and evaluate its real DescribeTable ItemCount.",
+        "capture_tables": [
+          "ondemand_capture"
+        ],
+        "expected_matches": [
+          "{{ONDEMAND_TABLE_NAME}}"
+        ],
+        "check_parameters": {
+          "lookback_days": 14,
+          "item_count_threshold": 100,
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "list_tables.json",
+          "describe_table__ondemand_capture.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_threshold_zero": {
+        "description": "Use the captured empty on-demand table with a zero item-count threshold.",
+        "capture_tables": [
+          "ondemand_capture"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "lookback_days": 14,
+          "item_count_threshold": 0,
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "list_tables.json",
+          "describe_table__ondemand_capture.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "dynamodb_best_fit_on_demand": {
+    "scenarios": {
+      "flag_low_utilization_provisioned": {
+        "description": "Use the captured 1/1 provisioned table and synthesize low utilization.",
+        "capture_tables": [
+          "provisioned_capture"
+        ],
+        "expected_matches": [
+          "{{PROVISIONED_TABLE_NAME}}"
+        ],
+        "check_parameters": {
+          "lookback_days": 14,
+          "spike_ratio_threshold": 3.0,
+          "low_utilization_threshold_pct": 20.0,
+          "throttle_events_threshold": 1.0,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "provisioned_capture": {
+            "ConsumedReadCapacityUnits": {
+              "Sum": 180.0
+            },
+            "ConsumedWriteCapacityUnits": {
+              "Sum": 180.0
+            },
+            "ProvisionedReadCapacityUnits": {
+              "Average": 1.0
+            },
+            "ProvisionedWriteCapacityUnits": {
+              "Average": 1.0
+            },
+            "ReadThrottleEvents": {
+              "Sum": 0.0
+            },
+            "WriteThrottleEvents": {
+              "Sum": 0.0
+            }
+          }
+        },
+        "payload_files": [
+          "list_tables.json",
+          "describe_table__provisioned_capture.json",
+          "get_metric_statistics__provisioned_capture__consumedreadcapacityunits.json",
+          "get_metric_statistics__provisioned_capture__consumedwritecapacityunits.json",
+          "get_metric_statistics__provisioned_capture__provisionedreadcapacityunits.json",
+          "get_metric_statistics__provisioned_capture__provisionedwritecapacityunits.json",
+          "get_metric_statistics__provisioned_capture__readthrottleevents.json",
+          "get_metric_statistics__provisioned_capture__writethrottleevents.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_already_on_demand": {
+        "description": "Use the captured on-demand table, which the on-demand best-fit check skips.",
+        "capture_tables": [
+          "ondemand_capture"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "list_tables.json",
+          "describe_table__ondemand_capture.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "dynamodb_best_fit_provisioned": {
+    "scenarios": {
+      "flag_steady_on_demand": {
+        "description": "Use the captured on-demand table and synthesize steady non-trivial traffic.",
+        "capture_tables": [
+          "ondemand_capture"
+        ],
+        "expected_matches": [
+          "{{ONDEMAND_TABLE_NAME}}"
+        ],
+        "check_parameters": {
+          "lookback_days": 14,
+          "spike_ratio_max": 2.0,
+          "min_avg_consumed_rcu": 1.0,
+          "min_avg_consumed_wcu": 1.0,
+          "throttle_events_max": 0.0,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "ondemand_capture": {
+            "ConsumedReadCapacityUnits": {
+              "Values": [
+                7200.0,
+                7200.0,
+                7200.0
+              ]
+            },
+            "ConsumedWriteCapacityUnits": {
+              "Values": [
+                7200.0,
+                7200.0,
+                7200.0
+              ]
+            },
+            "ReadThrottleEvents": {
+              "Sum": 0.0
+            },
+            "WriteThrottleEvents": {
+              "Sum": 0.0
+            }
+          }
+        },
+        "payload_files": [
+          "list_tables.json",
+          "describe_table__ondemand_capture.json",
+          "get_metric_statistics__ondemand_capture__consumedreadcapacityunits.json",
+          "get_metric_statistics__ondemand_capture__consumedwritecapacityunits.json",
+          "get_metric_statistics__ondemand_capture__readthrottleevents.json",
+          "get_metric_statistics__ondemand_capture__writethrottleevents.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_already_provisioned": {
+        "description": "Use the captured provisioned table, which the provisioned best-fit check skips.",
+        "capture_tables": [
+          "provisioned_capture"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "list_tables.json",
+          "describe_table__provisioned_capture.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  }
+}

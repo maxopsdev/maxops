@@ -1,0 +1,22 @@
+{
+  "Datapoints": [
+    {
+      "Average": 0.25,
+      "Sum": 900.0,
+      "Timestamp": "2026-04-24T00:09:44.808449+00:00",
+      "Unit": "Count"
+    }
+  ],
+  "Label": "ConsumedReadCapacityUnits",
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "529",
+      "content-type": "text/xml",
+      "date": "Fri, 24 Apr 2026 00:09:46 GMT",
+      "x-amzn-requestid": "2fd07ba3-931d-4d2f-bfff-8107f6be9438"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "2fd07ba3-931d-4d2f-bfff-8107f6be9438",
+    "RetryAttempts": 0
+  }
+}

@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Console Overlay | MaxOps Adventures №6</title>
+  <meta name="description" content="A page-by-page comic guide to the MaxOps browser extension: cost and finding chips inside AWS Console tables, why it only ever talks to your own machine, which resource types it covers today, and what to do when no chips appear.">
+  <link rel="icon" type="image/svg+xml" href="./assets/brand/maxops-mark.svg">
+  <link rel="stylesheet" href="./setup-guide.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="masthead">
+  <a class="brand" href="./docs.html"><img src="./assets/brand/maxops-mark.svg" alt="" width="26" height="26">MAXOPS <span>ADVENTURES</span></a>
+  <a class="masthead-back" href="./docs.html">‹ All issues</a>
+  <div class="counter">PAGE <b id="counterNow">1</b> / <span id="counterTotal">1</span></div>
+</header>
+
+<main class="pager" id="pager">
+
+  <!-- ============================================================ 1 COVER -->
+  <section class="page" data-page="1" data-slug="cover" data-chapter="Cover">
+    <div class="spread">
+      <div class="rail" style="align-items:center;">
+        <div class="panel" style="width:100%;">
+          <div class="panel-inner">
+            <img src="./assets/comic/ov-cover.jpg" alt="The Cost Sentinel presses a glowing teal price chip onto a row of a floating browser table." />
+            <div class="halftone"></div>
+            <div class="vignette"></div>
+          </div>
+          <div class="fig-tag">FIG. 01 — COVER</div>
+        </div>
+        <div class="kicker">MaxOps Adventures <b>· Issue №6</b></div>
+        <h1 class="title">THE CONSOLE<br /><em>OVERLAY</em></h1>
+        <div class="subtitle">Your Findings, Where You Already Are</div>
+        <p class="caption" style="border:none; padding-left:0; max-width:58ch;">
+          A browser extension that puts MaxOps cost and finding chips straight into AWS Console tables —
+          reading only from the MaxOps on your own machine.
+        </p>
+        <button class="cta" onclick="goTo(2)">Begin the walkthrough ▸</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= 2 WHAT IT DOES -->
+  <section class="page" data-page="2" data-slug="what-it-does" data-chapter="What it does">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/ov-chips.jpg" alt="A table where each row carries small glowing chips in an extra column, the Sentinel pointing at one." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 02 — THE CHIPS</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The idea <b>· Meet people where they are</b></div>
+        <h2 class="title title--sm">FINDINGS WHERE<br />YOU'RE ALREADY<br /><em>LOOKING</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>You're in the AWS Console because something needs doing. Switching to another tab to ask whether that instance is wasteful is friction — so I come to you instead.</p>
+        </div>
+        <p class="caption">
+          The extension watches for AWS Console resource tables and quietly adds a column. Each row picks up
+          small chips: what MaxOps thinks the resource costs, and whether it has a finding against it. The
+          Console's own data is untouched — nothing is edited, only appended.
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>Does it change what AWS shows me?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Never. I add a column beside what's already there. Every number the Console shows you is still the Console's own.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== 3 THE CHIPS -->
+  <section class="page" data-page="3" data-slug="the-chips" data-chapter="What a chip says">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">A Console row, with the added column</span>
+            <div class="mock-tile"><span>Instance</span><strong>i-0a1b2c3d — m5.xlarge — running</strong></div>
+            <div class="mock-row">
+              <span class="mock-btn primary">$140 / mo</span>
+              <span class="mock-btn amber">Idle capacity</span>
+            </div>
+            <p class="mock-note ok">Teal is the cost MaxOps estimates. Amber is a finding against this exact resource.</p>
+            <p class="mock-note">Both are clickable — they open that resource in MaxOps, where the evidence lives.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT A — ONE ROW</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Reading it <b>· Two chips, two questions</b></div>
+        <h2 class="title title--sm">WHAT A CHIP<br /><em>SAYS</em></h2>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">The cost chip</div><div class="ops-d">What this resource is estimated to cost, from the local pricing database you unpacked during onboarding. It answers "is this one worth my attention at all?"</div></div></div>
+          <div class="ops-item active"><div class="ops-num">02</div><div><div class="ops-h">The finding chip</div><div class="ops-d">A check has flagged this resource. It answers "does MaxOps already have an opinion about this one?" — the question that most often changes what you do next.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">Both are doors</div><div class="ops-d">Clicking through opens that resource in MaxOps, with the reason, the evidence and the recommended action attached.</div></div></div>
+        </div>
+        <p class="caption">
+          A row with no chips is not necessarily a healthy resource — it may simply be one MaxOps hasn't
+          scanned, or a type the overlay doesn't cover yet. Page 7 is about exactly that.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= 4 INSTALL -->
+  <section class="page" data-page="4" data-slug="install" data-chapter="Installing it">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/ov-install.jpg" alt="The Sentinel slots a glowing puzzle-piece extension into a socket on a browser window frame." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 03 — THE SOCKET</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Setup <b>· Load it yourself</b></div>
+        <h2 class="title title--sm">PUTTING IT<br /><em>IN</em></h2>
+        <p class="caption">
+          The extension ships as a folder per browser rather than through a store. You load it as an
+          unpacked extension — the normal route for something that only ever talks to software on your own
+          machine.
+        </p>
+        <div class="mock-tiles">
+          <div class="mock-tile"><span>Chrome</span><strong>supported</strong></div>
+          <div class="mock-tile"><span>Edge</span><strong>supported</strong></div>
+          <div class="mock-tile"><span>Firefox</span><strong>supported</strong></div>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Three builds, one behaviour. Chrome and Edge share the newer extension format; Firefox uses its own. You want the folder matching your browser — loading the wrong one simply won't start.</p>
+        </div>
+        <p class="caption">
+          Nothing is bundled from the internet and there is no account to create. Once loaded, open any
+          AWS Console resource page and it begins working.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== 5 POINTING -->
+  <section class="page" data-page="5" data-slug="pointing-it" data-chapter="Pointing it at MaxOps">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Extension options — two addresses</span>
+            <div class="mock-tile"><span>MaxOps backend</span><strong>http://localhost:8000</strong></div>
+            <p class="mock-note">Where the chips come from.</p>
+            <div class="mock-tile"><span>MaxOps app</span><strong>http://localhost:3000</strong></div>
+            <p class="mock-note">Where a chip takes you when clicked.</p>
+            <p class="mock-note ok">Both default to the standard local ports. If you run MaxOps exactly as onboarding described, there is nothing to change.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT B — THE TWO ADDRESSES</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Configuration <b>· Two fields, both local</b></div>
+        <h2 class="title title--sm">POINTING IT AT<br />YOUR <em>MAXOPS</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Two addresses, and both must be on your own machine. One is where the chips are fetched from; the other is where clicking a chip takes you.</p>
+        </div>
+        <p class="caption">
+          They are separate because they genuinely are two different things — the backend answers questions,
+          the app displays them. Most people never touch either, but if you moved MaxOps to a different
+          port, this is where to say so.
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>Could I point it at a MaxOps running on a shared server?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>No — and deliberately. The extension is only permitted to reach <code>localhost</code> and <code>127.0.0.1</code>. Any other address is refused by the browser before I ever see it. Next page.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================== 6 LOCAL ONLY -->
+  <section class="page" data-page="6" data-slug="local-only" data-chapter="It only talks home">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/ov-local.jpg" alt="A short cable joins a home-marked server box to a browser window, with a teal barrier separating a dark cloud above." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 04 — THE SHORT CABLE</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The guarantee <b>· Enforced, not promised</b></div>
+        <h2 class="title title--sm">IT ONLY TALKS<br /><em>HOME</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>An extension that reads your AWS Console deserves suspicion. So mine is built to be checkable rather than trusted.</p>
+        </div>
+        <div class="ops-list">
+          <div class="ops-item active"><div class="ops-num">01</div><div><div class="ops-h">It can only reach your machine</div><div class="ops-d">The extension declares access to <code>localhost</code> and <code>127.0.0.1</code> and nothing else. Not "doesn't call out" — <strong>cannot</strong>. The browser enforces it.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">It stores one thing</div><div class="ops-d">The only other permission it asks for is storage, used to remember those two addresses. No history, no telemetry, no identifiers.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">It runs only where it's needed</div><div class="ops-d">It activates on AWS Console pages. On every other site it does nothing at all.</div></div></div>
+        </div>
+        <p class="caption">
+          You do not have to take any of that on faith. The permissions are listed in the extension's own
+          manifest, in plain text, in the folder you loaded — and your browser will show you the same list
+          on its extensions page.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= 7 COVERAGE -->
+  <section class="page" data-page="7" data-slug="coverage" data-chapter="What it covers">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/ov-coverage.jpg" alt="A board of many slots with five glowing and filled at the front, the rest dim and empty, the Sentinel gesturing sheepishly." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 05 — FIVE LIT SLOTS</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Honesty <b>· The bit to know first</b></div>
+        <h2 class="title title--sm">IT DOESN'T COVER<br /><em>EVERYTHING</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Worth saying plainly rather than letting you discover it: the overlay understands <strong>five</strong> resource types. I check thirty-one.</p>
+        </div>
+        <div class="mock-tiles">
+          <div class="mock-tile hero"><span>Types overlaid</span><strong>5</strong></div>
+          <div class="mock-tile hero"><span>Types checked</span><strong>32</strong></div>
+          <div class="mock-tile hero"><span>Findings reachable</span><strong>~1 in 5</strong></div>
+        </div>
+        <p class="caption">
+          Roughly <strong>20 of the 112 checks</strong> produce findings the overlay can show. The rest are
+          real, and visible in the MaxOps dashboard — they simply have no chip in the Console yet.
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>So a bucket with no chip might still have findings?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Very likely. S3 has more checks than any other service — twelve — and the overlay doesn't cover it at all yet. <strong>Absence of a chip is not a clean bill of health.</strong> The dashboard remains the complete picture.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================== 8 WHICH FIVE -->
+  <section class="page" data-page="8" data-slug="which-five" data-chapter="Which five">
+    <div class="spread spread--solo">
+      <div class="rail">
+        <div class="kicker">The detail <b>· Where chips appear</b></div>
+        <h2 class="title title--sm">THE <em>FIVE</em>,<br />AND THE GAPS</h2>
+        <div class="rulebook-wrap">
+          <table class="rulebook">
+            <thead>
+              <tr><th scope="col">Console page</th><th scope="col">Chips?</th><th scope="col">Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>EC2 instances</td><td><em>Yes</em></td><td>Cost and findings on the instances list.</td></tr>
+              <tr><td>EBS volumes</td><td><em>Yes</em></td><td>Cost and findings on the volumes list.</td></tr>
+              <tr><td>RDS databases</td><td><em>Yes</em></td><td>Cost and findings on the databases list.</td></tr>
+              <tr><td>DynamoDB tables</td><td><em>Yes</em></td><td>Cost and findings on the tables list.</td></tr>
+              <tr><td>ElastiCache clusters</td><td><em>Yes</em></td><td>Redis, Valkey and Memcached clusters.</td></tr>
+              <tr><td>S3 buckets</td><td>Not yet</td><td>The largest gap — 12 checks, none of them reachable from the Console.</td></tr>
+              <tr><td>Auto Scaling groups</td><td>Not yet</td><td>9 checks.</td></tr>
+              <tr><td>OpenSearch domains</td><td>Not yet</td><td>8 checks.</td></tr>
+              <tr><td>EMR clusters</td><td>Not yet</td><td>6 checks.</td></tr>
+              <tr><td>Aurora clusters</td><td>Not yet</td><td>6 checks. Related RDS instances may still show chips.</td></tr>
+              <tr><td>Everything else</td><td>Not yet</td><td>Lambda, ECS, EFS, Redshift, Glue, Kinesis, VPC, CloudWatch, snapshots and more.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="caption">
+          The five that are covered are the ones people spend most time staring at in the Console — which is
+          why they came first. That is a reasonable starting point, not a finished job.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================== 9 NOTHING APPEARED -->
+  <section class="page" data-page="9" data-slug="no-chips" data-chapter="No chips appeared">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/ov-quiet.jpg" alt="An empty browser table with no chips and the Sentinel shrugging with both palms up beneath a question mark." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 06 — NOTHING HAPPENED</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Troubleshooting <b>· In this order</b></div>
+        <h2 class="title title--sm">NO CHIPS<br /><em>APPEARED</em></h2>
+        <div class="ops-list">
+          <div class="ops-item active"><div class="ops-num">01</div><div><div class="ops-h">Is this a covered type?</div><div class="ops-d">Check page 8 first. On an S3 or Auto Scaling page there will never be chips today, and nothing is wrong.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">Is MaxOps running?</div><div class="ops-d">The extension reads from your local backend. If it isn't up, there is nothing to fetch — open the MaxOps app and see.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">Has it ever scanned?</div><div class="ops-d">A running MaxOps that has never scanned knows nothing about your resources. Run the checks once and come back.</div></div></div>
+          <div class="ops-item"><div class="ops-num">04</div><div><div class="ops-h">Same account and region?</div><div class="ops-d">Chips match rows to what MaxOps scanned. Looking at a region you never scanned produces a table full of strangers.</div></div></div>
+          <div class="ops-item"><div class="ops-num">05</div><div><div class="ops-h">Right addresses?</div><div class="ops-d">If you moved MaxOps off its default ports, tell the extension in its options — page 5.</div></div></div>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>In practice it's almost always the first one. The honest answer to "why is this page bare" is usually that I don't cover that resource type yet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 10 END -->
+  <section class="page" data-page="10" data-slug="end" data-chapter="The end">
+    <div class="spread spread--solo">
+      <div class="rail" style="align-items:center; text-align:center;">
+        <div class="kicker">MaxOps Adventures <b>· Issue №6 · The End</b></div>
+        <h2 class="title">FIVE TYPES TODAY.<br />ONE SHORT<br /><em>CABLE</em>.</h2>
+        <p class="caption" style="border:none; padding-left:0; max-width:60ch;">
+          Cost and findings beside the rows you were already reading — fetched from your own machine, on the
+          resource types covered so far, with the dashboard still holding the complete picture.
+        </p>
+        <div class="chips" style="justify-content:center;">
+          <a class="chip" href="./docs.html">All issues</a>
+          <a class="chip alt" href="./checks.html">№3 — The Checks</a>
+          <a class="chip alt" href="./mcp.html">№5 — The Automation Layer</a>
+          <a class="chip alt" href="https://github.com/maxopsdev/maxops" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <button class="cta" onclick="goTo(1)">◂ Back to the cover</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="navbar">
+  <button class="navbtn" id="prevBtn" aria-label="Previous page">‹</button>
+  <div class="dots" id="dots"></div>
+  <button class="navbtn" id="nextBtn" aria-label="Next page">›</button>
+</nav>
+
+<script>
+  const pager = document.getElementById('pager');
+  const pages = Array.from(document.querySelectorAll('.page'));
+  const TOTAL = pages.length;
+  const dotsWrap = document.getElementById('dots');
+  const counterNow = document.getElementById('counterNow');
+  document.getElementById('counterTotal').textContent = TOTAL;
+  let current = 1;
+
+  pages.forEach((page, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Go to page ' + (i + 1) + ': ' + (page.dataset.chapter || ''));
+    d.title = (i + 1) + '. ' + (page.dataset.chapter || '');
+    d.addEventListener('click', () => goTo(i + 1));
+    dotsWrap.appendChild(d);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function setActive(n) {
+    current = n;
+    counterNow.textContent = n;
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === n - 1));
+    const slug = pages[n - 1]?.dataset.slug;
+    if (slug && decodeURIComponent((location.hash || '').replace(/^#/, '')) !== slug) {
+      history.replaceState(null, '', n === 1 ? location.pathname : '#' + slug);
+    }
+  }
+
+  window.goTo = function (n) {
+    n = Math.min(Math.max(n, 1), TOTAL);
+    pages[n - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  function pageFromHash() {
+    const raw = decodeURIComponent((location.hash || '').replace(/^#/, '')).trim();
+    if (!raw) return null;
+    const byPage = /^(?:page|panel)-(\d+)$/.exec(raw);
+    if (byPage) return Math.min(Math.max(Number(byPage[1]), 1), TOTAL);
+    const idx = pages.findIndex((p) => p.dataset.slug === raw);
+    return idx >= 0 ? idx + 1 : null;
+  }
+
+  function jumpToHash(smooth) {
+    const n = pageFromHash();
+    if (n === null) return false;
+    pages[n - 1].scrollIntoView({ behavior: smooth ? 'smooth' : 'instant', block: 'start' });
+    setActive(n);
+    return true;
+  }
+
+  window.addEventListener('hashchange', () => jumpToHash(true));
+
+  document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); goTo(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goTo(current - 1); }
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+        setActive(Number(entry.target.dataset.page));
+      }
+    });
+  }, { root: pager, threshold: [0.5] });
+  pages.forEach((p) => io.observe(p));
+
+  if (!jumpToHash(false)) setActive(1);
+</script>
+
+</body>
+</html>

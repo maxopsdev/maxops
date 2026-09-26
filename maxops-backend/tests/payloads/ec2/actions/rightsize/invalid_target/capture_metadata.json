@@ -1,0 +1,15 @@
+{
+  "account_id": "123456789012",
+  "action_key": "rightsize",
+  "calls": [],
+  "capture_source": "hand-authored",
+  "check_id": "ec2_rightsizer",
+  "expected_error": {
+    "detail_contains": "Missing target_instance_type parameter.",
+    "status_code": 400
+  },
+  "parameters": {},
+  "region": "us-east-1",
+  "resource_id": "i-PLACEHOLDER-INSTANCE",
+  "scenario": "invalid_target"
+}

@@ -1,0 +1,16 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "0",
+      "date": "Sun, 14 Jun 2026 20:10:07 GMT",
+      "server": "AmazonS3",
+      "x-amz-id-2": "fkKviYaVzBiJJJoq/UweSS6ygHqqvwmUYQHTbGsGTONgJ8uo00GP27/9Fc64IdgqCDCOZhy13PTGhGtdmy8OAjtN/weHJxbO",
+      "x-amz-request-id": "ZBTMVY9MXTTBZSTB",
+      "x-amz-transition-default-minimum-object-size": "all_storage_classes_128K"
+    },
+    "HTTPStatusCode": 200,
+    "HostId": "fkKviYaVzBiJJJoq/UweSS6ygHqqvwmUYQHTbGsGTONgJ8uo00GP27/9Fc64IdgqCDCOZhy13PTGhGtdmy8OAjtN/weHJxbO",
+    "RequestId": "ZBTMVY9MXTTBZSTB",
+    "RetryAttempts": 0
+  }
+}

@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MaxOps &amp; AI | Grounded answers about your own cloud</title>
+  <meta name="description" content="MaxOps speaks the open Model Context Protocol, so the AI assistant your team already uses can answer questions about your cloud spend — from verified findings, computed locally, read-only by default, and fully audited.">
+  <link rel="icon" type="image/svg+xml" href="./assets/brand/maxops-mark.svg">
+  <link rel="stylesheet" href="./setup-guide.css">
+  <link rel="stylesheet" href="./docs.css">
+  <link rel="stylesheet" href="./ai.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="masthead">
+  <a class="brand" href="./index.html"><img src="./assets/brand/maxops-mark.svg" alt="" width="26" height="26">MAXOPS <span>ADVENTURES</span></a>
+  <a class="masthead-back" href="./docs.html">Documentation ›</a>
+</header>
+
+<!-- ================================================================ HERO -->
+<section class="ai-hero">
+  <div class="ai-hero-inner">
+    <div>
+      <div class="kicker">MaxOps &amp; AI <b>· Built for the assistants you already use</b></div>
+      <h1>YOUR ASSISTANT,<br />ANSWERING FROM<br /><em>EVIDENCE</em></h1>
+      <p class="ai-lede">
+        MaxOps speaks the open <strong>Model Context Protocol</strong>. Connect the AI assistant your team
+        already runs, and ask about your cloud spend in plain language — answered from findings MaxOps
+        computed and verified, on your own machine, without a single line of your inventory leaving it.
+      </p>
+    </div>
+    <div class="band-art">
+      <img src="./assets/comic/ai-hero.jpg" alt="The Cost Sentinel and a glowing AI assistant orb studying a holographic cost dashboard together.">
+    </div>
+  </div>
+</section>
+
+<div class="proof">
+  <div><b>16</b><span>tools exposed over an open protocol — no proprietary bot, no vendor lock-in</span></div>
+  <div><b>13</b><span>of those are read-only. Writing requires a switch you set deliberately</span></div>
+  <div><b>0</b><span>bytes of your cloud inventory uploaded anywhere by MaxOps</span></div>
+</div>
+
+<!-- ============================================================ PROBLEM -->
+<section class="band">
+  <div class="band-head">
+    <h2>THE TWO WAYS THIS<br />USUALLY <em>GOES WRONG</em></h2>
+  </div>
+  <div class="cards">
+    <article>
+      <span class="tag">Failure one</span>
+      <h3>A chatbot that guesses</h3>
+      <p>
+        A language model asked "what's wasteful in my account?" will produce a confident, well-formatted,
+        plausible answer. Some of it will be invented — a saving that doesn't exist, an instance type that
+        was never running, a percentage nobody measured.
+      </p>
+      <p>
+        Cost decisions get made from those numbers. That is a bad place to discover the model was
+        improvising.
+      </p>
+    </article>
+    <article>
+      <span class="tag">Failure two</span>
+      <h3>Your inventory, uploaded</h3>
+      <p>
+        The alternative is usually a hosted service that ingests your infrastructure — resource names,
+        tags, spend, topology — so that something in someone else's cloud can analyse it.
+      </p>
+      <p>
+        That is a real conversation with your security team, and often the point where an otherwise good
+        tool stops being adoptable.
+      </p>
+    </article>
+    <article>
+      <span class="tag">What we did instead</span>
+      <h3>Separate the two jobs</h3>
+      <p>
+        <strong>MaxOps does the analysis. The assistant does the language.</strong> Findings are computed
+        by deterministic checks in code, on your machine. The assistant reads results that already exist
+        and explains them.
+      </p>
+      <p>It is a smaller claim than "AI-powered FinOps", and a far more useful one.</p>
+    </article>
+  </div>
+</section>
+
+<!-- =========================================================== GROUNDED -->
+<section class="band">
+  <div class="band-head">
+    <h2>GROUNDED,<br />NOT <em>GENERATED</em></h2>
+  </div>
+  <div class="band-grid">
+    <div class="band-art">
+      <img src="./assets/comic/ai-grounded.jpg" alt="The Sentinel hands a solid glowing checklist to the assistant orb while a ghostly invented figure dissolves away.">
+    </div>
+    <div class="band-copy">
+      <p>
+        Every number an assistant can reach through MaxOps was produced by a check — real code, run against
+        your account, with a recorded reason. Nothing is estimated at conversation time.
+      </p>
+      <div class="pull">
+        The assistant is never asked <em>"how much could we save?"</em>. It is asked
+        <em>"what did MaxOps find, and why?"</em>
+      </div>
+      <p>
+        And the evidence travels with the answer. A rightsizing recommendation carries the peak utilisation
+        that was measured, the observation windows behind it, the risks that were assessed, and up to
+        <strong>15 months</strong> of history — so an assistant can explain a recommendation, and you can
+        overrule it, without either of you guessing.
+      </p>
+      <p>
+        When MaxOps could not measure something, it says so rather than filling the gap. An assistant
+        reading that will tell you the same, because <strong>the honesty is in the data, not in the
+        prompt</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ PROTOCOL -->
+<section class="band">
+  <div class="band-head">
+    <h2>AN OPEN PROTOCOL,<br />NOT A <em>PROPRIETARY BOT</em></h2>
+  </div>
+  <div class="band-grid flip">
+    <div class="band-art">
+      <img src="./assets/comic/mcp-tools.jpg" alt="The Sentinel presents a glowing tool rack, most tools teal, three amber ones behind a small closed gate.">
+    </div>
+    <div class="band-copy">
+      <p>
+        MaxOps ships no chatbot, no embedded model and no inference bill. It exposes its capabilities over
+        the <strong>Model Context Protocol</strong> — the emerging open standard for connecting assistants
+        to real systems — and lets you bring whichever assistant your organisation has already approved.
+      </p>
+      <p>
+        That matters for a strategy question nobody enjoys answering twice: <strong>what happens when you
+        change AI vendors?</strong> Here, nothing. The bridge is a standard; the assistant is yours; swapping
+        it changes no MaxOps configuration.
+      </p>
+      <p>
+        Sixteen tools and five standing views are on offer — inventory, findings, tag-level cost summaries,
+        rightsizing recommendations and their evidence. An assistant can reach exactly those and nothing
+        else. It cannot browse your account, invent a query, or reach past the surface it was given.
+      </p>
+      <div class="chips">
+        <a class="chip" href="./mcp.html">How the bridge works — Issue №5</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================== GOVERNANCE -->
+<section class="band">
+  <div class="band-head">
+    <h2>THREE ANSWERS YOUR<br />SECURITY REVIEW WILL <em>ASK FOR</em></h2>
+  </div>
+  <div class="band-grid">
+    <div class="band-art">
+      <img src="./assets/comic/ai-governance.jpg" alt="The Sentinel stands before three glowing shields bearing a padlock, an open eye and an open ledger.">
+    </div>
+    <div class="band-copy">
+      <div class="cards" style="grid-template-columns:1fr">
+        <article>
+          <span class="tag">Where does the data go</span>
+          <h3>It stays on your machine</h3>
+          <p>
+            The bridge runs to <code>localhost</code>. MaxOps ships nothing anywhere, and the browser
+            extension is permitted to reach <code>localhost</code> and <code>127.0.0.1</code> — not as a
+            policy, but as a browser-enforced permission you can read in the manifest.
+          </p>
+        </article>
+        <article>
+          <span class="tag">What can it change</span>
+          <h3>Nothing, until you say so</h3>
+          <p>
+            Thirteen of the sixteen tools only read. The three that can act — snooze, un-snooze, run a
+            check — refuse outright until <code>MAXOPS_MCP_WRITE_ENABLED</code> is set where the bridge is
+            launched. The default is off, and the refusal names the exact switch.
+          </p>
+        </article>
+        <article>
+          <span class="tag">Who did what</span>
+          <h3>Assistants get no back door</h3>
+          <p>
+            An action taken through an assistant lands in the same audit ledger as one taken by hand —
+            with the actor, the timestamp, and the values before and after. Removing a snooze requires a
+            written reason whether a person or an assistant asks for it.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================== ASKS -->
+<section class="band">
+  <div class="band-head">
+    <h2>WHAT IT LOOKS LIKE<br />ON A <em>TUESDAY</em></h2>
+    <p style="margin:0;color:var(--muted);max-width:52ch">The questions that would otherwise mean three filters, an export and a spreadsheet.</p>
+  </div>
+  <div class="asks">
+    <div>"Which team's tag owns the most idle spend this month?"
+      <span>One question. Reads the tag cost summary MaxOps already computed.</span></div>
+    <div>"Why was this instance recommended for downsizing?"
+      <span>Returns the measured peak, the risks assessed, and the reasons behind the verdict.</span></div>
+    <div>"What did we snooze last quarter, and did anyone say why?"
+      <span>Reads the audit ledger — including the reasons written at the time.</span></div>
+    <div>"Anything unattached for more than a month in eu-west-1?"
+      <span>Filtered inventory, with the age that was actually observed.</span></div>
+  </div>
+</section>
+
+<!-- ============================================================= HONEST -->
+<section class="band">
+  <div class="band-head">
+    <h2>WHAT WE <em>DON'T</em> CLAIM</h2>
+  </div>
+  <div class="honest">
+    <h3>Three things worth being straight about</h3>
+    <p>
+      <strong>MaxOps is not an agent.</strong> It does not plan, decide or act on its own. It is the
+      grounded data layer an assistant reasons over — which is precisely why its answers can be trusted.
+      If you want autonomous remediation, that is a different product and a different risk appetite.
+    </p>
+    <p>
+      <strong>Your assistant is still your assistant.</strong> MaxOps ships nothing anywhere, but whatever
+      the assistant puts in its reply travels wherever that assistant normally sends conversations. The
+      guarantee we can make is narrower than "nothing ever leaves" — and we would rather state the narrow
+      one accurately than the broad one loosely.
+    </p>
+    <p>
+      <strong>Coverage is honest, not total.</strong> 112 checks across 32 resource types today. The
+      documentation says plainly which parts of the product cover what — including where they don't yet.
+    </p>
+  </div>
+</section>
+
+<!-- ================================================================ CTA -->
+<section class="ai-cta">
+  <h2>BRING YOUR OWN <em>ASSISTANT</em>.</h2>
+  <p>
+    MaxOps is open source and runs locally. Connect it to the assistant you already trust, and start asking
+    better questions about your own cloud.
+  </p>
+  <div class="chips">
+    <a class="chip" href="./mcp.html">Read Issue №5 — The Automation Layer</a>
+    <a class="chip alt" href="./docs.html">All documentation</a>
+    <a class="chip alt" href="https://github.com/maxopsdev/maxops" target="_blank" rel="noopener">GitHub</a>
+    <a class="chip alt" href="./index.html">maxops.dev</a>
+  </div>
+</section>
+
+</body>
+</html>

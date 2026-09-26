@@ -1,0 +1,26 @@
+{
+  "calls": [
+    {
+      "operation": "describe_vpcs",
+      "response_file": "describe_vpcs.json",
+      "service": "ec2"
+    },
+    {
+      "operation": "describe_vpc_endpoints",
+      "response_file": "describe_vpc_endpoints.json",
+      "service": "ec2"
+    }
+  ],
+  "check_id": "vpc_no_s3_vpc_endpoint",
+  "check_parameters": {
+    "region": "us-east-1"
+  },
+  "description": "Use the isolated endpoint VPC before gateway endpoints are created.",
+  "expected_matches": [
+    "vpc-ENDPOINT"
+  ],
+  "resource_placeholders": {
+    "endpoint_vpc": "vpc-ENDPOINT"
+  },
+  "scenario": "flag_vpc_without_s3_endpoint"
+}

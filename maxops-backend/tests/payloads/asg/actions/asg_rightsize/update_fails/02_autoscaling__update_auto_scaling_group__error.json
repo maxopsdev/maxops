@@ -1,0 +1,12 @@
+{
+  "Error": {
+    "Code": "ScalingActivityInProgress",
+    "Message": "Cannot change the size of AutoScalingGroup maxops-test-asg while there are scaling activities in progress.",
+    "Type": "Sender"
+  },
+  "ResponseMetadata": {
+    "HTTPStatusCode": 400,
+    "RequestId": "00000000-0000-0000-0000-0000000000f2",
+    "RetryAttempts": 0
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "connection": "keep-alive",
+      "content-length": "199",
+      "content-type": "application/x-amz-json-1.0",
+      "date": "Fri, 24 Apr 2026 00:09:45 GMT",
+      "server": "Server",
+      "x-amz-crc32": "1327616727",
+      "x-amzn-requestid": "U0A5PHCMQLDG6IQ2IEC1O1HR53VV4KQNSO5AEMVJF66Q9ASUAAJG"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "U0A5PHCMQLDG6IQ2IEC1O1HR53VV4KQNSO5AEMVJF66Q9ASUAAJG",
+    "RetryAttempts": 0
+  },
+  "TableNames": [
+    "maxops-payload-dynamodb-ondemand"
+  ]
+}

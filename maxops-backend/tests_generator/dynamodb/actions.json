@@ -1,0 +1,160 @@
+{
+  "use_provisioned_capacity": {
+    "scenario": "success",
+    "check_id": "dynamodb_best_fit_provisioned",
+    "description": "Switch the reusable on-demand table to provisioned capacity.",
+    "resource_ref": "ondemand_capture",
+    "parameters": {
+      "read_capacity_units": 2,
+      "write_capacity_units": 2
+    },
+    "expected_status": "submitted",
+    "expected_message": "DynamoDB table updated to PROVISIONED capacity.",
+    "expected_calls": [
+      {
+        "service": "dynamodb",
+        "operation": "update_table"
+      }
+    ]
+  },
+  "switch_to_on_demand_billing": {
+    "scenario": "success",
+    "check_id": "dynamodb_best_fit_on_demand",
+    "description": "Restore the reusable table to on-demand billing.",
+    "resource_ref": "ondemand_capture",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "DynamoDB table switched to On-Demand billing.",
+    "expected_calls": [
+      {
+        "service": "dynamodb",
+        "operation": "update_table"
+      }
+    ]
+  },
+  "enable_autoscaling": {
+    "scenario": "success",
+    "check_id": "dynamodb_underutilized_rcu",
+    "description": "Enable read and write target tracking on the reusable provisioned table.",
+    "resource_ref": "provisioned_capture",
+    "parameters": {
+      "min_read_capacity": 1,
+      "max_read_capacity": 4,
+      "min_write_capacity": 1,
+      "max_write_capacity": 4,
+      "target_utilization": 70.0
+    },
+    "expected_status": "submitted",
+    "expected_message": "DynamoDB autoscaling enabled.",
+    "expected_calls": [
+      {
+        "service": "application-autoscaling",
+        "operation": "register_scalable_target"
+      },
+      {
+        "service": "application-autoscaling",
+        "operation": "put_scaling_policy"
+      },
+      {
+        "service": "application-autoscaling",
+        "operation": "register_scalable_target"
+      },
+      {
+        "service": "application-autoscaling",
+        "operation": "put_scaling_policy"
+      }
+    ]
+  },
+  "reduce_rcu": {
+    "scenario": "success",
+    "check_id": "dynamodb_underutilized_rcu",
+    "description": "Reduce the action-only provisioned table from four to two RCUs.",
+    "resource_ref": "action_capacity_capture",
+    "parameters": {
+      "read_capacity_units": 2
+    },
+    "expected_status": "submitted",
+    "expected_message": "DynamoDB read capacity update submitted.",
+    "expected_calls": [
+      {
+        "service": "dynamodb",
+        "operation": "describe_table"
+      },
+      {
+        "service": "dynamodb",
+        "operation": "update_table"
+      }
+    ]
+  },
+  "reduce_wcu": {
+    "scenario": "success",
+    "check_id": "dynamodb_underutilized_wcu",
+    "description": "Reduce the action-only provisioned table from four to two WCUs.",
+    "resource_ref": "action_capacity_capture",
+    "parameters": {
+      "write_capacity_units": 2
+    },
+    "expected_status": "submitted",
+    "expected_message": "DynamoDB write capacity update submitted.",
+    "expected_calls": [
+      {
+        "service": "dynamodb",
+        "operation": "describe_table"
+      },
+      {
+        "service": "dynamodb",
+        "operation": "update_table"
+      }
+    ]
+  },
+  "delete_gsi": {
+    "scenario": "success",
+    "check_id": "dynamodb_gsi_unused",
+    "description": "Delete the reusable provisioned table's captured GSI after check capture.",
+    "resource_ref": "provisioned_capture",
+    "gsi_name": "{{UNUSED_GSI_NAME}}",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "DynamoDB GSI deletion submitted.",
+    "expected_calls": [
+      {
+        "service": "dynamodb",
+        "operation": "update_table"
+      }
+    ]
+  },
+  "backup_and_delete_table": {
+    "scenario": "success",
+    "check_id": "dynamodb_underutilized_tables",
+    "description": "Create a real backup and delete the isolated action-only table.",
+    "resource_ref": "action_backup_capture",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "DynamoDB table backup created and deletion submitted.",
+    "expected_calls": [
+      {
+        "service": "dynamodb",
+        "operation": "create_backup"
+      },
+      {
+        "service": "dynamodb",
+        "operation": "delete_table"
+      }
+    ]
+  },
+  "delete_table": {
+    "scenario": "success",
+    "check_id": "dynamodb_underutilized_tables",
+    "description": "Delete the reusable provisioned table as the final action.",
+    "resource_ref": "provisioned_capture",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "DynamoDB table deletion submitted.",
+    "expected_calls": [
+      {
+        "service": "dynamodb",
+        "operation": "delete_table"
+      }
+    ]
+  }
+}

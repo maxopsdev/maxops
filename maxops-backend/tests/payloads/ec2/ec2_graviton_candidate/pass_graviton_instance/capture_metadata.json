@@ -1,0 +1,38 @@
+{
+  "base_capture": "running",
+  "calls": [
+    {
+      "kwargs": {
+        "Filters": [
+          {
+            "Name": "instance-state-name",
+            "Values": [
+              "running"
+            ]
+          }
+        ]
+      },
+      "operation": "describe_instances",
+      "response_file": "describe_instances.json",
+      "service": "ec2"
+    }
+  ],
+  "captured_at": "2026-06-15T01:21:45.392930+00:00",
+  "check_id": "ec2_graviton_candidate",
+  "check_parameters": {
+    "allowed_families": [
+      "m",
+      "c",
+      "r",
+      "t"
+    ],
+    "region": "us-east-1"
+  },
+  "description": "Use a sanitized running Graviton instance payload so the check skips it.",
+  "expected_matches": [],
+  "instance_overrides": {
+    "Architecture": "arm64",
+    "InstanceType": "t4g.micro"
+  },
+  "scenario": "pass_graviton_instance"
+}

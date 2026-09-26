@@ -1,0 +1,26 @@
+{
+  "calls": [
+    {
+      "operation": "describe_db_instances",
+      "response_file": "describe_db_instances.json",
+      "service": "rds"
+    },
+    {
+      "db_alias": "idle_graviton_capture",
+      "db_instance_identifier": "maxops-payload-rds-idle-graviton",
+      "operation": "list_tags_for_resource",
+      "response_file": "list_tags_for_resource__idle_graviton_capture.json",
+      "service": "rds"
+    }
+  ],
+  "check_id": "rds_non_graviton_instance_class",
+  "check_parameters": {
+    "region": "us-east-1"
+  },
+  "db_placeholders": {
+    "idle_graviton_capture": "maxops-payload-rds-idle-graviton"
+  },
+  "description": "Use the captured db.t4g.micro DB instance class for the negative path.",
+  "expected_matches": [],
+  "scenario": "pass_graviton_instance"
+}

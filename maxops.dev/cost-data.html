@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Real Bill | MaxOps Adventures №7</title>
+  <meta name="description" content="A page-by-page comic guide to cost data in MaxOps: why list prices overstate what you pay, what a Cost and Usage Report is, what amortized cost means when you hold Reserved Instances or Savings Plans, and how to connect it in four steps.">
+  <link rel="icon" type="image/svg+xml" href="./assets/brand/maxops-mark.svg">
+  <link rel="stylesheet" href="./setup-guide.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="masthead">
+  <a class="brand" href="./docs.html"><img src="./assets/brand/maxops-mark.svg" alt="" width="26" height="26">MAXOPS <span>ADVENTURES</span></a>
+  <a class="masthead-back" href="./docs.html">‹ All issues</a>
+  <div class="counter">PAGE <b id="counterNow">1</b> / <span id="counterTotal">1</span></div>
+</header>
+
+<main class="pager" id="pager">
+
+  <!-- ============================================================ 1 COVER -->
+  <section class="page" data-page="1" data-slug="cover" data-chapter="Cover">
+    <div class="spread">
+      <div class="rail" style="align-items:center;">
+        <div class="panel" style="width:100%;">
+          <div class="panel-inner">
+            <img src="./assets/comic/cd-cover.jpg" alt="The Cost Sentinel holds a glowing invoice whose figures resolve from pale estimates into solid gold numbers." />
+            <div class="halftone"></div>
+            <div class="vignette"></div>
+          </div>
+          <div class="fig-tag">FIG. 01 — COVER</div>
+        </div>
+        <div class="kicker">MaxOps Adventures <b>· Issue №7</b></div>
+        <h1 class="title">THE REAL<br /><em>BILL</em></h1>
+        <div class="subtitle">From List Prices to What You Actually Paid</div>
+        <p class="caption" style="border:none; padding-left:0; max-width:58ch;">
+          Every saving MaxOps quotes starts as a public list price. If you hold Reserved Instances or
+          Savings Plans, that number is wrong — and this is how to fix it.
+        </p>
+        <button class="cta" onclick="goTo(2)">Begin the walkthrough ▸</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================== 2 THE PROBLEM -->
+  <section class="page" data-page="2" data-slug="the-problem" data-chapter="Why list prices lie">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/cd-two-prices.jpg" alt="Two price tags hang from the same server: a large pale one reading list price and a small solid one reading what you paid." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 02 — TWO PRICES</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The problem <b>· The sticker is not the receipt</b></div>
+        <h2 class="title title--sm">THE PRICE ON THE<br />SHELF ISN'T WHAT<br /><em>YOU PAID</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>By default I price everything from AWS's public list. It's honest, it needs no extra access, and it's enough to rank what's wasteful. But it's the sticker price — not your receipt.</p>
+        </div>
+        <p class="caption">
+          A Reserved Instance or a Savings Plan can cut what you actually pay for a resource substantially.
+          Price that resource at list and the saving looks larger than it is. Recommend deleting it on that
+          basis and the reasoning was built on a number nobody was ever charged.
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>So the findings are wrong?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>The <em>findings</em> hold — an idle resource is idle whatever it costs. It's the <em>amounts</em> that drift. And amounts are what people take to a budget meeting.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= 3 WHAT CUR IS -->
+  <section class="page" data-page="3" data-slug="what-is-cur" data-chapter="What a CUR is">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/cd-ledger.jpg" alt="An enormous itemised ledger unrolls, each line naming a single resource and an hour." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 03 — THE LEDGER</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The source <b>· Your itemised bill</b></div>
+        <h2 class="title title--sm">THE COST AND<br />USAGE <em>REPORT</em></h2>
+        <p class="caption">
+          The Cost and Usage Report — everyone says <strong>CUR</strong> — is the most detailed billing data
+          AWS produces. Not a monthly total, not a per-service summary: one line per resource, per usage
+          type, per hour, with the discounts already applied.
+        </p>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">It is not on by default</div><div class="ops-d">AWS only writes a CUR once you ask for one, into an S3 bucket you own. Nothing exists retroactively — the export starts producing data from the day it is created.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">It is enormous</div><div class="ops-d">Hundreds of columns, millions of rows for a large account. That is why it lands as compressed Parquet in S3 rather than something you open in a spreadsheet.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">03</div><div><div class="ops-h">It knows your discounts</div><div class="ops-d">This is the part that matters here. The CUR is where Reserved Instance and Savings Plan coverage is attributed back to the resource that consumed it.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================== 4 AMORTIZED -->
+  <section class="page" data-page="4" data-slug="amortized" data-chapter="Amortized cost">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">One m5.xlarge, one month, three ways of counting</span>
+            <div class="mock-tile"><span>List price (what MaxOps uses by default)</span><strong>$140.16 / mo</strong></div>
+            <div class="mock-tile"><span>Unblended — what AWS charged this month</span><strong>$0.00 / mo</strong></div>
+            <div class="mock-tile"><span>Net amortized — the reservation spread across its term</span><strong>$83.22 / mo</strong></div>
+            <p class="mock-note ok">MaxOps uses net amortized cost. It is the only one of the three that answers "what does keeping this resource actually cost me?"</p>
+            <p class="mock-note">Unblended reads $0 because the reservation was paid for up front, months ago. Delete the resource on that basis and you would expect to save nothing.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT A — THE SAME RESOURCE</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The concept <b>· The one piece of jargon worth learning</b></div>
+        <h2 class="title title--sm">AMORTIZED,<br />NOT <em>UNBLENDED</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>If you buy a year of capacity up front, the month you pay looks expensive and the eleven that follow look free. Neither is what the resource costs you.</p>
+        </div>
+        <p class="caption">
+          <strong>Amortized</strong> cost spreads that up-front payment evenly across the term it bought. So a
+          reserved instance shows a steady monthly figure rather than one spike and eleven zeroes.
+          <strong>Net</strong> means after discounts. MaxOps reads <em>net amortized cost</em> throughout.
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>Why does that choice matter to me?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Because it is the number that changes if you act. Delete an unreserved resource and you stop paying. Delete a reserved one and you keep paying until the term ends — amortized cost is what shows you the difference.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== 5 THE FOUR STEPS -->
+  <section class="page" data-page="5" data-slug="four-steps" data-chapter="The four steps">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Settings ▸ Cost Data</span>
+            <div class="mock-tile"><span>1 · Cost and Usage Report export</span><strong>Done</strong></div>
+            <div class="mock-tile"><span>2 · First bill delivered by AWS</span><strong>Done</strong></div>
+            <div class="mock-tile"><span>3 · Local cost cache</span><strong>Not set up</strong></div>
+            <div class="mock-row"><span class="mock-btn primary">Summarise billing data</span></div>
+            <div class="mock-tile"><span>4 · Pricing from actual cost</span><strong>Not set up</strong></div>
+            <p class="mock-note">The page never remembers which step you are on. It asks AWS and your own machine what is true, every time you open it.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT B — THE PAGE</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The shape of it <b>· Four steps, one page</b></div>
+        <h2 class="title title--sm">WHAT YOU'RE<br />ACTUALLY <em>DOING</em></h2>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">Ask AWS to produce the bill</div><div class="ops-d">Create the export. A one-time administrative act in the account that pays the bills.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">Wait for the first delivery</div><div class="ops-d">Up to 24 hours, and nothing you can hurry. This step needs nothing from you at all.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">Summarise it locally</div><div class="ops-d">Reduce millions of billing lines to one figure per resource per month, stored on your machine.</div></div></div>
+          <div class="ops-item"><div class="ops-num">04</div><div><div class="ops-h">Switch pricing over</div><div class="ops-d">Tell MaxOps to prefer the bill over the list. Reversible at any time, from the same page.</div></div></div>
+        </div>
+        <p class="caption">
+          Because the page detects rather than remembers, it is safe to close the tab, come back tomorrow,
+          or set part of this up by hand. It reflects whatever is actually there.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================ 6 SETUP CREDENTIALS -->
+  <section class="page" data-page="6" data-slug="two-keys" data-chapter="Why two sets of keys">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/cd-two-keys.jpg" alt="The Sentinel holds two distinct keys: a small worn one labelled read and a heavier one labelled setup, kept on separate rings." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 04 — TWO KEYS</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Access <b>· The scan role can't do this, on purpose</b></div>
+        <h2 class="title title--sm">WHY THIS ASKS FOR<br />A SECOND SET<br />OF <em>KEYS</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>The role I scan with is read-only. It cannot create a bucket, register an export, or run a query. That is not an oversight — it is the promise the role exists to make.</p>
+        </div>
+        <p class="caption">
+          Setting up cost data genuinely needs to create things. Rather than widen the scanning role and
+          quietly break that promise, MaxOps uses a <strong>separate profile for setup only</strong>. Scans keep
+          using the read-only role no matter what you choose here.
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>I don't have a profile with those permissions.</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Then let me make one. <strong>Create role</strong> builds <code>MaxOpsCostDataRole</code> scoped to exactly this job — the report bucket, the export, the queries. Nothing else. If your own credentials can't create roles either, download the policy and hand it to someone who can.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= 7 THE WAIT -->
+  <section class="page" data-page="7" data-slug="the-wait" data-chapter="The 24-hour wait">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/cd-waiting.jpg" alt="The Sentinel sits patiently beside an empty bucket, watching a slow sunrise, an hourglass at rest." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 05 — THE WAIT</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Step two <b>· The part you cannot rush</b></div>
+        <h2 class="title title--sm">COME BACK<br /><em>TOMORROW</em></h2>
+        <p class="caption">
+          Once the export exists, AWS writes the first file on its own schedule — usually within 24 hours.
+          There is no button for this. The step will read <em>Waiting on AWS</em>, and that is the correct
+          state, not a fault.
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>It's been a day and it still says waiting.</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Then check the export still exists and points at the bucket I manage. If step one has turned red, it will say so — and the button on it will say <strong>Repair</strong> rather than Create.</p>
+        </div>
+        <p class="caption">
+          Nothing is lost by leaving it. The page is a live view, not a wizard holding your place: reopen it
+          whenever you like and it will tell you where things stand.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= 8 SUMMARISE -->
+  <section class="page" data-page="8" data-slug="summarise" data-chapter="Summarising the bill">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Before you confirm</span>
+            <div class="mock-tile"><span>Queries to run</span><strong>13</strong></div>
+            <div class="mock-tile"><span>Months</span><strong>2025-09 → 2026-09</strong></div>
+            <div class="mock-tile"><span>Report size</span><strong>1.3 MB</strong></div>
+            <div class="mock-tile"><span>Estimated cost</span><strong>$0.00</strong></div>
+            <p class="mock-note ok">Athena bills per terabyte scanned. The estimate is an upper bound — it assumes every query reads the whole export.</p>
+            <p class="mock-note">Nothing is spent until you press the button. Cancel costs nothing.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT C — THE ESTIMATE</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Step three <b>· The step that costs money</b></div>
+        <h2 class="title title--sm">TURNING MILLIONS<br />OF LINES INTO<br />ONE <em>NUMBER</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Your bill is too large to read directly, so I ask Athena to reduce it: for each resource, in each month, the total net amortized cost. That summary lands on your machine as a small file.</p>
+        </div>
+        <p class="caption">
+          This is the one step in MaxOps that spends money, so it is the one step that shows you a bill first.
+          Athena charges for the data each query scans. For most accounts a summary costs a few cents or
+          nothing at all — but you see the estimate before you agree to it.
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>Do I have to run this every day?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>No. Re-run it when you want fresher figures. Only the current month changes; the ones already summarised are settled.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= 9 SWITCH ON -->
+  <section class="page" data-page="9" data-slug="switch-on" data-chapter="Turning it on">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/cd-switch.jpg" alt="The Sentinel throws a heavy switch and a wall of pale estimated figures turns solid and gold." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 06 — THE SWITCH</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Step four <b>· And what changes</b></div>
+        <h2 class="title title--sm">PRICED FROM<br />THE <em>BILL</em></h2>
+        <p class="caption">
+          The last step is a switch. Once it is on, any resource that appears in your bill is priced from
+          what it actually cost — discounts included. Anything not in the bill keeps its list price, so
+          nothing goes blank.
+        </p>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">Findings get truer amounts</div><div class="ops-d">The same resources are flagged, but what you would save by acting is now grounded in what you were charged.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">02</div><div><div class="ops-h">Rightsizing gets sharper</div><div class="ops-d">A reserved instance stops looking like an easy win. The recommendation reflects that you have already paid for it.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">It takes effect on the next scan</div><div class="ops-d">Existing findings keep the figures they were computed with. Re-scan to see them repriced.</div></div></div>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>And it is a switch, not a door. Turn it off and I go back to list prices without losing anything you built.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================== 10 WHAT IT ISN'T -->
+  <section class="page" data-page="10" data-slug="honest" data-chapter="What it won't tell you">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/cd-gap.jpg" alt="The Sentinel points at a deliberate gap in an otherwise complete ledger rather than filling it in." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 07 — THE GAP</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Honesty <b>· Where the number stops</b></div>
+        <h2 class="title title--sm">WHAT THIS<br />WON'T <em>TELL YOU</em></h2>
+        <p class="caption">
+          Cost data makes the amounts real. It does not make them complete, and it is worth knowing where the
+          edges are.
+        </p>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">Only what the bill itemises</div><div class="ops-d">A resource AWS does not bill per-resource will not appear. It keeps its list-price estimate, and the page says how many resources were matched so you can tell.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">Only from the export forward</div><div class="ops-d">A CUR created today has no data about last year. History accumulates from the day you create it — which is the best argument for creating it early.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">It won't match Cost Explorer exactly</div><div class="ops-d">Both are correct; they attribute reservations differently. Expect the same order of magnitude, not the same cents.</div></div></div>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Where I could not measure something, I say so rather than filling the gap. A number I invented would be worse than an honest absence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================ 11 WHEN IT GOES RED -->
+  <section class="page" data-page="11" data-slug="when-red" data-chapter="When a step goes red">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">A step that needs you</span>
+            <div class="mock-tile"><span>1 · Cost and Usage Report export</span><strong>Error</strong></div>
+            <p class="mock-note">The credentials in use aren't allowed to call <code>bcm-data-exports:ListExports</code>.</p>
+            <p class="mock-note ok">Setup is using the read-only scan role, which deliberately cannot do this. Choose an AWS profile under Setup credentials above.</p>
+            <div class="mock-row"><span class="mock-btn primary">Repair export</span></div>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT D — A RED STEP</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">When it breaks <b>· The message names the fix</b></div>
+        <h2 class="title title--sm">A STEP THAT<br />TURNS <em>RED</em></h2>
+        <p class="caption">
+          A red step always carries two things: the exact permission or resource at fault, and what to do
+          about it. If a fix exists, the button beside it performs that fix.
+        </p>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">A permission is missing</div><div class="ops-d">The message names the AWS action that was refused. Either pick a profile that has it, or let MaxOps create the role that does.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">The table points somewhere else</div><div class="ops-d">Usually a leftover from an earlier or hand-made export. <strong>Repair export</strong> points it back at the one MaxOps manages. No data in S3 is touched.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">A job failed</div><div class="ops-d">The failure stays on the page with the AWS error and the time it happened, until a later run of that same step succeeds.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 12 END -->
+  <section class="page" data-page="12" data-slug="end" data-chapter="The end">
+    <div class="spread spread--solo">
+      <div class="rail" style="align-items:center; text-align:center;">
+        <div class="kicker">MaxOps Adventures <b>· Issue №7 · The End</b></div>
+        <h2 class="title">FOUR STEPS.<br />ONE HONEST<br /><em>NUMBER</em>.</h2>
+        <p class="caption" style="border:none; padding-left:0; max-width:60ch;">
+          List prices tell you what a resource would cost a stranger. Your bill tells you what it costs you.
+          Once the two are connected, every saving MaxOps quotes is one you could actually bank.
+        </p>
+        <div class="chips" style="justify-content:center;">
+          <a class="chip" href="./docs.html">All issues</a>
+          <a class="chip alt" href="./rightsizer.html">№2 — The Rightsizer</a>
+          <a class="chip alt" href="./dials.html">№4 — The Dials</a>
+          <a class="chip alt" href="https://github.com/maxopsdev/maxops" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <button class="cta" onclick="goTo(1)">◂ Back to the cover</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+<nav class="navbar">
+  <button class="navbtn" id="prevBtn" aria-label="Previous page">‹</button>
+  <div class="dots" id="dots"></div>
+  <button class="navbtn" id="nextBtn" aria-label="Next page">›</button>
+</nav>
+
+<script>
+  const pager = document.getElementById('pager');
+  const pages = Array.from(document.querySelectorAll('.page'));
+  const TOTAL = pages.length;
+  const dotsWrap = document.getElementById('dots');
+  const counterNow = document.getElementById('counterNow');
+  document.getElementById('counterTotal').textContent = TOTAL;
+  let current = 1;
+
+  pages.forEach((page, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Go to page ' + (i + 1) + ': ' + (page.dataset.chapter || ''));
+    d.title = (i + 1) + '. ' + (page.dataset.chapter || '');
+    d.addEventListener('click', () => goTo(i + 1));
+    dotsWrap.appendChild(d);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function setActive(n) {
+    current = n;
+    counterNow.textContent = n;
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === n - 1));
+    const slug = pages[n - 1]?.dataset.slug;
+    if (slug && decodeURIComponent((location.hash || '').replace(/^#/, '')) !== slug) {
+      history.replaceState(null, '', n === 1 ? location.pathname : '#' + slug);
+    }
+  }
+
+  window.goTo = function (n) {
+    n = Math.min(Math.max(n, 1), TOTAL);
+    pages[n - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  function pageFromHash() {
+    const raw = decodeURIComponent((location.hash || '').replace(/^#/, '')).trim();
+    if (!raw) return null;
+    const byPage = /^(?:page|panel)-(\d+)$/.exec(raw);
+    if (byPage) return Math.min(Math.max(Number(byPage[1]), 1), TOTAL);
+    const idx = pages.findIndex((p) => p.dataset.slug === raw);
+    return idx >= 0 ? idx + 1 : null;
+  }
+
+  function jumpToHash(smooth) {
+    const n = pageFromHash();
+    if (n === null) return false;
+    pages[n - 1].scrollIntoView({ behavior: smooth ? 'smooth' : 'instant', block: 'start' });
+    setActive(n);
+    return true;
+  }
+
+  window.addEventListener('hashchange', () => jumpToHash(true));
+
+  document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); goTo(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goTo(current - 1); }
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+        setActive(Number(entry.target.dataset.page));
+      }
+    });
+  }, { root: pager, threshold: [0.5] });
+  pages.forEach((p) => io.observe(p));
+
+  if (!jumpToHash(false)) setActive(1);
+</script>
+
+</body>
+</html>

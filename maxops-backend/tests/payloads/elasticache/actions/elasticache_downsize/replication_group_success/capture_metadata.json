@@ -1,0 +1,66 @@
+{
+  "account_id": "123456789012",
+  "action_key": "elasticache_downsize",
+  "calls": [
+    {
+      "kwargs": {
+        "ReplicationGroupId": "maxops-test-replication-group"
+      },
+      "operation": "describe_replication_groups",
+      "raises_client_error": false,
+      "response_file": "01_elasticache__describe_replication_groups__response.json",
+      "service": "elasticache"
+    },
+    {
+      "kwargs": {
+        "ApplyImmediately": true,
+        "CacheNodeType": "cache.m6g.large",
+        "ReplicationGroupId": "maxops-test-replication-group"
+      },
+      "operation": "modify_replication_group",
+      "raises_client_error": false,
+      "response_file": "02_elasticache__modify_replication_group__response.json",
+      "service": "elasticache"
+    }
+  ],
+  "capture_source": "hand-authored",
+  "check_id": "elasticache_low_item_count",
+  "expected_message": "ElastiCache node type modification submitted.",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "elasticache_downsize",
+    "check_id": "elasticache_low_item_count",
+    "details": {
+      "response": {
+        "ReplicationGroup": {
+          "ARN": "arn:aws:elasticache:us-east-1:123456789012:replicationgroup:maxops-test-replication-group",
+          "CacheNodeType": "cache.m5.large",
+          "MemberClusters": [
+            "maxops-test-replication-group-001",
+            "maxops-test-replication-group-002",
+            "maxops-test-replication-group-003"
+          ],
+          "PendingModifiedValues": {
+            "CacheNodeType": "cache.m6g.large"
+          },
+          "ReplicationGroupId": "maxops-test-replication-group",
+          "Status": "modifying"
+        },
+        "ResponseMetadata": {
+          "HTTPStatusCode": 200,
+          "RequestId": "00000000-0000-0000-0000-000000000012",
+          "RetryAttempts": 0
+        }
+      },
+      "target_node_type": "cache.m6g.large"
+    },
+    "message": "ElastiCache node type modification submitted.",
+    "status": "submitted"
+  },
+  "parameters": {
+    "target_node_type": "cache.m6g.large"
+  },
+  "region": "us-east-1",
+  "resource_id": "maxops-test-replication-group",
+  "scenario": "replication_group_success"
+}

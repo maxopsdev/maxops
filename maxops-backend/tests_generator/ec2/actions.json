@@ -1,0 +1,126 @@
+{
+  "release_unused_elastic_ip": {
+    "scenario": "success",
+    "check_id": "unused_elastic_ips",
+    "description": "Release the isolated, unassociated Elastic IP.",
+    "resource_ref": "unused_elastic_ip",
+    "parameters": {
+      "confirm_release": true
+    },
+    "expected_status": "submitted",
+    "expected_message": "Unused Elastic IP released",
+    "expected_calls": [
+      {
+        "service": "ec2",
+        "operation": "describe_addresses"
+      },
+      {
+        "service": "ec2",
+        "operation": "release_address"
+      }
+    ]
+  },
+  "stop": {
+    "scenario": "success",
+    "check_id": "ec2_idle_instances",
+    "description": "Start and then stop the shared EC2 capture instance after check capture.",
+    "resource_ref": "capture_instance",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "Stop instance request submitted",
+    "expected_calls": [
+      {
+        "service": "ec2",
+        "operation": "stop_instances"
+      }
+    ]
+  },
+  "terminate": {
+    "scenario": "success",
+    "check_id": "ec2_unused_instances",
+    "description": "Terminate a disposable EC2 action instance.",
+    "resource_ref": "terminate_instance",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "Terminate instance request submitted",
+    "expected_calls": [
+      {
+        "service": "ec2",
+        "operation": "terminate_instances"
+      }
+    ]
+  },
+  "terminate_with_snapshot": {
+    "scenario": "success",
+    "check_id": "ec2_unused_instances",
+    "description": "Snapshot the attached root volume and terminate a disposable EC2 action instance.",
+    "resource_ref": "snapshot_terminate_instance",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "Terminate instance with snapshots submitted",
+    "expected_calls": [
+      {
+        "service": "ec2",
+        "operation": "describe_instances"
+      },
+      {
+        "service": "ec2",
+        "operation": "create_snapshot"
+      },
+      {
+        "service": "ec2",
+        "operation": "terminate_instances"
+      }
+    ]
+  },
+  "terminate_leave_volume": {
+    "scenario": "success",
+    "check_id": "ec2_unused_instances",
+    "description": "Disable DeleteOnTermination and terminate a disposable EC2 action instance.",
+    "resource_ref": "leave_volume_instance",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "Terminate instance request submitted (volumes preserved)",
+    "expected_calls": [
+      {
+        "service": "ec2",
+        "operation": "describe_instances"
+      },
+      {
+        "service": "ec2",
+        "operation": "modify_instance_attribute"
+      },
+      {
+        "service": "ec2",
+        "operation": "terminate_instances"
+      }
+    ]
+  },
+  "migrate_to_graviton": {
+    "scenario": "success",
+    "check_id": "ec2_graviton_candidate",
+    "description": "Stop the captured x86 instance, switch it to a Graviton type, then start it again.",
+    "resource_ref": "capture_instance",
+    "capture_enabled": false,
+    "capture_skip_reason": "In-place x86-to-Graviton migration is not a valid real AWS operation because the source AMI architecture remains x86_64.",
+    "parameters": {
+      "target_instance_type": "t4g.micro"
+    },
+    "expected_status": "submitted",
+    "expected_message": "Instance migration to t4g.micro submitted",
+    "expected_calls": [
+      {
+        "service": "ec2",
+        "operation": "stop_instances"
+      },
+      {
+        "service": "ec2",
+        "operation": "modify_instance_attribute"
+      },
+      {
+        "service": "ec2",
+        "operation": "start_instances"
+      }
+    ]
+  }
+}

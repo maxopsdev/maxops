@@ -1,0 +1,70 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "connection": "keep-alive",
+      "content-length": "1268",
+      "content-type": "application/x-amz-json-1.0",
+      "date": "Fri, 24 Apr 2026 00:09:46 GMT",
+      "server": "Server",
+      "x-amz-crc32": "2783661777",
+      "x-amzn-requestid": "L5TLQRU5JH1HUOA7L5FEI0012VVV4KQNSO5AEMVJF66Q9ASUAAJG"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "L5TLQRU5JH1HUOA7L5FEI0012VVV4KQNSO5AEMVJF66Q9ASUAAJG",
+    "RetryAttempts": 0
+  },
+  "Table": {
+    "AttributeDefinitions": [
+      {
+        "AttributeName": "gsi_key",
+        "AttributeType": "S"
+      },
+      {
+        "AttributeName": "id",
+        "AttributeType": "S"
+      }
+    ],
+    "CreationDateTime": "2026-04-23T20:08:35.812000-04:00",
+    "DeletionProtectionEnabled": false,
+    "GlobalSecondaryIndexes": [
+      {
+        "IndexArn": "arn:aws:dynamodb:us-east-1:123456789012:table/maxops-payload-dynamodb-provisioned/index/maxops_payload_unused_gsi",
+        "IndexName": "maxops_payload_unused_gsi",
+        "IndexSizeBytes": 0,
+        "IndexStatus": "ACTIVE",
+        "ItemCount": 0,
+        "KeySchema": [
+          {
+            "AttributeName": "gsi_key",
+            "KeyType": "HASH"
+          }
+        ],
+        "Projection": {
+          "ProjectionType": "ALL"
+        },
+        "ProvisionedThroughput": {
+          "NumberOfDecreasesToday": 0,
+          "ReadCapacityUnits": 1,
+          "WriteCapacityUnits": 1
+        }
+      }
+    ],
+    "ItemCount": 0,
+    "KeySchema": [
+      {
+        "AttributeName": "id",
+        "KeyType": "HASH"
+      }
+    ],
+    "ProvisionedThroughput": {
+      "NumberOfDecreasesToday": 0,
+      "ReadCapacityUnits": 1,
+      "WriteCapacityUnits": 1
+    },
+    "TableArn": "arn:aws:dynamodb:us-east-1:123456789012:table/maxops-payload-dynamodb-provisioned",
+    "TableId": "609be82d-9f6a-4c3b-bb68-af015820a46c",
+    "TableName": "maxops-payload-dynamodb-provisioned",
+    "TableSizeBytes": 0,
+    "TableStatus": "ACTIVE"
+  }
+}

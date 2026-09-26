@@ -1,0 +1,244 @@
+{
+  "ec2_idle_instances": {
+    "scenarios": {
+      "pass_idle_instance": {
+        "description": "Use the captured running instance and synthesize 15 months of low CPU averages and low CPU peaks.",
+        "base_capture": "running",
+        "expected_matches": [
+          "{{INSTANCE_ID}}"
+        ],
+        "check_parameters": {
+          "idle_days": 7,
+          "cpu_threshold": 5.0,
+          "cpu_max_threshold": 15.0,
+          "cpu_p90_threshold": 6.0,
+          "cpu_p95_threshold": 8.0,
+          "cpu_p99_threshold": 10.0,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "ec2": {
+            "CPUUtilization": {
+              "Unit": "Percent",
+              "Average": 1.25,
+              "Maximum": 4.5,
+              "p90": 3.5,
+              "p95": 4.0,
+              "p99": 4.25
+            },
+            "NetworkIn": {
+              "Unit": "Bytes",
+              "Average": 120.0,
+              "Maximum": 220.0,
+              "p90": 180.0,
+              "p95": 200.0,
+              "p99": 210.0
+            },
+            "NetworkOut": {
+              "Unit": "Bytes",
+              "Average": 180.0,
+              "Maximum": 260.0,
+              "p90": 220.0,
+              "p95": 230.0,
+              "p99": 240.0
+            }
+          },
+          "memory": {
+            "mem_used_percent": {
+              "Unit": "Percent",
+              "Average": 28.0,
+              "Maximum": 38.0,
+              "p90": 34.0,
+              "p95": 36.0,
+              "p99": 37.0
+            }
+          }
+        },
+        "payload_files": [
+          "describe_instances.json",
+          "get_metric_data_ec2.json",
+          "get_metric_data_memory.json",
+          "capture_metadata.json"
+        ]
+      },
+      "fail_busy_instance": {
+        "description": "Use the captured running instance and synthesize low average CPU with high peaks so the idle check rejects it.",
+        "base_capture": "running",
+        "expected_matches": [],
+        "check_parameters": {
+          "idle_days": 7,
+          "cpu_threshold": 5.0,
+          "cpu_max_threshold": 15.0,
+          "cpu_p90_threshold": 6.0,
+          "cpu_p95_threshold": 8.0,
+          "cpu_p99_threshold": 10.0,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "ec2": {
+            "CPUUtilization": {
+              "Unit": "Percent",
+              "Average": 3.8,
+              "Maximum": 22.0,
+              "p90": 9.0,
+              "p95": 12.0,
+              "p99": 16.0
+            },
+            "NetworkIn": {
+              "Unit": "Bytes",
+              "Average": 4096.0,
+              "Maximum": 8192.0,
+              "p90": 6144.0,
+              "p95": 7168.0,
+              "p99": 7680.0
+            },
+            "NetworkOut": {
+              "Unit": "Bytes",
+              "Average": 8192.0,
+              "Maximum": 12288.0,
+              "p90": 11264.0,
+              "p95": 11776.0,
+              "p99": 12032.0
+            }
+          },
+          "memory": {
+            "mem_used_percent": {
+              "Unit": "Percent",
+              "Average": 54.0,
+              "Maximum": 72.0,
+              "p90": 66.0,
+              "p95": 69.0,
+              "p99": 71.0
+            }
+          }
+        },
+        "payload_files": [
+          "describe_instances.json",
+          "get_metric_data_ec2.json",
+          "get_metric_data_memory.json",
+          "capture_metadata.json"
+        ]
+      },
+      "edge_no_datapoints": {
+        "description": "Use the captured running instance but emit empty values for every metric/stat series.",
+        "base_capture": "running",
+        "expected_matches": [],
+        "check_parameters": {
+          "idle_days": 7,
+          "cpu_threshold": 5.0,
+          "cpu_max_threshold": 15.0,
+          "cpu_p90_threshold": 6.0,
+          "cpu_p95_threshold": 8.0,
+          "cpu_p99_threshold": 10.0,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "ec2": {
+            "CPUUtilization": {
+              "Unit": "Percent",
+              "empty": true
+            },
+            "NetworkIn": {
+              "Unit": "Bytes",
+              "empty": true
+            },
+            "NetworkOut": {
+              "Unit": "Bytes",
+              "empty": true
+            }
+          },
+          "memory": {
+            "mem_used_percent": {
+              "Unit": "Percent",
+              "empty": true
+            }
+          }
+        },
+        "payload_files": [
+          "describe_instances.json",
+          "get_metric_data_ec2.json",
+          "get_metric_data_memory.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "ec2_unused_instances": {
+    "scenarios": {
+      "pass_stopped_instance": {
+        "description": "Reuse the same captured instance after stopping it.",
+        "base_capture": "stopped",
+        "expected_matches": [
+          "{{INSTANCE_ID}}"
+        ],
+        "check_parameters": {
+          "stopped_days": 30,
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "describe_instances.json",
+          "capture_metadata.json"
+        ]
+      },
+      "fail_no_stopped_instances": {
+        "description": "Use an empty stopped-instance listing to validate the negative path.",
+        "base_capture": "empty_stopped",
+        "expected_matches": [],
+        "check_parameters": {
+          "stopped_days": 30,
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "describe_instances.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "ec2_graviton_candidate": {
+    "scenarios": {
+      "flag_non_graviton_instance": {
+        "description": "Reuse the captured running x86 instance so the Graviton candidate check flags it.",
+        "base_capture": "running",
+        "expected_matches": [
+          "{{INSTANCE_ID}}"
+        ],
+        "check_parameters": {
+          "allowed_families": [
+            "m",
+            "c",
+            "r",
+            "t"
+          ],
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "describe_instances.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_graviton_instance": {
+        "description": "Use a sanitized running Graviton instance payload so the check skips it.",
+        "base_capture": "running",
+        "instance_overrides": {
+          "Architecture": "arm64",
+          "InstanceType": "t4g.micro"
+        },
+        "expected_matches": [],
+        "check_parameters": {
+          "allowed_families": [
+            "m",
+            "c",
+            "r",
+            "t"
+          ],
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "describe_instances.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  }
+}

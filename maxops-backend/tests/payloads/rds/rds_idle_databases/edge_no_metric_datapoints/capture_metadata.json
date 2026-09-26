@@ -1,0 +1,63 @@
+{
+  "calls": [
+    {
+      "operation": "describe_db_instances",
+      "response_file": "describe_db_instances.json",
+      "service": "rds"
+    },
+    {
+      "db_alias": "idle_graviton_capture",
+      "db_instance_identifier": "maxops-payload-rds-idle-graviton",
+      "operation": "list_tags_for_resource",
+      "response_file": "list_tags_for_resource__idle_graviton_capture.json",
+      "service": "rds"
+    },
+    {
+      "db_alias": "idle_graviton_capture",
+      "db_instance_identifier": "maxops-payload-rds-idle-graviton",
+      "metric_name": "CPUUtilization",
+      "operation": "get_metric_statistics",
+      "response_file": "get_metric_statistics__idle_graviton_capture__cpuutilization.json",
+      "service": "cloudwatch"
+    },
+    {
+      "db_alias": "idle_graviton_capture",
+      "db_instance_identifier": "maxops-payload-rds-idle-graviton",
+      "metric_name": "DatabaseConnections",
+      "operation": "get_metric_statistics",
+      "response_file": "get_metric_statistics__idle_graviton_capture__databaseconnections.json",
+      "service": "cloudwatch"
+    },
+    {
+      "db_alias": "idle_graviton_capture",
+      "db_instance_identifier": "maxops-payload-rds-idle-graviton",
+      "metric_name": "ReadIOPS",
+      "operation": "get_metric_statistics",
+      "response_file": "get_metric_statistics__idle_graviton_capture__readiops.json",
+      "service": "cloudwatch"
+    },
+    {
+      "db_alias": "idle_graviton_capture",
+      "db_instance_identifier": "maxops-payload-rds-idle-graviton",
+      "metric_name": "WriteIOPS",
+      "operation": "get_metric_statistics",
+      "response_file": "get_metric_statistics__idle_graviton_capture__writeiops.json",
+      "service": "cloudwatch"
+    }
+  ],
+  "check_id": "rds_idle_databases",
+  "check_parameters": {
+    "connections_threshold": 5,
+    "cpu_threshold": 5.0,
+    "idle_days": 7,
+    "region": "us-east-1"
+  },
+  "db_placeholders": {
+    "idle_graviton_capture": "maxops-payload-rds-idle-graviton"
+  },
+  "description": "Use the captured db.t4g.micro instance with empty datapoints for all RDS metrics.",
+  "expected_matches": [
+    "maxops-payload-rds-idle-graviton"
+  ],
+  "scenario": "edge_no_metric_datapoints"
+}

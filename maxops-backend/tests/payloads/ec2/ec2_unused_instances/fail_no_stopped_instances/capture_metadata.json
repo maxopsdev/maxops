@@ -1,0 +1,30 @@
+{
+  "base_capture": "empty_stopped",
+  "calls": [
+    {
+      "kwargs": {
+        "Filters": [
+          {
+            "Name": "instance-state-name",
+            "Values": [
+              "stopped"
+            ]
+          }
+        ]
+      },
+      "operation": "describe_instances",
+      "response_file": "describe_instances.json",
+      "service": "ec2"
+    }
+  ],
+  "captured_at": "2026-06-15T01:21:45.390821+00:00",
+  "check_id": "ec2_unused_instances",
+  "check_parameters": {
+    "region": "us-east-1",
+    "stopped_days": 30
+  },
+  "description": "Use an empty stopped-instance listing to validate the negative path.",
+  "expected_matches": [],
+  "instance_overrides": {},
+  "scenario": "fail_no_stopped_instances"
+}

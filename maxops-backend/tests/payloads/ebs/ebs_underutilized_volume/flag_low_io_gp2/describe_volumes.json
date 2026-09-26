@@ -1,0 +1,59 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "cache-control": "no-cache, no-store",
+      "content-length": "3481",
+      "content-type": "text/xml;charset=UTF-8",
+      "date": "Fri, 24 Apr 2026 00:13:19 GMT",
+      "server": "AmazonEC2",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "vary": "accept-encoding",
+      "x-amzn-requestid": "b6afc029-c012-4c5e-bc6a-43b1aa32e5c7"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "b6afc029-c012-4c5e-bc6a-43b1aa32e5c7",
+    "RetryAttempts": 0
+  },
+  "Volumes": [
+    {
+      "Attachments": [
+        {
+          "AttachTime": "2026-04-24T00:09:13+00:00",
+          "DeleteOnTermination": false,
+          "Device": "/dev/sdf",
+          "InstanceId": "i-EBSINSTANCE",
+          "State": "attached",
+          "VolumeId": "vol-ATTACHEDGP2"
+        }
+      ],
+      "AvailabilityZone": "us-east-1a",
+      "CreateTime": "2026-04-24T00:09:07.626000+00:00",
+      "Encrypted": false,
+      "Iops": 100,
+      "MultiAttachEnabled": false,
+      "Size": 1,
+      "SnapshotId": "",
+      "State": "in-use",
+      "Tags": [
+        {
+          "Key": "maxops_payload_capture",
+          "Value": "true"
+        },
+        {
+          "Key": "Name",
+          "Value": "maxops-payload-ebs-attached-gp2"
+        },
+        {
+          "Key": "maxops_test",
+          "Value": "true"
+        },
+        {
+          "Key": "maxops_payload_profile",
+          "Value": "attached_gp2"
+        }
+      ],
+      "VolumeId": "vol-ATTACHEDGP2",
+      "VolumeType": "gp2"
+    }
+  ]
+}

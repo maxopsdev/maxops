@@ -1,0 +1,17 @@
+{
+  "LocationConstraint": null,
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-type": "application/xml",
+      "date": "Thu, 16 Apr 2026 21:33:49 GMT",
+      "server": "AmazonS3",
+      "transfer-encoding": "chunked",
+      "x-amz-id-2": "S22RquUf8PTcfKVVGc1F9lV8Nqd2hJErf2xfZchY59IMBdvZNk0WQupy2s05pM/UCUjdJvdtwGQ=",
+      "x-amz-request-id": "244NWRVX45VVRNFX"
+    },
+    "HTTPStatusCode": 200,
+    "HostId": "S22RquUf8PTcfKVVGc1F9lV8Nqd2hJErf2xfZchY59IMBdvZNk0WQupy2s05pM/UCUjdJvdtwGQ=",
+    "RequestId": "244NWRVX45VVRNFX",
+    "RetryAttempts": 0
+  }
+}

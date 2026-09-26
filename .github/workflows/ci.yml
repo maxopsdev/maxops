@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  # Lets a maintainer re-run the suite without pushing -- after a flaky
+  # failure, or to confirm a green build on the current tip. Deploy docs
+  # already offers this.
+  workflow_dispatch:
+
+jobs:
+  backend-tests:
+    name: Backend tests (pytest)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: maxops-backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      # The GPU/rightsizer checks read instance specs from the bundled pricing
+      # database, so without it 87 tests fail on a catalog lookup rather than
+      # on anything they mean to assert. docker-entrypoint.sh does the same
+      # unpack at container start.
+      - name: Unpack the bundled pricing database
+        run: python staging_pricing/unpack_pricing_db.py
+      - name: Run unit tests (excludes tests/integration, see CONTRIBUTING.md)
+        run: pytest tests/ -v
+
+  frontend-checks:
+    name: Frontend type-check & tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: maxops-frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: maxops-frontend/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Type check
+        run: npm run type-check
+      - name: Run tests
+        run: npm test -- run

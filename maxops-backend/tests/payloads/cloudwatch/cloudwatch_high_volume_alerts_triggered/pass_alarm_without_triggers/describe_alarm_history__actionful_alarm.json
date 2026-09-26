@@ -1,0 +1,23 @@
+{
+  "AlarmHistoryItems": [
+    {
+      "AlarmName": "maxops-payload-actionful",
+      "AlarmType": "MetricAlarm",
+      "HistoryData": "{\"version\":\"1.0\",\"type\":\"Create\",\"createdAlarm\":{\"alarmName\":\"maxops-payload-actionful\",\"alarmArn\":\"arn:aws:cloudwatch:us-east-1:123456789012:alarm:maxops-payload-actionful\",\"alarmConfigurationUpdatedTimestamp\":\"2026-06-14T04:25:17.312+0000\",\"namespace\":\"MaxOps/Payload\",\"metricName\":\"CaptureMetric\",\"extendedStatistic\":\"AVERAGE\",\"period\":60,\"dimensions\":[{\"value\":\"actionful_alarm\",\"name\":\"Profile\"}],\"threshold\":80.0,\"comparisonOperator\":\"GreaterThanThreshold\",\"evaluationPeriods\":2,\"treatMissingData\":\"missing\",\"stateValue\":\"INSUFFICIENT_DATA\",\"stateUpdatedTimestamp\":\"2026-06-14T04:25:17.312+0000\",\"actionsEnabled\":true,\"alarmActions\":[\"arn:aws:sns:us-east-1:123456789012:maxops-payload-placeholder\"],\"insufficientDataActions\":[],\"okactions\":[]}}",
+      "HistoryItemType": "ConfigurationUpdate",
+      "HistorySummary": "Alarm \"maxops-payload-actionful\" created",
+      "Timestamp": "2026-06-14T04:25:17.313000+00:00"
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "1889",
+      "content-type": "text/xml",
+      "date": "Sun, 14 Jun 2026 04:25:31 GMT",
+      "x-amzn-requestid": "9dfa405d-8030-4ab7-9025-da7a810c90b4"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "9dfa405d-8030-4ab7-9025-da7a810c90b4",
+    "RetryAttempts": 0
+  }
+}

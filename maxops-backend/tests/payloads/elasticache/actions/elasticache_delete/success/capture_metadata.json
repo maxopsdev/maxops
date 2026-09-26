@@ -1,0 +1,76 @@
+{
+  "account_id": "123456789012",
+  "action_key": "elasticache_delete",
+  "calls": [
+    {
+      "kwargs": {
+        "ReplicationGroupId": "maxops-payload-elasticache-redis-ineligible"
+      },
+      "operation": "describe_replication_groups",
+      "raises_client_error": false,
+      "response_file": "01_elasticache__describe_replication_groups__response.json",
+      "service": "elasticache"
+    },
+    {
+      "kwargs": {
+        "ReplicationGroupId": "maxops-payload-elasticache-redis-ineligible",
+        "RetainPrimaryCluster": false
+      },
+      "operation": "delete_replication_group",
+      "raises_client_error": false,
+      "response_file": "02_elasticache__delete_replication_group__response.json",
+      "service": "elasticache"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "elasticache_redis_convertible_to_valkey",
+  "expected_message": "ElastiCache deletion submitted.",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "elasticache_delete",
+    "check_id": "elasticache_redis_convertible_to_valkey",
+    "details": {
+      "response": {
+        "ReplicationGroup": {
+          "ARN": "arn:aws:elasticache:us-east-1:123456789012:replicationgroup:maxops-payload-elasticache-redis-ineligible",
+          "AtRestEncryptionEnabled": false,
+          "AutoMinorVersionUpgrade": true,
+          "AutomaticFailover": "disabled",
+          "ClusterMode": "disabled",
+          "DataTiering": "disabled",
+          "Description": "MaxOps payload capture replication group.",
+          "GlobalReplicationGroupInfo": {},
+          "IpDiscovery": "ipv4",
+          "LogDeliveryConfigurations": [],
+          "MultiAZ": "disabled",
+          "NetworkType": "ipv4",
+          "PendingModifiedValues": {},
+          "ReplicationGroupCreateTime": "2026-06-14T17:56:26.689000+00:00",
+          "ReplicationGroupId": "maxops-payload-elasticache-redis-ineligible",
+          "SnapshotRetentionLimit": 0,
+          "SnapshotWindow": "03:00-04:00",
+          "Status": "deleting",
+          "TransitEncryptionEnabled": false
+        },
+        "ResponseMetadata": {
+          "HTTPHeaders": {
+            "content-length": "1530",
+            "content-type": "text/xml",
+            "date": "Sun, 14 Jun 2026 18:43:34 GMT",
+            "x-amzn-requestid": "52ddf75c-95c4-4921-a092-68e4f70bfffe"
+          },
+          "HTTPStatusCode": 200,
+          "RequestId": "52ddf75c-95c4-4921-a092-68e4f70bfffe",
+          "RetryAttempts": 0
+        }
+      }
+    },
+    "message": "ElastiCache deletion submitted.",
+    "status": "submitted"
+  },
+  "parameters": {},
+  "region": "us-east-1",
+  "resource_id": "maxops-payload-elasticache-redis-ineligible",
+  "resource_ref": "ineligible_redis_replication_group",
+  "scenario": "success"
+}

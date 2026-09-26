@@ -1,0 +1,43 @@
+{
+  "bucket_placeholders": {
+    "lifecycle_no_archival": "maxops-payload-s3-lifecycle-no-archival"
+  },
+  "calls": [
+    {
+      "operation": "list_buckets",
+      "response_file": "list_buckets.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "lifecycle_no_archival",
+      "bucket_name": "maxops-payload-s3-lifecycle-no-archival",
+      "operation": "get_bucket_location",
+      "response_file": "get_bucket_location__lifecycle_no_archival.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "lifecycle_no_archival",
+      "bucket_name": "maxops-payload-s3-lifecycle-no-archival",
+      "operation": "get_bucket_tagging",
+      "response_file": "get_bucket_tagging__lifecycle_no_archival.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "lifecycle_no_archival",
+      "bucket_name": "maxops-payload-s3-lifecycle-no-archival",
+      "operation": "get_bucket_lifecycle_configuration",
+      "response_file": "get_bucket_lifecycle_configuration__lifecycle_no_archival.json",
+      "service": "s3"
+    }
+  ],
+  "check_id": "s3_no_archival_policy",
+  "check_parameters": {
+    "include_infrequent_access": false,
+    "region": "us-east-1"
+  },
+  "description": "Use a bucket with expiration but no archival transition.",
+  "expected_matches": [
+    "maxops-payload-s3-lifecycle-no-archival"
+  ],
+  "scenario": "flag_bucket_without_archival"
+}

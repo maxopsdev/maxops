@@ -1,0 +1,49 @@
+{
+  "bucket_placeholders": {
+    "inventory_source": "maxops-payload-s3-inventory-source"
+  },
+  "calls": [
+    {
+      "operation": "list_buckets",
+      "response_file": "list_buckets.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "inventory_source",
+      "bucket_name": "maxops-payload-s3-inventory-source",
+      "operation": "get_bucket_location",
+      "response_file": "get_bucket_location__inventory_source.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "inventory_source",
+      "bucket_name": "maxops-payload-s3-inventory-source",
+      "operation": "get_bucket_tagging",
+      "response_file": "get_bucket_tagging__inventory_source.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "inventory_source",
+      "bucket_name": "maxops-payload-s3-inventory-source",
+      "operation": "get_bucket_lifecycle_configuration",
+      "response_file": "get_bucket_lifecycle_configuration__inventory_source.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "inventory_source",
+      "bucket_name": "maxops-payload-s3-inventory-source",
+      "operation": "list_bucket_inventory_configurations",
+      "response_file": "list_bucket_inventory_configurations__inventory_source.json",
+      "service": "s3"
+    }
+  ],
+  "check_id": "s3_inventory_enabled",
+  "check_parameters": {
+    "region": "us-east-1"
+  },
+  "description": "Use a bucket with inventory configuration enabled.",
+  "expected_matches": [
+    "maxops-payload-s3-inventory-source"
+  ],
+  "scenario": "flag_bucket_with_inventory"
+}

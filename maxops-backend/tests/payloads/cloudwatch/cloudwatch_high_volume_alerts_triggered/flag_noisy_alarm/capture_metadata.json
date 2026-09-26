@@ -1,0 +1,29 @@
+{
+  "calls": [
+    {
+      "operation": "describe_alarms",
+      "response_file": "describe_alarms.json",
+      "service": "cloudwatch"
+    },
+    {
+      "operation": "describe_alarm_history",
+      "resource_alias": "noisy_alarm",
+      "response_file": "describe_alarm_history__noisy_alarm.json",
+      "service": "cloudwatch"
+    }
+  ],
+  "check_id": "cloudwatch_high_volume_alerts_triggered",
+  "check_parameters": {
+    "lookback_days": 7,
+    "region": "us-east-1",
+    "trigger_count_threshold": 1
+  },
+  "description": "Use a captured alarm with a real transition into ALARM state.",
+  "expected_matches": [
+    "maxops-payload-noisy"
+  ],
+  "resource_placeholders": {
+    "noisy_alarm": "maxops-payload-noisy"
+  },
+  "scenario": "flag_noisy_alarm"
+}

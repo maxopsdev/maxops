@@ -1,0 +1,18 @@
+{
+  "FlowLogs": [],
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "cache-control": "no-cache, no-store",
+      "content-type": "text/xml;charset=UTF-8",
+      "date": "Sun, 14 Jun 2026 17:23:44 GMT",
+      "server": "AmazonEC2",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "transfer-encoding": "chunked",
+      "vary": "accept-encoding",
+      "x-amzn-requestid": "94dc6acf-77f0-4343-bd20-fb84f826b555"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "94dc6acf-77f0-4343-bd20-fb84f826b555",
+    "RetryAttempts": 0
+  }
+}

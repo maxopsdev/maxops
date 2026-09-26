@@ -1,0 +1,177 @@
+{
+  "Reservations": [
+    {
+      "Groups": [],
+      "Instances": [
+        {
+          "AmiLaunchIndex": 0,
+          "Architecture": "x86_64",
+          "BlockDeviceMappings": [
+            {
+              "DeviceName": "/dev/xvda",
+              "Ebs": {
+                "AttachTime": "2026-06-15T01:20:24+00:00",
+                "DeleteOnTermination": true,
+                "Status": "attached",
+                "VolumeId": "vol-PLACEHOLDER-LEAVE-VOLUME"
+              }
+            }
+          ],
+          "CapacityReservationSpecification": {
+            "CapacityReservationPreference": "open"
+          },
+          "ClientToken": "57ce1af1-6b41-463b-9d30-2a738a829dde",
+          "CpuOptions": {
+            "CoreCount": 1,
+            "ThreadsPerCore": 2
+          },
+          "CurrentInstanceBootMode": "legacy-bios",
+          "EbsOptimized": false,
+          "EnaSupport": true,
+          "EnclaveOptions": {
+            "Enabled": false
+          },
+          "HibernationOptions": {
+            "Configured": false
+          },
+          "Hypervisor": "xen",
+          "ImageId": "ami-PLACEHOLDER",
+          "InstanceId": "i-PLACEHOLDER-LEAVE-VOLUME",
+          "InstanceType": "t3a.micro",
+          "LaunchTime": "2026-06-15T01:20:24+00:00",
+          "MaintenanceOptions": {
+            "AutoRecovery": "default"
+          },
+          "MetadataOptions": {
+            "HttpEndpoint": "enabled",
+            "HttpProtocolIpv6": "disabled",
+            "HttpPutResponseHopLimit": 1,
+            "HttpTokens": "optional",
+            "InstanceMetadataTags": "disabled",
+            "State": "applied"
+          },
+          "Monitoring": {
+            "State": "disabled"
+          },
+          "NetworkInterfaces": [
+            {
+              "Association": {
+                "IpOwnerId": "amazon",
+                "PublicDnsName": "ec2-100-31-250-145.compute-1.amazonaws.com",
+                "PublicIp": "100.31.250.145"
+              },
+              "Attachment": {
+                "AttachTime": "2026-06-15T01:20:24+00:00",
+                "AttachmentId": "eni-attach-0eb253136c23e04b9",
+                "DeleteOnTermination": true,
+                "DeviceIndex": 0,
+                "NetworkCardIndex": 0,
+                "Status": "attached"
+              },
+              "Description": "",
+              "Groups": [
+                {
+                  "GroupId": "sg-PLACEHOLDER",
+                  "GroupName": "default"
+                }
+              ],
+              "InterfaceType": "interface",
+              "Ipv6Addresses": [],
+              "MacAddress": "0e:9a:4a:13:80:09",
+              "NetworkInterfaceId": "eni-0b2f4dd70f04f0599",
+              "OwnerId": "123456789012",
+              "PrivateDnsName": "ip-172-31-24-96.ec2.internal",
+              "PrivateIpAddress": "172.31.24.96",
+              "PrivateIpAddresses": [
+                {
+                  "Association": {
+                    "IpOwnerId": "amazon",
+                    "PublicDnsName": "ec2-100-31-250-145.compute-1.amazonaws.com",
+                    "PublicIp": "100.31.250.145"
+                  },
+                  "Primary": true,
+                  "PrivateDnsName": "ip-172-31-24-96.ec2.internal",
+                  "PrivateIpAddress": "172.31.24.96"
+                }
+              ],
+              "SourceDestCheck": true,
+              "Status": "in-use",
+              "SubnetId": "subnet-PLACEHOLDER",
+              "VpcId": "vpc-PLACEHOLDER"
+            }
+          ],
+          "Placement": {
+            "AvailabilityZone": "us-east-1c",
+            "GroupName": "",
+            "Tenancy": "default"
+          },
+          "PlatformDetails": "Linux/UNIX",
+          "PrivateDnsName": "ip-172-31-24-96.ec2.internal",
+          "PrivateDnsNameOptions": {
+            "EnableResourceNameDnsAAAARecord": false,
+            "EnableResourceNameDnsARecord": false,
+            "HostnameType": "ip-name"
+          },
+          "PrivateIpAddress": "172.31.24.96",
+          "ProductCodes": [],
+          "PublicDnsName": "ec2-100-31-250-145.compute-1.amazonaws.com",
+          "PublicIpAddress": "100.31.250.145",
+          "RootDeviceName": "/dev/xvda",
+          "RootDeviceType": "ebs",
+          "SecurityGroups": [
+            {
+              "GroupId": "sg-PLACEHOLDER",
+              "GroupName": "default"
+            }
+          ],
+          "SourceDestCheck": true,
+          "State": {
+            "Code": 16,
+            "Name": "running"
+          },
+          "StateTransitionReason": "",
+          "SubnetId": "subnet-PLACEHOLDER",
+          "Tags": [
+            {
+              "Key": "maxops_payload_profile",
+              "Value": "leave_volume_instance"
+            },
+            {
+              "Key": "maxops_test",
+              "Value": "true"
+            },
+            {
+              "Key": "maxops_payload_capture",
+              "Value": "true"
+            },
+            {
+              "Key": "Name",
+              "Value": "maxops-payload-ec2-leave-volume"
+            }
+          ],
+          "UsageOperation": "RunInstances",
+          "UsageOperationUpdateTime": "2026-06-15T01:20:24+00:00",
+          "VirtualizationType": "hvm",
+          "VpcId": "vpc-PLACEHOLDER"
+        }
+      ],
+      "OwnerId": "123456789012",
+      "ReservationId": "r-063433f1b2d4d336c"
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "cache-control": "no-cache, no-store",
+      "content-length": "5511",
+      "content-type": "text/xml;charset=UTF-8",
+      "date": "Mon, 15 Jun 2026 01:23:07 GMT",
+      "server": "AmazonEC2",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "vary": "accept-encoding",
+      "x-amzn-requestid": "bbc00297-7385-4cc5-af96-ad6a5c81c989"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "bbc00297-7385-4cc5-af96-ad6a5c81c989",
+    "RetryAttempts": 0
+  }
+}

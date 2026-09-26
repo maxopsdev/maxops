@@ -1,0 +1,21 @@
+{
+  "calls": [
+    {
+      "operation": "describe_volumes",
+      "response_file": "describe_volumes.json",
+      "service": "ec2"
+    }
+  ],
+  "check_id": "ebs_unattached_volumes",
+  "check_parameters": {
+    "min_age_days": 0,
+    "region": "us-east-1"
+  },
+  "description": "Use only attached capture volumes so the unattached check has no match.",
+  "expected_matches": [],
+  "scenario": "pass_attached_volumes",
+  "volume_placeholders": {
+    "attached_gp2": "vol-ATTACHEDGP2",
+    "provisioned_io1": "vol-PROVISIONEDIO1"
+  }
+}

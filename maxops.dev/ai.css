@@ -1,0 +1,235 @@
+/* ==========================================================================
+   AI positioning page. Rides on setup-guide.css (tokens, panel, bubble,
+   caption, chips, rulebook) and docs.css (.lib layout).
+   ========================================================================== */
+
+.ai-hero {
+  position: relative;
+  padding: 92px 0 46px;
+}
+
+.ai-hero-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 6vw;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.ai-hero h1 {
+  margin: 10px 0 0;
+  font-family: 'Bangers', cursive;
+  font-size: clamp(2.4rem, 5.4vw, 4.2rem);
+  line-height: .98;
+  letter-spacing: .02em;
+  color: var(--paper);
+  text-shadow: 0 0 34px rgba(52, 224, 196, .18);
+}
+.ai-hero h1 em { font-style: normal; color: var(--teal); }
+
+.ai-lede {
+  margin: 20px 0 0;
+  max-width: 56ch;
+  font-size: 1.16rem;
+  line-height: 1.62;
+  color: var(--muted);
+}
+.ai-lede strong { color: var(--paper); font-weight: 600; }
+
+/* the proof strip under the hero */
+.proof {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+  max-width: 1180px;
+  margin: 34px auto 0;
+  padding: 0 6vw;
+}
+.proof div {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--rail-2);
+  padding: 16px 18px;
+}
+.proof b {
+  display: block;
+  font-family: 'Bangers', cursive;
+  font-size: 2.1rem;
+  line-height: 1;
+  letter-spacing: .03em;
+  color: var(--teal);
+}
+.proof span {
+  display: block;
+  margin-top: 7px;
+  font-size: .92rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+/* ---------------------------------------------------------------- bands */
+
+.band {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 52px 6vw 0;
+}
+
+.band-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.band-head h2 {
+  margin: 0;
+  font-family: 'Bangers', cursive;
+  font-size: clamp(1.6rem, 3.4vw, 2.35rem);
+  letter-spacing: .03em;
+  color: var(--paper);
+}
+.band-head h2 em { font-style: normal; color: var(--teal); }
+
+.band-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+.band-grid.flip > .band-art { order: 2; }
+
+.band-art {
+  border: 1.5px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--mat);
+  box-shadow: 0 28px 66px -34px rgba(0, 0, 0, .8);
+}
+.band-art img { display: block; width: 100%; }
+
+.band-copy p {
+  margin: 0 0 14px;
+  font-size: 1.04rem;
+  line-height: 1.68;
+  color: var(--muted);
+}
+.band-copy p strong { color: var(--paper); font-weight: 600; }
+.band-copy p:last-child { margin-bottom: 0; }
+
+.pull {
+  margin: 18px 0;
+  padding: 14px 18px;
+  border-left: 3px solid var(--teal);
+  background: rgba(52, 224, 196, .07);
+  font-size: 1.06rem;
+  line-height: 1.55;
+  color: var(--paper);
+}
+
+/* ------------------------------------------------------------ card rows */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.cards article {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--rail-2);
+  padding: 20px;
+}
+.cards h3 {
+  margin: 0 0 8px;
+  font-size: 1.04rem;
+  color: var(--paper);
+  letter-spacing: .01em;
+}
+.cards .tag {
+  display: block;
+  margin-bottom: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .64rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+.cards p { margin: 0; font-size: .97rem; line-height: 1.6; color: var(--muted); }
+.cards p + p { margin-top: 9px; }
+.cards code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .86em;
+  color: var(--teal);
+  word-break: break-word;
+}
+
+/* --------------------------------------------------------- ask examples */
+
+.asks { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+.asks div {
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--amber);
+  border-radius: 10px;
+  background: var(--rail-2);
+  padding: 14px 16px;
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: var(--paper);
+}
+.asks div span {
+  display: block;
+  margin-top: 7px;
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+/* ------------------------------------------------------------- honesty */
+
+.honest {
+  border: 1px dashed var(--line-strong, rgba(148,178,255,.3));
+  border-radius: 14px;
+  background: rgba(148, 178, 255, .04);
+  padding: 22px 24px;
+}
+.honest h3 {
+  margin: 0 0 10px;
+  font-family: 'Bangers', cursive;
+  font-size: 1.4rem;
+  letter-spacing: .03em;
+  color: var(--paper);
+}
+.honest p { margin: 0 0 12px; font-size: 1rem; line-height: 1.65; color: var(--muted); }
+.honest p:last-child { margin-bottom: 0; }
+.honest strong { color: var(--paper); font-weight: 600; }
+
+/* ----------------------------------------------------------------- cta */
+
+.ai-cta {
+  max-width: 1180px;
+  margin: 58px auto 0;
+  padding: 40px 6vw 70px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+.ai-cta h2 {
+  margin: 0 0 12px;
+  font-family: 'Bangers', cursive;
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  letter-spacing: .03em;
+  color: var(--paper);
+}
+.ai-cta h2 em { font-style: normal; color: var(--teal); }
+.ai-cta p { margin: 0 auto 24px; max-width: 62ch; color: var(--muted); font-size: 1.05rem; line-height: 1.6; }
+.ai-cta .chips { justify-content: center; }
+
+/* ------------------------------------------------------------ responsive */
+
+@media (max-width: 900px) {
+  .ai-hero-inner,
+  .band-grid { grid-template-columns: 1fr; }
+  .band-grid.flip > .band-art { order: 0; }
+  .ai-hero { padding-top: 84px; }
+}

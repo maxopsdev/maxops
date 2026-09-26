@@ -1,0 +1,35 @@
+{
+  "Addresses": [
+    {
+      "AllocationId": "eipalloc-PLACEHOLDER",
+      "Domain": "vpc",
+      "NetworkBorderGroup": "us-east-1",
+      "PublicIp": "198.51.100.10",
+      "PublicIpv4Pool": "amazon",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "maxops-payload-ec2-unused-eip"
+        },
+        {
+          "Key": "maxops_payload_capture",
+          "Value": "true"
+        }
+      ]
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "cache-control": "no-cache, no-store",
+      "content-length": "595",
+      "content-type": "text/xml;charset=UTF-8",
+      "date": "Mon, 15 Jun 2026 01:21:46 GMT",
+      "server": "AmazonEC2",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-amzn-requestid": "c27f3e38-19ab-4be6-bb64-76566825a769"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "c27f3e38-19ab-4be6-bb64-76566825a769",
+    "RetryAttempts": 0
+  }
+}

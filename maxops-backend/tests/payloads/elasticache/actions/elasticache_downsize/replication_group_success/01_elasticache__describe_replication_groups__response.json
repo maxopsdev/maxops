@@ -1,0 +1,24 @@
+{
+  "ReplicationGroups": [
+    {
+      "ARN": "arn:aws:elasticache:us-east-1:123456789012:replicationgroup:maxops-test-replication-group",
+      "AutomaticFailover": "enabled",
+      "CacheNodeType": "cache.m5.large",
+      "ClusterEnabled": false,
+      "Description": "Hand-authored fixture replication group",
+      "Engine": "redis",
+      "MemberClusters": [
+        "maxops-test-replication-group-001",
+        "maxops-test-replication-group-002",
+        "maxops-test-replication-group-003"
+      ],
+      "ReplicationGroupId": "maxops-test-replication-group",
+      "Status": "available"
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPStatusCode": 200,
+    "RequestId": "00000000-0000-0000-0000-000000000011",
+    "RetryAttempts": 0
+  }
+}

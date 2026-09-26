@@ -1,0 +1,56 @@
+{
+  "Messages": [],
+  "MetricDataResults": [
+    {
+      "Id": "memory_average",
+      "Label": "mem_used_percent Average",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [],
+      "Values": []
+    },
+    {
+      "Id": "memory_maximum",
+      "Label": "mem_used_percent Maximum",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [],
+      "Values": []
+    },
+    {
+      "Id": "memory_p90",
+      "Label": "mem_used_percent p90",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [],
+      "Values": []
+    },
+    {
+      "Id": "memory_p95",
+      "Label": "mem_used_percent p95",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [],
+      "Values": []
+    },
+    {
+      "Id": "memory_p99",
+      "Label": "mem_used_percent p99",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [],
+      "Values": []
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "1267",
+      "content-type": "text/xml",
+      "date": "Mon, 15 Jun 2026 01:21:14 GMT",
+      "x-amzn-requestid": "52252776-661f-489d-9233-a9edbe777ffb"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "52252776-661f-489d-9233-a9edbe777ffb",
+    "RetryAttempts": 0
+  }
+}

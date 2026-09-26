@@ -1,0 +1,39 @@
+{
+  "account_id": "123456789012",
+  "action_key": "asg_rightsize",
+  "calls": [
+    {
+      "kwargs": {
+        "AutoScalingGroupNames": [
+          "maxops-test-asg"
+        ]
+      },
+      "operation": "describe_auto_scaling_groups",
+      "raises_client_error": false,
+      "response_file": "01_autoscaling__describe_auto_scaling_groups__response.json",
+      "service": "autoscaling"
+    },
+    {
+      "kwargs": {
+        "AutoScalingGroupName": "maxops-test-asg",
+        "DesiredCapacity": 3
+      },
+      "operation": "update_auto_scaling_group",
+      "raises_client_error": true,
+      "response_file": "02_autoscaling__update_auto_scaling_group__error.json",
+      "service": "autoscaling"
+    }
+  ],
+  "capture_source": "hand-authored",
+  "check_id": "asg_low_cpu_overprovisioned",
+  "expected_error": {
+    "detail_contains": "ScalingActivityInProgress",
+    "status_code": 500
+  },
+  "parameters": {
+    "target_desired_capacity": 3
+  },
+  "region": "us-east-1",
+  "resource_id": "maxops-test-asg",
+  "scenario": "update_fails"
+}

@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "MaxOps AWS Dashboard Overlay",
+  "description": "Adds local MaxOps cost, savings, and check-failure context to AWS console instance views.",
+  "version": "0.1.0",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "MaxOps"
+  },
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://console.aws.amazon.com/*",
+        "https://*.console.aws.amazon.com/*"
+      ],
+      "js": [
+        "src/browser-api.js",
+        "src/content.js"
+      ],
+      "css": [
+        "src/content.css"
+      ],
+      "all_frames": true,
+      "match_about_blank": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "host_permissions": [
+    "http://localhost:*/*",
+    "http://127.0.0.1:*/*"
+  ],
+  "options_page": "options.html",
+  "permissions": [
+    "storage"
+  ]
+}

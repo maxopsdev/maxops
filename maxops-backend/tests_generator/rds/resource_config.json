@@ -1,0 +1,48 @@
+{
+  "service": "rds",
+  "profile": "default",
+  "region": "us-east-1",
+  "state_file": "tests_generator/rds/.rds_capture_state.json",
+  "placeholder_values": {
+    "ACCOUNT_ID": "123456789012",
+    "REGION": "us-east-1",
+    "DB_SUBNET_GROUP": "maxops-payload-rds-subnet-group",
+    "GRAVITON_DB_IDENTIFIER": "maxops-payload-rds-idle-graviton",
+    "NON_GRAVITON_DB_IDENTIFIER": "maxops-payload-rds-non-graviton",
+    "VPC_ID": "vpc-PLACEHOLDER",
+    "SUBNET_ID_A": "subnet-PLACEHOLDER-A",
+    "SUBNET_ID_B": "subnet-PLACEHOLDER-B",
+    "SECURITY_GROUP_ID": "sg-PLACEHOLDER"
+  },
+  "capture_window_days": 7,
+  "db_instance_definitions": {
+    "idle_graviton_capture": {
+      "identifier_placeholder_key": "GRAVITON_DB_IDENTIFIER",
+      "db_instance_class": "db.t4g.micro",
+      "engine": "mysql",
+      "allocated_storage": 20,
+      "master_username": "admin",
+      "master_user_password": "TestPassword123!",
+      "tags": {
+        "Name": "{{GRAVITON_DB_IDENTIFIER}}",
+        "maxops_test": "true",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "idle_graviton_capture"
+      }
+    },
+    "non_graviton_capture": {
+      "identifier_placeholder_key": "NON_GRAVITON_DB_IDENTIFIER",
+      "db_instance_class": "db.t3.micro",
+      "engine": "mysql",
+      "allocated_storage": 20,
+      "master_username": "admin",
+      "master_user_password": "TestPassword123!",
+      "tags": {
+        "Name": "{{NON_GRAVITON_DB_IDENTIFIER}}",
+        "maxops_test": "true",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "non_graviton_capture"
+      }
+    }
+  }
+}

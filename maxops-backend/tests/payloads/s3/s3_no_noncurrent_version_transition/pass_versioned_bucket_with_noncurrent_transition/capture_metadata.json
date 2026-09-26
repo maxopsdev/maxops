@@ -1,0 +1,49 @@
+{
+  "bucket_placeholders": {
+    "compliant_versioned": "maxops-payload-s3-compliant-versioned"
+  },
+  "calls": [
+    {
+      "operation": "list_buckets",
+      "response_file": "list_buckets.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "compliant_versioned",
+      "bucket_name": "maxops-payload-s3-compliant-versioned",
+      "operation": "get_bucket_location",
+      "response_file": "get_bucket_location__compliant_versioned.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "compliant_versioned",
+      "bucket_name": "maxops-payload-s3-compliant-versioned",
+      "operation": "get_bucket_tagging",
+      "response_file": "get_bucket_tagging__compliant_versioned.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "compliant_versioned",
+      "bucket_name": "maxops-payload-s3-compliant-versioned",
+      "operation": "get_bucket_lifecycle_configuration",
+      "response_file": "get_bucket_lifecycle_configuration__compliant_versioned.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "compliant_versioned",
+      "bucket_name": "maxops-payload-s3-compliant-versioned",
+      "operation": "get_bucket_versioning",
+      "response_file": "get_bucket_versioning__compliant_versioned.json",
+      "service": "s3"
+    }
+  ],
+  "check_id": "s3_no_noncurrent_version_transition",
+  "check_parameters": {
+    "include_infrequent_access": false,
+    "region": "us-east-1",
+    "require_versioning_enabled": true
+  },
+  "description": "Use a versioned bucket with NoncurrentVersionTransition configured.",
+  "expected_matches": [],
+  "scenario": "pass_versioned_bucket_with_noncurrent_transition"
+}

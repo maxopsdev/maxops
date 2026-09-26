@@ -1,0 +1,59 @@
+{
+  "account_id": "123456789012",
+  "created_at_epoch": 1781459782,
+  "placeholder_map": {
+    "123456789012": "123456789012",
+    "maxops-payload-elasticache-low-items": "maxops-payload-elasticache-low-i-1518b2-1781459782",
+    "maxops-payload-elasticache-non-graviton": "maxops-payload-elasticache-non-g-f01c37-1781459782",
+    "maxops-payload-elasticache-redis-ineligible": "maxops-payload-elastic-594877-1781459782",
+    "maxops-payload-elasticache-redis-valkey": "maxops-payload-elastic-ca4516-1781459782"
+  },
+  "region": "us-east-1",
+  "resources": {
+    "ineligible_redis_replication_group": {
+      "cache_node_type": "cache.t4g.micro",
+      "engine": "redis",
+      "engine_version": null,
+      "member_clusters": [
+        "maxops-payload-elastic-594877-1781459782-001",
+        "maxops-payload-elastic-594877-1781459782-002"
+      ],
+      "placeholder_key": "INELIGIBLE_REDIS_RG_ID",
+      "placeholder_value": "maxops-payload-elasticache-redis-ineligible",
+      "replication_group_id": "maxops-payload-elastic-594877-1781459782",
+      "resource_type": "elasticache_replication_group"
+    },
+    "low_items_graviton_cluster": {
+      "cache_node_type": "cache.t4g.micro",
+      "cluster_id": "maxops-payload-elasticache-low-i-1518b2-1781459782",
+      "engine": "redis",
+      "engine_version": "7.1.0",
+      "placeholder_key": "LOW_ITEMS_CLUSTER_ID",
+      "placeholder_value": "maxops-payload-elasticache-low-items",
+      "resource_type": "elasticache_cluster"
+    },
+    "non_graviton_cluster": {
+      "cache_node_type": "cache.t3.micro",
+      "cluster_id": "maxops-payload-elasticache-non-g-f01c37-1781459782",
+      "engine": "redis",
+      "engine_version": "7.1.0",
+      "placeholder_key": "NON_GRAVITON_CLUSTER_ID",
+      "placeholder_value": "maxops-payload-elasticache-non-graviton",
+      "resource_type": "elasticache_cluster"
+    },
+    "redis_replication_group": {
+      "cache_node_type": "cache.t4g.micro",
+      "engine": "redis",
+      "engine_version": null,
+      "member_clusters": [
+        "maxops-payload-elastic-ca4516-1781459782-001",
+        "maxops-payload-elastic-ca4516-1781459782-002"
+      ],
+      "placeholder_key": "REDIS_VALKEY_RG_ID",
+      "placeholder_value": "maxops-payload-elasticache-redis-valkey",
+      "replication_group_id": "maxops-payload-elastic-ca4516-1781459782",
+      "resource_type": "elasticache_replication_group"
+    }
+  },
+  "service": "elasticache"
+}

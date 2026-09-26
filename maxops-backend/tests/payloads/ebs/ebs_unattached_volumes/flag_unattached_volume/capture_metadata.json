@@ -1,0 +1,22 @@
+{
+  "calls": [
+    {
+      "operation": "describe_volumes",
+      "response_file": "describe_volumes.json",
+      "service": "ec2"
+    }
+  ],
+  "check_id": "ebs_unattached_volumes",
+  "check_parameters": {
+    "min_age_days": 0,
+    "region": "us-east-1"
+  },
+  "description": "Use the captured 1 GiB unattached gp3 volume.",
+  "expected_matches": [
+    "vol-UNATTACHED"
+  ],
+  "scenario": "flag_unattached_volume",
+  "volume_placeholders": {
+    "unattached_gp3": "vol-UNATTACHED"
+  }
+}

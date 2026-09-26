@@ -1,0 +1,489 @@
+{
+  "cloudwatch_alarms_no_actions": {
+    "check_function": "check_cloudwatch_alarms_no_actions",
+    "check_module": "app.checks.cloudwatch.alarms_no_actions",
+    "negative_scenarios": [
+      "pass_alarm_with_actions"
+    ],
+    "positive_scenarios": [
+      "flag_alarm_without_actions"
+    ],
+    "service": "cloudwatch"
+  },
+  "cloudwatch_duplicate_alarms": {
+    "check_function": "check_cloudwatch_duplicate_alarms",
+    "check_module": "app.checks.cloudwatch.alarms_with_duplicates",
+    "negative_scenarios": [
+      "pass_unique_alarm"
+    ],
+    "positive_scenarios": [
+      "flag_duplicate_alarms"
+    ],
+    "service": "cloudwatch"
+  },
+  "cloudwatch_high_volume_alerts_triggered": {
+    "check_function": "check_cloudwatch_high_volume_alerts_triggered",
+    "check_module": "app.checks.cloudwatch.alarms_with_high_volume",
+    "negative_scenarios": [
+      "pass_alarm_without_triggers"
+    ],
+    "positive_scenarios": [
+      "flag_noisy_alarm"
+    ],
+    "service": "cloudwatch"
+  },
+  "cloudwatch_log_groups_no_expiration": {
+    "check_function": "check_cloudwatch_log_groups_no_expiration",
+    "check_module": "app.checks.cloudwatch.log_groups_no_expiration",
+    "negative_scenarios": [
+      "pass_log_group_with_retention"
+    ],
+    "positive_scenarios": [
+      "flag_log_group_without_retention"
+    ],
+    "service": "cloudwatch"
+  },
+  "dynamodb_best_fit_on_demand": {
+    "check_function": "check_dynamodb_best_fit_on_demand",
+    "check_module": "app.checks.dynamodb.best_fit_ondemand",
+    "negative_scenarios": [
+      "pass_already_on_demand"
+    ],
+    "positive_scenarios": [
+      "flag_low_utilization_provisioned"
+    ],
+    "service": "dynamodb"
+  },
+  "dynamodb_best_fit_provisioned": {
+    "check_function": "check_dynamodb_best_fit_provisioned",
+    "check_module": "app.checks.dynamodb.best_fit_provisoned",
+    "negative_scenarios": [
+      "pass_already_provisioned"
+    ],
+    "positive_scenarios": [
+      "flag_steady_on_demand"
+    ],
+    "service": "dynamodb"
+  },
+  "dynamodb_gsi_unused": {
+    "check_function": "check_dynamodb_gsi_unused",
+    "check_module": "app.checks.dynamodb.gsi_unused",
+    "negative_scenarios": [
+      "pass_gsi_with_reads"
+    ],
+    "positive_scenarios": [
+      "flag_unused_gsi"
+    ],
+    "service": "dynamodb"
+  },
+  "dynamodb_underutilized_rcu": {
+    "check_function": "check_dynamodb_underutilized_rcu",
+    "check_module": "app.checks.dynamodb.underutilized_rcu",
+    "negative_scenarios": [
+      "pass_busy_rcu"
+    ],
+    "positive_scenarios": [
+      "flag_low_rcu"
+    ],
+    "service": "dynamodb"
+  },
+  "dynamodb_underutilized_tables": {
+    "check_function": "check_dynamodb_underutilized_tables",
+    "check_module": "app.checks.dynamodb.underutilized_tables",
+    "negative_scenarios": [
+      "pass_threshold_zero"
+    ],
+    "positive_scenarios": [
+      "flag_low_item_table"
+    ],
+    "service": "dynamodb"
+  },
+  "dynamodb_underutilized_wcu": {
+    "check_function": "check_dynamodb_underutilized_wcu",
+    "check_module": "app.checks.dynamodb.underutilized_wcu",
+    "negative_scenarios": [
+      "pass_busy_wcu"
+    ],
+    "positive_scenarios": [
+      "flag_low_wcu"
+    ],
+    "service": "dynamodb"
+  },
+  "ebs_gp2_volumes_convertible_to_gp3": {
+    "check_function": "check_ebs_gp2_volumes_convertible_to_gp3",
+    "check_module": "app.checks.ebs.gp2_convertible_to_gp3",
+    "negative_scenarios": [
+      "pass_non_gp2_volumes"
+    ],
+    "positive_scenarios": [
+      "flag_attached_gp2"
+    ],
+    "service": "ebs"
+  },
+  "ebs_iops_overprovisioned_volume": {
+    "check_function": "check_ebs_iops_overprovisioned_volume",
+    "check_module": "app.checks.ebs.iops_overprovisioned_volume",
+    "negative_scenarios": [
+      "pass_busy_iops_io1"
+    ],
+    "positive_scenarios": [
+      "flag_low_iops_io1"
+    ],
+    "service": "ebs"
+  },
+  "ebs_large_volumes_low_utilization": {
+    "check_function": "check_ebs_large_volumes_low_utilization",
+    "check_module": "app.checks.ebs.large_volumes_low_utilization",
+    "negative_scenarios": [
+      "pass_high_utilization_gp2"
+    ],
+    "positive_scenarios": [
+      "flag_minimal_large_threshold_gp2"
+    ],
+    "service": "ebs"
+  },
+  "ebs_unattached_volumes": {
+    "check_function": "check_ebs_unattached_volumes",
+    "check_module": "app.checks.ebs.unattached_volumes",
+    "negative_scenarios": [
+      "pass_attached_volumes"
+    ],
+    "positive_scenarios": [
+      "flag_unattached_volume"
+    ],
+    "service": "ebs"
+  },
+  "ebs_underutilized_provisioned_iops": {
+    "check_function": "check_ebs_underutilized_provisioned_iops",
+    "check_module": "app.checks.ebs.underutilized_provisioned_iops",
+    "negative_scenarios": [
+      "pass_busy_provisioned_iops_io1"
+    ],
+    "positive_scenarios": [
+      "flag_low_provisioned_iops_io1"
+    ],
+    "service": "ebs"
+  },
+  "ebs_underutilized_volume": {
+    "check_function": "check_ebs_underutilized_volume",
+    "check_module": "app.checks.ebs.underutilized_volume",
+    "negative_scenarios": [
+      "pass_high_io_gp2"
+    ],
+    "positive_scenarios": [
+      "flag_low_io_gp2"
+    ],
+    "service": "ebs"
+  },
+  "ec2_graviton_candidate": {
+    "check_function": "check_ec2_graviton_candidate",
+    "check_module": "app.checks.ec2.graviton_candidate",
+    "negative_scenarios": [
+      "pass_graviton_instance"
+    ],
+    "positive_scenarios": [
+      "flag_non_graviton_instance"
+    ],
+    "service": "ec2"
+  },
+  "ec2_idle_instances": {
+    "check_function": "check_ec2_idle_instances",
+    "check_module": "app.checks.ec2.idle_instances",
+    "negative_scenarios": [
+      "fail_busy_instance",
+      "edge_no_datapoints"
+    ],
+    "positive_scenarios": [
+      "pass_idle_instance"
+    ],
+    "service": "ec2"
+  },
+  "ec2_unused_instances": {
+    "check_function": "check_ec2_unused_instances",
+    "check_module": "app.checks.ec2.unused_instances",
+    "negative_scenarios": [
+      "fail_no_stopped_instances"
+    ],
+    "positive_scenarios": [
+      "pass_stopped_instance"
+    ],
+    "service": "ec2"
+  },
+  "elasticache_low_item_count": {
+    "check_function": "check_elasticache_low_item_count",
+    "check_module": "app.checks.elasticache.low_items_count",
+    "negative_scenarios": [
+      "pass_cluster_with_items",
+      "edge_missing_item_metrics"
+    ],
+    "positive_scenarios": [
+      "flag_low_item_cluster"
+    ],
+    "service": "elasticache"
+  },
+  "elasticache_non_graviton_instance_class": {
+    "check_function": "check_elasticache_non_graviton_instance_class",
+    "check_module": "app.checks.elasticache.non_graviton",
+    "negative_scenarios": [
+      "pass_graviton_cluster"
+    ],
+    "positive_scenarios": [
+      "flag_non_graviton_cluster"
+    ],
+    "service": "elasticache"
+  },
+  "elasticache_redis_convertible_to_valkey": {
+    "check_function": "check_elasticache_redis_convertible_to_valkey",
+    "check_module": "app.checks.elasticache.valkey_compatible",
+    "negative_scenarios": [
+      "pass_ineligible_engine_version"
+    ],
+    "positive_scenarios": [
+      "flag_redis_replication_group"
+    ],
+    "service": "elasticache"
+  },
+  "rds_idle_databases": {
+    "check_function": "check_rds_idle_databases",
+    "check_module": "app.checks.rds.idle_databases",
+    "negative_scenarios": [
+      "pass_busy_database"
+    ],
+    "positive_scenarios": [
+      "flag_idle_database",
+      "edge_no_metric_datapoints"
+    ],
+    "service": "rds"
+  },
+  "rds_non_graviton_instance_class": {
+    "check_function": "check_rds_non_graviton_instance_class",
+    "check_module": "app.checks.rds.non_graviton",
+    "negative_scenarios": [
+      "pass_graviton_instance"
+    ],
+    "positive_scenarios": [
+      "flag_non_graviton_instance"
+    ],
+    "service": "rds"
+  },
+  "s3_inventory_enabled": {
+    "check_function": "check_s3_inventory_enabled",
+    "check_module": "app.checks.s3.inventory_enabled",
+    "negative_scenarios": [
+      "pass_bucket_without_inventory"
+    ],
+    "positive_scenarios": [
+      "flag_bucket_with_inventory"
+    ],
+    "service": "s3"
+  },
+  "s3_log_buckets_without_expiration_policy": {
+    "check_function": "check_s3_log_buckets_without_expiration_policy",
+    "check_module": "app.checks.s3.logs_bucket_no_expiration",
+    "negative_scenarios": [
+      "pass_non_log_bucket_with_expiration"
+    ],
+    "positive_scenarios": [
+      "flag_log_bucket_without_expiration"
+    ],
+    "service": "s3"
+  },
+  "s3_logging_enabled": {
+    "check_function": "check_s3_logging_enabled",
+    "check_module": "app.checks.s3.access_logging_enabled",
+    "negative_scenarios": [
+      "pass_bucket_without_logging"
+    ],
+    "positive_scenarios": [
+      "flag_bucket_with_logging"
+    ],
+    "service": "s3"
+  },
+  "s3_no_archival_policy": {
+    "check_function": "check_s3_no_archival_policy",
+    "check_module": "app.checks.s3.no_archival_policies",
+    "negative_scenarios": [
+      "pass_bucket_with_archival"
+    ],
+    "positive_scenarios": [
+      "flag_bucket_without_archival"
+    ],
+    "service": "s3"
+  },
+  "s3_no_delete_marker_expiration": {
+    "check_function": "check_s3_no_delete_marker_expiration",
+    "check_module": "app.checks.s3.no_delete_marker_expiration",
+    "negative_scenarios": [
+      "pass_versioned_bucket_with_delete_marker_cleanup"
+    ],
+    "positive_scenarios": [
+      "flag_versioned_bucket_missing_delete_marker_cleanup"
+    ],
+    "service": "s3"
+  },
+  "s3_no_expiration_policy": {
+    "check_function": "check_s3_no_expiration_policy",
+    "check_module": "app.checks.s3.no_expiration_set",
+    "negative_scenarios": [
+      "pass_bucket_with_expiration"
+    ],
+    "positive_scenarios": [
+      "flag_bucket_without_expiration"
+    ],
+    "service": "s3"
+  },
+  "s3_no_lifecycle_policy": {
+    "check_function": "check_s3_no_lifecycle_policy",
+    "check_module": "app.checks.s3.no_life_cycle_policies",
+    "negative_scenarios": [
+      "pass_bucket_with_lifecycle"
+    ],
+    "positive_scenarios": [
+      "flag_bucket_without_lifecycle"
+    ],
+    "service": "s3"
+  },
+  "s3_no_mpu_policy": {
+    "check_function": "check_s3_no_mpu_policy",
+    "check_module": "app.checks.s3.no_mpu_policy",
+    "negative_scenarios": [
+      "pass_bucket_with_abort_mpu"
+    ],
+    "positive_scenarios": [
+      "flag_bucket_without_abort_mpu"
+    ],
+    "service": "s3"
+  },
+  "s3_no_noncurrent_expiration": {
+    "check_function": "check_s3_no_noncurrent_expiration",
+    "check_module": "app.checks.s3.no_noncurrent_expiration",
+    "negative_scenarios": [
+      "pass_versioned_bucket_with_noncurrent_expiration"
+    ],
+    "positive_scenarios": [
+      "flag_versioned_bucket_missing_noncurrent_expiration"
+    ],
+    "service": "s3"
+  },
+  "s3_no_noncurrent_version_transition": {
+    "check_function": "check_s3_no_noncurrent_version_transition",
+    "check_module": "app.checks.s3.no_noncurrent_objects_archival",
+    "negative_scenarios": [
+      "pass_versioned_bucket_with_noncurrent_transition"
+    ],
+    "positive_scenarios": [
+      "flag_versioned_bucket_missing_noncurrent_transition"
+    ],
+    "service": "s3"
+  },
+  "s3_replication_enabled": {
+    "check_function": "check_s3_replication_enabled",
+    "check_module": "app.checks.s3.replication_enabled",
+    "negative_scenarios": [
+      "pass_bucket_without_replication"
+    ],
+    "positive_scenarios": [
+      "flag_bucket_with_replication"
+    ],
+    "service": "s3"
+  },
+  "sagemaker_endpoint_gpu_underutilized": {
+    "check_function": "check_sagemaker_endpoint_gpu_underutilized",
+    "check_module": "app.checks.sagemaker.endpoint_gpu_underutilized",
+    "negative_scenarios": [
+      "fail_gpu_memory_resident",
+      "edge_gpu_no_telemetry"
+    ],
+    "positive_scenarios": [
+      "pass_gpu_idle_memory_low"
+    ],
+    "service": "sagemaker"
+  },
+  "sagemaker_endpoint_idle": {
+    "check_function": "check_sagemaker_endpoint_idle",
+    "check_module": "app.checks.sagemaker.endpoint_idle",
+    "negative_scenarios": [
+      "fail_with_traffic",
+      "edge_young_endpoint"
+    ],
+    "positive_scenarios": [
+      "pass_zero_invocations"
+    ],
+    "service": "sagemaker"
+  },
+  "sagemaker_endpoint_overprovisioned": {
+    "check_function": "check_sagemaker_endpoint_overprovisioned",
+    "check_module": "app.checks.sagemaker.endpoint_overprovisioned",
+    "negative_scenarios": [
+      "fail_scaling_policy"
+    ],
+    "positive_scenarios": [
+      "pass_low_utilization"
+    ],
+    "service": "sagemaker"
+  },
+  "sagemaker_notebook_idle": {
+    "check_function": "check_sagemaker_notebook_idle",
+    "check_module": "app.checks.sagemaker.notebook_idle",
+    "negative_scenarios": [
+      "fail_gpu_agent_missing"
+    ],
+    "positive_scenarios": [
+      "pass_cpu_idle"
+    ],
+    "service": "sagemaker"
+  },
+  "sagemaker_notebook_no_auto_stop": {
+    "check_function": "check_sagemaker_notebook_no_auto_stop",
+    "check_module": "app.checks.sagemaker.notebook_no_auto_stop",
+    "negative_scenarios": [
+      "fail_autostop",
+      "edge_describe_failure"
+    ],
+    "positive_scenarios": [
+      "pass_no_config"
+    ],
+    "service": "sagemaker"
+  },
+  "sagemaker_training_no_managed_spot": {
+    "check_function": "check_sagemaker_training_no_managed_spot",
+    "check_module": "app.checks.sagemaker.training_no_managed_spot",
+    "negative_scenarios": [
+      "fail_one_spot_run",
+      "edge_two_runs"
+    ],
+    "positive_scenarios": [
+      "pass_three_on_demand"
+    ],
+    "service": "sagemaker"
+  },
+  "vpc_flow_logs_enabled": {
+    "check_function": "check_vpc_flow_logs_enabled",
+    "check_module": "app.checks.vpc.vpc_flow_logs_enabled",
+    "negative_scenarios": [
+      "pass_vpc_without_flow_logs"
+    ],
+    "positive_scenarios": [
+      "flag_vpc_with_flow_logs"
+    ],
+    "service": "vpc"
+  },
+  "vpc_no_dynamodb_vpc_endpoint": {
+    "check_function": "check_vpc_no_dynamodb_vpc_endpoint",
+    "check_module": "app.checks.vpc.no_dynamodb_endpoint",
+    "negative_scenarios": [],
+    "positive_scenarios": [
+      "flag_vpc_without_dynamodb_endpoint"
+    ],
+    "service": "vpc"
+  },
+  "vpc_no_s3_vpc_endpoint": {
+    "check_function": "check_vpc_no_s3_vpc_endpoint",
+    "check_module": "app.checks.vpc.no_s3_vpc_endpoint",
+    "negative_scenarios": [],
+    "positive_scenarios": [
+      "flag_vpc_without_s3_endpoint"
+    ],
+    "service": "vpc"
+  }
+}

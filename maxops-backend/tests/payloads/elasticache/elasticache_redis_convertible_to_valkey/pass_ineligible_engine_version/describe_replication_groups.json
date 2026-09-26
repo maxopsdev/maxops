@@ -1,0 +1,79 @@
+{
+  "ReplicationGroups": [
+    {
+      "ARN": "arn:aws:elasticache:us-east-1:123456789012:replicationgroup:maxops-payload-elasticache-redis-ineligible",
+      "AtRestEncryptionEnabled": false,
+      "AuthTokenEnabled": false,
+      "AutoMinorVersionUpgrade": true,
+      "AutomaticFailover": "disabled",
+      "CacheNodeType": "cache.t4g.micro",
+      "ClusterEnabled": false,
+      "ClusterMode": "disabled",
+      "DataTiering": "disabled",
+      "Description": "MaxOps payload capture replication group.",
+      "GlobalReplicationGroupInfo": {},
+      "IpDiscovery": "ipv4",
+      "LogDeliveryConfigurations": [],
+      "MemberClusters": [
+        "maxops-payload-elasticache-redis-ineligible-001",
+        "maxops-payload-elasticache-redis-ineligible-002"
+      ],
+      "MultiAZ": "disabled",
+      "NetworkType": "ipv4",
+      "NodeGroups": [
+        {
+          "NodeGroupId": "0001",
+          "NodeGroupMembers": [
+            {
+              "CacheClusterId": "maxops-payload-elasticache-redis-ineligible-001",
+              "CacheNodeId": "0001",
+              "CurrentRole": "primary",
+              "PreferredAvailabilityZone": "us-east-1f",
+              "ReadEndpoint": {
+                "Address": "maxops-payload-elasticache-redis-ineligible-001.uudkh8.0001.use1.cache.amazonaws.com",
+                "Port": 6379
+              }
+            },
+            {
+              "CacheClusterId": "maxops-payload-elasticache-redis-ineligible-002",
+              "CacheNodeId": "0001",
+              "CurrentRole": "replica",
+              "PreferredAvailabilityZone": "us-east-1b",
+              "ReadEndpoint": {
+                "Address": "maxops-payload-elasticache-redis-ineligible-002.uudkh8.0001.use1.cache.amazonaws.com",
+                "Port": 6379
+              }
+            }
+          ],
+          "PrimaryEndpoint": {
+            "Address": "maxops-payload-elasticache-redis-ineligible.uudkh8.ng.0001.use1.cache.amazonaws.com",
+            "Port": 6379
+          },
+          "ReaderEndpoint": {
+            "Address": "maxops-payload-elasticache-redis-ineligible-ro.uudkh8.ng.0001.use1.cache.amazonaws.com",
+            "Port": 6379
+          },
+          "Status": "available"
+        }
+      ],
+      "PendingModifiedValues": {},
+      "ReplicationGroupCreateTime": "2026-06-14T03:50:09.982000+00:00",
+      "ReplicationGroupId": "maxops-payload-elasticache-redis-ineligible",
+      "SnapshotRetentionLimit": 0,
+      "SnapshotWindow": "04:30-05:30",
+      "Status": "available",
+      "TransitEncryptionEnabled": false
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "7171",
+      "content-type": "text/xml",
+      "date": "Sun, 14 Jun 2026 03:55:57 GMT",
+      "x-amzn-requestid": "6e47f2f9-4045-44e0-8fa0-6751c2effcf6"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "6e47f2f9-4045-44e0-8fa0-6751c2effcf6",
+    "RetryAttempts": 0
+  }
+}

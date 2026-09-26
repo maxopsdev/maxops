@@ -1,0 +1,74 @@
+{
+  "account_id": "123456789012",
+  "action_key": "add_abort_mpu_policy",
+  "calls": [
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-lifecycle-no-mpu"
+      },
+      "operation": "get_bucket_lifecycle_configuration",
+      "raises_client_error": false,
+      "response_file": "01_s3__get_bucket_lifecycle_configuration__response.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-lifecycle-no-mpu",
+        "LifecycleConfiguration": {
+          "Rules": [
+            {
+              "Expiration": {
+                "Days": 60
+              },
+              "Filter": {
+                "Prefix": ""
+              },
+              "ID": "expire-and-archive-no-mpu",
+              "Status": "Enabled",
+              "Transitions": [
+                {
+                  "Days": 30,
+                  "StorageClass": "GLACIER"
+                }
+              ]
+            },
+            {
+              "AbortIncompleteMultipartUpload": {
+                "DaysAfterInitiation": 7
+              },
+              "Filter": {
+                "Prefix": ""
+              },
+              "ID": "maxops-abort-mpu-{{ANY_INT}}",
+              "Status": "Enabled"
+            }
+          ]
+        }
+      },
+      "operation": "put_bucket_lifecycle_configuration",
+      "raises_client_error": false,
+      "response_file": "02_s3__put_bucket_lifecycle_configuration__response.json",
+      "service": "s3"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "s3_no_mpu_policy",
+  "expected_message": "Abort incomplete MPUs lifecycle policy added.",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "add_abort_mpu_policy",
+    "check_id": "s3_no_mpu_policy",
+    "details": {
+      "bucket": "maxops-payload-s3-lifecycle-no-mpu",
+      "days": 7,
+      "rule_id": "maxops-abort-mpu-{{ANY_INT}}"
+    },
+    "message": "Abort incomplete MPUs lifecycle policy added.",
+    "status": "submitted"
+  },
+  "parameters": {},
+  "region": "us-east-1",
+  "resource_id": "maxops-payload-s3-lifecycle-no-mpu",
+  "resource_ref": "lifecycle_no_mpu",
+  "scenario": "success"
+}

@@ -1,0 +1,18 @@
+{
+  "Error": {
+    "Code": "ReplicationGroupNotFoundFault",
+    "Message": "ReplicationGroup maxops-payload-elasticache-low-items not found.",
+    "Type": "Sender"
+  },
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "346",
+      "content-type": "text/xml",
+      "date": "Sun, 14 Jun 2026 18:03:15 GMT",
+      "x-amzn-requestid": "1dac81d7-e28b-4bbc-b5dc-5fca9d7793fe"
+    },
+    "HTTPStatusCode": 404,
+    "RequestId": "1dac81d7-e28b-4bbc-b5dc-5fca9d7793fe",
+    "RetryAttempts": 0
+  }
+}

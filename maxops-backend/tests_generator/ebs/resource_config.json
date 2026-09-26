@@ -1,0 +1,80 @@
+{
+  "service": "ebs",
+  "profile": "default",
+  "region": "us-east-1",
+  "state_file": "tests_generator/ebs/.ebs_capture_state.json",
+  "placeholder_values": {
+    "ACCOUNT_ID": "123456789012",
+    "REGION": "us-east-1",
+    "INSTANCE_ID": "i-EBSINSTANCE",
+    "INSTANCE_NAME": "maxops-payload-ebs-instance",
+    "AMI_ID": "ami-EBSPLACEHOLDER",
+    "VPC_ID": "vpc-EBSPLACEHOLDER",
+    "SUBNET_ID": "subnet-EBSPLACEHOLDER",
+    "SECURITY_GROUP_ID": "sg-EBSPLACEHOLDER",
+    "AVAILABILITY_ZONE": "us-east-1a",
+    "UNATTACHED_VOLUME_ID": "vol-UNATTACHED",
+    "ATTACHED_GP2_VOLUME_ID": "vol-ATTACHEDGP2",
+    "PROVISIONED_IO1_VOLUME_ID": "vol-PROVISIONEDIO1",
+    "UNATTACHED_VOLUME_NAME": "maxops-payload-ebs-unattached",
+    "ATTACHED_GP2_VOLUME_NAME": "maxops-payload-ebs-attached-gp2",
+    "PROVISIONED_IO1_VOLUME_NAME": "maxops-payload-ebs-provisioned-io1"
+    ,"DLM_ROLE_NAME": "maxops-payload-ebs-dlm-role"
+    ,"DLM_ROLE_ARN": "arn:aws:iam::123456789012:role/maxops-payload-ebs-dlm-role"
+  },
+  "capture_window_days": 7,
+  "capture_instance": {
+    "name_placeholder_key": "INSTANCE_NAME",
+    "instance_type": "t3a.nano",
+    "tags": {
+      "Name": "{{INSTANCE_NAME}}",
+      "maxops_test": "true",
+      "maxops_payload_capture": "true",
+      "maxops_payload_profile": "ebs_capture_instance"
+    }
+  },
+  "volume_definitions": {
+    "unattached_gp3": {
+      "volume_id_placeholder_key": "UNATTACHED_VOLUME_ID",
+      "name_placeholder_key": "UNATTACHED_VOLUME_NAME",
+      "volume_type": "gp3",
+      "size": 1,
+      "attach": false,
+      "tags": {
+        "Name": "{{UNATTACHED_VOLUME_NAME}}",
+        "maxops_test": "true",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "unattached_gp3"
+      }
+    },
+    "attached_gp2": {
+      "volume_id_placeholder_key": "ATTACHED_GP2_VOLUME_ID",
+      "name_placeholder_key": "ATTACHED_GP2_VOLUME_NAME",
+      "volume_type": "gp2",
+      "size": 1,
+      "attach": true,
+      "device": "/dev/sdf",
+      "tags": {
+        "Name": "{{ATTACHED_GP2_VOLUME_NAME}}",
+        "maxops_test": "true",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "attached_gp2"
+      }
+    },
+    "provisioned_io1": {
+      "volume_id_placeholder_key": "PROVISIONED_IO1_VOLUME_ID",
+      "name_placeholder_key": "PROVISIONED_IO1_VOLUME_NAME",
+      "volume_type": "io1",
+      "size": 4,
+      "iops": 200,
+      "attach": true,
+      "device": "/dev/sdg",
+      "tags": {
+        "Name": "{{PROVISIONED_IO1_VOLUME_NAME}}",
+        "maxops_test": "true",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "provisioned_io1"
+      }
+    }
+  }
+}

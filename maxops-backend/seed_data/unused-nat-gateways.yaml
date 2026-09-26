@@ -1,0 +1,7 @@
+name: Unused NAT Gateways
+description: Find NAT Gateways with minimal data transfer, indicating they may be underutilized or no longer needed.
+resource: aws.nat-gateway
+filters:
+  - type: unused
+    days: 30
+

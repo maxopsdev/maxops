@@ -1,0 +1,80 @@
+{
+  "account_id": "123456789012",
+  "action_key": "ebs_reduce_iops",
+  "calls": [
+    {
+      "kwargs": {
+        "VolumeIds": [
+          "vol-PROVISIONEDIO1"
+        ]
+      },
+      "operation": "describe_volumes",
+      "raises_client_error": false,
+      "response_file": "01_ec2__describe_volumes__response.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {
+        "Iops": 100,
+        "VolumeId": "vol-PROVISIONEDIO1"
+      },
+      "operation": "modify_volume",
+      "raises_client_error": false,
+      "response_file": "02_ec2__modify_volume__response.json",
+      "service": "ec2"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "ebs_underutilized_provisioned_iops",
+  "expected_message": "EBS volume IOPS modification submitted.",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "ebs_reduce_iops",
+    "check_id": "ebs_underutilized_provisioned_iops",
+    "details": {
+      "new_iops": 100,
+      "previous_iops": 200,
+      "response": {
+        "ResponseMetadata": {
+          "HTTPHeaders": {
+            "cache-control": "no-cache, no-store",
+            "content-type": "text/xml;charset=UTF-8",
+            "date": "Sun, 14 Jun 2026 20:23:56 GMT",
+            "server": "AmazonEC2",
+            "strict-transport-security": "max-age=31536000; includeSubDomains",
+            "transfer-encoding": "chunked",
+            "vary": "accept-encoding",
+            "x-amzn-requestid": "e544bc18-9a3c-449f-9cce-e8fefed6aa3e"
+          },
+          "HTTPStatusCode": 200,
+          "RequestId": "e544bc18-9a3c-449f-9cce-e8fefed6aa3e",
+          "RetryAttempts": 0
+        },
+        "VolumeModification": {
+          "ModificationState": "modifying",
+          "OriginalIops": 200,
+          "OriginalMultiAttachEnabled": false,
+          "OriginalSize": 4,
+          "OriginalVolumeType": "io1",
+          "Progress": 0,
+          "StartTime": "2026-06-14T20:23:56+00:00",
+          "TargetIops": 100,
+          "TargetMultiAttachEnabled": false,
+          "TargetSize": 4,
+          "TargetVolumeType": "io1",
+          "VolumeId": "vol-PROVISIONEDIO1"
+        }
+      },
+      "volume_id": "vol-PROVISIONEDIO1"
+    },
+    "message": "EBS volume IOPS modification submitted.",
+    "status": "submitted"
+  },
+  "parameters": {
+    "iops": 100
+  },
+  "region": "us-east-1",
+  "resource_id": "vol-PROVISIONEDIO1",
+  "resource_ref": "provisioned_io1",
+  "scenario": "success"
+}

@@ -1,0 +1,9 @@
+# Force LF line endings for scripts that run inside Linux containers,
+# regardless of the platform/git config used to check them out.
+*.sh text eol=lf
+docker-entrypoint.sh text eol=lf
+Dockerfile text eol=lf
+
+# Golden fixtures are compared byte-for-byte, so they must never have their
+# line endings translated on checkout.
+*_golden.json -text

@@ -1,0 +1,21 @@
+{
+  "AutoScalingGroups": [
+    {
+      "AutoScalingGroupARN": "arn:aws:autoscaling:us-east-1:123456789012:autoScalingGroup:00000000-0000-0000-0000-0000000000aa:autoScalingGroupName/maxops-test-asg",
+      "AutoScalingGroupName": "maxops-test-asg",
+      "AvailabilityZones": [
+        "us-east-1a",
+        "us-east-1b"
+      ],
+      "DesiredCapacity": 4,
+      "HealthCheckType": "EC2",
+      "MaxSize": 8,
+      "MinSize": 2
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPStatusCode": 200,
+    "RequestId": "00000000-0000-0000-0000-000000000081",
+    "RetryAttempts": 0
+  }
+}

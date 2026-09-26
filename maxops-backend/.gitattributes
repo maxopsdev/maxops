@@ -1,0 +1,7 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Golden fixtures are compared byte-for-byte, so their line endings must never
+# be translated on checkout. This has to live here rather than in the root
+# .gitattributes: the `* text=auto` rule above is deeper and would win.
+*_golden.json -text

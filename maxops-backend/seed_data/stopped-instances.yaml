@@ -1,0 +1,7 @@
+name: Stopped EC2 Instances
+description: Identify EC2 instances that are currently stopped. While stopped instances don't incur compute costs, they still consume EBS storage and may indicate forgotten resources.
+resource: aws.ec2
+filters:
+  - type: state
+    value: stopped
+

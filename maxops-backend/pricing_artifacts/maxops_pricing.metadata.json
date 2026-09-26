@@ -1,0 +1,50 @@
+{
+  "database_name": "maxops_pricing.db",
+  "database_size_bytes": 568856576,
+  "regions": [
+    "us-east-1",
+    "us-east-2",
+    "us-west-1",
+    "us-west-2",
+    "ca-central-1",
+    "eu-west-1",
+    "eu-west-2",
+    "eu-west-3",
+    "eu-central-1",
+    "eu-north-1",
+    "ap-south-1",
+    "ap-southeast-1",
+    "ap-southeast-2",
+    "ap-northeast-1",
+    "sa-east-1"
+  ],
+  "tables": {
+    "ec2_instance_specs": {
+      "coverage_ratio": 0.9638205499276411,
+      "missing_priced_instance_type_count": 50,
+      "priced_instance_type_count": 1382,
+      "row_count": 1332,
+      "source_region": "us-east-1",
+      "source_regions": [
+        "us-east-1"
+      ],
+      "with_network_baseline": 1332,
+      "with_network_peak": 1332
+    },
+    "street_pricing_ec2": {
+      "row_count": 190165
+    },
+    "street_pricing_elasticache": {
+      "row_count": 2895
+    },
+    "street_pricing_opensearch": {
+      "row_count": 3228
+    },
+    "street_pricing_rds": {
+      "row_count": 50716
+    },
+    "street_pricing_redshift": {
+      "row_count": 120
+    }
+  }
+}

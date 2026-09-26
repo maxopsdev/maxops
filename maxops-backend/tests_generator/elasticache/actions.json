@@ -1,0 +1,56 @@
+{
+  "elasticache_downsize": {
+    "scenario": "success",
+    "check_id": "elasticache_low_item_count",
+    "description": "Modify the low-items cache cluster node type.",
+    "resource_ref": "low_items_graviton_cluster",
+    "parameters": {"target_node_type": "cache.t4g.small"},
+    "expected_status": "submitted",
+    "expected_message": "ElastiCache node type modification submitted.",
+    "expected_calls": [
+      {"service": "elasticache", "operation": "describe_replication_groups"},
+      {"service": "elasticache", "operation": "describe_cache_clusters"},
+      {"service": "elasticache", "operation": "modify_cache_cluster"}
+    ]
+  },
+  "elasticache_migrate_graviton": {
+    "scenario": "success",
+    "check_id": "elasticache_non_graviton_instance_class",
+    "description": "Migrate the non-Graviton cache cluster to a t4g node type.",
+    "resource_ref": "non_graviton_cluster",
+    "parameters": {"target_node_type": "cache.t4g.micro"},
+    "expected_status": "submitted",
+    "expected_message": "ElastiCache node type modification submitted.",
+    "expected_calls": [
+      {"service": "elasticache", "operation": "describe_replication_groups"},
+      {"service": "elasticache", "operation": "describe_cache_clusters"},
+      {"service": "elasticache", "operation": "modify_cache_cluster"}
+    ]
+  },
+  "elasticache_upgrade_valkey": {
+    "scenario": "success",
+    "check_id": "elasticache_redis_convertible_to_valkey",
+    "description": "Submit the production upgrade path for the Redis replication group.",
+    "resource_ref": "redis_replication_group",
+    "parameters": {"target_engine_version": "7.1"},
+    "expected_status": "submitted",
+    "expected_message": "ElastiCache upgrade submitted.",
+    "expected_calls": [
+      {"service": "elasticache", "operation": "describe_replication_groups"},
+      {"service": "elasticache", "operation": "modify_replication_group"}
+    ]
+  },
+  "elasticache_delete": {
+    "scenario": "success",
+    "check_id": "elasticache_redis_convertible_to_valkey",
+    "description": "Delete the isolated ineligible replication group as the final action.",
+    "resource_ref": "ineligible_redis_replication_group",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "ElastiCache deletion submitted.",
+    "expected_calls": [
+      {"service": "elasticache", "operation": "describe_replication_groups"},
+      {"service": "elasticache", "operation": "delete_replication_group"}
+    ]
+  }
+}

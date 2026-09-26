@@ -1,0 +1,8 @@
+name: Resources Missing Cost Center Tag
+description: Identify resources that are missing the required CostCenter tag. Proper tagging is essential for cost allocation and chargeback.
+resource: aws.ec2
+filters:
+  - type: tag
+    key: CostCenter
+    value: null
+

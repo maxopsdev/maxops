@@ -1,0 +1,341 @@
+{
+  "generator": {
+    "seed": 20260420,
+    "resource_count": 48,
+    "account_id": "999999999999",
+    "default_region": "us-east-1",
+    "output_dir": "synthetic_data/generated/elasticache"
+  },
+  "regions": [
+    {
+      "name": "us-east-1",
+      "weight": 0.56,
+      "azs": ["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d"]
+    },
+    {
+      "name": "us-west-2",
+      "weight": 0.26,
+      "azs": ["us-west-2a", "us-west-2b", "us-west-2c"]
+    },
+    {
+      "name": "eu-west-1",
+      "weight": 0.18,
+      "azs": ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+    }
+  ],
+  "distributions": {
+    "environments": {
+      "prod": 0.38,
+      "dev": 0.17,
+      "uat": 0.11,
+      "qa": 0.09,
+      "sandbox": 0.1,
+      "shared": 0.15
+    },
+    "teams": {
+      "platform": 0.16,
+      "payments": 0.13,
+      "commerce": 0.12,
+      "data": 0.11,
+      "growth": 0.08,
+      "risk": 0.1,
+      "identity": 0.08,
+      "support": 0.08,
+      "core-infra": 0.14
+    },
+    "owners": {
+      "alice.chen": 0.09,
+      "miguel.santos": 0.09,
+      "priya.shah": 0.1,
+      "noah.reed": 0.09,
+      "fatima.khan": 0.08,
+      "jordan.kim": 0.08,
+      "sarah.lee": 0.11,
+      "olivia.ng": 0.09,
+      "liam.patel": 0.1,
+      "maya.garcia": 0.09,
+      "ethan.wong": 0.08
+    },
+    "cost_centers": {
+      "CC-1001": 0.14,
+      "CC-1014": 0.12,
+      "CC-1020": 0.12,
+      "CC-1105": 0.18,
+      "CC-1202": 0.11,
+      "CC-1308": 0.1,
+      "CC-1420": 0.12,
+      "CC-1507": 0.11
+    },
+    "business_units": {
+      "consumer": 0.31,
+      "enterprise": 0.2,
+      "operations": 0.13,
+      "risk": 0.12,
+      "data": 0.11,
+      "platform": 0.13
+    },
+    "resource_types": {
+      "elasticache_cluster": 0.64,
+      "elasticache_replication_group": 0.36
+    },
+    "engines": {
+      "redis": 0.68,
+      "valkey": 0.32
+    },
+    "node_type_families": {
+      "graviton_burstable": 0.31,
+      "graviton_general": 0.18,
+      "non_graviton_burstable": 0.24,
+      "non_graviton_general": 0.15,
+      "non_graviton_memory": 0.12
+    },
+    "usage_profiles": {
+      "steady_healthy": 0.31,
+      "high_item_healthy": 0.18,
+      "low_item_candidate": 0.18,
+      "non_graviton_candidate": 0.15,
+      "valkey_candidate": 0.12,
+      "missing_metrics": 0.06
+    }
+  },
+  "tag_dimensions": {
+    "criticality": ["tier1", "tier2", "tier3"],
+    "compliance": ["pci", "sox", "gdpr", "none"],
+    "cache_patterns": ["session", "hot-key", "catalog", "leaderboard", "feature-flags"],
+    "data_classification": ["internal", "confidential", "restricted"]
+  },
+  "naming": {
+    "org_prefix": "maxops-demo",
+    "apps": [
+      "payments",
+      "session",
+      "catalog",
+      "pricing",
+      "risk",
+      "auth",
+      "orders",
+      "inventory",
+      "support",
+      "fraud",
+      "analytics",
+      "billing"
+    ],
+    "roles": [
+      "primary",
+      "cache",
+      "read",
+      "hotset",
+      "shared",
+      "ops"
+    ]
+  },
+  "engine_profiles": {
+    "redis_eligible": {
+      "engine": "redis",
+      "engine_version": "7.1",
+      "port": 6379,
+      "parameter_group_name": "default.redis7",
+      "snapshot_retention_limit": 1
+    },
+    "redis_ineligible": {
+      "engine": "redis",
+      "engine_version": "5.0.6",
+      "port": 6379,
+      "parameter_group_name": "default.redis5.0",
+      "snapshot_retention_limit": 0
+    },
+    "valkey": {
+      "engine": "valkey",
+      "engine_version": "7.2",
+      "port": 6379,
+      "parameter_group_name": "default.valkey7",
+      "snapshot_retention_limit": 1
+    }
+  },
+  "node_type_profiles": {
+    "graviton_burstable": {
+      "classes": {
+        "cache.t4g.micro": 0.42,
+        "cache.t4g.small": 0.34,
+        "cache.t4g.medium": 0.24
+      },
+      "finding_profile": null
+    },
+    "graviton_general": {
+      "classes": {
+        "cache.m6g.large": 0.54,
+        "cache.r6g.large": 0.46
+      },
+      "finding_profile": null
+    },
+    "non_graviton_burstable": {
+      "classes": {
+        "cache.t3.micro": 0.45,
+        "cache.t3.small": 0.31,
+        "cache.t3.medium": 0.24
+      },
+      "finding_profile": "elasticache_non_graviton_instance_class"
+    },
+    "non_graviton_general": {
+      "classes": {
+        "cache.m5.large": 0.57,
+        "cache.m5.xlarge": 0.43
+      },
+      "finding_profile": "elasticache_non_graviton_instance_class"
+    },
+    "non_graviton_memory": {
+      "classes": {
+        "cache.r5.large": 0.56,
+        "cache.r5.xlarge": 0.44
+      },
+      "finding_profile": "elasticache_non_graviton_instance_class"
+    }
+  },
+  "usage_profiles": {
+    "steady_healthy": {
+      "curritems_range": [2500, 22000],
+      "keycount_range": [2500, 20000],
+      "metric_history_pattern": "steady",
+      "finding_profile": null
+    },
+    "high_item_healthy": {
+      "curritems_range": [24000, 120000],
+      "keycount_range": [22000, 110000],
+      "metric_history_pattern": "bursty",
+      "finding_profile": null
+    },
+    "low_item_candidate": {
+      "curritems_range": [0, 120],
+      "keycount_range": [0, 200],
+      "metric_history_pattern": "idle",
+      "finding_profile": "elasticache_low_item_count"
+    },
+    "non_graviton_candidate": {
+      "curritems_range": [1200, 14000],
+      "keycount_range": [900, 12000],
+      "metric_history_pattern": "steady",
+      "finding_profile": "elasticache_non_graviton_instance_class"
+    },
+    "valkey_candidate": {
+      "curritems_range": [1800, 16000],
+      "keycount_range": [1400, 14000],
+      "metric_history_pattern": "steady",
+      "finding_profile": "elasticache_redis_convertible_to_valkey"
+    },
+    "missing_metrics": {
+      "curritems_range": [0, 0],
+      "keycount_range": [0, 0],
+      "metric_history_pattern": "empty",
+      "finding_profile": null
+    }
+  },
+  "seed_profiles": {
+    "low_items_cluster_capture": {
+      "seed_check_id": "elasticache_low_item_count",
+      "seed_scenario": "flag_low_item_cluster",
+      "seed_resource_alias": "low_items_graviton_cluster",
+      "resource_type": "elasticache_cluster"
+    },
+    "non_graviton_cluster_capture": {
+      "seed_check_id": "elasticache_non_graviton_instance_class",
+      "seed_scenario": "flag_non_graviton_cluster",
+      "seed_resource_alias": "non_graviton_cluster",
+      "resource_type": "elasticache_cluster"
+    },
+    "graviton_cluster_capture": {
+      "seed_check_id": "elasticache_non_graviton_instance_class",
+      "seed_scenario": "pass_graviton_cluster",
+      "seed_resource_alias": "low_items_graviton_cluster",
+      "resource_type": "elasticache_cluster"
+    },
+    "eligible_replication_group_capture": {
+      "seed_check_id": "elasticache_redis_convertible_to_valkey",
+      "seed_scenario": "flag_redis_replication_group",
+      "seed_resource_alias": "redis_replication_group",
+      "resource_type": "elasticache_replication_group"
+    },
+    "ineligible_replication_group_capture": {
+      "seed_check_id": "elasticache_redis_convertible_to_valkey",
+      "seed_scenario": "pass_ineligible_engine_version",
+      "seed_resource_alias": "ineligible_redis_replication_group",
+      "resource_type": "elasticache_replication_group"
+    }
+  },
+  "finding_profiles": {
+    "elasticache_low_item_count": {
+      "check_id": "elasticache_low_item_count",
+      "title": "ElastiCache Low Item Count",
+      "finding_type": "low_usage",
+      "severity": "medium",
+      "confidence_range": [0.82, 0.96],
+      "risk_score_range": [0.07, 0.22],
+      "recommended_action": "review_cache_usage",
+      "alternative_actions": ["scale_down_capacity", "decommission_cache"],
+      "savings_factor": 0.28,
+      "reason_template": "Average item count {avg_curritems:.1f} over the last 7 days is well below the active-use threshold."
+    },
+    "elasticache_non_graviton_instance_class": {
+      "check_id": "elasticache_non_graviton_instance_class",
+      "title": "ElastiCache Non-Graviton Instance Class",
+      "finding_type": "cost_efficiency",
+      "severity": "low",
+      "confidence_range": [0.76, 0.91],
+      "risk_score_range": [0.1, 0.28],
+      "recommended_action": "migrate_to_graviton_instance_class",
+      "alternative_actions": ["compare_price_performance", "review_cache_usage"],
+      "savings_factor": 0.14,
+      "reason_template": "Node type {cache_node_type} is not Graviton-based and may be a migration candidate."
+    },
+    "elasticache_redis_convertible_to_valkey": {
+      "check_id": "elasticache_redis_convertible_to_valkey",
+      "title": "Redis OSS Convertible to Valkey",
+      "finding_type": "upgrade_opportunity",
+      "severity": "low",
+      "confidence_range": [0.8, 0.95],
+      "risk_score_range": [0.08, 0.24],
+      "recommended_action": "upgrade_engine",
+      "alternative_actions": ["review_cache_usage", "plan_engine_migration"],
+      "savings_factor": 0.1,
+      "reason_template": "Engine {engine} version {engine_version} is eligible for a Valkey migration path."
+    }
+  },
+  "action_catalog": {
+    "review_cache_usage": {
+      "label": "Review Cache Usage",
+      "description": "Validate whether the cache still serves a meaningful active workload.",
+      "parameters": {}
+    },
+    "scale_down_capacity": {
+      "label": "Scale Down Capacity",
+      "description": "Move to a smaller node type or reduce replica count to lower baseline cost.",
+      "parameters": {}
+    },
+    "decommission_cache": {
+      "label": "Decommission Cache",
+      "description": "Retire the cache if the application no longer depends on it.",
+      "parameters": {}
+    },
+    "migrate_to_graviton_instance_class": {
+      "label": "Migrate To Graviton",
+      "description": "Move to a Graviton-based cache node type for better price/performance.",
+      "parameters": {}
+    },
+    "compare_price_performance": {
+      "label": "Compare Price/Performance",
+      "description": "Benchmark the workload on a Graviton-based cache class before migration.",
+      "parameters": {}
+    },
+    "upgrade_engine": {
+      "label": "Upgrade Engine",
+      "description": "Plan a Redis OSS to Valkey engine migration.",
+      "parameters": {
+        "target_engine": "valkey"
+      }
+    },
+    "plan_engine_migration": {
+      "label": "Plan Engine Migration",
+      "description": "Assess upgrade readiness, compatibility, and rollout steps for Valkey.",
+      "parameters": {}
+    }
+  }
+}

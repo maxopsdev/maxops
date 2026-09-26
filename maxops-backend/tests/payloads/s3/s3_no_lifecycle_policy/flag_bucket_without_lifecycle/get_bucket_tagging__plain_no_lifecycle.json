@@ -1,0 +1,29 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "date": "Thu, 16 Apr 2026 21:33:48 GMT",
+      "server": "AmazonS3",
+      "transfer-encoding": "chunked",
+      "x-amz-id-2": "PC5+3FYNaY1RyErT90M3Knms+eguvtmuAzOXCp63zZGLTTTnWeiBCpn5+6EfTvhrXzrDjiYTZ1Nj3qrQ8urOMQ==",
+      "x-amz-request-id": "GR27W5RX9PDTH823"
+    },
+    "HTTPStatusCode": 200,
+    "HostId": "PC5+3FYNaY1RyErT90M3Knms+eguvtmuAzOXCp63zZGLTTTnWeiBCpn5+6EfTvhrXzrDjiYTZ1Nj3qrQ8urOMQ==",
+    "RequestId": "GR27W5RX9PDTH823",
+    "RetryAttempts": 0
+  },
+  "TagSet": [
+    {
+      "Key": "maxops_payload_profile",
+      "Value": "plain_no_lifecycle"
+    },
+    {
+      "Key": "maxops_payload_capture",
+      "Value": "true"
+    },
+    {
+      "Key": "Name",
+      "Value": "maxops-payload-s3-plain-no-lifecycle"
+    }
+  ]
+}

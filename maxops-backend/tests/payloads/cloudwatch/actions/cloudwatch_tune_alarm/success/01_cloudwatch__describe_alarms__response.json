@@ -1,0 +1,45 @@
+{
+  "CompositeAlarms": [],
+  "MetricAlarms": [
+    {
+      "ActionsEnabled": false,
+      "AlarmActions": [
+        "arn:aws:sns:us-east-1:123456789012:maxops-payload-placeholder"
+      ],
+      "AlarmArn": "arn:aws:cloudwatch:us-east-1:123456789012:alarm:maxops-payload-noisy",
+      "AlarmConfigurationUpdatedTimestamp": "2026-06-14T17:02:35.268000+00:00",
+      "AlarmName": "maxops-payload-noisy",
+      "ComparisonOperator": "GreaterThanThreshold",
+      "Dimensions": [
+        {
+          "Name": "Profile",
+          "Value": "noisy_alarm"
+        }
+      ],
+      "EvaluationPeriods": 2,
+      "InsufficientDataActions": [],
+      "MetricName": "CaptureMetric",
+      "Namespace": "MaxOps/Payload",
+      "OKActions": [],
+      "Period": 60,
+      "StateReason": "MaxOps payload trigger",
+      "StateTransitionedTimestamp": "2026-06-14T17:02:19.017000+00:00",
+      "StateUpdatedTimestamp": "2026-06-14T17:02:19.017000+00:00",
+      "StateValue": "ALARM",
+      "Statistic": "Average",
+      "Threshold": 80.0,
+      "TreatMissingData": "missing"
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "1765",
+      "content-type": "text/xml",
+      "date": "Sun, 14 Jun 2026 17:02:35 GMT",
+      "x-amzn-requestid": "d0707254-03a8-4fd0-9c38-cd42680fdafb"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "d0707254-03a8-4fd0-9c38-cd42680fdafb",
+    "RetryAttempts": 0
+  }
+}

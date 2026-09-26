@@ -1,0 +1,27 @@
+{
+  "account_id": "123456789012",
+  "action_key": "rds_migrate_graviton",
+  "calls": [
+    {
+      "kwargs": {
+        "DBInstanceIdentifier": "maxops-test-rds-instance"
+      },
+      "operation": "describe_db_instances",
+      "raises_client_error": false,
+      "response_file": "01_rds__describe_db_instances__response.json",
+      "service": "rds"
+    }
+  ],
+  "capture_source": "hand-authored",
+  "check_id": "rds_non_graviton_instance_class",
+  "expected_error": {
+    "detail_contains": "RDS DB instance not found.",
+    "status_code": 404
+  },
+  "parameters": {
+    "target_instance_class": "db.m6g.large"
+  },
+  "region": "us-east-1",
+  "resource_id": "maxops-test-rds-instance",
+  "scenario": "not_found"
+}

@@ -1,0 +1,7 @@
+name: Old EBS Snapshots
+description: Find EBS snapshots older than 90 days that may no longer be needed. Old snapshots can accumulate significant storage costs over time.
+resource: aws.snapshot
+filters:
+  - type: age
+    days: 90
+

@@ -1,0 +1,57 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "878",
+      "date": "Sun, 14 Jun 2026 20:10:08 GMT",
+      "server": "AmazonS3",
+      "x-amz-id-2": "IjZOyXKiRf4H8KBXkD6h9ImeB8afi8JX3gTpvyYXoPzlFer/aUFijEmRssc9gBLQn0McL2p3gNY=",
+      "x-amz-request-id": "XXK2GY0HXC8NT6PE",
+      "x-amz-transition-default-minimum-object-size": "all_storage_classes_128K"
+    },
+    "HTTPStatusCode": 200,
+    "HostId": "IjZOyXKiRf4H8KBXkD6h9ImeB8afi8JX3gTpvyYXoPzlFer/aUFijEmRssc9gBLQn0McL2p3gNY=",
+    "RequestId": "XXK2GY0HXC8NT6PE",
+    "RetryAttempts": 0
+  },
+  "Rules": [
+    {
+      "AbortIncompleteMultipartUpload": {
+        "DaysAfterInitiation": 7
+      },
+      "Expiration": {
+        "Days": 60
+      },
+      "Filter": {
+        "Prefix": ""
+      },
+      "ID": "current-only-controls",
+      "Status": "Enabled",
+      "Transitions": [
+        {
+          "Days": 30,
+          "StorageClass": "GLACIER"
+        }
+      ]
+    },
+    {
+      "Expiration": {
+        "ExpiredObjectDeleteMarker": true
+      },
+      "Filter": {
+        "Prefix": ""
+      },
+      "ID": "maxops-delete-marker-cleanup-{{ANY_INT}}",
+      "Status": "Enabled"
+    },
+    {
+      "Filter": {
+        "Prefix": ""
+      },
+      "ID": "maxops-noncurrent-expiration-{{ANY_INT}}",
+      "NoncurrentVersionExpiration": {
+        "NoncurrentDays": 30
+      },
+      "Status": "Enabled"
+    }
+  ]
+}

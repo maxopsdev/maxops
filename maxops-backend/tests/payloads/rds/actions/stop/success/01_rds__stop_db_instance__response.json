@@ -1,0 +1,122 @@
+{
+  "DBInstance": {
+    "AllocatedStorage": 20,
+    "AssociatedRoles": [],
+    "AutoMinorVersionUpgrade": true,
+    "AvailabilityZone": "us-east-1b",
+    "BackupRetentionPeriod": 0,
+    "BackupTarget": "region",
+    "CACertificateIdentifier": "rds-ca-rsa2048-g1",
+    "CertificateDetails": {
+      "CAIdentifier": "rds-ca-rsa2048-g1",
+      "ValidTill": "2027-06-14T17:42:36+00:00"
+    },
+    "CopyTagsToSnapshot": false,
+    "CustomerOwnedIpEnabled": false,
+    "DBInstanceArn": "arn:aws:rds:us-east-1:123456789012:db:maxops-payload-rds-idle-graviton",
+    "DBInstanceClass": "db.t4g.micro",
+    "DBInstanceIdentifier": "maxops-payload-rds-idle-graviton",
+    "DBInstanceStatus": "stopping",
+    "DBParameterGroups": [
+      {
+        "DBParameterGroupName": "default.mysql8.4",
+        "ParameterApplyStatus": "in-sync"
+      }
+    ],
+    "DBSecurityGroups": [],
+    "DBSubnetGroup": {
+      "DBSubnetGroupDescription": "MaxOps payload capture subnet group.",
+      "DBSubnetGroupName": "maxops-payload-rds-subnet-group",
+      "SubnetGroupStatus": "Complete",
+      "Subnets": [
+        {
+          "SubnetAvailabilityZone": {
+            "Name": "us-east-1c"
+          },
+          "SubnetIdentifier": "subnet-PLACEHOLDER-A",
+          "SubnetOutpost": {},
+          "SubnetStatus": "Active"
+        },
+        {
+          "SubnetAvailabilityZone": {
+            "Name": "us-east-1b"
+          },
+          "SubnetIdentifier": "subnet-PLACEHOLDER-B",
+          "SubnetOutpost": {},
+          "SubnetStatus": "Active"
+        }
+      ],
+      "VpcId": "vpc-PLACEHOLDER"
+    },
+    "DbInstancePort": 0,
+    "DbiResourceId": "db-55OV4B47VT5DWDRP2GXCMLEFOY",
+    "DedicatedLogVolume": false,
+    "DeletionProtection": false,
+    "DomainMemberships": [],
+    "Endpoint": {
+      "Address": "maxops-payload-rds-idle-graviton.c5j5gkgqdf7l.us-east-1.rds.amazonaws.com",
+      "HostedZoneId": "Z2R2ITUGPM61AM",
+      "Port": 3306
+    },
+    "Engine": "mysql",
+    "EngineVersion": "8.4.8",
+    "IAMDatabaseAuthenticationEnabled": false,
+    "InstanceCreateTime": "2026-06-14T17:44:00.008000+00:00",
+    "LicenseModel": "general-public-license",
+    "MasterUsername": "admin",
+    "MonitoringInterval": 0,
+    "MultiAZ": false,
+    "NetworkType": "IPV4",
+    "OptionGroupMemberships": [
+      {
+        "OptionGroupName": "default:mysql-8-4",
+        "Status": "in-sync"
+      }
+    ],
+    "PendingModifiedValues": {},
+    "PerformanceInsightsEnabled": false,
+    "PreferredBackupWindow": "03:56-04:26",
+    "PreferredMaintenanceWindow": "sat:08:13-sat:08:43",
+    "PubliclyAccessible": false,
+    "ReadReplicaDBInstanceIdentifiers": [],
+    "StorageEncrypted": false,
+    "StorageThroughput": 0,
+    "StorageType": "gp2",
+    "TagList": [
+      {
+        "Key": "maxops_payload_capture",
+        "Value": "true"
+      },
+      {
+        "Key": "maxops_test",
+        "Value": "true"
+      },
+      {
+        "Key": "maxops_payload_profile",
+        "Value": "idle_graviton_capture"
+      },
+      {
+        "Key": "Name",
+        "Value": "maxops-payload-rds-idle-graviton"
+      }
+    ],
+    "VpcSecurityGroups": [
+      {
+        "Status": "active",
+        "VpcSecurityGroupId": "sg-PLACEHOLDER"
+      }
+    ]
+  },
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "5093",
+      "content-type": "text/xml",
+      "date": "Sun, 14 Jun 2026 17:50:27 GMT",
+      "strict-transport-security": "max-age=31536000",
+      "x-amzn-requestid": "94411c8f-f0de-4470-a39d-43c55b4dba6a"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "94411c8f-f0de-4470-a39d-43c55b4dba6a",
+    "RetryAttempts": 0
+  }
+}

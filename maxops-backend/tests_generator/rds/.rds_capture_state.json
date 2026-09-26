@@ -1,0 +1,41 @@
+{
+  "account_id": "123456789012",
+  "created_at_epoch": 1781458835,
+  "placeholder_map": {
+    "123456789012": "123456789012",
+    "maxops-payload-rds-idle-graviton": "maxops-payload-rds-idle-graviton-1781458835",
+    "maxops-payload-rds-non-graviton": "maxops-payload-rds-non-graviton-1781458835",
+    "maxops-payload-rds-subnet-group": "maxops-payload-rds-subnet-group-1781458835",
+    "sg-PLACEHOLDER": "sg-943095ec",
+    "subnet-PLACEHOLDER-A": "subnet-9c4eecc4",
+    "subnet-PLACEHOLDER-B": "subnet-b063e8c6",
+    "vpc-PLACEHOLDER": "vpc-141f3f70"
+  },
+  "region": "us-east-1",
+  "resources": {
+    "idle_graviton_capture": {
+      "db_instance_arn": "arn:aws:rds:us-east-1:123456789012:db:maxops-payload-rds-idle-graviton-1781458835",
+      "db_instance_class": "db.t4g.micro",
+      "db_instance_identifier": "maxops-payload-rds-idle-graviton-1781458835",
+      "placeholder_key": "GRAVITON_DB_IDENTIFIER",
+      "placeholder_value": "maxops-payload-rds-idle-graviton"
+    },
+    "non_graviton_capture": {
+      "db_instance_arn": "arn:aws:rds:us-east-1:123456789012:db:maxops-payload-rds-non-graviton-1781458835",
+      "db_instance_class": "db.t3.micro",
+      "db_instance_identifier": "maxops-payload-rds-non-graviton-1781458835",
+      "placeholder_key": "NON_GRAVITON_DB_IDENTIFIER",
+      "placeholder_value": "maxops-payload-rds-non-graviton"
+    }
+  },
+  "service": "rds",
+  "supporting_resources": {
+    "db_subnet_group_name": "maxops-payload-rds-subnet-group-1781458835",
+    "security_group_id": "sg-943095ec",
+    "subnet_ids": [
+      "subnet-9c4eecc4",
+      "subnet-b063e8c6"
+    ],
+    "vpc_id": "vpc-141f3f70"
+  }
+}

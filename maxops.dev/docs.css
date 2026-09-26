@@ -1,0 +1,361 @@
+/* ==========================================================================
+   Documentation library — the MaxOps Adventures rack.
+   Inherits tokens, masthead, title/kicker/caption and chips from setup-guide.css.
+   ========================================================================== */
+
+.lib {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 96px 6vw 90px;
+}
+
+/* ------------------------------------------------------------------ hero */
+
+.lib-hero {
+  display: grid;
+  gap: 18px;
+  padding-bottom: 34px;
+  border-bottom: 1px solid var(--line);
+}
+
+.lib-hero .title { max-width: 20ch; }
+
+.lib-lede {
+  max-width: 66ch;
+  margin: 0;
+  font-size: 1.12rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.lib-lede strong { color: var(--paper); font-weight: 600; }
+
+.lib-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+.lib-stat {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.lib-stat b { color: var(--teal); font-weight: 600; }
+
+/* --------------------------------------------------------------- section */
+
+.lib-section { padding-top: 46px; }
+
+.lib-section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.lib-section-head h2 {
+  margin: 0;
+  font-family: 'Bangers', cursive;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  letter-spacing: .03em;
+  color: var(--paper);
+}
+.lib-section-head h2 em { font-style: normal; color: var(--teal); }
+.lib-section-head p {
+  margin: 0;
+  max-width: 52ch;
+  font-size: .98rem;
+  color: var(--muted);
+}
+
+/* ------------------------------------------------------------------ rack */
+
+.rack {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+  gap: 20px;
+}
+
+/* the published issue takes a double-width hero slot */
+.rack .issue--feature { grid-column: span 2; }
+
+.issue {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1.5px solid var(--line);
+  border-radius: 18px;
+  background: var(--mat);
+  padding: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+.issue::before {
+  content: ""; position: absolute; inset: -1.5px; border-radius: 18px; pointer-events: none;
+  padding: 1.5px;
+  background: linear-gradient(135deg, var(--amber), transparent 32%, transparent 68%, var(--teal));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity: .55;
+}
+a.issue:hover,
+a.issue:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--teal-dim);
+  box-shadow: 0 26px 60px -30px rgba(0, 0, 0, .85), 0 0 0 1px rgba(52, 224, 196, .1);
+  outline: none;
+}
+a.issue:focus-visible { border-color: var(--teal); }
+
+.issue-cover {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  aspect-ratio: 16 / 9;
+  background: var(--rail-2);
+}
+.issue-cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.issue-cover .halftone {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(7, 12, 22, .9) 1px, transparent 1.4px);
+  background-size: 4px 4px; opacity: .12; mix-blend-mode: multiply;
+}
+.issue-cover .vignette {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(7, 12, 22, 0) 52%, rgba(7, 12, 22, .72) 100%);
+}
+
+/* placeholder cover for an unwritten issue — deliberately drawn, not a grey box */
+.issue-cover--soon {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(70% 70% at 30% 20%, rgba(52, 224, 196, .1), transparent 62%),
+    radial-gradient(60% 60% at 80% 90%, rgba(245, 166, 35, .09), transparent 60%),
+    linear-gradient(160deg, #0c1527, #090f1e);
+}
+.issue-cover--soon::after {
+  content: ""; position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(148, 178, 255, .16) 1px, transparent 1.3px);
+  background-size: 7px 7px; opacity: .5;
+}
+.soon-mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 78px; height: 88px;
+  color: var(--teal-dim);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: rgba(52, 224, 196, .09);
+  border: 0;
+  font-family: 'Bangers', cursive;
+  font-size: 2.3rem;
+  letter-spacing: .04em;
+}
+
+.issue-num {
+  position: absolute; top: 12px; left: 12px; z-index: 2;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .66rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--amber);
+  background: rgba(7, 12, 22, .72);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 4px 9px;
+}
+
+.issue-status {
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .62rem; letter-spacing: .14em; text-transform: uppercase;
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+.issue-status.out { background: var(--teal); color: var(--ink); }
+.issue-status.soon { background: rgba(7, 12, 22, .72); border: 1px solid var(--line); color: var(--muted); }
+
+.issue-body { padding: 16px 10px 8px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+
+.issue-arc {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .64rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--muted);
+}
+.issue-arc b { color: var(--amber); font-weight: 500; }
+
+.issue-title {
+  font-family: 'Bangers', cursive;
+  font-size: 1.7rem;
+  line-height: 1.05;
+  letter-spacing: .03em;
+  color: var(--paper);
+}
+.issue--feature .issue-title { font-size: 2.2rem; }
+.issue-title em { font-style: normal; color: var(--teal); }
+.issue.is-soon .issue-title { color: var(--muted); }
+
+.issue-desc { margin: 0; font-size: .98rem; line-height: 1.5; color: var(--muted); }
+.issue-desc strong { color: var(--paper); font-weight: 600; }
+
+.issue-meta {
+  margin-top: auto;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  padding-top: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .7rem; letter-spacing: .06em; color: var(--muted);
+}
+.issue-meta .dot-sep { opacity: .4; }
+.issue-read { margin-left: auto; color: var(--teal); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+
+/* chapter quick-links on the featured issue */
+.issue-chapters {
+  display: flex; flex-wrap: wrap; gap: 7px;
+  margin-top: 2px;
+}
+.issue-chapters a {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 5px 11px;
+  font-size: .82rem;
+  color: var(--text-soft, var(--muted));
+  text-decoration: none;
+  transition: border-color 150ms ease, color 150ms ease;
+}
+.issue-chapters a:hover,
+.issue-chapters a:focus-visible {
+  border-color: var(--teal); color: var(--teal); outline: none;
+}
+
+/* ---------------------------------------------------------------- lookup */
+
+.lookup-tools { margin-bottom: 16px; }
+
+.sr-only-label {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+.lookup-search {
+  position: relative;
+  max-width: 520px;
+}
+.lookup-search input {
+  width: 100%;
+  height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--rail-2);
+  color: var(--paper);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.05rem;
+  padding: 0 40px 0 14px;
+}
+.lookup-search input::placeholder { color: var(--muted); }
+.lookup-search input:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(52, 224, 196, .12);
+}
+.lookup-search .hint {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  font-family: 'JetBrains Mono', monospace; font-size: .7rem; color: var(--muted);
+  pointer-events: none;
+}
+
+.lookup-count {
+  margin-top: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  color: var(--muted);
+}
+
+.lookup {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 10px;
+}
+
+.lookup a {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--rail-2);
+  padding: 13px 15px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 150ms ease, transform 150ms ease, background 150ms ease;
+}
+.lookup a:hover,
+.lookup a:focus-visible {
+  border-color: var(--teal-dim);
+  background: var(--rail);
+  transform: translateX(2px);
+  outline: none;
+}
+.lookup a:focus-visible { border-color: var(--teal); }
+
+.lookup .q { font-size: 1.02rem; line-height: 1.35; color: var(--paper); }
+.lookup .where {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .66rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.lookup a:hover .where, .lookup a:focus-visible .where { color: var(--teal); }
+
+.lookup-empty {
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  padding: 22px;
+  text-align: center;
+  color: var(--muted);
+  font-size: .98rem;
+}
+.lookup-empty a { color: var(--teal); }
+
+/* ---------------------------------------------------------------- footer */
+
+.lib-foot {
+  margin-top: 56px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 14px;
+}
+.lib-foot h3 {
+  margin: 0;
+  font-family: 'Bangers', cursive;
+  font-size: 1.35rem;
+  letter-spacing: .03em;
+  color: var(--paper);
+}
+.lib-foot p { margin: 0; max-width: 62ch; color: var(--muted); font-size: .98rem; line-height: 1.5; }
+
+/* ------------------------------------------------------------ responsive */
+
+@media (max-width: 760px) {
+  .rack { grid-template-columns: 1fr; }
+  .rack .issue--feature { grid-column: span 1; }
+  .issue--feature .issue-title { font-size: 1.7rem; }
+  .lib { padding: 88px 6vw 70px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .issue, .lookup a { transition: none; }
+  a.issue:hover, a.issue:focus-visible, .lookup a:hover, .lookup a:focus-visible { transform: none; }
+}

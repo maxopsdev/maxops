@@ -1,0 +1,53 @@
+services:
+  backend:
+    build: ./maxops-backend
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      # Bare `VAR` (no `=`) passes the value through from the environment
+      # `docker compose` runs in (including .env) and OMITS it entirely from
+      # the container if unset -- unlike `VAR: ${VAR:-}`, which would set it
+      # to an empty string. That distinction matters here: botocore treats
+      # AWS_PROFILE="" as an explicit (invalid) profile name, not "no profile",
+      # so a blank env var breaks every AWS call for anyone not using it.
+      - AWS_PROFILE
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+      # The onboarding wizard writes a MaxOpsReadOnlyRole profile back to an
+      # AWS config file once a role is created/registered (see aws-setup.md).
+      # /root/.aws is mounted read-only above (on purpose -- the container
+      # shouldn't be able to rewrite your real ~/.aws), so redirect the write
+      # target into the backend-data volume, where it persists like the DBs.
+      # Read lookups for existing profiles (AWS_PROFILE, source_profile
+      # chaining) still resolve through the read-only /root/.aws mount as
+      # normal -- this only affects where MaxOps writes the new profile.
+      - AWS_CONFIG_FILE=/app/data/aws/config
+      - DATABASE_URL=sqlite:////app/data/maxops.db
+      - PRICING_DATABASE_PATH=/app/data/maxops_pricing.db
+      - MAXOPS_ENABLE_ACTIONS=${MAXOPS_ENABLE_ACTIONS:-false}
+      - TEST_ACTION=${TEST_ACTION:-false}
+    volumes:
+      - backend-data:/app/data
+      # Mounts your local AWS config/credentials read-only so AWS_PROFILE works
+      # inside the container. Defaults to an empty placeholder dir (harmless) so
+      # `docker compose up` works out of the box; set AWS_CONFIG_HOST_DIR in .env
+      # to your real ~/.aws path to enable it — no editing this file required.
+      - ${AWS_CONFIG_HOST_DIR:-./.aws-empty}:/root/.aws:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  frontend:
+    build: ./maxops-frontend
+    ports:
+      - "127.0.0.1:3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  backend-data:

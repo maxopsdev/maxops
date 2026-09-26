@@ -1,0 +1,43 @@
+{
+  "CompositeAlarms": [],
+  "MetricAlarms": [
+    {
+      "ActionsEnabled": true,
+      "AlarmActions": [],
+      "AlarmArn": "arn:aws:cloudwatch:us-east-1:123456789012:alarm:maxops-payload-no-action",
+      "AlarmConfigurationUpdatedTimestamp": "2026-06-14T17:02:18.400000+00:00",
+      "AlarmName": "maxops-payload-no-action",
+      "ComparisonOperator": "GreaterThanThreshold",
+      "Dimensions": [
+        {
+          "Name": "Profile",
+          "Value": "no_action_alarm"
+        }
+      ],
+      "EvaluationPeriods": 2,
+      "InsufficientDataActions": [],
+      "MetricName": "CaptureMetric",
+      "Namespace": "MaxOps/Payload",
+      "OKActions": [],
+      "Period": 60,
+      "StateReason": "Unchecked: Initial alarm creation",
+      "StateTransitionedTimestamp": "2026-06-14T17:02:18.400000+00:00",
+      "StateUpdatedTimestamp": "2026-06-14T17:02:18.400000+00:00",
+      "StateValue": "INSUFFICIENT_DATA",
+      "Statistic": "Average",
+      "Threshold": 80.0,
+      "TreatMissingData": "missing"
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "1687",
+      "content-type": "text/xml",
+      "date": "Sun, 14 Jun 2026 17:02:36 GMT",
+      "x-amzn-requestid": "4cb3c42b-c56d-4063-bc87-1e9629d16ddd"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "4cb3c42b-c56d-4063-bc87-1e9629d16ddd",
+    "RetryAttempts": 0
+  }
+}

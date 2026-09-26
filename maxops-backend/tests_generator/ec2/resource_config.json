@@ -1,0 +1,81 @@
+{
+  "service": "ec2",
+  "profile": "default",
+  "region": "us-east-1",
+  "state_file": "tests_generator/ec2/.ec2_capture_state.json",
+  "placeholder_values": {
+    "INSTANCE_ID": "i-PLACEHOLDER-INSTANCE",
+    "INSTANCE_NAME": "maxops-payload-ec2-capture",
+    "TERMINATE_INSTANCE_ID": "i-PLACEHOLDER-TERMINATE",
+    "TERMINATE_INSTANCE_NAME": "maxops-payload-ec2-terminate",
+    "SNAPSHOT_TERMINATE_INSTANCE_ID": "i-PLACEHOLDER-SNAPSHOT-TERMINATE",
+    "SNAPSHOT_TERMINATE_INSTANCE_NAME": "maxops-payload-ec2-snapshot-terminate",
+    "LEAVE_VOLUME_INSTANCE_ID": "i-PLACEHOLDER-LEAVE-VOLUME",
+    "LEAVE_VOLUME_INSTANCE_NAME": "maxops-payload-ec2-leave-volume",
+    "LEAVE_VOLUME_ID": "vol-PLACEHOLDER-LEAVE-VOLUME",
+    "TERMINATION_SNAPSHOT_ID": "snap-PLACEHOLDER-TERMINATION",
+    "VPC_ID": "vpc-PLACEHOLDER",
+    "SUBNET_ID": "subnet-PLACEHOLDER",
+    "SECURITY_GROUP_ID": "sg-PLACEHOLDER",
+    "AMI_ID": "ami-PLACEHOLDER",
+    "ELASTIC_IP_ALLOCATION_ID": "eipalloc-PLACEHOLDER",
+    "ELASTIC_IP_ADDRESS": "198.51.100.10",
+    "REGION": "us-east-1",
+    "ACCOUNT_ID": "123456789012"
+  },
+  "capture_window_hours": 24,
+  "capture_instance": {
+    "key": "capture_instance",
+    "placeholder_key": "INSTANCE_ID",
+    "name_placeholder_key": "INSTANCE_NAME",
+    "instance_type": "t3a.small",
+    "tags": {
+      "Name": "{{INSTANCE_NAME}}",
+      "maxops_test": "true",
+      "maxops_payload_capture": "true",
+      "maxops_payload_profile": "capture_instance"
+    }
+  },
+  "action_instance_definitions": {
+    "terminate_instance": {
+      "instance_id_placeholder_key": "TERMINATE_INSTANCE_ID",
+      "name_placeholder_key": "TERMINATE_INSTANCE_NAME",
+      "instance_type": "t3a.micro",
+      "tags": {
+        "Name": "{{TERMINATE_INSTANCE_NAME}}",
+        "maxops_test": "true",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "terminate_instance"
+      }
+    },
+    "snapshot_terminate_instance": {
+      "instance_id_placeholder_key": "SNAPSHOT_TERMINATE_INSTANCE_ID",
+      "name_placeholder_key": "SNAPSHOT_TERMINATE_INSTANCE_NAME",
+      "instance_type": "t3a.micro",
+      "tags": {
+        "Name": "{{SNAPSHOT_TERMINATE_INSTANCE_NAME}}",
+        "maxops_test": "true",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "snapshot_terminate_instance"
+      }
+    },
+    "leave_volume_instance": {
+      "instance_id_placeholder_key": "LEAVE_VOLUME_INSTANCE_ID",
+      "name_placeholder_key": "LEAVE_VOLUME_INSTANCE_NAME",
+      "volume_id_placeholder_key": "LEAVE_VOLUME_ID",
+      "instance_type": "t3a.micro",
+      "preserve_root_volume": true,
+      "tags": {
+        "Name": "{{LEAVE_VOLUME_INSTANCE_NAME}}",
+        "maxops_test": "true",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "leave_volume_instance"
+      }
+    }
+  },
+  "elastic_ip": {
+    "key": "unused_elastic_ip",
+    "allocation_id_placeholder_key": "ELASTIC_IP_ALLOCATION_ID",
+    "public_ip_placeholder_key": "ELASTIC_IP_ADDRESS"
+  }
+}

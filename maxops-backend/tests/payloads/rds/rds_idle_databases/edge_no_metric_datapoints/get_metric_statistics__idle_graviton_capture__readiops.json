@@ -1,0 +1,15 @@
+{
+  "Datapoints": [],
+  "Label": "ReadIOPS",
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "510",
+      "content-type": "text/xml",
+      "date": "Sun, 19 Apr 2026 22:37:02 GMT",
+      "x-amzn-requestid": "902ed2db-eaaf-4009-8515-9d509368f6cf"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "902ed2db-eaaf-4009-8515-9d509368f6cf",
+    "RetryAttempts": 0
+  }
+}

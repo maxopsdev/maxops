@@ -1,0 +1,59 @@
+{
+  "Pages": [
+    {
+      "EncodingType": "url",
+      "IsTruncated": false,
+      "KeyMarker": "",
+      "MaxKeys": 1000,
+      "Name": "maxops-payload-vpc-deletion",
+      "Prefix": "",
+      "ResponseMetadata": {
+        "HTTPHeaders": {
+          "content-type": "application/xml",
+          "date": "Sun, 14 Jun 2026 17:27:14 GMT",
+          "server": "AmazonS3",
+          "transfer-encoding": "chunked",
+          "x-amz-id-2": "5J+ySAnrUmvfOY3BIOPyw6q7RWFsCRuR2Df71uLpQN9Z2YIenwTjE2SSupYMZfN43J0tNZbFyuMWwNitJ/N3HavdlniLgF7R",
+          "x-amz-request-id": "ZB4DQW2D86XGFR70"
+        },
+        "HTTPStatusCode": 200,
+        "HostId": "5J+ySAnrUmvfOY3BIOPyw6q7RWFsCRuR2Df71uLpQN9Z2YIenwTjE2SSupYMZfN43J0tNZbFyuMWwNitJ/N3HavdlniLgF7R",
+        "RequestId": "ZB4DQW2D86XGFR70",
+        "RetryAttempts": 0
+      },
+      "VersionIdMarker": "",
+      "Versions": [
+        {
+          "ChecksumAlgorithm": [
+            "CRC64NVME"
+          ],
+          "ETag": "\"d41d8cd98f00b204e9800998ecf8427e\"",
+          "IsLatest": true,
+          "Key": "AWSLogs/123456789012/",
+          "LastModified": "2026-06-14T17:26:57+00:00",
+          "Owner": {
+            "ID": "e8093bbaf30c617d0918e84bbb472a0978b4882a0f75326b9e08bbd3a9e25198"
+          },
+          "Size": 0,
+          "StorageClass": "STANDARD",
+          "VersionId": "o1KLi2hGxI2_xWSj1DiZdrbcI2Cm1z24"
+        },
+        {
+          "ChecksumAlgorithm": [
+            "CRC64NVME"
+          ],
+          "ETag": "\"d41d8cd98f00b204e9800998ecf8427e\"",
+          "IsLatest": false,
+          "Key": "AWSLogs/123456789012/",
+          "LastModified": "2026-06-14T17:26:57+00:00",
+          "Owner": {
+            "ID": "e8093bbaf30c617d0918e84bbb472a0978b4882a0f75326b9e08bbd3a9e25198"
+          },
+          "Size": 0,
+          "StorageClass": "STANDARD",
+          "VersionId": "WneDosmdEOBs1g7VmbrQfRvf8LF9pjPh"
+        }
+      ]
+    }
+  ]
+}

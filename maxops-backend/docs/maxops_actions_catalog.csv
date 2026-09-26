@@ -1,0 +1,78 @@
+Resource Type(s),Action Key,Action Name,Description (one-liner),Payload Generation,Test Cases,Test Type,Dedicated Test Files
+s3,add_abort_mpu_policy,Add Abort MPU Policy,Add rule to abort incomplete multipart uploads,Yes,Yes,payload-replay,
+s3,add_archival_transition,Add Archival Transition,Add lifecycle rule to transition objects to Glacier,Yes,Yes,payload-replay,
+s3,add_basic_lifecycle_policy,Add Basic Lifecycle Policy,Add comprehensive S3 lifecycle policy,Yes,Yes,payload-replay,
+s3,add_expiration_policy,Add Expiration Policy,Add lifecycle rule to expire old objects,Yes,Yes,payload-replay,
+efs,add_lifecycle_policy,Add Lifecycle Policy,Add EFS lifecycle policy for IA transition,No,No,,
+s3,add_log_retention_lifecycle,Add Log Retention Lifecycle,Add lifecycle policy for log bucket retention,Yes,Yes,payload-replay,
+s3,add_noncurrent_archival_transition,Add Noncurrent Archival Transition,Add rule to archive old noncurrent versions,Yes,Yes,payload-replay,
+s3,add_noncurrent_expiration,Add Noncurrent Expiration,Add rule to expire old noncurrent versions,Yes,Yes,payload-replay,
+dynamodb,backup_and_delete_table,Backup and Delete Table,Create backup before deleting DynamoDB table,Yes,Yes,payload-replay+dedicated,test_dynamodb_payload_generator.py
+cloudwatch,cloudwatch_consolidate_duplicate_alarms,Consolidate Duplicate CloudWatch Alarms,Keep one alarm and delete explicitly selected matching duplicates,Yes,Yes,payload-replay+dedicated,test_cloudwatch_checks_actions.py
+cloudwatch,cloudwatch_delete_alarm,Delete CloudWatch Alarm,Delete one or more CloudWatch alarms,Yes,Yes,payload-replay+dedicated,test_cloudwatch_checks_actions.py
+cloudwatch,cloudwatch_delete_log_group,Delete CloudWatch Log Group,Delete a CloudWatch Logs log group,No,No,,
+cloudwatch,cloudwatch_disable_alarm_actions,Disable CloudWatch Alarm Actions,Disable actions while preserving the alarm and its history,Yes,Yes,payload-replay+dedicated,test_cloudwatch_checks_actions.py
+cloudwatch,cloudwatch_set_log_group_retention,Set CloudWatch Log Group Retention,Set retention policy for a CloudWatch Logs log group,Yes,Yes,payload-replay+dedicated,test_cloudwatch_checks_actions.py
+cloudwatch,cloudwatch_tune_alarm,Tune CloudWatch Alarm,Update explicitly selected fields on a simple metric alarm,Yes,Yes,payload-replay+dedicated,test_cloudwatch_checks_actions.py
+efs,delete_file_system,Delete File System,Delete unused EFS file system,No,No,,
+dynamodb,delete_gsi,Delete GSI,Delete unused Global Secondary Index,Yes,Yes,payload-replay+dedicated,test_dynamodb_payload_generator.py
+snapshot,delete_snapshot,Delete Snapshot,Delete old EBS snapshot,No,Yes,dedicated,test_ec2_payload_generator.py
+dynamodb,delete_table,Delete Table,Delete unused DynamoDB table,Yes,Yes,payload-replay+dedicated,test_dynamodb_payload_actions.py;test_dynamodb_payload_generator.py
+s3,disable_inventory_and_delete_log_bucket,Disable Inventory and Delete Log Bucket,Disable S3 inventory and cleanup destination bucket,Yes,Yes,payload-replay,
+s3,disable_logging_and_delete_log_bucket,Disable Logging and Delete Log Bucket,Disable S3 access logging and cleanup log bucket,Yes,Yes,payload-replay,
+s3,disable_replication_and_delete_bucket,Disable Replication and Delete Bucket,Disable S3 replication and cleanup destination bucket,Yes,Yes,payload-replay,
+vpc,dynamodb_vpc_endpoint,Create DynamoDB VPC Endpoint,Create DynamoDB VPC endpoint for a VPC,Yes,Yes,payload-replay,
+ebs,ebs_downsize_volume,Downsize Volume,Reduce EBS volume size or change type,No,Yes,dedicated,test_elasticache_rds_eip_ebs_actions.py
+ebs,ebs_lifecycle_policy,Create Lifecycle Policy,Create DLM lifecycle policy for EBS snapshots,Yes,Yes,payload-replay+dedicated,test_elasticache_rds_eip_ebs_actions.py
+ebs,ebs_reduce_iops,Reduce Provisioned IOPS,Reduce provisioned IOPS for EBS volume,Yes,Yes,payload-replay+dedicated,test_elasticache_rds_eip_ebs_actions.py
+ecs,ecs_delete_cluster,Delete ECS Cluster,Delete idle ECS cluster,No,No,,
+ecs,ecs_delete_service,Delete ECS Service,Delete ECS service and cleanup resources,No,No,,
+ecs,ecs_rightsize_task_definition,Rightsize Task Definition,Optimize ECS task CPU and memory allocation,No,No,,
+efs,efs_add_lifecycle_policy,Add EFS Lifecycle Policy,Add EFS lifecycle policy (alias),No,No,,
+efs,efs_delete,Delete EFS,Delete unused EFS file system (alias),No,No,,
+efs,efs_modify_performance_mode,Modify EFS Performance Mode,Change EFS performance mode (alias),No,No,,
+efs,efs_modify_throughput_mode,Modify EFS Throughput Mode,Change EFS throughput mode (alias),No,No,,
+elasticache,elasticache_delete,Delete ElastiCache Instance,Delete ElastiCache cluster or replication group,Yes,Yes,payload-replay+dedicated,test_elasticache_rds_eip_ebs_actions.py
+elasticache,elasticache_downsize,Downsize ElastiCache,Reduce ElastiCache node type or count,Yes,Yes,payload-replay+dedicated,test_elasticache_rds_eip_ebs_actions.py
+elasticache,elasticache_migrate_graviton,Migrate to Graviton,Migrate ElastiCache to Graviton node type,Yes,Yes,payload-replay+dedicated,test_elasticache_rds_eip_ebs_actions.py
+elasticache,elasticache_upgrade_valkey,Upgrade to Valkey,Upgrade ElastiCache from Redis to Valkey,Yes,Yes,payload-replay+dedicated,test_elasticache_rds_eip_ebs_actions.py
+dynamodb,enable_autoscaling,Enable Autoscaling,Enable DynamoDB table autoscaling,Yes,Yes,payload-replay+dedicated,test_dynamodb_payload_generator.py
+s3,enable_delete_marker_cleanup,Enable Delete Marker Cleanup,Add lifecycle rule to cleanup expired delete markers,Yes,Yes,payload-replay,
+glue,glue_set_workers_count,Set Glue Workers Count,Update AWS Glue job worker count,No,No,,
+glue,glue_upgrade_version,Upgrade Glue Version,Update AWS Glue job to a specified Glue version,No,No,,
+ec2,install_cloudwatch_agent,Install CloudWatch Agent,Install and configure CloudWatch agent on EC2 instance,No,Yes,dedicated,test_cloudwatch_agent_service.py
+ec2,migrate_to_graviton,Migrate to Graviton,Migrate EC2 instance to Graviton-based instance type,Yes,Yes,payload-replay+dedicated,test_ec2_checks_actions.py;test_ec2_payload_checks.py;test_ec2_payload_generator.py
+efs,modify_performance_mode,Modify Performance Mode,Change EFS performance mode using DataSync,No,No,,
+efs,modify_throughput_mode,Modify Throughput Mode,Change EFS throughput mode,No,No,,
+"rds,rds_instance",rds_migrate_graviton,Migrate RDS to Graviton,Change an RDS DB instance to an explicitly selected Graviton class,Yes,Yes,payload-replay+dedicated,test_elasticache_rds_eip_ebs_actions.py;test_rds_payload_checks.py
+redshift,redshift_delete_snapshot,Delete Redshift Snapshot,Delete Redshift snapshots by identifier(s),No,No,,
+redshift,redshift_reduce_snapshot_retention,Reduce Redshift Snapshot Retention,Reduce automated snapshot retention period for a Redshift cluster,No,No,,
+redshift,redshift_rightsize_cluster,Rightsize Redshift Cluster,Right-size a Redshift cluster by changing node type/count/cluster type,No,No,,
+lambda,reduce_log_verbosity_and_retention,Reduce Log Verbosity and Retention,Optimize Lambda logging configuration (alias),No,No,,
+lambda,reduce_provisioned_concurrency,Reduce Provisioned Concurrency,Reduce or disable Lambda provisioned concurrency,No,No,,
+dynamodb,reduce_rcu,Reduce RCU,Reduce DynamoDB Read Capacity Units,Yes,Yes,payload-replay+dedicated,test_dynamodb_payload_generator.py
+dynamodb,reduce_wcu,Reduce WCU,Reduce DynamoDB Write Capacity Units,Yes,Yes,payload-replay+dedicated,test_dynamodb_payload_generator.py
+elastic_ip,release_unused_elastic_ip,Release Unused Elastic IP,"Release an explicitly confirmed, unassociated Elastic IP allocation",Yes,Yes,payload-replay+dedicated,test_elasticache_rds_eip_ebs_actions.py
+ec2,rightsize,Rightsize Instance,Change an EC2 instance to a smaller instance type,No,Yes,dedicated,test_ec2_checks_actions.py
+vpc,s3_vpc_endpoint,Create S3 VPC Endpoint,Create S3 VPC endpoint for a VPC,Yes,Yes,payload-replay,
+ec2,schedule_off_hours,Schedule Off-Hours Shutdown,Create paired EC2 stop/start schedules for off-hours savings,No,Yes,dedicated,test_ec2_checks_actions.py;test_ec2_payload_checks.py
+lambda,set_log_retention,Set Log Retention,Configure CloudWatch log retention for Lambda,No,No,,
+ebs,snapshot_and_terminate,Snapshot and Terminate,Create snapshot and delete unattached EBS volume,Yes,Yes,payload-replay+dedicated,test_elasticache_rds_eip_ebs_actions.py
+"ec2,rds",stop,Stop Instance,Stop EC2 instance or RDS database,Yes,Yes,payload-replay+dedicated,test_ec2_checks_actions.py;test_ec2_payload_checks.py;test_rds_payload_checks.py
+dynamodb,switch_to_on_demand_billing,Switch to On-Demand Billing,Switch DynamoDB table to on-demand billing mode,Yes,Yes,payload-replay+dedicated,test_dynamodb_payload_generator.py
+ec2,terminate,Terminate Instance,Terminate EC2 instance,Yes,Yes,payload-replay+dedicated,test_ec2_checks_actions.py;test_ec2_payload_checks.py;test_ec2_payload_generator.py
+ec2,terminate_leave_volume,Terminate but Leave Volume,Terminate EC2 instance but keep EBS volume,Yes,Yes,payload-replay+dedicated,test_ec2_checks_actions.py;test_ec2_payload_checks.py;test_ec2_payload_generator.py
+ec2,terminate_with_snapshot,Terminate with Snapshot,Create snapshot before terminating EC2 instance,Yes,Yes,payload-replay+dedicated,test_ec2_checks_actions.py;test_ec2_payload_checks.py;test_ec2_payload_generator.py
+lambda,update_memory,Update Memory,Adjust Lambda function memory allocation (alias),No,No,,
+lambda,update_memory_configuration,Update Memory Configuration,Adjust Lambda function memory allocation,No,No,,
+lambda,update_provisioned_concurrency,Update Provisioned Concurrency,Update Lambda provisioned concurrency (alias),No,No,,
+dynamodb,use_provisioned_capacity,Use Provisioned Capacity,Switch DynamoDB table to provisioned capacity mode,Yes,Yes,payload-replay+dedicated,test_dynamodb_payload_generator.py
+vpc,vpc_flow_logs_disabling,Disable VPC Flow Logs,Disable VPC flow logs by deleting flow log resources,Yes,Yes,payload-replay+dedicated,test_vpc_flow_log_bucket_deletion.py
+vpc,vpc_flow_logs_disabling_with_bucket_deletion,Disable VPC Flow Logs and Delete Buckets,Disable selected flow logs and delete explicitly approved S3 destinations,Yes,Yes,payload-replay+dedicated,test_vpc_flow_log_bucket_deletion.py
+vpc,vpc_flow_logs_disabling_with_bucket_expiration,Disable VPC Flow Logs with Bucket Expiration,Disable VPC flow logs and set S3 log expiration policy,Yes,Yes,payload-replay+dedicated,test_vpc_flow_log_bucket_deletion.py
+sagemaker,stop_notebook,Stop SageMaker Notebook,Stop an InService SageMaker notebook instance,No,Yes,unit,test_sagemaker_checks.py
+sagemaker,delete_endpoint,Delete SageMaker Endpoint,Delete an endpoint while retaining shared endpoint config and model,No,Yes,unit,test_sagemaker_checks.py
+s3,s3_review_unused_bucket,Review Unused S3 Bucket,Advisory deletion review or Deep Archive retain-it alternative,No,No,advisory,
+s3,s3_review_storage_class,Review S3 Storage Class,Advisory ranked storage-class scenarios with ObjectSizeGreaterThan=131071 lifecycle guidance,No,No,advisory,
+s3,s3_restore_to_standard,Restore S3 Objects to Standard,Advisory restore-then-copy workflow with lifecycle ordering and fee caveats,No,No,advisory,
+s3,s3_write_direct_to_class,Write New S3 Objects Directly to Class,Advisory producer storage-class header guidance with restore and lifecycle backstop caveats,No,No,advisory,

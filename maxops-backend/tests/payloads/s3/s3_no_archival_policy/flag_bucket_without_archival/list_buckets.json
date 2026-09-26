@@ -1,0 +1,11 @@
+{
+  "Buckets": [
+    {
+      "CreationDate": "2026-04-16T21:30:34+00:00",
+      "Name": "maxops-payload-s3-lifecycle-no-archival"
+    }
+  ],
+  "Owner": {
+    "ID": "e8093bbaf30c617d0918e84bbb472a0978b4882a0f75326b9e08bbd3a9e25198"
+  }
+}

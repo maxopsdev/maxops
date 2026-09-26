@@ -1,0 +1,34 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "connection": "keep-alive",
+      "content-length": "237",
+      "content-type": "application/x-amz-json-1.0",
+      "date": "Fri, 24 Apr 2026 00:09:46 GMT",
+      "server": "Server",
+      "x-amz-crc32": "1971597392",
+      "x-amzn-requestid": "49PQPU6H80JUOE0DVU9VB8722FVV4KQNSO5AEMVJF66Q9ASUAAJG"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "49PQPU6H80JUOE0DVU9VB8722FVV4KQNSO5AEMVJF66Q9ASUAAJG",
+    "RetryAttempts": 0
+  },
+  "Tags": [
+    {
+      "Key": "maxops_test",
+      "Value": "true"
+    },
+    {
+      "Key": "maxops_payload_capture",
+      "Value": "true"
+    },
+    {
+      "Key": "maxops_payload_profile",
+      "Value": "provisioned_capture"
+    },
+    {
+      "Key": "Name",
+      "Value": "maxops-payload-dynamodb-provisioned"
+    }
+  ]
+}

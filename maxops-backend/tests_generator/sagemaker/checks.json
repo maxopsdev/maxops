@@ -1,0 +1,40 @@
+{
+  "sagemaker_endpoint_idle": {
+    "description": "Old endpoint with a real zero-invocation capture",
+    "resource_refs": ["endpoint_cpu"],
+    "positive_scenarios": ["pass_zero_invocations"],
+    "negative_scenarios": ["fail_with_traffic"],
+    "edge_scenarios": ["edge_young_endpoint"],
+    "scenarios": {
+      "pass_zero_invocations": {"expected_matches": ["endpoint_cpu"], "payload_files": ["list_endpoints.json", "describe_endpoint.json", "describe_endpoint_config.json", "get_metric_data.json"], "metric_overrides": {"Invocations": 0}},
+      "fail_with_traffic": {"expected_matches": [], "payload_files": ["list_endpoints.json", "describe_endpoint.json", "describe_endpoint_config.json", "get_metric_data.json"]},
+      "edge_young_endpoint": {"expected_matches": [], "payload_files": ["list_endpoints.json", "describe_endpoint.json", "describe_endpoint_config.json", "get_metric_data.json"]}
+    }
+  },
+  "sagemaker_endpoint_overprovisioned": {
+    "description": "Two-instance endpoint with low utilization and no autoscaling",
+    "resource_refs": ["endpoint_cpu_x2"],
+    "positive_scenarios": ["pass_low_utilization"], "negative_scenarios": ["fail_scaling_policy"], "edge_scenarios": [],
+    "scenarios": {"pass_low_utilization": {"expected_matches": ["endpoint_cpu_x2"], "payload_files": ["list_endpoints.json", "describe_endpoint.json", "describe_endpoint_config.json", "get_metric_data.json"]}, "fail_scaling_policy": {"expected_matches": [], "payload_files": ["list_endpoints.json", "describe_endpoint.json", "describe_endpoint_config.json", "describe_scaling_policies.json", "get_metric_data.json"]}}
+  },
+  "sagemaker_endpoint_gpu_underutilized": {
+    "description": "Serving GPU endpoint with low compute and memory utilization",
+    "resource_refs": ["endpoint_gpu"], "positive_scenarios": ["pass_gpu_idle_memory_low"], "negative_scenarios": ["fail_gpu_memory_resident"], "edge_scenarios": ["edge_gpu_no_telemetry"],
+    "scenarios": {"pass_gpu_idle_memory_low": {"expected_matches": ["endpoint_gpu"], "payload_files": ["list_endpoints.json", "describe_endpoint.json", "describe_endpoint_config.json", "get_metric_data.json"], "metric_overrides": {"GPUUtilization": 0, "GPUMemoryUtilization": 0}}, "fail_gpu_memory_resident": {"expected_matches": [], "payload_files": ["list_endpoints.json", "describe_endpoint.json", "describe_endpoint_config.json", "get_metric_data.json"]}, "edge_gpu_no_telemetry": {"expected_matches": [], "payload_files": ["list_endpoints.json", "describe_endpoint.json", "describe_endpoint_config.json", "get_metric_data.json"]}}
+  },
+  "sagemaker_notebook_no_auto_stop": {
+    "description": "Notebook lifecycle configuration inspection",
+    "resource_refs": ["notebook_cpu", "notebook_cpu_autostop"], "positive_scenarios": ["pass_no_config"], "negative_scenarios": ["fail_autostop"], "edge_scenarios": ["edge_describe_failure"],
+    "scenarios": {"pass_no_config": {"expected_matches": ["notebook_cpu"], "payload_files": ["list_notebook_instances.json", "describe_notebook_instance.json"]}, "fail_autostop": {"expected_matches": [], "payload_files": ["list_notebook_instances.json", "describe_notebook_instance.json", "describe_notebook_instance_lifecycle_config.json"]}, "edge_describe_failure": {"expected_matches": [], "payload_files": ["list_notebook_instances.json", "describe_notebook_instance.json"]}}
+  },
+  "sagemaker_notebook_idle": {
+    "description": "Agent metrics for CPU and GPU notebooks",
+    "resource_refs": ["notebook_cpu", "endpoint_gpu"], "positive_scenarios": ["pass_cpu_idle"], "negative_scenarios": ["fail_gpu_agent_missing"], "edge_scenarios": [],
+    "scenarios": {"pass_cpu_idle": {"expected_matches": ["notebook_cpu"], "payload_files": ["list_notebook_instances.json", "describe_notebook_instance.json", "list_metrics.json", "get_metric_data.json"]}, "fail_gpu_agent_missing": {"expected_matches": [], "payload_files": ["list_notebook_instances.json", "describe_notebook_instance.json", "list_metrics.json", "get_metric_data.json"]}}
+  },
+  "sagemaker_training_no_managed_spot": {
+    "description": "Recurring completed training family",
+    "resource_refs": ["training_cpu"], "positive_scenarios": ["pass_three_on_demand"], "negative_scenarios": ["fail_one_spot_run"], "edge_scenarios": ["edge_two_runs"],
+    "scenarios": {"pass_three_on_demand": {"expected_matches": ["training_cpu"], "payload_files": ["list_training_jobs.json", "describe_training_job.json"]}, "fail_one_spot_run": {"expected_matches": [], "payload_files": ["list_training_jobs.json", "describe_training_job.json"]}, "edge_two_runs": {"expected_matches": [], "payload_files": ["list_training_jobs.json", "describe_training_job.json"]}}
+  }
+}

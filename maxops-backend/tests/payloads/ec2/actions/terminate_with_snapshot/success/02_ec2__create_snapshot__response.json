@@ -1,0 +1,26 @@
+{
+  "Description": "Snapshot before terminating i-PLACEHOLDER-SNAPSHOT-TERMINATE",
+  "Encrypted": false,
+  "OwnerId": "123456789012",
+  "Progress": "",
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "cache-control": "no-cache, no-store",
+      "content-length": "545",
+      "content-type": "text/xml;charset=UTF-8",
+      "date": "Mon, 15 Jun 2026 01:23:06 GMT",
+      "server": "AmazonEC2",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-amzn-requestid": "2eb10a1e-fb91-451e-8d6c-f16a61fd8fdf"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "2eb10a1e-fb91-451e-8d6c-f16a61fd8fdf",
+    "RetryAttempts": 0
+  },
+  "SnapshotId": "snap-PLACEHOLDER-TERMINATION",
+  "StartTime": "2026-06-15T01:23:06.716000+00:00",
+  "State": "pending",
+  "Tags": [],
+  "VolumeId": "vol-0bb12c203266a027a",
+  "VolumeSize": 8
+}

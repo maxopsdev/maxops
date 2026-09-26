@@ -1,0 +1,16 @@
+{
+  "IsTruncated": false,
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "189",
+      "date": "Thu, 16 Apr 2026 21:33:45 GMT",
+      "server": "AmazonS3",
+      "x-amz-id-2": "59vhEdrol68rsUJypJImQDp7knkkghLw7EpoZ19eQD5Y3CUrcdBSV6DqOtryHcDEb9OEQNKTohA=",
+      "x-amz-request-id": "ZK491JZV5DCVGDPY"
+    },
+    "HTTPStatusCode": 200,
+    "HostId": "59vhEdrol68rsUJypJImQDp7knkkghLw7EpoZ19eQD5Y3CUrcdBSV6DqOtryHcDEb9OEQNKTohA=",
+    "RequestId": "ZK491JZV5DCVGDPY",
+    "RetryAttempts": 0
+  }
+}

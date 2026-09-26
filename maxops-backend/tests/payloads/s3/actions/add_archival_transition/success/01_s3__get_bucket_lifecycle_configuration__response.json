@@ -1,0 +1,31 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "382",
+      "date": "Sun, 14 Jun 2026 20:10:05 GMT",
+      "server": "AmazonS3",
+      "x-amz-id-2": "gpfCRS8vIC1L4XYgrEvEUGr62ra1yDt+HAJZAGuWbMxd98WExKABFl8Sz5q92EuuDS1tmr6KZNo=",
+      "x-amz-request-id": "8J1VXE8D5KFJN0BG",
+      "x-amz-transition-default-minimum-object-size": "all_storage_classes_128K"
+    },
+    "HTTPStatusCode": 200,
+    "HostId": "gpfCRS8vIC1L4XYgrEvEUGr62ra1yDt+HAJZAGuWbMxd98WExKABFl8Sz5q92EuuDS1tmr6KZNo=",
+    "RequestId": "8J1VXE8D5KFJN0BG",
+    "RetryAttempts": 0
+  },
+  "Rules": [
+    {
+      "AbortIncompleteMultipartUpload": {
+        "DaysAfterInitiation": 7
+      },
+      "Expiration": {
+        "Days": 60
+      },
+      "Filter": {
+        "Prefix": ""
+      },
+      "ID": "expire-no-archive",
+      "Status": "Enabled"
+    }
+  ]
+}

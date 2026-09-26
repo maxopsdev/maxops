@@ -1,0 +1,35 @@
+{
+  "ReplicationConfiguration": {
+    "Role": "arn:aws:iam::123456789012:role/maxops-payload-s3-replication-role",
+    "Rules": [
+      {
+        "DeleteMarkerReplication": {
+          "Status": "Disabled"
+        },
+        "Destination": {
+          "Bucket": "arn:aws:s3:::maxops-payload-s3-replication-dest",
+          "StorageClass": "STANDARD"
+        },
+        "Filter": {
+          "Prefix": ""
+        },
+        "ID": "replicate-all-objects",
+        "Priority": 1,
+        "Status": "Enabled"
+      }
+    ]
+  },
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "date": "Thu, 16 Apr 2026 21:33:49 GMT",
+      "server": "AmazonS3",
+      "transfer-encoding": "chunked",
+      "x-amz-id-2": "qt+dZuBDh2KWQdUIYCSBh6TjioybT8rkA2Eo1T0NO7GomZ5Up9SN7qbmzAlF6ekUqpUu1Z6jvn3K5dwytxXPdw==",
+      "x-amz-request-id": "244HKDYB37CM3K41"
+    },
+    "HTTPStatusCode": 200,
+    "HostId": "qt+dZuBDh2KWQdUIYCSBh6TjioybT8rkA2Eo1T0NO7GomZ5Up9SN7qbmzAlF6ekUqpUu1Z6jvn3K5dwytxXPdw==",
+    "RequestId": "244HKDYB37CM3K41",
+    "RetryAttempts": 0
+  }
+}

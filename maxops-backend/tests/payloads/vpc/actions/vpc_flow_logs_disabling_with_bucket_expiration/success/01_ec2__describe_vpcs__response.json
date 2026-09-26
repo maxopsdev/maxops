@@ -1,0 +1,46 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "cache-control": "no-cache, no-store",
+      "content-length": "952",
+      "content-type": "text/xml;charset=UTF-8",
+      "date": "Sun, 14 Jun 2026 17:25:55 GMT",
+      "server": "AmazonEC2",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-amzn-requestid": "8abadb1a-a184-4634-af27-f7a5455e8244"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "8abadb1a-a184-4634-af27-f7a5455e8244",
+    "RetryAttempts": 0
+  },
+  "Vpcs": [
+    {
+      "CidrBlock": "10.2.0.0/24",
+      "CidrBlockAssociationSet": [
+        {
+          "AssociationId": "vpc-cidr-assoc-066e0acae1976b5e0",
+          "CidrBlock": "10.2.0.0/24",
+          "CidrBlockState": {
+            "State": "associated"
+          }
+        }
+      ],
+      "DhcpOptionsId": "dopt-f8bec09d",
+      "InstanceTenancy": "default",
+      "IsDefault": false,
+      "OwnerId": "123456789012",
+      "State": "available",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "maxops-payload-expiration_vpc-1781457928"
+        },
+        {
+          "Key": "maxops_payload_capture",
+          "Value": "true"
+        }
+      ],
+      "VpcId": "vpc-EXPIRATION"
+    }
+  ]
+}

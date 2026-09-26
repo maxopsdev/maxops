@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MaxOps Plugin Settings</title>
+    <link rel="stylesheet" href="src/options.css">
+  </head>
+  <body>
+    <main>
+      <h1>MaxOps Plugin Settings</h1>
+      <form id="settingsForm">
+        <label for="backendBaseUrl">Backend URL</label>
+        <input id="backendBaseUrl" name="backendBaseUrl" type="url" required>
+        <label for="frontendBaseUrl">MaxOps UI URL</label>
+        <input id="frontendBaseUrl" name="frontendBaseUrl" type="url" required>
+        <p class="hint">Only local HTTP URLs are accepted: localhost or 127.0.0.1.</p>
+        <button type="submit">Save</button>
+      </form>
+      <p id="status" class="status"></p>
+    </main>
+    <script src="src/browser-api.js"></script>
+    <script src="src/options.js"></script>
+  </body>
+</html>

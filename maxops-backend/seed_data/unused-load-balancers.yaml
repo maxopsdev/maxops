@@ -1,0 +1,7 @@
+name: Unused Load Balancers
+description: Find Application and Classic Load Balancers with no active targets or low request counts, indicating they may no longer be needed.
+resource: aws.elb
+filters:
+  - type: unused
+    days: 30
+

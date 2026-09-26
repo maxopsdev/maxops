@@ -1,0 +1,29 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "date": "Thu, 16 Apr 2026 21:33:49 GMT",
+      "server": "AmazonS3",
+      "transfer-encoding": "chunked",
+      "x-amz-id-2": "KXF+lITGejEUjOaYnNgNXTgL3nFgd8Ll4MtpvMB0eSEuZD7amlVIuaTIZcPWcV2ernae+SVy66uH54DfSgzSSQ==",
+      "x-amz-request-id": "244VMVR7PSH8VTV5"
+    },
+    "HTTPStatusCode": 200,
+    "HostId": "KXF+lITGejEUjOaYnNgNXTgL3nFgd8Ll4MtpvMB0eSEuZD7amlVIuaTIZcPWcV2ernae+SVy66uH54DfSgzSSQ==",
+    "RequestId": "244VMVR7PSH8VTV5",
+    "RetryAttempts": 0
+  },
+  "TagSet": [
+    {
+      "Key": "maxops_payload_profile",
+      "Value": "versioned_missing_noncurrent_controls"
+    },
+    {
+      "Key": "maxops_payload_capture",
+      "Value": "true"
+    },
+    {
+      "Key": "Name",
+      "Value": "maxops-payload-s3-versioned-missing-noncurrent"
+    }
+  ]
+}

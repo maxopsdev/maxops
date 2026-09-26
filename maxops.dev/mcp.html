@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Automation Layer | MaxOps Adventures №5</title>
+  <meta name="description" content="A page-by-page comic guide to the MaxOps MCP server: asking your AI assistant about your own cloud, what it can answer, why everything stays local, and the gate in front of anything that writes.">
+  <link rel="icon" type="image/svg+xml" href="./assets/brand/maxops-mark.svg">
+  <link rel="stylesheet" href="./setup-guide.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="masthead">
+  <a class="brand" href="./docs.html"><img src="./assets/brand/maxops-mark.svg" alt="" width="26" height="26">MAXOPS <span>ADVENTURES</span></a>
+  <a class="masthead-back" href="./docs.html">‹ All issues</a>
+  <div class="counter">PAGE <b id="counterNow">1</b> / <span id="counterTotal">1</span></div>
+</header>
+
+<main class="pager" id="pager">
+
+  <!-- ============================================================ 1 COVER -->
+  <section class="page" data-page="1" data-slug="cover" data-chapter="Cover">
+    <div class="spread">
+      <div class="rail" style="align-items:center;">
+        <div class="panel" style="width:100%;">
+          <div class="panel-inner">
+            <img src="./assets/comic/mcp-cover.jpg" alt="The Cost Sentinel beside a glowing teal bridge of light arcing from a server tower to a floating chat window." />
+            <div class="halftone"></div>
+            <div class="vignette"></div>
+          </div>
+          <div class="fig-tag">FIG. 01 — COVER</div>
+        </div>
+        <div class="kicker">MaxOps Adventures <b>· Issue №5</b></div>
+        <h1 class="title">THE AUTOMATION<br /><em>LAYER</em></h1>
+        <div class="subtitle">Ask Your Assistant About Your Own Cloud</div>
+        <p class="caption" style="border:none; padding-left:0; max-width:58ch;">
+          Connect MaxOps to a desktop AI assistant and ask questions in plain language — without any of
+          your cloud data leaving the machine it already lives on.
+        </p>
+        <button class="cta" onclick="goTo(2)">Begin the walkthrough ▸</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= 2 WHAT IT IS -->
+  <section class="page" data-page="2" data-slug="what-it-is" data-chapter="What it is">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/mcp-bridge.jpg" alt="A bridge of light between a glowing server box and a floating chat window, with data motes flowing across it." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 02 — THE BRIDGE</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The idea <b>· A bridge, not a service</b></div>
+        <h2 class="title title--sm">WHAT THIS<br /><em>ACTUALLY</em> IS</h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>A bridge between your MaxOps and a desktop AI assistant. You ask a question in your own words; the assistant walks across the bridge, reads what I already know, and answers.</p>
+        </div>
+        <p class="caption">
+          MaxOps speaks a shared protocol that desktop AI clients understand. Once it's connected, the
+          assistant gains a set of things it may ask MaxOps — and <strong>nothing else</strong>. It cannot
+          browse your account, invent a query, or reach past what's on the bridge.
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>So the AI gets access to my AWS account?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>No — it gets access to <em>me</em>, and I already did the looking. It reads my findings, my inventory, my recommendations. Your AWS credentials never come near it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= 3 WHAT TO ASK -->
+  <section class="page" data-page="3" data-slug="what-to-ask" data-chapter="What to ask it">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Questions it can answer today</span>
+            <div class="mock-tile"><span>Ask</span><strong>"What's costing us most in eu-west-1?"</strong></div>
+            <div class="mock-tile"><span>Ask</span><strong>"Which volumes has nobody attached in a month?"</strong></div>
+            <div class="mock-tile"><span>Ask</span><strong>"Summarise savings by team tag."</strong></div>
+            <div class="mock-tile"><span>Ask</span><strong>"Why was this instance recommended for downsizing?"</strong></div>
+            <p class="mock-note ok">Each of these maps onto something MaxOps already computed. The assistant is reading, phrasing and joining — not analysing your cloud itself.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT A — THE ASKING</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">In practice <b>· Why bother</b></div>
+        <h2 class="title title--sm">WHAT IT'S<br /><em>FOR</em></h2>
+        <p class="caption">
+          The dashboard is better than an assistant at showing you a hundred findings. The assistant is
+          better at the questions that <strong>cut across</strong> them — the ones that would otherwise mean
+          three filters, an export, and a spreadsheet.
+        </p>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Think of it as the difference between reading a report and asking the person who wrote it. Same facts. Much faster to the part you cared about.</p>
+        </div>
+        <p class="caption">
+          It's also where the tag summaries earn their keep: <em>"which team owns the most idle spend"</em>
+          is one question to an assistant and a genuine chore in any dashboard.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================== 4 THE TOOLS -->
+  <section class="page" data-page="4" data-slug="the-tools" data-chapter="What it can reach">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/mcp-tools.jpg" alt="The Sentinel presents a glowing tool rack; most tools glow teal, three at the right sit behind a small closed gate." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 03 — THE RACK</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The surface <b>· Sixteen, and no more</b></div>
+        <h2 class="title title--sm">WHAT IT CAN<br /><em>REACH</em></h2>
+        <div class="mock-tiles">
+          <div class="mock-tile hero"><span>Tools</span><strong>16</strong></div>
+          <div class="mock-tile hero"><span>That can change anything</span><strong>3</strong></div>
+        </div>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">2</div><div><div class="ops-h">Finding its way around</div><div class="ops-d">Which resource types exist, and which checks are available.</div></div></div>
+          <div class="ops-item"><div class="ops-num">5</div><div><div class="ops-h">Inventory and findings</div><div class="ops-d">Latest results, inventory listings, filtered queries across both, and cost savings summarised by tag.</div></div></div>
+          <div class="ops-item"><div class="ops-num">6</div><div><div class="ops-h">Rightsizing</div><div class="ops-d">Recommendations, the detail behind a single one, and the 15-month confidence trend from Issue №2.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">3</div><div><div class="ops-h">The ones behind the gate</div><div class="ops-d">Snooze, un-snooze, and run a check. Off by default — pages 7 and 8.</div></div></div>
+        </div>
+        <p class="caption">
+          Thirteen of the sixteen only read. That ratio is the design: an assistant should be overwhelmingly
+          a reader of your account's history.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= 5 RESOURCES -->
+  <section class="page" data-page="5" data-slug="resources" data-chapter="Standing views">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Five standing views, addressable by name</span>
+            <div class="term">
+              <div class="term-bar"><i></i><i></i><i></i><span>available views</span></div>
+              <pre>maxops://resource-types
+maxops://dashboard/summary
+maxops://inventory/<span class="k">{type}</span>
+maxops://snoozes/<span class="k">{type}</span>
+maxops://rightsizer/<span class="k">{type}</span></pre>
+            </div>
+            <p class="mock-note">Always read-only. An assistant can pull one up without being asked to run anything.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT B — THE VIEWS</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Beyond tools <b>· Things, not actions</b></div>
+        <h2 class="title title--sm">FIVE STANDING<br /><em>VIEWS</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Tools are verbs — "go and fetch". These are nouns. Your dashboard summary, your inventory for a resource type, everything currently snoozed. An assistant can just <em>look</em> at them.</p>
+        </div>
+        <p class="caption">
+          The practical difference is that a good assistant will pull up the dashboard summary at the start
+          of a conversation without being told to, and reason from there. It's the equivalent of glancing at
+          the room before answering a question about it.
+        </p>
+        <p class="caption">
+          <strong>Every one is read-only</strong>, with no exceptions and no gate — because looking at a view
+          can never change anything.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================== 6 STAYS LOCAL -->
+  <section class="page" data-page="6" data-slug="stays-local" data-chapter="It stays local">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/mcp-local.jpg" alt="A translucent teal dome over a small city block of server towers, data swirling inside it and empty sky outside." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 04 — THE DOME</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The important part <b>· Where the data goes</b></div>
+        <h2 class="title title--sm">IT ALL STAYS<br /><em>HERE</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>The bridge runs to your own machine. By default I answer on <code>localhost</code> — the assistant is talking to software running beside it, not to anything of mine on the internet.</p>
+        </div>
+        <p class="caption">
+          This is the whole reason the integration is shaped this way. Your inventory, your cost figures,
+          your findings and the reasons you snoozed things are exactly the sort of thing that shouldn't be
+          uploaded anywhere to be useful.
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>But the assistant itself is a cloud service. Doesn't my data reach it that way?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>A fair question, and worth being precise about. Whatever the assistant <em>puts in its answer</em> travels wherever that assistant normally sends conversations. What this bridge guarantees is narrower and still worth having: <strong>MaxOps itself never ships your account anywhere</strong>, and you choose which questions get asked in the first place.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= 7 READ ONLY -->
+  <section class="page" data-page="7" data-slug="read-only" data-chapter="Read-only by default">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/mcp-readonly.jpg" alt="The Sentinel holds a door open a hand's width with a teal chain across the gap, gesturing to look through." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 05 — LOOK, DON'T TOUCH</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The default <b>· Off until you say so</b></div>
+        <h2 class="title title--sm">READ-ONLY<br />OUT OF THE <em>BOX</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Connect me today and the assistant can read everything and change nothing. Not "shouldn't" — <em>can't</em>. The three write tools refuse outright.</p>
+        </div>
+        <p class="caption">
+          Ask an assistant to snooze something before you've opened the gate and it gets a flat refusal
+          explaining exactly which switch is missing:
+        </p>
+        <div class="mock-tile">
+          <span>The refusal</span><strong>Write tools are disabled. Set MAXOPS_MCP_WRITE_ENABLED=true to enable them.</strong>
+        </div>
+        <p class="caption">
+          That message is deliberately specific. A vague failure would send an assistant off inventing
+          workarounds; a precise one tells it — and you — that this is a deliberate configuration, not a
+          bug to route around.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= 8 WRITE MODE -->
+  <section class="page" data-page="8" data-slug="write-mode" data-chapter="Opening the gate">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/mcp-gate.jpg" alt="A closed amber hatch beside a red switch in the off position, the Sentinel's hand near but not on it." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 06 — THE SWITCH</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Write mode <b>· Three tools, one switch</b></div>
+        <h2 class="title title--sm">OPENING THE<br /><em>GATE</em></h2>
+        <p class="caption">
+          One setting where the bridge is launched opens all three at once:
+        </p>
+        <div class="mock-tile"><span>The switch</span><strong>MAXOPS_MCP_WRITE_ENABLED=true</strong></div>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">Snooze resources</div><div class="ops-d">Hide findings until a date you name, with a reason. The same narrow, per-check exception from Issue №3 — just requested in words.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">02</div><div><div class="ops-h">Remove a snooze</div><div class="ops-d">Bring something back into view. <strong>Requires a non-empty reason</strong> — the bridge refuses without one, exactly as the app does.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">Run a check</div><div class="ops-d">Ask MaxOps to re-run one question right now. Covered on the next page — it is not what it looks like.</div></div></div>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Every snooze made this way lands in the same ledger as one made by hand — who, when, before and after. An assistant doesn't get an anonymous back door.</p>
+        </div>
+        <div class="chips">
+          <a class="chip alt" href="./checks.html#audit">The ledger — Issue №3</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== 9 RUN CHECK -->
+  <section class="page" data-page="9" data-slug="run-check" data-chapter="Why running counts">
+    <div class="spread spread--solo">
+      <div class="rail">
+        <div class="kicker">A subtlety <b>· Worth a page</b></div>
+        <h2 class="title title--sm">WHY <em>RUNNING</em> A CHECK<br />COUNTS AS WRITING</h2>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>Running a check only reads AWS. Why is it locked behind the write switch?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Because "changes nothing in AWS" and "changes nothing at all" are different promises, and only the second one is worth making.</p>
+        </div>
+        <p class="caption">
+          Running a check is read-only <em>against your cloud</em> — that guarantee from Issue №3 holds
+          absolutely. But it is not free and not invisible:
+        </p>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">It calls AWS</div><div class="ops-d">Real API calls against your account, initiated by something you are talking to rather than something you clicked.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">It writes findings</div><div class="ops-d">Results land in your MaxOps history. Tomorrow's dashboard reflects a scan an assistant decided to run.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">03</div><div><div class="ops-h">It can be asked repeatedly</div><div class="ops-d">The failure mode is not damage — it is an enthusiastic assistant running a hundred checks because re-running seemed helpful.</div></div></div>
+        </div>
+        <p class="caption">
+          So it sits behind the same switch. <strong>The gate isn't only about destruction; it's about who
+          gets to initiate work in your account.</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================== 10 CONNECTING -->
+  <section class="page" data-page="10" data-slug="connecting" data-chapter="Connecting it">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">What your assistant needs to know</span>
+            <div class="term">
+              <div class="term-bar"><i></i><i></i><i></i><span>client configuration</span></div>
+              <pre>{
+  <span class="k">"mcpServers"</span>: {
+    <span class="k">"maxops"</span>: {
+      <span class="k">"command"</span>: <span class="p">"…/maxops-mcp"</span>,
+      <span class="k">"env"</span>: {
+        <span class="k">"MAXOPS_API_BASE_URL"</span>:
+          <span class="p">"http://localhost:8000/api/v1"</span>,
+        <span class="k">"MAXOPS_MCP_WRITE_ENABLED"</span>:
+          <span class="p">"false"</span>
+      }
+    }
+  }
+}</pre>
+            </div>
+            <p class="mock-note ok">Start the MaxOps backend first — the bridge needs something on the other side.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT C — THE WIRING</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Setup <b>· Three things</b></div>
+        <h2 class="title title--sm">CONNECTING<br />THE <em>BRIDGE</em></h2>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">Where MaxOps is</div><div class="ops-d">The address of your running backend. The default assumes it's on this machine on the usual port.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">Whether writing is allowed</div><div class="ops-d">Leave it <code>false</code> until you have a reason. You can always turn it on later.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">How to launch it</div><div class="ops-d">The assistant starts the bridge itself and talks to it directly — there is no extra service to keep running, and nothing listening on a port for anyone else to find.</div></div></div>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>That last part matters more than it reads. The bridge exists only while your assistant is using it, and only your assistant can reach it.</p>
+        </div>
+        <p class="caption">
+          Requests give up after 30 seconds by default, so a slow query fails cleanly instead of leaving a
+          conversation hanging.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= 11 TESTING -->
+  <section class="page" data-page="11" data-slug="testing" data-chapter="Testing it">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Check the bridge without any assistant</span>
+            <div class="term">
+              <div class="term-bar"><i></i><i></i><i></i><span>smoke test</span></div>
+              <pre><span class="p">$</span> maxops-mcp-client \
+    --api-base-url http://localhost:8000/api/v1 \
+    smoke --resource-type ec2 --limit 3</pre>
+            </div>
+            <p class="mock-note ok">If this returns three EC2 rows, the bridge works and any remaining problem is in your assistant's configuration.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT D — THE SMOKE TEST</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">When it doesn't work <b>· Halve the problem</b></div>
+        <h2 class="title title--sm">TESTING IT<br /><em>ALONE</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Two things can be wrong: the bridge, or the assistant's configuration. Test the bridge by itself and you instantly know which half to fix.</p>
+        </div>
+        <p class="caption">
+          A bundled test client speaks to the bridge exactly as an assistant would, from a terminal. It
+          takes the same settings, so if it works here and not there, the configuration is the difference.
+        </p>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">Nothing comes back</div><div class="ops-d">The MaxOps backend probably isn't running. The bridge has nothing to read from.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">Empty results</div><div class="ops-d">The backend is up but has never scanned. Run onboarding's first scan and try again.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">03</div><div><div class="ops-h">Works here, not in the assistant</div><div class="ops-d">The launch command or its settings differ. Compare the two carefully — an absolute path is usually the culprit.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 12 END -->
+  <section class="page" data-page="12" data-slug="end" data-chapter="The end">
+    <div class="spread spread--solo">
+      <div class="rail" style="align-items:center; text-align:center;">
+        <div class="kicker">MaxOps Adventures <b>· Issue №5 · The End</b></div>
+        <h2 class="title">SIXTEEN TOOLS.<br />THIRTEEN OF THEM<br />ONLY <em>READ</em>.</h2>
+        <p class="caption" style="border:none; padding-left:0; max-width:60ch;">
+          A bridge to your own machine, a conversation instead of three filters and an export, and a switch
+          you have to reach for deliberately before anything can change.
+        </p>
+        <div class="chips" style="justify-content:center;">
+          <a class="chip" href="./docs.html">All issues</a>
+          <a class="chip alt" href="./checks.html">№3 — The Checks</a>
+          <a class="chip alt" href="./dials.html">№4 — The Dials</a>
+          <a class="chip alt" href="https://github.com/maxopsdev/maxops" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <button class="cta" onclick="goTo(1)">◂ Back to the cover</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="navbar">
+  <button class="navbtn" id="prevBtn" aria-label="Previous page">‹</button>
+  <div class="dots" id="dots"></div>
+  <button class="navbtn" id="nextBtn" aria-label="Next page">›</button>
+</nav>
+
+<script>
+  const pager = document.getElementById('pager');
+  const pages = Array.from(document.querySelectorAll('.page'));
+  const TOTAL = pages.length;
+  const dotsWrap = document.getElementById('dots');
+  const counterNow = document.getElementById('counterNow');
+  document.getElementById('counterTotal').textContent = TOTAL;
+  let current = 1;
+
+  pages.forEach((page, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Go to page ' + (i + 1) + ': ' + (page.dataset.chapter || ''));
+    d.title = (i + 1) + '. ' + (page.dataset.chapter || '');
+    d.addEventListener('click', () => goTo(i + 1));
+    dotsWrap.appendChild(d);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function setActive(n) {
+    current = n;
+    counterNow.textContent = n;
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === n - 1));
+    const slug = pages[n - 1]?.dataset.slug;
+    if (slug && decodeURIComponent((location.hash || '').replace(/^#/, '')) !== slug) {
+      history.replaceState(null, '', n === 1 ? location.pathname : '#' + slug);
+    }
+  }
+
+  window.goTo = function (n) {
+    n = Math.min(Math.max(n, 1), TOTAL);
+    pages[n - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  function pageFromHash() {
+    const raw = decodeURIComponent((location.hash || '').replace(/^#/, '')).trim();
+    if (!raw) return null;
+    const byPage = /^(?:page|panel)-(\d+)$/.exec(raw);
+    if (byPage) return Math.min(Math.max(Number(byPage[1]), 1), TOTAL);
+    const idx = pages.findIndex((p) => p.dataset.slug === raw);
+    return idx >= 0 ? idx + 1 : null;
+  }
+
+  function jumpToHash(smooth) {
+    const n = pageFromHash();
+    if (n === null) return false;
+    pages[n - 1].scrollIntoView({ behavior: smooth ? 'smooth' : 'instant', block: 'start' });
+    setActive(n);
+    return true;
+  }
+
+  window.addEventListener('hashchange', () => jumpToHash(true));
+
+  document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); goTo(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goTo(current - 1); }
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+        setActive(Number(entry.target.dataset.page));
+      }
+    });
+  }, { root: pager, threshold: [0.5] });
+  pages.forEach((p) => io.observe(p));
+
+  if (!jumpToHash(false)) setActive(1);
+</script>
+
+</body>
+</html>

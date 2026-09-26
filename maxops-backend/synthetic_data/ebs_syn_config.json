@@ -1,0 +1,300 @@
+{
+  "generator": {
+    "seed": 20260423,
+    "volume_count": 20,
+    "account_id": "999999999999",
+    "default_region": "us-east-1",
+    "output_dir": "synthetic_data/generated/ebs"
+  },
+  "regions": [
+    {
+      "name": "us-east-1",
+      "weight": 0.62,
+      "azs": ["us-east-1a", "us-east-1b", "us-east-1c"]
+    },
+    {
+      "name": "us-west-2",
+      "weight": 0.24,
+      "azs": ["us-west-2a", "us-west-2b", "us-west-2c"]
+    },
+    {
+      "name": "eu-west-1",
+      "weight": 0.14,
+      "azs": ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+    }
+  ],
+  "distributions": {
+    "environments": {
+      "prod": 0.4,
+      "dev": 0.18,
+      "uat": 0.12,
+      "qa": 0.1,
+      "sandbox": 0.1,
+      "shared": 0.1
+    },
+    "teams": {
+      "platform": 0.18,
+      "payments": 0.14,
+      "commerce": 0.12,
+      "data": 0.1,
+      "risk": 0.1,
+      "identity": 0.08,
+      "support": 0.08,
+      "core-infra": 0.2
+    },
+    "owners": {
+      "alice.chen": 0.1,
+      "miguel.santos": 0.08,
+      "priya.shah": 0.11,
+      "noah.reed": 0.08,
+      "fatima.khan": 0.09,
+      "jordan.kim": 0.08,
+      "sarah.lee": 0.1,
+      "olivia.ng": 0.1,
+      "liam.patel": 0.12,
+      "maya.garcia": 0.14
+    },
+    "cost_centers": {
+      "CC-1001": 0.15,
+      "CC-1014": 0.12,
+      "CC-1020": 0.11,
+      "CC-1105": 0.18,
+      "CC-1202": 0.12,
+      "CC-1308": 0.1,
+      "CC-1420": 0.11,
+      "CC-1507": 0.11
+    },
+    "business_units": {
+      "consumer": 0.32,
+      "enterprise": 0.22,
+      "operations": 0.16,
+      "risk": 0.12,
+      "data": 0.18
+    },
+    "usage_profiles": {
+      "healthy_gp2": 0.22,
+      "healthy_gp3": 0.18,
+      "underutilized_volume": 0.12,
+      "large_low_utilization": 0.14,
+      "iops_overprovisioned": 0.12,
+      "underutilized_provisioned_iops": 0.12,
+      "unattached_idle": 0.08,
+      "healthy_io": 0.12
+    }
+  },
+  "tag_dimensions": {
+    "criticality": ["tier1", "tier2", "tier3"],
+    "compliance": ["pci", "sox", "gdpr", "none"],
+    "backup_tier": ["gold", "silver", "bronze"],
+    "data_classification": ["internal", "confidential", "restricted"]
+  },
+  "naming": {
+    "org_prefix": "maxops-demo",
+    "apps": ["payments", "catalog", "orders", "risk", "support", "billing", "analytics"],
+    "roles": ["data", "logs", "db", "cache", "backup", "index"]
+  },
+  "usage_profiles": {
+    "healthy_gp2": {
+      "seed_profile": "healthy_gp2",
+      "volume_type": "gp2",
+      "size_range_gb": [40, 280],
+      "iops_range": [100, 250],
+      "throughput_range": [0, 0],
+      "attached": true,
+      "avg_iops_range": [18.0, 62.0],
+      "avg_throughput_mb_range": [4.0, 18.0],
+      "metric_pattern": "steady",
+      "finding_profile": null
+    },
+    "healthy_gp3": {
+      "seed_profile": "healthy_gp3",
+      "volume_type": "gp3",
+      "size_range_gb": [64, 320],
+      "iops_range": [3000, 4500],
+      "throughput_range": [125, 220],
+      "attached": true,
+      "avg_iops_range": [16.0, 44.0],
+      "avg_throughput_mb_range": [2.0, 12.0],
+      "metric_pattern": "steady",
+      "finding_profile": null
+    },
+    "underutilized_volume": {
+      "seed_profile": "underutilized_volume",
+      "volume_type": "gp2",
+      "size_range_gb": [40, 260],
+      "iops_range": [100, 220],
+      "throughput_range": [0, 0],
+      "attached": true,
+      "avg_iops_range": [0.4, 2.8],
+      "avg_throughput_mb_range": [0.05, 0.4],
+      "metric_pattern": "idle",
+      "finding_profile": "ebs_underutilized_volume"
+    },
+    "large_low_utilization": {
+      "seed_profile": "large_low_utilization",
+      "volume_type": "gp3",
+      "size_range_gb": [650, 1600],
+      "iops_range": [3500, 6000],
+      "throughput_range": [150, 300],
+      "attached": true,
+      "avg_iops_range": [0.4, 2.8],
+      "avg_throughput_mb_range": [0.05, 0.45],
+      "metric_pattern": "idle",
+      "finding_profile": "ebs_large_volumes_low_utilization"
+    },
+    "iops_overprovisioned": {
+      "seed_profile": "iops_overprovisioned",
+      "volume_type": "io1",
+      "size_range_gb": [120, 400],
+      "iops_range": [3500, 8000],
+      "throughput_range": [0, 0],
+      "attached": true,
+      "avg_iops_range": [220.0, 980.0],
+      "avg_throughput_mb_range": [0.6, 3.5],
+      "metric_pattern": "steady",
+      "finding_profile": "ebs_iops_overprovisioned_volume"
+    },
+    "underutilized_provisioned_iops": {
+      "seed_profile": "underutilized_provisioned_iops",
+      "volume_type": "io2",
+      "size_range_gb": [100, 300],
+      "iops_range": [3500, 9000],
+      "throughput_range": [0, 0],
+      "attached": true,
+      "avg_iops_range": [140.0, 820.0],
+      "avg_throughput_mb_range": [0.4, 2.8],
+      "metric_pattern": "steady",
+      "finding_profile": "ebs_underutilized_provisioned_iops"
+    },
+    "unattached_idle": {
+      "seed_profile": "unattached_idle",
+      "volume_type": "gp3",
+      "size_range_gb": [20, 120],
+      "iops_range": [3000, 3000],
+      "throughput_range": [125, 125],
+      "attached": false,
+      "avg_iops_range": [0.0, 0.0],
+      "avg_throughput_mb_range": [0.0, 0.0],
+      "metric_pattern": "empty",
+      "finding_profile": null
+    },
+    "healthy_io": {
+      "seed_profile": "healthy_io",
+      "volume_type": "io1",
+      "size_range_gb": [120, 260],
+      "iops_range": [3500, 7000],
+      "throughput_range": [0, 0],
+      "attached": true,
+      "avg_iops_range": [1800.0, 3400.0],
+      "avg_throughput_mb_range": [6.0, 18.0],
+      "metric_pattern": "bursty",
+      "finding_profile": null
+    }
+  },
+  "finding_profiles": {
+    "ebs_underutilized_volume": {
+      "check_id": "ebs_underutilized_volume",
+      "title": "Underutilized EBS volume",
+      "finding_type": "utilization",
+      "severity": "medium",
+      "confidence_range": [0.82, 0.95],
+      "risk_score_range": [0.08, 0.2],
+      "recommended_action": "review_volume",
+      "alternative_actions": ["snapshot_and_archive"],
+      "savings_factor": 0.25
+    },
+    "ebs_large_volumes_low_utilization": {
+      "check_id": "ebs_large_volumes_low_utilization",
+      "title": "Large low-utilization EBS volume",
+      "finding_type": "rightsizing",
+      "severity": "high",
+      "confidence_range": [0.85, 0.97],
+      "risk_score_range": [0.12, 0.28],
+      "recommended_action": "downsize_volume",
+      "alternative_actions": ["snapshot_and_archive"],
+      "savings_factor": 0.42
+    },
+    "ebs_iops_overprovisioned_volume": {
+      "check_id": "ebs_iops_overprovisioned_volume",
+      "title": "IOPS overprovisioned EBS volume",
+      "finding_type": "cost",
+      "severity": "medium",
+      "confidence_range": [0.83, 0.96],
+      "risk_score_range": [0.09, 0.22],
+      "recommended_action": "reduce_iops",
+      "alternative_actions": ["migrate_to_gp3"],
+      "savings_factor": 0.3
+    },
+    "ebs_underutilized_provisioned_iops": {
+      "check_id": "ebs_underutilized_provisioned_iops",
+      "title": "Underutilized provisioned IOPS volume",
+      "finding_type": "cost",
+      "severity": "medium",
+      "confidence_range": [0.84, 0.97],
+      "risk_score_range": [0.1, 0.24],
+      "recommended_action": "reduce_iops_or_migrate",
+      "alternative_actions": ["migrate_to_gp3"],
+      "savings_factor": 0.34
+    }
+  },
+  "action_catalog": {
+    "review_volume": {
+      "label": "Review volume",
+      "description": "Inspect workload demand before changing storage settings."
+    },
+    "snapshot_and_archive": {
+      "label": "Snapshot and archive",
+      "description": "Snapshot the volume and remove or archive if no longer needed."
+    },
+    "downsize_volume": {
+      "label": "Downsize volume",
+      "description": "Reduce allocated size or replatform to a smaller EBS volume."
+    },
+    "reduce_iops": {
+      "label": "Reduce provisioned IOPS",
+      "description": "Lower IOPS to match observed demand."
+    },
+    "migrate_to_gp3": {
+      "label": "Migrate to gp3",
+      "description": "Move provisioned IOPS storage to gp3 for lower baseline cost."
+    },
+    "reduce_iops_or_migrate": {
+      "label": "Reduce IOPS or migrate",
+      "description": "Lower provisioned IOPS or migrate to gp3 after validation."
+    }
+  },
+  "seed_profiles": {
+    "healthy_gp2": {
+      "seed_check_id": "ebs_underutilized_volume",
+      "seed_scenario": "pass_high_io_gp2"
+    },
+    "healthy_gp3": {
+      "seed_check_id": "ebs_unattached_volumes",
+      "seed_scenario": "flag_unattached_volume"
+    },
+    "underutilized_volume": {
+      "seed_check_id": "ebs_underutilized_volume",
+      "seed_scenario": "flag_low_io_gp2"
+    },
+    "large_low_utilization": {
+      "seed_check_id": "ebs_large_volumes_low_utilization",
+      "seed_scenario": "flag_minimal_large_threshold_gp2"
+    },
+    "iops_overprovisioned": {
+      "seed_check_id": "ebs_iops_overprovisioned_volume",
+      "seed_scenario": "flag_low_iops_io1"
+    },
+    "underutilized_provisioned_iops": {
+      "seed_check_id": "ebs_underutilized_provisioned_iops",
+      "seed_scenario": "flag_low_provisioned_iops_io1"
+    },
+    "unattached_idle": {
+      "seed_check_id": "ebs_unattached_volumes",
+      "seed_scenario": "flag_unattached_volume"
+    },
+    "healthy_io": {
+      "seed_check_id": "ebs_underutilized_provisioned_iops",
+      "seed_scenario": "pass_busy_provisioned_iops_io1"
+    }
+  }
+}

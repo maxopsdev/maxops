@@ -1,0 +1,47 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "connection": "keep-alive",
+      "content-length": "904",
+      "content-type": "application/x-amz-json-1.0",
+      "date": "Fri, 24 Apr 2026 00:09:45 GMT",
+      "server": "Server",
+      "x-amz-crc32": "3977403566",
+      "x-amzn-requestid": "J8ECHU06TTU2NITHN2SJ5FPKTBVV4KQNSO5AEMVJF66Q9ASUAAJG"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "J8ECHU06TTU2NITHN2SJ5FPKTBVV4KQNSO5AEMVJF66Q9ASUAAJG",
+    "RetryAttempts": 0
+  },
+  "Table": {
+    "AttributeDefinitions": [
+      {
+        "AttributeName": "id",
+        "AttributeType": "S"
+      }
+    ],
+    "BillingModeSummary": {
+      "BillingMode": "PAY_PER_REQUEST",
+      "LastUpdateToPayPerRequestDateTime": "2026-04-23T20:08:57.816000-04:00"
+    },
+    "CreationDateTime": "2026-04-23T20:08:57.816000-04:00",
+    "DeletionProtectionEnabled": false,
+    "ItemCount": 0,
+    "KeySchema": [
+      {
+        "AttributeName": "id",
+        "KeyType": "HASH"
+      }
+    ],
+    "ProvisionedThroughput": {
+      "NumberOfDecreasesToday": 0,
+      "ReadCapacityUnits": 0,
+      "WriteCapacityUnits": 0
+    },
+    "TableArn": "arn:aws:dynamodb:us-east-1:123456789012:table/maxops-payload-dynamodb-ondemand",
+    "TableId": "1b442b2c-cbf5-48f9-b7d5-72c96737e1ae",
+    "TableName": "maxops-payload-dynamodb-ondemand",
+    "TableSizeBytes": 0,
+    "TableStatus": "ACTIVE"
+  }
+}

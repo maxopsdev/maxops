@@ -1,0 +1,42 @@
+{
+  "FlowLogs": [
+    {
+      "CreationTime": "2026-06-14T17:22:56.366000+00:00",
+      "DeliverLogsStatus": "SUCCESS",
+      "DestinationOptions": {
+        "FileFormat": "plain-text",
+        "HiveCompatiblePartitions": false,
+        "PerHourPartition": false
+      },
+      "FlowLogId": "fl-DISABLE",
+      "FlowLogStatus": "ACTIVE",
+      "LogDestination": "arn:aws:s3:::maxops-payload-vpc-disable",
+      "LogDestinationType": "s3",
+      "LogFormat": "${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstport} ${protocol} ${packets} ${bytes} ${start} ${end} ${action} ${log-status}",
+      "MaxAggregationInterval": 600,
+      "ResourceId": "vpc-DISABLE",
+      "Tags": [
+        {
+          "Key": "maxops_payload_capture",
+          "Value": "true"
+        }
+      ],
+      "TrafficType": "ALL"
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "cache-control": "no-cache, no-store",
+      "content-type": "text/xml;charset=UTF-8",
+      "date": "Sun, 14 Jun 2026 17:23:44 GMT",
+      "server": "AmazonEC2",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "transfer-encoding": "chunked",
+      "vary": "accept-encoding",
+      "x-amzn-requestid": "94dc6acf-77f0-4343-bd20-fb84f826b555"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "94dc6acf-77f0-4343-bd20-fb84f826b555",
+    "RetryAttempts": 0
+  }
+}

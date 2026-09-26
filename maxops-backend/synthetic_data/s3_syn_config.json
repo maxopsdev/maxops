@@ -1,0 +1,777 @@
+{
+  "generator": {
+    "seed": 20260416,
+    "bucket_count": 50,
+    "account_id": "999999999999",
+    "default_region": "us-east-1",
+    "output_dir": "synthetic_data/generated/s3"
+  },
+  "regions": [
+    {
+      "name": "us-east-1",
+      "weight": 0.54
+    },
+    {
+      "name": "us-west-2",
+      "weight": 0.28
+    },
+    {
+      "name": "eu-west-1",
+      "weight": 0.18
+    }
+  ],
+  "distributions": {
+    "environments": {
+      "prod": 0.38,
+      "dev": 0.16,
+      "uat": 0.12,
+      "sit": 0.1,
+      "qa": 0.08,
+      "sandbox": 0.08,
+      "shared": 0.08
+    },
+    "teams": {
+      "payments": 0.16,
+      "commerce": 0.13,
+      "platform": 0.14,
+      "data": 0.11,
+      "risk": 0.09,
+      "identity": 0.08,
+      "ml": 0.07,
+      "support": 0.06,
+      "security": 0.07,
+      "core-infra": 0.09
+    },
+    "owners": {
+      "alice.chen": 0.09,
+      "miguel.santos": 0.08,
+      "priya.shah": 0.09,
+      "noah.reed": 0.08,
+      "fatima.khan": 0.08,
+      "jordan.kim": 0.08,
+      "sarah.lee": 0.1,
+      "dylan.ross": 0.08,
+      "olivia.ng": 0.1,
+      "liam.patel": 0.11,
+      "maya.garcia": 0.11
+    },
+    "cost_centers": {
+      "CC-1001": 0.15,
+      "CC-1014": 0.13,
+      "CC-1020": 0.11,
+      "CC-1105": 0.16,
+      "CC-1202": 0.12,
+      "CC-1308": 0.09,
+      "CC-1420": 0.12,
+      "CC-1507": 0.12
+    },
+    "business_units": {
+      "consumer": 0.31,
+      "enterprise": 0.19,
+      "operations": 0.14,
+      "risk": 0.12,
+      "data": 0.12,
+      "platform": 0.12
+    },
+    "bucket_profiles": {
+      "non_versioned_healthy": 0.42,
+      "healthy_versioned": 0.2,
+      "log_bucket_without_expiration": 0.05,
+      "logging_enabled": 0.03,
+      "inventory_enabled": 0.03,
+      "replication_enabled": 0.02,
+      "no_lifecycle": 0.04,
+      "no_expiration": 0.04,
+      "no_archival": 0.04,
+      "no_mpu_cleanup": 0.04,
+      "versioned_missing_noncurrent_expiration": 0.03,
+      "versioned_missing_delete_marker_cleanup": 0.03,
+      "versioned_missing_noncurrent_transition": 0.03
+    },
+    "finding_profiles": {
+      "s3_no_lifecycle_policy": 0.09,
+      "s3_no_expiration_policy": 0.09,
+      "s3_inventory_enabled": 0.09,
+      "s3_logging_enabled": 0.09,
+      "s3_log_buckets_without_expiration_policy": 0.09,
+      "s3_no_archival_policy": 0.09,
+      "s3_no_mpu_policy": 0.09,
+      "s3_no_noncurrent_expiration": 0.09,
+      "s3_no_delete_marker_expiration": 0.09,
+      "s3_no_noncurrent_version_transition": 0.09,
+      "s3_replication_enabled": 0.1
+    }
+  },
+  "tag_dimensions": {
+    "criticality": [
+      "tier1",
+      "tier2",
+      "tier3"
+    ],
+    "compliance": [
+      "pci",
+      "sox",
+      "gdpr",
+      "none"
+    ],
+    "data_classification": [
+      "public",
+      "internal",
+      "confidential",
+      "restricted"
+    ],
+    "log_types": [
+      "alb",
+      "vpc-flow",
+      "cloudtrail",
+      "access"
+    ],
+    "lifecycle_owners": [
+      "platform-governance",
+      "data-ops",
+      "storage-ops",
+      "finops"
+    ]
+  },
+  "naming": {
+    "org_prefix": "maxops-demo",
+    "apps": [
+      "payments",
+      "checkout",
+      "ledger",
+      "catalog",
+      "pricing",
+      "risk",
+      "auth",
+      "orders",
+      "inventory",
+      "support",
+      "fraud",
+      "ml-features",
+      "events",
+      "billing"
+    ],
+    "data_suffixes": [
+      "assets",
+      "data",
+      "reports",
+      "archive",
+      "exports",
+      "backups",
+      "raw",
+      "processed"
+    ]
+  },
+  "bucket_profiles": {
+    "non_versioned_healthy": {
+      "seed_check_id": "s3_no_expiration_policy",
+      "seed_scenario": "pass_bucket_with_expiration",
+      "seed_bucket_alias": "compliant_nonversioned",
+      "placeholder_bindings": {
+        "COMPLIANT_NONVERSIONED_BUCKET": "self"
+      },
+      "finding_profile": null,
+      "bucket_kind": "app_data",
+      "storage_size_gb_range": [
+        45.0,
+        1800.0
+      ],
+      "object_count_range": [
+        12000,
+        850000
+      ],
+      "storage_class_mix": {
+        "STANDARD": 0.72,
+        "GLACIER": 0.28
+      }
+    },
+    "healthy_versioned": {
+      "seed_check_id": "s3_no_noncurrent_expiration",
+      "seed_scenario": "pass_versioned_bucket_with_noncurrent_expiration",
+      "seed_bucket_alias": "compliant_versioned",
+      "placeholder_bindings": {
+        "COMPLIANT_VERSIONED_BUCKET": "self"
+      },
+      "finding_profile": null,
+      "bucket_kind": "app_data",
+      "storage_size_gb_range": [
+        120.0,
+        2400.0
+      ],
+      "object_count_range": [
+        25000,
+        1300000
+      ],
+      "storage_class_mix": {
+        "STANDARD": 0.52,
+        "GLACIER": 0.36,
+        "DEEP_ARCHIVE": 0.12
+      }
+    },
+    "no_lifecycle": {
+      "seed_check_id": "s3_no_lifecycle_policy",
+      "seed_scenario": "flag_bucket_without_lifecycle",
+      "seed_bucket_alias": "plain_no_lifecycle",
+      "placeholder_bindings": {
+        "PLAIN_NO_LIFECYCLE_BUCKET": "self"
+      },
+      "finding_profile": "s3_no_lifecycle_policy",
+      "bucket_kind": "app_data",
+      "storage_size_gb_range": [
+        80.0,
+        2200.0
+      ],
+      "object_count_range": [
+        35000,
+        950000
+      ],
+      "storage_class_mix": {
+        "STANDARD": 1.0
+      }
+    },
+    "no_expiration": {
+      "seed_check_id": "s3_no_expiration_policy",
+      "seed_scenario": "flag_bucket_without_expiration",
+      "seed_bucket_alias": "lifecycle_no_expiration",
+      "placeholder_bindings": {
+        "LIFECYCLE_NO_EXPIRATION_BUCKET": "self"
+      },
+      "finding_profile": "s3_no_expiration_policy",
+      "bucket_kind": "app_data",
+      "storage_size_gb_range": [
+        60.0,
+        1600.0
+      ],
+      "object_count_range": [
+        15000,
+        760000
+      ],
+      "storage_class_mix": {
+        "STANDARD": 0.66,
+        "GLACIER": 0.34
+      }
+    },
+    "no_archival": {
+      "seed_check_id": "s3_no_archival_policy",
+      "seed_scenario": "flag_bucket_without_archival",
+      "seed_bucket_alias": "lifecycle_no_archival",
+      "placeholder_bindings": {
+        "LIFECYCLE_NO_ARCHIVAL_BUCKET": "self"
+      },
+      "finding_profile": "s3_no_archival_policy",
+      "bucket_kind": "archive_candidate",
+      "storage_size_gb_range": [
+        120.0,
+        4200.0
+      ],
+      "object_count_range": [
+        25000,
+        950000
+      ],
+      "storage_class_mix": {
+        "STANDARD": 0.92,
+        "GLACIER": 0.08
+      }
+    },
+    "no_mpu_cleanup": {
+      "seed_check_id": "s3_no_mpu_policy",
+      "seed_scenario": "flag_bucket_without_abort_mpu",
+      "seed_bucket_alias": "lifecycle_no_mpu",
+      "placeholder_bindings": {
+        "LIFECYCLE_NO_MPU_BUCKET": "self"
+      },
+      "finding_profile": "s3_no_mpu_policy",
+      "bucket_kind": "app_data",
+      "storage_size_gb_range": [
+        30.0,
+        850.0
+      ],
+      "object_count_range": [
+        9000,
+        450000
+      ],
+      "storage_class_mix": {
+        "STANDARD": 0.78,
+        "GLACIER": 0.22
+      }
+    },
+    "versioned_missing_noncurrent_expiration": {
+      "seed_check_id": "s3_no_noncurrent_expiration",
+      "seed_scenario": "flag_versioned_bucket_missing_noncurrent_expiration",
+      "seed_bucket_alias": "versioned_missing_noncurrent_controls",
+      "placeholder_bindings": {
+        "VERSIONED_MISSING_NONCURRENT_BUCKET": "self"
+      },
+      "finding_profile": "s3_no_noncurrent_expiration",
+      "bucket_kind": "versioned_data",
+      "storage_size_gb_range": [
+        180.0,
+        5200.0
+      ],
+      "object_count_range": [
+        45000,
+        1450000
+      ],
+      "storage_class_mix": {
+        "STANDARD": 0.58,
+        "GLACIER": 0.3,
+        "DEEP_ARCHIVE": 0.12
+      }
+    },
+    "versioned_missing_delete_marker_cleanup": {
+      "seed_check_id": "s3_no_delete_marker_expiration",
+      "seed_scenario": "flag_versioned_bucket_missing_delete_marker_cleanup",
+      "seed_bucket_alias": "versioned_missing_noncurrent_controls",
+      "placeholder_bindings": {
+        "VERSIONED_MISSING_NONCURRENT_BUCKET": "self"
+      },
+      "finding_profile": "s3_no_delete_marker_expiration",
+      "bucket_kind": "versioned_data",
+      "storage_size_gb_range": [
+        90.0,
+        2400.0
+      ],
+      "object_count_range": [
+        32000,
+        980000
+      ],
+      "storage_class_mix": {
+        "STANDARD": 0.63,
+        "GLACIER": 0.27,
+        "DEEP_ARCHIVE": 0.1
+      }
+    },
+    "versioned_missing_noncurrent_transition": {
+      "seed_check_id": "s3_no_noncurrent_version_transition",
+      "seed_scenario": "flag_versioned_bucket_missing_noncurrent_transition",
+      "seed_bucket_alias": "versioned_missing_noncurrent_controls",
+      "placeholder_bindings": {
+        "VERSIONED_MISSING_NONCURRENT_BUCKET": "self"
+      },
+      "finding_profile": "s3_no_noncurrent_version_transition",
+      "bucket_kind": "versioned_data",
+      "storage_size_gb_range": [
+        150.0,
+        3800.0
+      ],
+      "object_count_range": [
+        42000,
+        1180000
+      ],
+      "storage_class_mix": {
+        "STANDARD": 0.8,
+        "GLACIER": 0.15,
+        "DEEP_ARCHIVE": 0.05
+      }
+    },
+    "logging_enabled": {
+      "seed_check_id": "s3_logging_enabled",
+      "seed_scenario": "flag_bucket_with_logging",
+      "seed_bucket_alias": "logging_source",
+      "placeholder_bindings": {
+        "LOGGING_SOURCE_BUCKET": "self",
+        "LOGGING_TARGET_BUCKET": "logging_target"
+      },
+      "finding_profile": "s3_logging_enabled",
+      "bucket_kind": "app_data",
+      "storage_size_gb_range": [
+        35.0,
+        900.0
+      ],
+      "object_count_range": [
+        12000,
+        380000
+      ],
+      "storage_class_mix": {
+        "STANDARD": 0.88,
+        "GLACIER": 0.12
+      }
+    },
+    "log_bucket_without_expiration": {
+      "seed_check_id": "s3_log_buckets_without_expiration_policy",
+      "seed_scenario": "flag_log_bucket_without_expiration",
+      "seed_bucket_alias": "logging_target",
+      "placeholder_bindings": {
+        "LOGGING_TARGET_BUCKET": "self"
+      },
+      "finding_profile": "s3_log_buckets_without_expiration_policy",
+      "bucket_kind": "log_sink",
+      "storage_size_gb_range": [
+        220.0,
+        6200.0
+      ],
+      "object_count_range": [
+        120000,
+        3400000
+      ],
+      "storage_class_mix": {
+        "STANDARD": 0.95,
+        "GLACIER": 0.05
+      }
+    },
+    "inventory_enabled": {
+      "seed_check_id": "s3_inventory_enabled",
+      "seed_scenario": "flag_bucket_with_inventory",
+      "seed_bucket_alias": "inventory_source",
+      "placeholder_bindings": {
+        "ACCOUNT_ID": "account_id",
+        "INVENTORY_SOURCE_BUCKET": "self",
+        "INVENTORY_DEST_BUCKET": "inventory_target"
+      },
+      "finding_profile": "s3_inventory_enabled",
+      "bucket_kind": "analytics",
+      "storage_size_gb_range": [
+        80.0,
+        1700.0
+      ],
+      "object_count_range": [
+        24000,
+        640000
+      ],
+      "storage_class_mix": {
+        "STANDARD": 0.69,
+        "GLACIER": 0.21,
+        "DEEP_ARCHIVE": 0.1
+      }
+    },
+    "replication_enabled": {
+      "seed_check_id": "s3_replication_enabled",
+      "seed_scenario": "flag_bucket_with_replication",
+      "seed_bucket_alias": "replication_source",
+      "placeholder_bindings": {
+        "ACCOUNT_ID": "account_id",
+        "REPLICATION_ROLE_NAME": "replication_role",
+        "REPLICATION_SOURCE_BUCKET": "self",
+        "REPLICATION_DEST_BUCKET": "replication_target"
+      },
+      "finding_profile": "s3_replication_enabled",
+      "bucket_kind": "disaster_recovery",
+      "storage_size_gb_range": [
+        150.0,
+        4100.0
+      ],
+      "object_count_range": [
+        50000,
+        1200000
+      ],
+      "storage_class_mix": {
+        "STANDARD": 0.74,
+        "GLACIER": 0.16,
+        "DEEP_ARCHIVE": 0.1
+      }
+    }
+  },
+  "finding_profiles": {
+    "s3_no_lifecycle_policy": {
+      "check_id": "s3_no_lifecycle_policy",
+      "title": "Lifecycle policy missing",
+      "finding_type": "missing_policy",
+      "severity": "medium",
+      "confidence_range": [
+        0.86,
+        0.96
+      ],
+      "risk_score_range": [
+        0.44,
+        0.72
+      ],
+      "recommended_action": "add_lifecycle",
+      "alternative_actions": [
+        "add_expiration",
+        "add_archival_transition"
+      ],
+      "savings_factor": 0.5,
+      "reason_template": "Bucket {bucket_name} has {object_count} objects across {bucket_size_gb} GB but no lifecycle rules. Add lifecycle controls before storage growth compounds."
+    },
+    "s3_no_expiration_policy": {
+      "check_id": "s3_no_expiration_policy",
+      "title": "Expiration rule missing",
+      "finding_type": "missing_policy",
+      "severity": "medium",
+      "confidence_range": [
+        0.83,
+        0.95
+      ],
+      "risk_score_range": [
+        0.38,
+        0.66
+      ],
+      "recommended_action": "add_expiration",
+      "alternative_actions": [
+        "add_lifecycle",
+        "add_archival_transition"
+      ],
+      "savings_factor": 0.3,
+      "reason_template": "Bucket {bucket_name} transitions data but never expires current objects, leaving {bucket_size_gb} GB eligible to linger longer than needed."
+    },
+    "s3_inventory_enabled": {
+      "check_id": "s3_inventory_enabled",
+      "title": "Inventory configuration enabled",
+      "finding_type": "enabled_feature",
+      "severity": "low",
+      "confidence_range": [
+        0.81,
+        0.93
+      ],
+      "risk_score_range": [
+        0.24,
+        0.49
+      ],
+      "recommended_action": "disable_inventory",
+      "alternative_actions": [
+        "add_expiration",
+        "review_inventory_destination"
+      ],
+      "savings_factor": 0.08,
+      "reason_template": "Bucket {bucket_name} publishes inventory reports to {inventory_target_bucket}, which adds recurring objects and analysis overhead."
+    },
+    "s3_logging_enabled": {
+      "check_id": "s3_logging_enabled",
+      "title": "Server access logging enabled",
+      "finding_type": "enabled_feature",
+      "severity": "low",
+      "confidence_range": [
+        0.83,
+        0.95
+      ],
+      "risk_score_range": [
+        0.26,
+        0.52
+      ],
+      "recommended_action": "disable_logging",
+      "alternative_actions": [
+        "add_expiration",
+        "move_logs_to_archive"
+      ],
+      "savings_factor": 0.12,
+      "reason_template": "Bucket {bucket_name} sends access logs to {logging_target_bucket}. If the logs are not actively consumed, storage and request costs accumulate."
+    },
+    "s3_log_buckets_without_expiration_policy": {
+      "check_id": "s3_log_buckets_without_expiration_policy",
+      "title": "Log bucket missing expiration",
+      "finding_type": "missing_policy",
+      "severity": "high",
+      "confidence_range": [
+        0.88,
+        0.97
+      ],
+      "risk_score_range": [
+        0.56,
+        0.84
+      ],
+      "recommended_action": "add_expiration",
+      "alternative_actions": [
+        "add_lifecycle",
+        "move_logs_to_archive"
+      ],
+      "savings_factor": 0.7,
+      "reason_template": "Log bucket {bucket_name} holds {object_count} log objects and has no expiration policy, which is a classic storage growth trap."
+    },
+    "s3_no_archival_policy": {
+      "check_id": "s3_no_archival_policy",
+      "title": "Archival transition missing",
+      "finding_type": "missing_policy",
+      "severity": "medium",
+      "confidence_range": [
+        0.84,
+        0.95
+      ],
+      "risk_score_range": [
+        0.42,
+        0.71
+      ],
+      "recommended_action": "add_archival_transition",
+      "alternative_actions": [
+        "add_lifecycle",
+        "add_expiration"
+      ],
+      "savings_factor": 0.8,
+      "reason_template": "Bucket {bucket_name} already manages retention but keeps most data in warm storage. Adding archival transitions can cut long-tail storage cost sharply."
+    },
+    "s3_no_mpu_policy": {
+      "check_id": "s3_no_mpu_policy",
+      "title": "Multipart upload cleanup missing",
+      "finding_type": "missing_policy",
+      "severity": "low",
+      "confidence_range": [
+        0.78,
+        0.91
+      ],
+      "risk_score_range": [
+        0.22,
+        0.45
+      ],
+      "recommended_action": "enable_abort_mpu",
+      "alternative_actions": [
+        "add_lifecycle"
+      ],
+      "savings_factor": 0.05,
+      "reason_template": "Bucket {bucket_name} has lifecycle rules but does not clean up incomplete multipart uploads, leaving avoidable storage waste."
+    },
+    "s3_no_noncurrent_expiration": {
+      "check_id": "s3_no_noncurrent_expiration",
+      "title": "Noncurrent version expiration missing",
+      "finding_type": "missing_policy",
+      "severity": "medium",
+      "confidence_range": [
+        0.86,
+        0.96
+      ],
+      "risk_score_range": [
+        0.46,
+        0.74
+      ],
+      "recommended_action": "add_noncurrent_expiration",
+      "alternative_actions": [
+        "add_noncurrent_transition",
+        "add_delete_marker_cleanup"
+      ],
+      "savings_factor": 0.2,
+      "reason_template": "Versioned bucket {bucket_name} retains older object versions indefinitely. Noncurrent expiration is the missing control."
+    },
+    "s3_no_delete_marker_expiration": {
+      "check_id": "s3_no_delete_marker_expiration",
+      "title": "Delete marker cleanup missing",
+      "finding_type": "missing_policy",
+      "severity": "low",
+      "confidence_range": [
+        0.82,
+        0.94
+      ],
+      "risk_score_range": [
+        0.28,
+        0.53
+      ],
+      "recommended_action": "add_delete_marker_cleanup",
+      "alternative_actions": [
+        "add_noncurrent_expiration"
+      ],
+      "savings_factor": 0.06,
+      "reason_template": "Versioned bucket {bucket_name} is missing ExpiredObjectDeleteMarker cleanup, which can leave tombstones and list noise behind."
+    },
+    "s3_no_noncurrent_version_transition": {
+      "check_id": "s3_no_noncurrent_version_transition",
+      "title": "Noncurrent version transition missing",
+      "finding_type": "missing_policy",
+      "severity": "medium",
+      "confidence_range": [
+        0.87,
+        0.97
+      ],
+      "risk_score_range": [
+        0.47,
+        0.78
+      ],
+      "recommended_action": "add_noncurrent_transition",
+      "alternative_actions": [
+        "add_noncurrent_expiration",
+        "add_delete_marker_cleanup"
+      ],
+      "savings_factor": 0.85,
+      "reason_template": "Versioned bucket {bucket_name} keeps noncurrent versions in higher-cost storage. Adding a transition policy would reduce long-term storage spend."
+    },
+    "s3_replication_enabled": {
+      "check_id": "s3_replication_enabled",
+      "title": "Replication enabled",
+      "finding_type": "enabled_feature",
+      "severity": "low",
+      "confidence_range": [
+        0.84,
+        0.95
+      ],
+      "risk_score_range": [
+        0.29,
+        0.57
+      ],
+      "recommended_action": "disable_replication",
+      "alternative_actions": [
+        "review_replication_scope",
+        "add_archival_transition"
+      ],
+      "savings_factor": 0.5,
+      "reason_template": "Bucket {bucket_name} replicates data to {replication_target_bucket}. If the policy is stale, it doubles storage without a current business need."
+    }
+  },
+  "action_catalog": {
+    "add_lifecycle": {
+      "label": "Add lifecycle policy",
+      "description": "Define lifecycle rules for the bucket and automate tiering or cleanup.",
+      "parameters": {}
+    },
+    "add_expiration": {
+      "label": "Add expiration rule",
+      "description": "Expire older objects after a defined retention period.",
+      "parameters": {
+        "expiration_days": 90
+      }
+    },
+    "add_archival_transition": {
+      "label": "Add archival transition",
+      "description": "Move older objects into Glacier-class storage.",
+      "parameters": {
+        "transition_days": 30,
+        "storage_class": "GLACIER"
+      }
+    },
+    "enable_abort_mpu": {
+      "label": "Enable MPU cleanup",
+      "description": "Abort incomplete multipart uploads after a short grace period.",
+      "parameters": {
+        "days_after_initiation": 7
+      }
+    },
+    "disable_inventory": {
+      "label": "Disable inventory",
+      "description": "Turn off S3 Inventory for this bucket.",
+      "parameters": {}
+    },
+    "review_inventory_destination": {
+      "label": "Review inventory destination",
+      "description": "Verify whether the inventory destination bucket is still needed.",
+      "parameters": {}
+    },
+    "disable_logging": {
+      "label": "Disable logging",
+      "description": "Turn off server access logging if it is not required.",
+      "parameters": {}
+    },
+    "move_logs_to_archive": {
+      "label": "Archive log objects",
+      "description": "Transition log objects to colder storage and set a retention horizon.",
+      "parameters": {
+        "transition_days": 30,
+        "expiration_days": 180
+      }
+    },
+    "add_noncurrent_expiration": {
+      "label": "Expire noncurrent versions",
+      "description": "Delete noncurrent versions after a retention window.",
+      "parameters": {
+        "noncurrent_days": 60
+      }
+    },
+    "add_noncurrent_transition": {
+      "label": "Archive noncurrent versions",
+      "description": "Transition noncurrent versions to Glacier-class storage.",
+      "parameters": {
+        "noncurrent_days": 30,
+        "storage_class": "GLACIER"
+      }
+    },
+    "add_delete_marker_cleanup": {
+      "label": "Clean up delete markers",
+      "description": "Remove expired delete markers from versioned buckets.",
+      "parameters": {}
+    },
+    "disable_replication": {
+      "label": "Disable replication",
+      "description": "Remove the replication policy if the duplicate copy is no longer required.",
+      "parameters": {}
+    },
+    "review_replication_scope": {
+      "label": "Review replication scope",
+      "description": "Reduce replication to only the prefixes or tags that still need it.",
+      "parameters": {}
+    }
+  }
+}

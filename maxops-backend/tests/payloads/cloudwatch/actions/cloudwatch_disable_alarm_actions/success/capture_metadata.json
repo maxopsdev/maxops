@@ -1,0 +1,47 @@
+{
+  "account_id": "123456789012",
+  "action_key": "cloudwatch_disable_alarm_actions",
+  "calls": [
+    {
+      "kwargs": {
+        "AlarmNames": [
+          "maxops-payload-noisy"
+        ]
+      },
+      "operation": "describe_alarms",
+      "raises_client_error": false,
+      "response_file": "01_cloudwatch__describe_alarms__response.json",
+      "service": "cloudwatch"
+    },
+    {
+      "kwargs": {
+        "AlarmNames": [
+          "maxops-payload-noisy"
+        ]
+      },
+      "operation": "disable_alarm_actions",
+      "raises_client_error": false,
+      "response_file": "02_cloudwatch__disable_alarm_actions__response.json",
+      "service": "cloudwatch"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "cloudwatch_high_volume_alerts_triggered",
+  "expected_message": "CloudWatch alarm actions disabled",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "cloudwatch_disable_alarm_actions",
+    "check_id": "cloudwatch_high_volume_alerts_triggered",
+    "details": {
+      "alarm_name": "maxops-payload-noisy",
+      "region": "us-east-1"
+    },
+    "message": "CloudWatch alarm actions disabled",
+    "status": "submitted"
+  },
+  "parameters": {},
+  "region": "us-east-1",
+  "resource_id": "maxops-payload-noisy",
+  "resource_ref": "noisy_alarm",
+  "scenario": "success"
+}

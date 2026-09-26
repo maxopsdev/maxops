@@ -1,0 +1,81 @@
+{
+  "account_id": "123456789012",
+  "created_at_epoch": 1781469172,
+  "dlm_policies": [],
+  "placeholder_map": {
+    "123456789012": "123456789012",
+    "ami-EBSPLACEHOLDER": "ami-0517aaaee33d8b971",
+    "arn:aws:iam::123456789012:role/maxops-payload-ebs-dlm-role": "arn:aws:iam::123456789012:role/maxops-payload-ebs-dlm-role-1781469172",
+    "i-EBSINSTANCE": "i-0050c922696654cb6",
+    "maxops-payload-ebs-attached-gp2": "maxops-payload-ebs-attached-gp2-1781469172",
+    "maxops-payload-ebs-dlm-role": "maxops-payload-ebs-dlm-role-1781469172",
+    "maxops-payload-ebs-instance": "maxops-payload-ebs-instance-1781469172",
+    "maxops-payload-ebs-provisioned-io1": "maxops-payload-ebs-provisioned-io1-1781469172",
+    "maxops-payload-ebs-unattached": "maxops-payload-ebs-unattached-1781469172",
+    "sg-EBSPLACEHOLDER": "sg-943095ec",
+    "subnet-EBSPLACEHOLDER": "subnet-9c4eecc4",
+    "us-east-1a": "us-east-1c",
+    "vol-ATTACHEDGP2": "vol-069f34c7ad8199028",
+    "vol-PROVISIONEDIO1": "vol-0b035110e5388c1c4",
+    "vol-UNATTACHED": "vol-0ad7b4de19babdbe1",
+    "vpc-EBSPLACEHOLDER": "vpc-141f3f70"
+  },
+  "region": "us-east-1",
+  "resources": {
+    "attached_gp2": {
+      "attach": true,
+      "device": "/dev/sdf",
+      "iops": null,
+      "name": "maxops-payload-ebs-attached-gp2-1781469172",
+      "name_placeholder_key": "ATTACHED_GP2_VOLUME_NAME",
+      "placeholder_key": "ATTACHED_GP2_VOLUME_ID",
+      "placeholder_value": "vol-ATTACHEDGP2",
+      "size": 1,
+      "volume_id": "vol-069f34c7ad8199028",
+      "volume_type": "gp2"
+    },
+    "provisioned_io1": {
+      "attach": true,
+      "device": "/dev/sdg",
+      "iops": 200,
+      "name": "maxops-payload-ebs-provisioned-io1-1781469172",
+      "name_placeholder_key": "PROVISIONED_IO1_VOLUME_NAME",
+      "placeholder_key": "PROVISIONED_IO1_VOLUME_ID",
+      "placeholder_value": "vol-PROVISIONEDIO1",
+      "size": 4,
+      "volume_id": "vol-0b035110e5388c1c4",
+      "volume_type": "io1"
+    },
+    "unattached_gp3": {
+      "attach": false,
+      "device": null,
+      "iops": null,
+      "name": "maxops-payload-ebs-unattached-1781469172",
+      "name_placeholder_key": "UNATTACHED_VOLUME_NAME",
+      "placeholder_key": "UNATTACHED_VOLUME_ID",
+      "placeholder_value": "vol-UNATTACHED",
+      "size": 1,
+      "volume_id": "vol-0ad7b4de19babdbe1",
+      "volume_type": "gp3"
+    }
+  },
+  "service": "ebs",
+  "snapshots": [],
+  "supporting_resources": {
+    "ami_id": "ami-0517aaaee33d8b971",
+    "availability_zone": "us-east-1c",
+    "dlm_role": {
+      "managed_policy_arn": "arn:aws:iam::aws:policy/service-role/AWSDataLifecycleManagerServiceRole",
+      "role_arn": "arn:aws:iam::123456789012:role/maxops-payload-ebs-dlm-role-1781469172",
+      "role_name": "maxops-payload-ebs-dlm-role-1781469172"
+    },
+    "instance": {
+      "instance_id": "i-0050c922696654cb6",
+      "instance_type": "t3a.nano",
+      "name": "maxops-payload-ebs-instance-1781469172"
+    },
+    "security_group_id": "sg-943095ec",
+    "subnet_id": "subnet-9c4eecc4",
+    "vpc_id": "vpc-141f3f70"
+  }
+}

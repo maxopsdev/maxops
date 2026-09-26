@@ -1,0 +1,18 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "cache-control": "no-cache, no-store",
+      "content-type": "text/xml;charset=UTF-8",
+      "date": "Sun, 14 Jun 2026 17:23:44 GMT",
+      "server": "AmazonEC2",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "transfer-encoding": "chunked",
+      "vary": "accept-encoding",
+      "x-amzn-requestid": "5622e0d5-7809-41e4-b1da-1fc4646136c2"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "5622e0d5-7809-41e4-b1da-1fc4646136c2",
+    "RetryAttempts": 0
+  },
+  "VpcEndpoints": []
+}

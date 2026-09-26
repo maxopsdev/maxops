@@ -1,0 +1,18 @@
+{
+  "service": "cloudwatch",
+  "profile": "default",
+  "region": "us-east-1",
+  "state_file": "tests_generator/cloudwatch/.cloudwatch_capture_state.json",
+  "placeholder_values": {
+    "ACCOUNT_ID": "123456789012",
+    "REGION": "us-east-1",
+    "LOG_GROUP_NO_RETENTION": "/maxops/payload/no-retention",
+    "LOG_GROUP_RETAINED": "/maxops/payload/retained",
+    "LOG_GROUP_DELETE_TARGET": "/maxops/payload/delete-target",
+    "NO_ACTION_ALARM": "maxops-payload-no-action",
+    "NOISY_ALARM": "maxops-payload-noisy",
+    "DUPLICATE_KEEPER_ALARM": "maxops-payload-duplicate-keeper",
+    "DUPLICATE_DELETE_ALARM": "maxops-payload-duplicate-delete",
+    "ACTIONFUL_ALARM": "maxops-payload-actionful"
+  }
+}

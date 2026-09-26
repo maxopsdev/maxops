@@ -1,0 +1,82 @@
+{
+  "cloudwatch_set_log_group_retention": {
+    "scenario": "success",
+    "check_id": "cloudwatch_log_groups_no_expiration",
+    "description": "Set retention on the no-retention capture log group.",
+    "resource_ref": "log_group_no_retention",
+    "parameters": {"retention_days": 30},
+    "expected_status": "submitted",
+    "expected_message": "CloudWatch log group retention update submitted",
+    "expected_calls": [
+      {"service": "logs", "operation": "describe_log_groups"},
+      {"service": "logs", "operation": "put_retention_policy"}
+    ]
+  },
+  "cloudwatch_disable_alarm_actions": {
+    "scenario": "success",
+    "check_id": "cloudwatch_high_volume_alerts_triggered",
+    "description": "Disable actions on the noisy capture alarm.",
+    "resource_ref": "noisy_alarm",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "CloudWatch alarm actions disabled",
+    "expected_calls": [
+      {"service": "cloudwatch", "operation": "describe_alarms"},
+      {"service": "cloudwatch", "operation": "disable_alarm_actions"}
+    ]
+  },
+  "cloudwatch_tune_alarm": {
+    "scenario": "success",
+    "check_id": "cloudwatch_high_volume_alerts_triggered",
+    "description": "Tune only explicitly selected fields on the noisy capture alarm.",
+    "resource_ref": "noisy_alarm",
+    "parameters": {"threshold": 90, "evaluation_periods": 3},
+    "expected_status": "submitted",
+    "expected_message": "CloudWatch alarm tuning submitted",
+    "expected_calls": [
+      {"service": "cloudwatch", "operation": "describe_alarms"},
+      {"service": "cloudwatch", "operation": "put_metric_alarm"}
+    ]
+  },
+  "cloudwatch_consolidate_duplicate_alarms": {
+    "scenario": "success",
+    "check_id": "cloudwatch_duplicate_alarms",
+    "description": "Keep one duplicate alarm and delete the explicitly selected duplicate.",
+    "resource_ref": "duplicate_keeper_alarm",
+    "parameters": {
+      "duplicate_alarm_names": ["{{DUPLICATE_DELETE_ALARM}}"]
+    },
+    "expected_status": "submitted",
+    "expected_message": "Duplicate CloudWatch alarms deleted",
+    "expected_calls": [
+      {"service": "cloudwatch", "operation": "describe_alarms"},
+      {"service": "cloudwatch", "operation": "delete_alarms"}
+    ]
+  },
+  "cloudwatch_delete_alarm": {
+    "scenario": "success",
+    "check_id": "cloudwatch_alarms_no_actions",
+    "description": "Delete the isolated no-action alarm as the final CloudWatch action.",
+    "resource_ref": "no_action_alarm",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "CloudWatch alarm deletion submitted",
+    "expected_calls": [
+      {"service": "cloudwatch", "operation": "describe_alarms"},
+      {"service": "cloudwatch", "operation": "delete_alarms"}
+    ]
+  },
+  "cloudwatch_delete_log_group": {
+    "scenario": "success",
+    "check_id": "cloudwatch_log_groups_no_recent_ingestion",
+    "description": "Delete the isolated delete-target log group as the final CloudWatch action.",
+    "resource_ref": "log_group_delete_target",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "CloudWatch log group deletion submitted",
+    "expected_calls": [
+      {"service": "logs", "operation": "describe_log_groups"},
+      {"service": "logs", "operation": "delete_log_group"}
+    ]
+  }
+}

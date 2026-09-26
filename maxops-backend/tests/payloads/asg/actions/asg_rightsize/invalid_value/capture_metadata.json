@@ -1,0 +1,17 @@
+{
+  "account_id": "123456789012",
+  "action_key": "asg_rightsize",
+  "calls": [],
+  "capture_source": "hand-authored",
+  "check_id": "asg_low_cpu_overprovisioned",
+  "expected_error": {
+    "detail_contains": "target_desired_capacity must be a non-negative integer.",
+    "status_code": 400
+  },
+  "parameters": {
+    "target_desired_capacity": "two"
+  },
+  "region": "us-east-1",
+  "resource_id": "maxops-test-asg",
+  "scenario": "invalid_value"
+}

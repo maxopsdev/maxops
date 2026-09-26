@@ -1,0 +1,73 @@
+{
+  "account_id": "123456789012",
+  "action_key": "disable_inventory_and_delete_log_bucket",
+  "calls": [
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-inventory-source"
+      },
+      "operation": "list_bucket_inventory_configurations",
+      "raises_client_error": false,
+      "response_file": "01_s3__list_bucket_inventory_configurations__response.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-inventory-source",
+        "Id": "daily-inventory"
+      },
+      "operation": "delete_bucket_inventory_configuration",
+      "raises_client_error": false,
+      "response_file": "02_s3__delete_bucket_inventory_configuration__response.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-inventory-dest"
+      },
+      "operation": "list_object_versions",
+      "raises_client_error": false,
+      "response_file": "03_s3__list_object_versions__response.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-inventory-dest"
+      },
+      "operation": "list_objects_v2",
+      "raises_client_error": false,
+      "response_file": "04_s3__list_objects_v2__response.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-inventory-dest"
+      },
+      "operation": "delete_bucket",
+      "raises_client_error": false,
+      "response_file": "05_s3__delete_bucket__response.json",
+      "service": "s3"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "s3_inventory_enabled",
+  "expected_message": "Inventory disabled and target inventory bucket deletion requested.",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "disable_inventory_and_delete_log_bucket",
+    "check_id": "s3_inventory_enabled",
+    "details": {
+      "source_bucket": "maxops-payload-s3-inventory-source",
+      "target_buckets": [
+        "maxops-payload-s3-inventory-dest"
+      ]
+    },
+    "message": "Inventory disabled and target inventory bucket deletion requested.",
+    "status": "submitted"
+  },
+  "parameters": {},
+  "region": "us-east-1",
+  "resource_id": "maxops-payload-s3-inventory-source",
+  "resource_ref": "inventory_source",
+  "scenario": "success"
+}

@@ -1,0 +1,21 @@
+{
+  "Error": {
+    "BucketName": "maxops-payload-s3-plain-no-lifecycle",
+    "Code": "NoSuchLifecycleConfiguration",
+    "Message": "The lifecycle configuration does not exist"
+  },
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "321",
+      "content-type": "application/xml",
+      "date": "Sun, 14 Jun 2026 20:10:06 GMT",
+      "server": "AmazonS3",
+      "x-amz-id-2": "QCtejsuoZqfoutoOAmd5fE50j7A8kjiKvnIAsD5Gp0G29NUM2+BIJWfIE7fy4MUp5NWBcvFpGts=",
+      "x-amz-request-id": "GJZKN4X4PKQXP6MR"
+    },
+    "HTTPStatusCode": 404,
+    "HostId": "QCtejsuoZqfoutoOAmd5fE50j7A8kjiKvnIAsD5Gp0G29NUM2+BIJWfIE7fy4MUp5NWBcvFpGts=",
+    "RequestId": "GJZKN4X4PKQXP6MR",
+    "RetryAttempts": 0
+  }
+}

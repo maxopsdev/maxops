@@ -1,0 +1,49 @@
+{
+  "bucket_placeholders": {
+    "logging_source": "maxops-payload-s3-logging-source"
+  },
+  "calls": [
+    {
+      "operation": "list_buckets",
+      "response_file": "list_buckets.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "logging_source",
+      "bucket_name": "maxops-payload-s3-logging-source",
+      "operation": "get_bucket_location",
+      "response_file": "get_bucket_location__logging_source.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "logging_source",
+      "bucket_name": "maxops-payload-s3-logging-source",
+      "operation": "get_bucket_tagging",
+      "response_file": "get_bucket_tagging__logging_source.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "logging_source",
+      "bucket_name": "maxops-payload-s3-logging-source",
+      "operation": "get_bucket_lifecycle_configuration",
+      "response_file": "get_bucket_lifecycle_configuration__logging_source.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "logging_source",
+      "bucket_name": "maxops-payload-s3-logging-source",
+      "operation": "get_bucket_logging",
+      "response_file": "get_bucket_logging__logging_source.json",
+      "service": "s3"
+    }
+  ],
+  "check_id": "s3_logging_enabled",
+  "check_parameters": {
+    "region": "us-east-1"
+  },
+  "description": "Use a bucket with server access logging enabled.",
+  "expected_matches": [
+    "maxops-payload-s3-logging-source"
+  ],
+  "scenario": "flag_bucket_with_logging"
+}

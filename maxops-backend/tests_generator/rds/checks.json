@@ -1,0 +1,160 @@
+{
+  "rds_idle_databases": {
+    "scenarios": {
+      "flag_idle_database": {
+        "description": "Use the captured db.t4g.micro instance and synthesize low CPU and connection counts.",
+        "capture_instances": [
+          "idle_graviton_capture"
+        ],
+        "expected_matches": [
+          "{{GRAVITON_DB_IDENTIFIER}}"
+        ],
+        "check_parameters": {
+          "idle_days": 7,
+          "cpu_threshold": 5.0,
+          "connections_threshold": 5,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "idle_graviton_capture": {
+            "CPUUtilization": {
+              "Average": 1.25
+            },
+            "DatabaseConnections": {
+              "Average": 1.0
+            },
+            "ReadIOPS": {
+              "Average": 0.5
+            },
+            "WriteIOPS": {
+              "Average": 0.25
+            }
+          }
+        },
+        "payload_files": [
+          "describe_db_instances.json",
+          "list_tags_for_resource__idle_graviton_capture.json",
+          "get_metric_statistics__idle_graviton_capture__cpuutilization.json",
+          "get_metric_statistics__idle_graviton_capture__databaseconnections.json",
+          "get_metric_statistics__idle_graviton_capture__readiops.json",
+          "get_metric_statistics__idle_graviton_capture__writeiops.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_busy_database": {
+        "description": "Use the captured db.t4g.micro instance and synthesize busy CPU and connection counts.",
+        "capture_instances": [
+          "idle_graviton_capture"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "idle_days": 7,
+          "cpu_threshold": 5.0,
+          "connections_threshold": 5,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "idle_graviton_capture": {
+            "CPUUtilization": {
+              "Average": 27.0
+            },
+            "DatabaseConnections": {
+              "Average": 42.0
+            },
+            "ReadIOPS": {
+              "Average": 80.0
+            },
+            "WriteIOPS": {
+              "Average": 44.0
+            }
+          }
+        },
+        "payload_files": [
+          "describe_db_instances.json",
+          "list_tags_for_resource__idle_graviton_capture.json",
+          "get_metric_statistics__idle_graviton_capture__cpuutilization.json",
+          "get_metric_statistics__idle_graviton_capture__databaseconnections.json",
+          "get_metric_statistics__idle_graviton_capture__readiops.json",
+          "get_metric_statistics__idle_graviton_capture__writeiops.json",
+          "capture_metadata.json"
+        ]
+      },
+      "edge_no_metric_datapoints": {
+        "description": "Use the captured db.t4g.micro instance with empty datapoints for all RDS metrics.",
+        "capture_instances": [
+          "idle_graviton_capture"
+        ],
+        "expected_matches": [
+          "{{GRAVITON_DB_IDENTIFIER}}"
+        ],
+        "check_parameters": {
+          "idle_days": 7,
+          "cpu_threshold": 5.0,
+          "connections_threshold": 5,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "idle_graviton_capture": {
+            "CPUUtilization": {
+              "empty": true
+            },
+            "DatabaseConnections": {
+              "empty": true
+            },
+            "ReadIOPS": {
+              "empty": true
+            },
+            "WriteIOPS": {
+              "empty": true
+            }
+          }
+        },
+        "payload_files": [
+          "describe_db_instances.json",
+          "list_tags_for_resource__idle_graviton_capture.json",
+          "get_metric_statistics__idle_graviton_capture__cpuutilization.json",
+          "get_metric_statistics__idle_graviton_capture__databaseconnections.json",
+          "get_metric_statistics__idle_graviton_capture__readiops.json",
+          "get_metric_statistics__idle_graviton_capture__writeiops.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "rds_non_graviton_instance_class": {
+    "scenarios": {
+      "flag_non_graviton_instance": {
+        "description": "Use the captured non-Graviton DB instance class for the positive path.",
+        "capture_instances": [
+          "non_graviton_capture"
+        ],
+        "expected_matches": [
+          "{{NON_GRAVITON_DB_IDENTIFIER}}"
+        ],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "describe_db_instances.json",
+          "list_tags_for_resource__non_graviton_capture.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_graviton_instance": {
+        "description": "Use the captured db.t4g.micro DB instance class for the negative path.",
+        "capture_instances": [
+          "idle_graviton_capture"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "describe_db_instances.json",
+          "list_tags_for_resource__idle_graviton_capture.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  }
+}

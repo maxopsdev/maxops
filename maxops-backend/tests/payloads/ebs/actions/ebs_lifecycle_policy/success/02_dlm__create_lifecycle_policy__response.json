@@ -1,0 +1,23 @@
+{
+  "PolicyId": "policy-PLACEHOLDER",
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "access-control-allow-credentials": "true",
+      "access-control-allow-headers": "*,Authorization,Date,X-Amz-Date,X-Amz-Security-Token,X-Amz-Target,content-type,x-amz-content-sha256,x-amz-user-agent,x-amzn-platform-id,x-amzn-trace-id,cache-control,x-api-key,x-do-not-redirect-to-midway,amz-sdk-invocation-id,amz-sdk-request,x-amz-requested-by-user-alias",
+      "access-control-allow-methods": "OPTIONS,PUT,POST,GET,PATCH,DELETE",
+      "access-control-allow-origin": "*",
+      "access-control-expose-headers": "x-amzn-errortype,x-amzn-requestid,x-amzn-errormessage,x-amzn-trace-id,x-amz-apigw-id,date",
+      "access-control-max-age": "86400",
+      "connection": "keep-alive",
+      "content-length": "39",
+      "content-type": "application/json",
+      "date": "Sun, 14 Jun 2026 20:26:09 GMT",
+      "x-amz-apigw-id": "e98vTFkCoAMEYLw=",
+      "x-amzn-requestid": "b3ec9260-62c0-4df5-874c-bf06fb833bac",
+      "x-amzn-trace-id": "Root=1-6a2f0e61-24e31feb41af1d8b1d95c3fc"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "b3ec9260-62c0-4df5-874c-bf06fb833bac",
+    "RetryAttempts": 0
+  }
+}

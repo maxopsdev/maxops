@@ -1,0 +1,29 @@
+{
+  "calls": [
+    {
+      "operation": "list_tables",
+      "response_file": "list_tables.json",
+      "service": "dynamodb"
+    },
+    {
+      "operation": "describe_table",
+      "response_file": "describe_table__ondemand_capture.json",
+      "service": "dynamodb",
+      "table_alias": "ondemand_capture",
+      "table_name": "maxops-payload-dynamodb-ondemand"
+    }
+  ],
+  "check_id": "dynamodb_underutilized_tables",
+  "check_parameters": {
+    "item_count_threshold": 0,
+    "lookback_days": 14,
+    "region": "us-east-1"
+  },
+  "description": "Use the captured empty on-demand table with a zero item-count threshold.",
+  "expected_matches": [],
+  "gsi_placeholders": {},
+  "scenario": "pass_threshold_zero",
+  "table_placeholders": {
+    "ondemand_capture": "maxops-payload-dynamodb-ondemand"
+  }
+}

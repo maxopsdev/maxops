@@ -1,0 +1,75 @@
+{
+  "account_id": "123456789012",
+  "action_key": "add_basic_lifecycle_policy",
+  "calls": [
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-plain-no-lifecycle"
+      },
+      "operation": "get_bucket_lifecycle_configuration",
+      "raises_client_error": true,
+      "response_file": "01_s3__get_bucket_lifecycle_configuration__error.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-plain-no-lifecycle",
+        "LifecycleConfiguration": {
+          "Rules": [
+            {
+              "AbortIncompleteMultipartUpload": {
+                "DaysAfterInitiation": 7
+              },
+              "Expiration": {
+                "Days": 365
+              },
+              "Filter": {
+                "Prefix": ""
+              },
+              "ID": "maxops-basic-lifecycle-{{ANY_INT}}",
+              "Status": "Enabled",
+              "Transitions": [
+                {
+                  "Days": 30,
+                  "StorageClass": "GLACIER"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "operation": "put_bucket_lifecycle_configuration",
+      "raises_client_error": false,
+      "response_file": "02_s3__put_bucket_lifecycle_configuration__response.json",
+      "service": "s3"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "s3_no_lifecycle_policy",
+  "expected_message": "Lifecycle policy added: Transition to GLACIER after 30 days, delete after 365 days, abort incomplete uploads after 7 days.",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "add_basic_lifecycle_policy",
+    "check_id": "s3_no_lifecycle_policy",
+    "details": {
+      "abort_mpu_days": 7,
+      "bucket": "maxops-payload-s3-plain-no-lifecycle",
+      "expiration_days": 365,
+      "rule_id": "maxops-basic-lifecycle-{{ANY_INT}}",
+      "transition_days": 30,
+      "transition_storage_class": "GLACIER"
+    },
+    "message": "Lifecycle policy added: Transition to GLACIER after 30 days, delete after 365 days, abort incomplete uploads after 7 days.",
+    "status": "submitted"
+  },
+  "parameters": {
+    "abort_mpu_days": 7,
+    "expiration_days": 365,
+    "transition_days": 30,
+    "transition_storage_class": "GLACIER"
+  },
+  "region": "us-east-1",
+  "resource_id": "maxops-payload-s3-plain-no-lifecycle",
+  "resource_ref": "plain_no_lifecycle",
+  "scenario": "success"
+}

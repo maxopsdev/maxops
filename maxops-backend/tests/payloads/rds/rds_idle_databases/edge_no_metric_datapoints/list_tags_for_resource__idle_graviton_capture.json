@@ -1,0 +1,32 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "714",
+      "content-type": "text/xml",
+      "date": "Sun, 19 Apr 2026 22:37:01 GMT",
+      "strict-transport-security": "max-age=31536000",
+      "x-amzn-requestid": "29d11e6f-4685-4054-828c-d3c673a8851f"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "29d11e6f-4685-4054-828c-d3c673a8851f",
+    "RetryAttempts": 0
+  },
+  "TagList": [
+    {
+      "Key": "maxops_payload_capture",
+      "Value": "true"
+    },
+    {
+      "Key": "maxops_test",
+      "Value": "true"
+    },
+    {
+      "Key": "maxops_payload_profile",
+      "Value": "idle_graviton_capture"
+    },
+    {
+      "Key": "Name",
+      "Value": "maxops-payload-rds-idle-graviton"
+    }
+  ]
+}

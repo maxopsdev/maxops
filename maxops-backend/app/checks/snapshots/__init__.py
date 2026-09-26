@@ -1,0 +1,1 @@
+"""Snapshot resource checks."""

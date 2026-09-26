@@ -1,0 +1,42 @@
+{
+  "vpc_no_s3_vpc_endpoint": {
+    "scenarios": {
+      "flag_vpc_without_s3_endpoint": {
+        "description": "Use the isolated endpoint VPC before gateway endpoints are created.",
+        "resource_refs": ["endpoint_vpc"],
+        "expected_matches": ["{{ENDPOINT_VPC_ID}}"],
+        "check_parameters": {"region": "{{REGION}}"},
+        "payload_files": ["describe_vpcs.json", "describe_vpc_endpoints.json", "capture_metadata.json"]
+      }
+    }
+  },
+  "vpc_no_dynamodb_vpc_endpoint": {
+    "scenarios": {
+      "flag_vpc_without_dynamodb_endpoint": {
+        "description": "Use the isolated endpoint VPC before gateway endpoints are created.",
+        "resource_refs": ["endpoint_vpc"],
+        "expected_matches": ["{{ENDPOINT_VPC_ID}}"],
+        "check_parameters": {"region": "{{REGION}}"},
+        "payload_files": ["describe_vpcs.json", "describe_vpc_endpoints.json", "capture_metadata.json"]
+      }
+    }
+  },
+  "vpc_flow_logs_enabled": {
+    "scenarios": {
+      "flag_vpc_with_flow_logs": {
+        "description": "Use the disposable disable-action VPC with an S3 flow log.",
+        "resource_refs": ["disable_vpc"],
+        "expected_matches": ["{{DISABLE_VPC_ID}}"],
+        "check_parameters": {"region": "{{REGION}}"},
+        "payload_files": ["describe_vpcs.json", "describe_flow_logs.json", "capture_metadata.json"]
+      },
+      "pass_vpc_without_flow_logs": {
+        "description": "Reuse the endpoint VPC before any flow logs or endpoints are created.",
+        "resource_refs": ["endpoint_vpc"],
+        "expected_matches": [],
+        "check_parameters": {"region": "{{REGION}}"},
+        "payload_files": ["describe_vpcs.json", "describe_flow_logs.json", "capture_metadata.json"]
+      }
+    }
+  }
+}

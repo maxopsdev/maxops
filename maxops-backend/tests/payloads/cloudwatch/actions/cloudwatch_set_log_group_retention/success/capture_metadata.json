@@ -1,0 +1,47 @@
+{
+  "account_id": "123456789012",
+  "action_key": "cloudwatch_set_log_group_retention",
+  "calls": [
+    {
+      "kwargs": {
+        "logGroupNamePrefix": "/maxops/payload/no-retention"
+      },
+      "operation": "describe_log_groups",
+      "raises_client_error": false,
+      "response_file": "01_logs__describe_log_groups__response.json",
+      "service": "logs"
+    },
+    {
+      "kwargs": {
+        "logGroupName": "/maxops/payload/no-retention",
+        "retentionInDays": 30
+      },
+      "operation": "put_retention_policy",
+      "raises_client_error": false,
+      "response_file": "02_logs__put_retention_policy__response.json",
+      "service": "logs"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "cloudwatch_log_groups_no_expiration",
+  "expected_message": "CloudWatch log group retention update submitted",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "cloudwatch_set_log_group_retention",
+    "check_id": "cloudwatch_log_groups_no_expiration",
+    "details": {
+      "log_group_name": "/maxops/payload/no-retention",
+      "region": "us-east-1",
+      "retention_days": 30
+    },
+    "message": "CloudWatch log group retention update submitted",
+    "status": "submitted"
+  },
+  "parameters": {
+    "retention_days": 30
+  },
+  "region": "us-east-1",
+  "resource_id": "/maxops/payload/no-retention",
+  "resource_ref": "log_group_no_retention",
+  "scenario": "success"
+}

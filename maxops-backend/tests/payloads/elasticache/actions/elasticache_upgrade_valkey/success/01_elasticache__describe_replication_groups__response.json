@@ -1,0 +1,79 @@
+{
+  "ReplicationGroups": [
+    {
+      "ARN": "arn:aws:elasticache:us-east-1:123456789012:replicationgroup:maxops-payload-elasticache-redis-valkey",
+      "AtRestEncryptionEnabled": false,
+      "AuthTokenEnabled": false,
+      "AutoMinorVersionUpgrade": true,
+      "AutomaticFailover": "disabled",
+      "CacheNodeType": "cache.t4g.micro",
+      "ClusterEnabled": false,
+      "ClusterMode": "disabled",
+      "DataTiering": "disabled",
+      "Description": "MaxOps payload capture replication group.",
+      "GlobalReplicationGroupInfo": {},
+      "IpDiscovery": "ipv4",
+      "LogDeliveryConfigurations": [],
+      "MemberClusters": [
+        "maxops-payload-elasticache-redis-valkey-001",
+        "maxops-payload-elasticache-redis-valkey-002"
+      ],
+      "MultiAZ": "disabled",
+      "NetworkType": "ipv4",
+      "NodeGroups": [
+        {
+          "NodeGroupId": "0001",
+          "NodeGroupMembers": [
+            {
+              "CacheClusterId": "maxops-payload-elasticache-redis-valkey-001",
+              "CacheNodeId": "0001",
+              "CurrentRole": "primary",
+              "PreferredAvailabilityZone": "us-east-1f",
+              "ReadEndpoint": {
+                "Address": "maxops-payload-elasticache-redis-valkey-001.uudkh8.0001.use1.cache.amazonaws.com",
+                "Port": 6379
+              }
+            },
+            {
+              "CacheClusterId": "maxops-payload-elasticache-redis-valkey-002",
+              "CacheNodeId": "0001",
+              "CurrentRole": "replica",
+              "PreferredAvailabilityZone": "us-east-1d",
+              "ReadEndpoint": {
+                "Address": "maxops-payload-elasticache-redis-valkey-002.uudkh8.0001.use1.cache.amazonaws.com",
+                "Port": 6379
+              }
+            }
+          ],
+          "PrimaryEndpoint": {
+            "Address": "maxops-payload-elasticache-redis-valkey.uudkh8.ng.0001.use1.cache.amazonaws.com",
+            "Port": 6379
+          },
+          "ReaderEndpoint": {
+            "Address": "maxops-payload-elasticache-redis-valkey-ro.uudkh8.ng.0001.use1.cache.amazonaws.com",
+            "Port": 6379
+          },
+          "Status": "available"
+        }
+      ],
+      "PendingModifiedValues": {},
+      "ReplicationGroupCreateTime": "2026-06-14T17:56:25.596000+00:00",
+      "ReplicationGroupId": "maxops-payload-elasticache-redis-valkey",
+      "SnapshotRetentionLimit": 0,
+      "SnapshotWindow": "08:30-09:30",
+      "Status": "available",
+      "TransitEncryptionEnabled": false
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "3765",
+      "content-type": "text/xml",
+      "date": "Sun, 14 Jun 2026 18:26:26 GMT",
+      "x-amzn-requestid": "be631b98-e629-463b-b09f-9486e7b742bc"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "be631b98-e629-463b-b09f-9486e7b742bc",
+    "RetryAttempts": 0
+  }
+}

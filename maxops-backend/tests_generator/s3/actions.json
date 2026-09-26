@@ -1,0 +1,159 @@
+{
+  "add_log_retention_lifecycle": {
+    "scenario": "success",
+    "check_id": "s3_log_buckets_without_expiration_policy",
+    "description": "Add retention to the logging target before the logging deletion action.",
+    "resource_ref": "logging_target",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "Log retention lifecycle policy added.",
+    "expected_calls": [
+      {"service": "s3", "operation": "get_bucket_lifecycle_configuration"},
+      {"service": "s3", "operation": "put_bucket_lifecycle_configuration"}
+    ]
+  },
+  "add_archival_transition": {
+    "scenario": "success",
+    "check_id": "s3_no_archival_policy",
+    "description": "Add an archival transition to the no-archival bucket.",
+    "resource_ref": "lifecycle_no_archival",
+    "parameters": {"archival_days": 30},
+    "expected_status": "submitted",
+    "expected_message": "Archival transition lifecycle policy added.",
+    "expected_calls": [
+      {"service": "s3", "operation": "get_bucket_lifecycle_configuration"},
+      {"service": "s3", "operation": "put_bucket_lifecycle_configuration"}
+    ]
+  },
+  "enable_delete_marker_cleanup": {
+    "scenario": "success",
+    "check_id": "s3_no_delete_marker_expiration",
+    "description": "Add expired delete-marker cleanup to the versioned action bucket.",
+    "resource_ref": "versioned_missing_noncurrent_controls",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "Delete marker cleanup lifecycle policy added.",
+    "expected_calls": [
+      {"service": "s3", "operation": "get_bucket_lifecycle_configuration"},
+      {"service": "s3", "operation": "put_bucket_lifecycle_configuration"}
+    ]
+  },
+  "add_expiration_policy": {
+    "scenario": "success",
+    "check_id": "s3_no_expiration_policy",
+    "description": "Add current-object expiration to the no-expiration bucket.",
+    "resource_ref": "lifecycle_no_expiration",
+    "parameters": {"expiration_days": 90},
+    "expected_status": "submitted",
+    "expected_message": "Expiration lifecycle policy added.",
+    "expected_calls": [
+      {"service": "s3", "operation": "get_bucket_lifecycle_configuration"},
+      {"service": "s3", "operation": "put_bucket_lifecycle_configuration"}
+    ]
+  },
+  "add_basic_lifecycle_policy": {
+    "scenario": "success",
+    "check_id": "s3_no_lifecycle_policy",
+    "description": "Add a complete lifecycle policy to the plain bucket.",
+    "resource_ref": "plain_no_lifecycle",
+    "parameters": {
+      "transition_days": 30,
+      "transition_storage_class": "GLACIER",
+      "expiration_days": 365,
+      "abort_mpu_days": 7
+    },
+    "expected_status": "submitted",
+    "expected_message_prefix": "Lifecycle policy added:",
+    "expected_calls": [
+      {"service": "s3", "operation": "get_bucket_lifecycle_configuration"},
+      {"service": "s3", "operation": "put_bucket_lifecycle_configuration"}
+    ]
+  },
+  "add_abort_mpu_policy": {
+    "scenario": "success",
+    "check_id": "s3_no_mpu_policy",
+    "description": "Add multipart-upload cleanup to the no-MPU bucket.",
+    "resource_ref": "lifecycle_no_mpu",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "Abort incomplete MPUs lifecycle policy added.",
+    "expected_calls": [
+      {"service": "s3", "operation": "get_bucket_lifecycle_configuration"},
+      {"service": "s3", "operation": "put_bucket_lifecycle_configuration"}
+    ]
+  },
+  "add_noncurrent_expiration": {
+    "scenario": "success",
+    "check_id": "s3_no_noncurrent_expiration",
+    "description": "Add noncurrent-version expiration to the shared versioned action bucket.",
+    "resource_ref": "versioned_missing_noncurrent_controls",
+    "parameters": {"noncurrent_expiration_days": 30},
+    "expected_status": "submitted",
+    "expected_message": "Noncurrent version expiration lifecycle policy added.",
+    "expected_calls": [
+      {"service": "s3", "operation": "get_bucket_lifecycle_configuration"},
+      {"service": "s3", "operation": "put_bucket_lifecycle_configuration"}
+    ]
+  },
+  "add_noncurrent_archival_transition": {
+    "scenario": "success",
+    "check_id": "s3_no_noncurrent_version_transition",
+    "description": "Add noncurrent archival to the shared versioned action bucket.",
+    "resource_ref": "versioned_missing_noncurrent_controls",
+    "parameters": {"noncurrent_transition_days": 30},
+    "expected_status": "submitted",
+    "expected_message": "Noncurrent archival transition lifecycle policy added.",
+    "expected_calls": [
+      {"service": "s3", "operation": "get_bucket_lifecycle_configuration"},
+      {"service": "s3", "operation": "put_bucket_lifecycle_configuration"}
+    ]
+  },
+  "disable_logging_and_delete_log_bucket": {
+    "scenario": "success",
+    "check_id": "s3_logging_enabled",
+    "description": "Disable source logging and delete the logging target.",
+    "resource_ref": "logging_source",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "Logging disabled and target log bucket deletion requested.",
+    "expected_calls": [
+      {"service": "s3", "operation": "get_bucket_logging"},
+      {"service": "s3", "operation": "put_bucket_logging"},
+      {"service": "s3", "operation": "list_object_versions"},
+      {"service": "s3", "operation": "list_objects_v2"},
+      {"service": "s3", "operation": "delete_bucket"}
+    ]
+  },
+  "disable_inventory_and_delete_log_bucket": {
+    "scenario": "success",
+    "check_id": "s3_inventory_enabled",
+    "description": "Disable inventory and delete its destination bucket.",
+    "resource_ref": "inventory_source",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "Inventory disabled and target inventory bucket deletion requested.",
+    "expected_calls": [
+      {"service": "s3", "operation": "list_bucket_inventory_configurations"},
+      {"service": "s3", "operation": "delete_bucket_inventory_configuration"},
+      {"service": "s3", "operation": "list_object_versions"},
+      {"service": "s3", "operation": "list_objects_v2"},
+      {"service": "s3", "operation": "delete_bucket"}
+    ]
+  },
+  "disable_replication_and_delete_bucket": {
+    "scenario": "success",
+    "check_id": "s3_replication_enabled",
+    "description": "Disable replication and delete its destination bucket as the final S3 action.",
+    "resource_ref": "replication_source",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "Replication disabled and replicate bucket deletion requested.",
+    "expected_calls": [
+      {"service": "s3", "operation": "get_bucket_replication"},
+      {"service": "s3", "operation": "delete_bucket_replication"},
+      {"service": "s3", "operation": "list_object_versions"},
+      {"service": "s3", "operation": "list_objects_v2"},
+      {"service": "s3", "operation": "delete_bucket"}
+    ]
+  }
+}

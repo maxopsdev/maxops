@@ -1,0 +1,43 @@
+# FastAPI and server
+fastapi==0.104.1
+starlette>=0.27.0  # Explicit dependency for CORS middleware
+uvicorn[standard]==0.24.0
+
+# AWS SDK
+boto3==1.43.45
+botocore==1.43.45
+
+# Database
+# Updated for Python 3.13+ compatibility (2.0.23 has TypingOnly bug with Python 3.13)
+sqlalchemy>=2.0.25
+alembic==1.12.1
+
+# Data processing
+# Note: pandas 2.2.0+ required for Python 3.14 support
+# For Python 3.12, use: pandas==2.1.3
+pandas>=2.2.0
+duckdb>=1.1.0
+pyarrow>=16.0.0
+
+# Authentication & Security
+python-dotenv==1.0.0
+
+# HTTP client
+httpx==0.25.2
+
+# Utilities
+# Updated for Python 3.13+ compatibility (better wheel support)
+pydantic>=2.5.0,<3.0.0
+pydantic-settings>=2.1.0
+pyyaml==6.0.1
+
+# Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+pytest-mock==3.12.0
+
+# Development
+black==23.11.0
+flake8==6.1.0
+mypy==1.7.1

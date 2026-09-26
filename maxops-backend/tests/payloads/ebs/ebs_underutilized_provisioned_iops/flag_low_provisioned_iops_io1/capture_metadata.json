@@ -1,0 +1,40 @@
+{
+  "calls": [
+    {
+      "operation": "describe_volumes",
+      "response_file": "describe_volumes.json",
+      "service": "ec2"
+    },
+    {
+      "metric_name": "VolumeReadOps",
+      "operation": "get_metric_statistics",
+      "response_file": "get_metric_statistics__provisioned_io1__volumereadops.json",
+      "service": "cloudwatch",
+      "volume_alias": "provisioned_io1",
+      "volume_id": "vol-PROVISIONEDIO1"
+    },
+    {
+      "metric_name": "VolumeWriteOps",
+      "operation": "get_metric_statistics",
+      "response_file": "get_metric_statistics__provisioned_io1__volumewriteops.json",
+      "service": "cloudwatch",
+      "volume_alias": "provisioned_io1",
+      "volume_id": "vol-PROVISIONEDIO1"
+    }
+  ],
+  "check_id": "ebs_underutilized_provisioned_iops",
+  "check_parameters": {
+    "lookback_days": 14,
+    "min_provisioned_iops": 100,
+    "region": "us-east-1",
+    "utilization_threshold_pct": 30.0
+  },
+  "description": "Use the captured 4 GiB io1 volume at the minimum 100 provisioned IOPS.",
+  "expected_matches": [
+    "vol-PROVISIONEDIO1"
+  ],
+  "scenario": "flag_low_provisioned_iops_io1",
+  "volume_placeholders": {
+    "provisioned_io1": "vol-PROVISIONEDIO1"
+  }
+}

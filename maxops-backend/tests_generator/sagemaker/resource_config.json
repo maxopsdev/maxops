@@ -1,0 +1,23 @@
+{
+  "service": "sagemaker",
+  "profile": "maxops",
+  "region": "us-east-1",
+  "state_file": "tests_generator/sagemaker/.capture_state.json",
+  "estimated_hourly_cost_usd": 1.77,
+  "placeholder_values": {
+    "NOTEBOOK_CPU": "maxops-sagemaker-notebook-cpu",
+    "NOTEBOOK_AUTOSTOP": "maxops-sagemaker-notebook-autostop",
+    "ENDPOINT_CPU": "maxops-sagemaker-endpoint-cpu",
+    "ENDPOINT_CPU_X2": "maxops-sagemaker-endpoint-cpu-x2",
+    "ENDPOINT_GPU": "maxops-sagemaker-endpoint-gpu",
+    "TRAINING_FAMILY": "maxops-sagemaker-training"
+  },
+  "resources": {
+    "notebook_cpu": {"kind": "notebook", "instance_type": "ml.t3.medium", "hourly_cost_usd": 0.05},
+    "notebook_cpu_autostop": {"kind": "notebook", "instance_type": "ml.t3.medium", "hourly_cost_usd": 0.05},
+    "endpoint_cpu": {"kind": "endpoint", "instance_type": "ml.m5.large", "instance_count": 1, "hourly_cost_usd": 0.12},
+    "endpoint_cpu_x2": {"kind": "endpoint", "instance_type": "ml.m5.large", "instance_count": 2, "hourly_cost_usd": 0.23},
+    "endpoint_gpu": {"kind": "endpoint", "instance_type": "ml.g4dn.xlarge", "instance_count": 1, "hourly_cost_usd": 0.74},
+    "training_cpu": {"kind": "training_job", "instance_type": "ml.m5.large", "instance_count": 1, "runs": 4, "hourly_cost_usd": 0.12}
+  }
+}

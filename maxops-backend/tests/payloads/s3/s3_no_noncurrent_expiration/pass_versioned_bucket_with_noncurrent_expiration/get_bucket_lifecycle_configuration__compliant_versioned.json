@@ -1,0 +1,56 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "873",
+      "date": "Thu, 16 Apr 2026 21:33:45 GMT",
+      "server": "AmazonS3",
+      "x-amz-id-2": "mQRlUpjqHai/nUBPbT68tTXFpafUllpy1UAyvVVl8z1/DuOYOIsfZmdqYanApNlu9fFhoMV5e00=",
+      "x-amz-request-id": "ZK47YG8Z48YB1SME",
+      "x-amz-transition-default-minimum-object-size": "all_storage_classes_128K"
+    },
+    "HTTPStatusCode": 200,
+    "HostId": "mQRlUpjqHai/nUBPbT68tTXFpafUllpy1UAyvVVl8z1/DuOYOIsfZmdqYanApNlu9fFhoMV5e00=",
+    "RequestId": "ZK47YG8Z48YB1SME",
+    "RetryAttempts": 0
+  },
+  "Rules": [
+    {
+      "AbortIncompleteMultipartUpload": {
+        "DaysAfterInitiation": 7
+      },
+      "Expiration": {
+        "Days": 60
+      },
+      "Filter": {
+        "Prefix": ""
+      },
+      "ID": "fully-managed-versioned",
+      "NoncurrentVersionExpiration": {
+        "NoncurrentDays": 60
+      },
+      "NoncurrentVersionTransitions": [
+        {
+          "NoncurrentDays": 30,
+          "StorageClass": "GLACIER"
+        }
+      ],
+      "Status": "Enabled",
+      "Transitions": [
+        {
+          "Days": 30,
+          "StorageClass": "GLACIER"
+        }
+      ]
+    },
+    {
+      "Expiration": {
+        "ExpiredObjectDeleteMarker": true
+      },
+      "Filter": {
+        "Prefix": ""
+      },
+      "ID": "delete-marker-cleanup",
+      "Status": "Enabled"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "CacheClusters": [
+    {
+      "ARN": "arn:aws:elasticache:us-east-1:123456789012:cluster:maxops-payload-elasticache-non-graviton",
+      "AtRestEncryptionEnabled": false,
+      "AuthTokenEnabled": false,
+      "AutoMinorVersionUpgrade": true,
+      "CacheClusterCreateTime": "2026-06-14T17:59:26.573000+00:00",
+      "CacheClusterId": "maxops-payload-elasticache-non-graviton",
+      "CacheClusterStatus": "available",
+      "CacheNodeType": "cache.t3.micro",
+      "CacheNodes": [
+        {
+          "CacheNodeCreateTime": "2026-06-14T17:59:26.573000+00:00",
+          "CacheNodeId": "0001",
+          "CacheNodeStatus": "available",
+          "CustomerAvailabilityZone": "us-east-1d",
+          "Endpoint": {
+            "Address": "maxops-payload-elasticache-non-graviton.uudkh8.0001.use1.cache.amazonaws.com",
+            "Port": 6379
+          },
+          "ParameterGroupStatus": "in-sync"
+        }
+      ],
+      "CacheParameterGroup": {
+        "CacheNodeIdsToReboot": [],
+        "CacheParameterGroupName": "default.redis7",
+        "ParameterApplyStatus": "in-sync"
+      },
+      "CacheSecurityGroups": [],
+      "CacheSubnetGroupName": "default",
+      "ClientDownloadLandingPage": "https://console.aws.amazon.com/elasticache/home#client-download:",
+      "Engine": "redis",
+      "EngineVersion": "7.1.0",
+      "IpDiscovery": "ipv4",
+      "LogDeliveryConfigurations": [],
+      "NetworkType": "ipv4",
+      "NumCacheNodes": 1,
+      "PendingModifiedValues": {},
+      "PreferredAvailabilityZone": "us-east-1d",
+      "PreferredMaintenanceWindow": "sat:04:00-sat:05:00",
+      "ReplicationGroupLogDeliveryEnabled": false,
+      "SnapshotRetentionLimit": 0,
+      "SnapshotWindow": "06:00-07:00",
+      "TransitEncryptionEnabled": false
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "2773",
+      "content-type": "text/xml",
+      "date": "Sun, 14 Jun 2026 18:13:20 GMT",
+      "x-amzn-requestid": "e1223d13-8c07-40b8-a3eb-ecefade4adda"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "e1223d13-8c07-40b8-a3eb-ecefade4adda",
+    "RetryAttempts": 0
+  }
+}

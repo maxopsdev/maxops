@@ -1,0 +1,71 @@
+{
+  "account_id": "123456789012",
+  "action_key": "disable_logging_and_delete_log_bucket",
+  "calls": [
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-logging-source"
+      },
+      "operation": "get_bucket_logging",
+      "raises_client_error": false,
+      "response_file": "01_s3__get_bucket_logging__response.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-logging-source",
+        "BucketLoggingStatus": {}
+      },
+      "operation": "put_bucket_logging",
+      "raises_client_error": false,
+      "response_file": "02_s3__put_bucket_logging__response.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-logging-target"
+      },
+      "operation": "list_object_versions",
+      "raises_client_error": false,
+      "response_file": "03_s3__list_object_versions__response.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-logging-target"
+      },
+      "operation": "list_objects_v2",
+      "raises_client_error": false,
+      "response_file": "04_s3__list_objects_v2__response.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-logging-target"
+      },
+      "operation": "delete_bucket",
+      "raises_client_error": false,
+      "response_file": "05_s3__delete_bucket__response.json",
+      "service": "s3"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "s3_logging_enabled",
+  "expected_message": "Logging disabled and target log bucket deletion requested.",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "disable_logging_and_delete_log_bucket",
+    "check_id": "s3_logging_enabled",
+    "details": {
+      "source_bucket": "maxops-payload-s3-logging-source",
+      "target_bucket": "maxops-payload-s3-logging-target"
+    },
+    "message": "Logging disabled and target log bucket deletion requested.",
+    "status": "submitted"
+  },
+  "parameters": {},
+  "region": "us-east-1",
+  "resource_id": "maxops-payload-s3-logging-source",
+  "resource_ref": "logging_source",
+  "scenario": "success"
+}

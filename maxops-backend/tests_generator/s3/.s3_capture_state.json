@@ -1,0 +1,109 @@
+{
+  "account_id": "123456789012",
+  "created_at_epoch": 1781467284,
+  "placeholder_map": {
+    "123456789012": "123456789012",
+    "maxops-payload-s3-compliant-nonversioned": "maxops-payload-s3-compliant-nonversioned-1781467284",
+    "maxops-payload-s3-compliant-versioned": "maxops-payload-s3-compliant-versioned-1781467284",
+    "maxops-payload-s3-inventory-dest": "maxops-payload-s3-inventory-dest-1781467284",
+    "maxops-payload-s3-inventory-source": "maxops-payload-s3-inventory-source-1781467284",
+    "maxops-payload-s3-lifecycle-no-archival": "maxops-payload-s3-lifecycle-no-archival-1781467284",
+    "maxops-payload-s3-lifecycle-no-expiration": "maxops-payload-s3-lifecycle-no-expiration-1781467284",
+    "maxops-payload-s3-lifecycle-no-mpu": "maxops-payload-s3-lifecycle-no-mpu-1781467284",
+    "maxops-payload-s3-logging-source": "maxops-payload-s3-logging-source-1781467284",
+    "maxops-payload-s3-logging-target": "maxops-payload-s3-logging-target-1781467284",
+    "maxops-payload-s3-plain-no-lifecycle": "maxops-payload-s3-plain-no-lifecycle-1781467284",
+    "maxops-payload-s3-replication-dest": "maxops-payload-s3-replication-dest-1781467284",
+    "maxops-payload-s3-replication-policy": "maxops-payload-s3-replication-policy-1781467284",
+    "maxops-payload-s3-replication-role": "maxops-payload-s3-replication-role-1781467284",
+    "maxops-payload-s3-replication-source": "maxops-payload-s3-replication-source-1781467284",
+    "maxops-payload-s3-versioned-missing-noncurrent": "maxops-payload-s3-versioned-missing-noncurrent-1781467284"
+  },
+  "region": "us-east-1",
+  "resources": {
+    "compliant_nonversioned": {
+      "bucket_name": "maxops-payload-s3-compliant-nonversioned-1781467284",
+      "placeholder_key": "COMPLIANT_NONVERSIONED_BUCKET",
+      "placeholder_value": "maxops-payload-s3-compliant-nonversioned",
+      "versioning_enabled": false
+    },
+    "compliant_versioned": {
+      "bucket_name": "maxops-payload-s3-compliant-versioned-1781467284",
+      "placeholder_key": "COMPLIANT_VERSIONED_BUCKET",
+      "placeholder_value": "maxops-payload-s3-compliant-versioned",
+      "versioning_enabled": true
+    },
+    "inventory_dest": {
+      "bucket_name": "maxops-payload-s3-inventory-dest-1781467284",
+      "placeholder_key": "INVENTORY_DEST_BUCKET",
+      "placeholder_value": "maxops-payload-s3-inventory-dest",
+      "versioning_enabled": false
+    },
+    "inventory_source": {
+      "bucket_name": "maxops-payload-s3-inventory-source-1781467284",
+      "placeholder_key": "INVENTORY_SOURCE_BUCKET",
+      "placeholder_value": "maxops-payload-s3-inventory-source",
+      "versioning_enabled": false
+    },
+    "lifecycle_no_archival": {
+      "bucket_name": "maxops-payload-s3-lifecycle-no-archival-1781467284",
+      "placeholder_key": "LIFECYCLE_NO_ARCHIVAL_BUCKET",
+      "placeholder_value": "maxops-payload-s3-lifecycle-no-archival",
+      "versioning_enabled": false
+    },
+    "lifecycle_no_expiration": {
+      "bucket_name": "maxops-payload-s3-lifecycle-no-expiration-1781467284",
+      "placeholder_key": "LIFECYCLE_NO_EXPIRATION_BUCKET",
+      "placeholder_value": "maxops-payload-s3-lifecycle-no-expiration",
+      "versioning_enabled": false
+    },
+    "lifecycle_no_mpu": {
+      "bucket_name": "maxops-payload-s3-lifecycle-no-mpu-1781467284",
+      "placeholder_key": "LIFECYCLE_NO_MPU_BUCKET",
+      "placeholder_value": "maxops-payload-s3-lifecycle-no-mpu",
+      "versioning_enabled": false
+    },
+    "logging_source": {
+      "bucket_name": "maxops-payload-s3-logging-source-1781467284",
+      "placeholder_key": "LOGGING_SOURCE_BUCKET",
+      "placeholder_value": "maxops-payload-s3-logging-source",
+      "versioning_enabled": false
+    },
+    "logging_target": {
+      "bucket_name": "maxops-payload-s3-logging-target-1781467284",
+      "placeholder_key": "LOGGING_TARGET_BUCKET",
+      "placeholder_value": "maxops-payload-s3-logging-target",
+      "versioning_enabled": false
+    },
+    "plain_no_lifecycle": {
+      "bucket_name": "maxops-payload-s3-plain-no-lifecycle-1781467284",
+      "placeholder_key": "PLAIN_NO_LIFECYCLE_BUCKET",
+      "placeholder_value": "maxops-payload-s3-plain-no-lifecycle",
+      "versioning_enabled": false
+    },
+    "replication_dest": {
+      "bucket_name": "maxops-payload-s3-replication-dest-1781467284",
+      "placeholder_key": "REPLICATION_DEST_BUCKET",
+      "placeholder_value": "maxops-payload-s3-replication-dest",
+      "versioning_enabled": true
+    },
+    "replication_source": {
+      "bucket_name": "maxops-payload-s3-replication-source-1781467284",
+      "placeholder_key": "REPLICATION_SOURCE_BUCKET",
+      "placeholder_value": "maxops-payload-s3-replication-source",
+      "versioning_enabled": true
+    },
+    "versioned_missing_noncurrent_controls": {
+      "bucket_name": "maxops-payload-s3-versioned-missing-noncurrent-1781467284",
+      "placeholder_key": "VERSIONED_MISSING_NONCURRENT_BUCKET",
+      "placeholder_value": "maxops-payload-s3-versioned-missing-noncurrent",
+      "versioning_enabled": true
+    }
+  },
+  "service": "s3",
+  "supporting_resources": {
+    "replication_policy_name": "maxops-payload-s3-replication-policy-1781467284",
+    "replication_role_arn": "arn:aws:iam::123456789012:role/maxops-payload-s3-replication-role-1781467284",
+    "replication_role_name": "maxops-payload-s3-replication-role-1781467284"
+  }
+}

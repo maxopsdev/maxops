@@ -1,0 +1,26 @@
+{
+  "calls": [
+    {
+      "operation": "describe_vpcs",
+      "response_file": "describe_vpcs.json",
+      "service": "ec2"
+    },
+    {
+      "operation": "describe_flow_logs",
+      "response_file": "describe_flow_logs.json",
+      "service": "ec2"
+    }
+  ],
+  "check_id": "vpc_flow_logs_enabled",
+  "check_parameters": {
+    "region": "us-east-1"
+  },
+  "description": "Use the disposable disable-action VPC with an S3 flow log.",
+  "expected_matches": [
+    "vpc-DISABLE"
+  ],
+  "resource_placeholders": {
+    "disable_vpc": "vpc-DISABLE"
+  },
+  "scenario": "flag_vpc_with_flow_logs"
+}

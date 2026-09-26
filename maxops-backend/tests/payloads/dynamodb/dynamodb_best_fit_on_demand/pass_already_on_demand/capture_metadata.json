@@ -1,0 +1,27 @@
+{
+  "calls": [
+    {
+      "operation": "list_tables",
+      "response_file": "list_tables.json",
+      "service": "dynamodb"
+    },
+    {
+      "operation": "describe_table",
+      "response_file": "describe_table__ondemand_capture.json",
+      "service": "dynamodb",
+      "table_alias": "ondemand_capture",
+      "table_name": "maxops-payload-dynamodb-ondemand"
+    }
+  ],
+  "check_id": "dynamodb_best_fit_on_demand",
+  "check_parameters": {
+    "region": "us-east-1"
+  },
+  "description": "Use the captured on-demand table, which the on-demand best-fit check skips.",
+  "expected_matches": [],
+  "gsi_placeholders": {},
+  "scenario": "pass_already_on_demand",
+  "table_placeholders": {
+    "ondemand_capture": "maxops-payload-dynamodb-ondemand"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "account_id": "123456789012",
+  "action_key": "asg_rightsize",
+  "calls": [
+    {
+      "kwargs": {
+        "AutoScalingGroupNames": [
+          "maxops-test-asg"
+        ]
+      },
+      "operation": "describe_auto_scaling_groups",
+      "raises_client_error": false,
+      "response_file": "01_autoscaling__describe_auto_scaling_groups__response.json",
+      "service": "autoscaling"
+    },
+    {
+      "kwargs": {
+        "AutoScalingGroupName": "maxops-test-asg",
+        "MaxSize": 6
+      },
+      "operation": "update_auto_scaling_group",
+      "raises_client_error": false,
+      "response_file": "02_autoscaling__update_auto_scaling_group__response.json",
+      "service": "autoscaling"
+    }
+  ],
+  "capture_source": "hand-authored",
+  "check_id": "asg_low_cpu_overprovisioned",
+  "expected_message": "ASG capacity update submitted",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "asg_rightsize",
+    "check_id": "asg_low_cpu_overprovisioned",
+    "details": {
+      "auto_scaling_group_name": "maxops-test-asg",
+      "previous_capacity": {
+        "desired_capacity": 4,
+        "max_size": 8,
+        "min_size": 2
+      },
+      "response": {
+        "ResponseMetadata": {
+          "HTTPStatusCode": 200,
+          "RequestId": "00000000-0000-0000-0000-0000000000a2",
+          "RetryAttempts": 0
+        }
+      },
+      "target_capacity": {
+        "target_max_size": 6
+      }
+    },
+    "message": "ASG capacity update submitted",
+    "status": "submitted"
+  },
+  "parameters": {
+    "target_max_size": 6
+  },
+  "region": "us-east-1",
+  "resource_id": "maxops-test-asg",
+  "scenario": "max_reduction_success"
+}

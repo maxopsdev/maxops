@@ -1,0 +1,24 @@
+{
+  "calls": [
+    {
+      "operation": "describe_cache_clusters",
+      "response_file": "describe_cache_clusters.json",
+      "service": "elasticache"
+    }
+  ],
+  "check_id": "elasticache_non_graviton_instance_class",
+  "check_parameters": {
+    "region": "us-east-1"
+  },
+  "description": "Use the captured non-Graviton cluster for the positive path.",
+  "expected_matches": [
+    "maxops-payload-elasticache-non-graviton"
+  ],
+  "resource_placeholders": {
+    "non_graviton_cluster": "maxops-payload-elasticache-non-graviton"
+  },
+  "resource_types": {
+    "non_graviton_cluster": "elasticache_cluster"
+  },
+  "scenario": "flag_non_graviton_cluster"
+}

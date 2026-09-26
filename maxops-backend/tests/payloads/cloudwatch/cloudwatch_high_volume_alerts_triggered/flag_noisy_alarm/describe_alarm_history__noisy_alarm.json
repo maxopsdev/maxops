@@ -1,0 +1,47 @@
+{
+  "AlarmHistoryItems": [
+    {
+      "AlarmName": "maxops-payload-noisy",
+      "AlarmType": "MetricAlarm",
+      "HistoryData": "{\"actionState\":\"Failed\",\"stateUpdateTimestamp\":1781411117626,\"notificationResource\":\"arn:aws:sns:us-east-1:123456789012:maxops-payload-placeholder\",\"publishedMessage\":null,\"error\":\"Topic does not exist\",\"muteWindowEndTimestamp\":null}",
+      "HistoryItemType": "Action",
+      "HistorySummary": "Failed to execute action arn:aws:sns:us-east-1:123456789012:maxops-payload-placeholder",
+      "Timestamp": "2026-06-14T04:25:17.664000+00:00"
+    },
+    {
+      "AlarmName": "maxops-payload-noisy",
+      "AlarmType": "MetricAlarm",
+      "HistoryData": "{\"version\":\"1.0\",\"oldState\":{\"stateValue\":\"OK\",\"stateReason\":\"MaxOps payload baseline\"},\"newState\":{\"stateValue\":\"ALARM\",\"stateReason\":\"MaxOps payload trigger\"}}",
+      "HistoryItemType": "StateUpdate",
+      "HistorySummary": "Alarm updated from OK to ALARM",
+      "Timestamp": "2026-06-14T04:25:17.626000+00:00"
+    },
+    {
+      "AlarmName": "maxops-payload-noisy",
+      "AlarmType": "MetricAlarm",
+      "HistoryData": "{\"version\":\"1.0\",\"oldState\":{\"stateValue\":\"INSUFFICIENT_DATA\",\"stateReason\":\"Unchecked: Initial alarm creation\"},\"newState\":{\"stateValue\":\"OK\",\"stateReason\":\"MaxOps payload baseline\"}}",
+      "HistoryItemType": "StateUpdate",
+      "HistorySummary": "Alarm updated from INSUFFICIENT_DATA to OK",
+      "Timestamp": "2026-06-14T04:25:17.472000+00:00"
+    },
+    {
+      "AlarmName": "maxops-payload-noisy",
+      "AlarmType": "MetricAlarm",
+      "HistoryData": "{\"version\":\"1.0\",\"type\":\"Create\",\"createdAlarm\":{\"alarmName\":\"maxops-payload-noisy\",\"alarmArn\":\"arn:aws:cloudwatch:us-east-1:123456789012:alarm:maxops-payload-noisy\",\"alarmConfigurationUpdatedTimestamp\":\"2026-06-14T04:25:16.722+0000\",\"namespace\":\"MaxOps/Payload\",\"metricName\":\"CaptureMetric\",\"extendedStatistic\":\"AVERAGE\",\"period\":60,\"dimensions\":[{\"value\":\"noisy_alarm\",\"name\":\"Profile\"}],\"threshold\":80.0,\"comparisonOperator\":\"GreaterThanThreshold\",\"evaluationPeriods\":2,\"treatMissingData\":\"missing\",\"stateValue\":\"INSUFFICIENT_DATA\",\"stateUpdatedTimestamp\":\"2026-06-14T04:25:16.722+0000\",\"actionsEnabled\":true,\"alarmActions\":[\"arn:aws:sns:us-east-1:123456789012:maxops-payload-placeholder\"],\"insufficientDataActions\":[],\"okactions\":[]}}",
+      "HistoryItemType": "ConfigurationUpdate",
+      "HistorySummary": "Alarm \"maxops-payload-noisy\" created",
+      "Timestamp": "2026-06-14T04:25:16.723000+00:00"
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "3908",
+      "content-type": "text/xml",
+      "date": "Sun, 14 Jun 2026 04:25:32 GMT",
+      "x-amzn-requestid": "d23310e4-5075-4833-81b8-9c364b3ca3ac"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "d23310e4-5075-4833-81b8-9c364b3ca3ac",
+    "RetryAttempts": 0
+  }
+}

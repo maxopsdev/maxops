@@ -1,0 +1,21 @@
+{
+  "service": "vpc",
+  "profile": "default",
+  "region": "us-east-1",
+  "state_file": "tests_generator/vpc/.vpc_capture_state.json",
+  "placeholder_values": {
+    "ACCOUNT_ID": "123456789012",
+    "REGION": "us-east-1",
+    "ENDPOINT_VPC_ID": "vpc-ENDPOINT",
+    "ENDPOINT_ROUTE_TABLE_ID": "rtb-ENDPOINT",
+    "DISABLE_VPC_ID": "vpc-DISABLE",
+    "EXPIRATION_VPC_ID": "vpc-EXPIRATION",
+    "DELETION_VPC_ID": "vpc-DELETION",
+    "DISABLE_FLOW_LOG_ID": "fl-DISABLE",
+    "EXPIRATION_FLOW_LOG_ID": "fl-EXPIRATION",
+    "DELETION_FLOW_LOG_ID": "fl-DELETION",
+    "DISABLE_BUCKET": "maxops-payload-vpc-disable",
+    "EXPIRATION_BUCKET": "maxops-payload-vpc-expiration",
+    "DELETION_BUCKET": "maxops-payload-vpc-deletion"
+  }
+}

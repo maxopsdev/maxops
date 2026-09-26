@@ -1,0 +1,867 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Rightsizer | MaxOps Adventures №2</title>
+  <meta name="description" content="A page-by-page comic guide to MaxOps rightsizing: how a smaller instance is chosen, why peak matters more than average, what the verdicts mean, and every reason MaxOps refuses to recommend a change.">
+  <link rel="icon" type="image/svg+xml" href="./assets/brand/maxops-mark.svg">
+  <link rel="stylesheet" href="./setup-guide.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="masthead">
+  <a class="brand" href="./docs.html"><img src="./assets/brand/maxops-mark.svg" alt="" width="26" height="26">MAXOPS <span>ADVENTURES</span></a>
+  <a class="masthead-back" href="./docs.html">‹ All issues</a>
+  <div class="counter">PAGE <b id="counterNow">1</b> / <span id="counterTotal">1</span></div>
+</header>
+
+<main class="pager" id="pager">
+
+  <!-- ============================================================ 1 COVER -->
+  <section class="page" data-page="1" data-slug="cover" data-chapter="Cover">
+    <div class="spread">
+      <div class="rail" style="align-items:center;">
+        <div class="panel" style="width:100%;">
+          <div class="panel-inner">
+            <img src="./assets/comic/rs-cover.jpg" alt="The Cost Sentinel holds a giant golden caliper up against a huge glowing server box that contains one tiny workload." />
+            <div class="halftone"></div>
+            <div class="vignette"></div>
+          </div>
+          <div class="fig-tag">FIG. 01 — COVER</div>
+        </div>
+        <div class="kicker">MaxOps Adventures <b>· Issue №2</b></div>
+        <h1 class="title">THE<br /><em>RIGHTSIZER</em></h1>
+        <div class="subtitle">Measure Twice, Shrink Once</div>
+        <p class="caption" style="border:none; padding-left:0; max-width:58ch;">
+          How MaxOps decides an instance is too big — the formula, the statistic, the three tiers, and
+          every single reason it refuses to recommend a change.
+        </p>
+        <button class="cta" onclick="goTo(2)">Begin the walkthrough ▸</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== 2 QUESTION -->
+  <section class="page" data-page="2" data-slug="the-question" data-chapter="The question">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/rs-measure.jpg" alt="The Sentinel stretches a glowing measuring tape around a large empty instance box holding one small bright core." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 02 — THE EMPTY BOX</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The question <b>· One instance, one number</b></div>
+        <h2 class="title title--sm">HOW BIG IS<br /><em>TOO BIG</em>?</h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>You're paying for the box. Your workload is the glowing bit inside it. Rightsizing is just measuring the gap — carefully enough that you'd bet production on the answer.</p>
+        </div>
+        <p class="caption">
+          Every recommendation in this issue answers one question: <strong>is there a cheaper instance that
+          still comfortably fits this workload?</strong> "Comfortably" is doing a lot of work in that sentence,
+          and the next sixteen pages are about exactly how much.
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>Can't you just look at CPU and pick something smaller?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>That's how you get paged at 3am. Average CPU hides every spike, vCPU counts lie across generations, and a missing metric is <em>not</em> the same as a zero. All three have an answer here.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= 3 FORMULA -->
+  <section class="page" data-page="3" data-slug="the-formula" data-chapter="The formula">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">The whole recommendation, in one line</span>
+            <div class="term">
+              <div class="term-bar"><i></i><i></i><i></i><span>required capacity</span></div>
+              <pre>capacity you need =
+
+  capacity you have now
+  <span class="k">×</span>  the share you actually use
+  <span class="k">÷</span>  the share you want to use</pre>
+            </div>
+            <span class="mock-label gap">Worked example</span>
+            <div class="mock-tiles">
+              <div class="mock-tile"><span>Current instance</span><strong>m5.xlarge</strong></div>
+              <div class="mock-tile"><span>Its capacity score</span><strong>1,000</strong></div>
+              <div class="mock-tile"><span>Peak CPU used</span><strong>35%</strong></div>
+              <div class="mock-tile"><span>Target headroom</span><strong>70%</strong></div>
+            </div>
+            <div class="term">
+              <div class="term-bar"><i></i><i></i><i></i><span>result</span></div>
+              <pre>1000 <span class="k">×</span> 35% <span class="k">÷</span> 70% <span class="p">=</span> <span class="p">500</span>
+
+<span class="c">the cheapest instance scoring 500
+or more -- with enough memory too</span></pre>
+            </div>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT A — THE FORMULA</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The formula <b>· Four numbers</b></div>
+        <h2 class="title title--sm">WHAT THE MATH<br /><em>ACTUALLY</em> SAYS</h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Read it right to left. <em>You're using 35% of a box worth 1000. I want you at 70% of the new one. So you need 500.</em> That's the entire idea.</p>
+        </div>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">Capacity you have now</div><div class="ops-d">How much compute your current instance actually delivers — a benchmark score, not a vCPU count. The next page explains why that distinction matters.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">The share you actually use</div><div class="ops-d">Your <strong>peak</strong> demand, not your average. Page 5 is entirely about that choice.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">03</div><div><div class="ops-h">The share you want to use</div><div class="ops-d">Your headroom setting, <strong>70%</strong> by default. Dividing by it <strong>inflates</strong> the requirement — you're asking for a machine you'd run at 70%, not one you'd run flat out. Ask for a lower share and you get a bigger, safer instance.</div></div></div>
+        </div>
+        <p class="caption">
+          Memory runs the identical calculation with its own headroom setting, also 70% by default.
+          A candidate has to satisfy <strong>both</strong> before it is considered at all.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== 4 COREMARK -->
+  <section class="page" data-page="4" data-slug="why-not-vcpus" data-chapter="Why not vCPUs">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">The trap: counting vCPUs</span>
+            <div class="mock-tiles">
+              <div class="mock-tile"><span>m5.xlarge</span><strong>4 vCPU</strong></div>
+              <div class="mock-tile"><span>m6g.xlarge</span><strong>4 vCPU</strong></div>
+            </div>
+            <p class="mock-note bad">Same number. Different chips, different generations, different real throughput.</p>
+            <span class="mock-label gap">What MaxOps compares instead</span>
+            <div class="mock-tiles">
+              <div class="mock-tile"><span>A benchmark score</span><strong>measured per instance type</strong></div>
+            </div>
+            <p class="mock-note ok">Now "is this target actually big enough?" has an honest answer across families, generations and architectures.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT B — THE UNIT</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The unit <b>· Comparing unlike things</b></div>
+        <h2 class="title title--sm">WHY NOT<br />COUNT <em>vCPUs</em>?</h2>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>Four vCPUs is four vCPUs, surely?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Not remotely. A vCPU is a <em>billing</em> unit, not a performance one. Two instances with the same count can differ by a wide margin in real throughput — different silicon, different clock, different generation, sometimes a different architecture entirely.</p>
+        </div>
+        <p class="caption">
+          If sizing counted vCPUs, every cross-generation and cross-architecture recommendation would be a
+          guess. Scoring each instance type with a <strong>benchmark</strong> makes "big enough" a comparison
+          between two numbers on the same scale, which is what lets the rightsizer suggest a newer family or
+          a Graviton target at all.
+        </p>
+        <p class="caption">
+          It also means the answer degrades honestly: when a type has <strong>no</strong> CoreMark score in
+          the catalog, it isn't guessed at — the candidate simply can't be evaluated.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 5 PEAK -->
+  <section class="page" data-page="5" data-slug="peak-not-average" data-chapter="p99, not average">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/rs-peak.jpg" alt="The Sentinel points at the tallest spike on a holographic mountain-range chart, ignoring a flat line below it." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 03 — THE PEAK</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The statistic <b>· Where averages kill</b></div>
+        <h2 class="title title--sm">THE PEAK,<br />NOT THE <em>AVERAGE</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>An instance averaging 8% CPU that hits 95% every weeknight at close of business is <em>not</em> an 8% instance. Shrink it on the average and you break the only hour that mattered.</p>
+        </div>
+        <div class="ops-list">
+          <div class="ops-item active"><div class="ops-num">01</div><div><div class="ops-h">The decision statistic is p99</div><div class="ops-d">The 99th percentile — high enough to survive the daily peak, not so high that one freak sample sets your bill forever.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">Three windows, not one</div><div class="ops-d">Capacity is evaluated over <strong>14, 30 and 60 days</strong>. A single window can miss a monthly batch job or over-weight one bad week.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">03</div><div><div class="ops-h">The conservative maximum wins</div><div class="ops-d">Capacity uses the <strong>maximum p99 across all three windows</strong>. When the windows disagree, the busiest one is believed. Disagreement means "there is load you haven't seen lately," and that is a reason for caution, not for optimism.</div></div></div>
+          <div class="ops-item"><div class="ops-num">04</div><div><div class="ops-h">Missing samples are never zero</div><div class="ops-d">A gap in CloudWatch means "unknown," never "idle." Treating gaps as zeros is the single easiest way to recommend a catastrophe.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================== 6 CAPACITY FLOOR -->
+  <section class="page" data-page="6" data-slug="capacity-floor" data-chapter="The capacity floor">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">When a measurement is missing</span>
+            <div class="mock-tiles">
+              <div class="mock-tile"><span>CPU — measured</span><strong>may shrink</strong></div>
+              <div class="mock-tile"><span>Memory — not measured</span><strong>held at today's size</strong></div>
+            </div>
+            <p class="mock-note ok">An unmeasured dimension is treated as <strong>fully used</strong>, so it can never be reduced.</p>
+            <span class="mock-label gap">What the recommendation tells you</span>
+            <div class="mock-tile"><span>Note</span><strong>Memory metric unavailable — current capacity retained</strong></div>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT C — THE FLOOR</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The safety net <b>· Unknown ≠ unused</b></div>
+        <h2 class="title title--sm">IF IT CAN'T<br />MEASURE IT, IT<br />WON'T <em>SHRINK</em> IT</h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>If I have no measurement for something, I assume you need every bit of what you already have. I will never hand back capacity I couldn't watch you using.</p>
+        </div>
+        <p class="caption">
+          This is the <strong>capacity floor</strong>, and it's why a missing metric doesn't have to block a
+          recommendation outright. The common case: CPU is always available from CloudWatch, memory usually
+          isn't. Rather than refuse everything, the rightsizer sizes CPU on evidence and <strong>pins memory
+          at the current instance's memory</strong> — so the target may be cheaper, but never smaller in the
+          dimension nobody could measure.
+        </p>
+        <p class="caption">
+          The recommendation says so on its face — <strong>"memory metric unavailable, current capacity retained"</strong> — so you always know which parts of the advice rest on measurement and which rest on caution.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================ 7 MEMORY DISCOVERY -->
+  <section class="page" data-page="7" data-slug="memory-discovery" data-chapter="Finding memory">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Accepted metric names</span>
+            <div class="mock-row">
+              <span class="mock-pill on">mem_used_percent</span>
+              <span class="mock-pill on">MemoryUtilization</span>
+              <span class="mock-pill on">mem</span>
+              <span class="mock-pill on">memory_pct</span>
+            </div>
+            <span class="mock-label gap">Rejected outright</span>
+            <div class="mock-row">
+              <span class="mock-pill">…bytes</span>
+              <span class="mock-pill">…free</span>
+              <span class="mock-pill">…available</span>
+              <span class="mock-pill">…cache</span>
+              <span class="mock-pill">…swap</span>
+              <span class="mock-pill">…total</span>
+            </div>
+            <p class="mock-note bad">A "free memory" series would invert the entire recommendation.</p>
+            <span class="mock-label gap">If several could match</span>
+            <p class="mock-note">The standard CloudWatch agent metric wins. Anything else is a fallback,
+            and a candidate carrying no usable readings is passed over for the next one.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT D — THE HUNT</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Memory <b>· AWS won't tell you</b></div>
+        <h2 class="title title--sm">HUNTING THE<br /><em>MEMORY</em> METRIC</h2>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>Why is memory so much harder than CPU?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Because AWS can't see inside your instance. CPU comes free from the hypervisor; memory only exists if <em>you</em> installed the CloudWatch agent — and you got to name the metric whatever you liked.</p>
+        </div>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">It looks for what you publish</div><div class="ops-d">MaxOps searches each region's CloudWatch metrics for a memory series it can tie to a specific instance. You don't have to tell it a metric name.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">Naming is forgiving</div><div class="ops-d">Capitals, underscores and dashes don't matter, and the usual variations on "memory" and "percent" are all recognised.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">03</div><div><div class="ops-h">The wrong metrics are refused</div><div class="ops-d">Anything measuring <strong>free</strong>, <strong>available</strong>, <strong>cached</strong>, <strong>swap</strong> or raw <strong>bytes</strong> is ignored. A "free memory" series would invert every recommendation — better no memory data than backwards memory data.</div></div></div>
+          <div class="ops-item"><div class="ops-num">04</div><div><div class="ops-h">One source, everywhere</div><div class="ops-d">Once a usable series is found it is remembered, so the inventory, the recommendation and the 15-month history all agree rather than each guessing separately.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================== 8 TIERS -->
+  <section class="page" data-page="8" data-slug="tiers" data-chapter="Three tiers">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/rs-tiers.jpg" alt="The Sentinel presents three glowing instance boxes on pedestals, the middle one highlighted in teal." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 04 — THREE PEDESTALS</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The tiers <b>· One dial, three settings</b></div>
+        <h2 class="title title--sm">HOW MUCH<br /><em>HEADROOM</em>?</h2>
+        <div class="mock-tiles">
+          <div class="mock-tile"><span>Conservative</span><strong>0.55</strong></div>
+          <div class="mock-tile hero"><span>Balanced</span><strong>0.70</strong></div>
+          <div class="mock-tile"><span>Aggressive</span><strong>0.85</strong></div>
+        </div>
+        <p class="caption">
+          The same workload, run through the formula three times with three ratios. A ratio of
+          <strong>0.55</strong> says "size it so we'd sit at 55% — plenty of room to grow." <strong>0.85</strong>
+          says "run it hot, take the money." Same evidence, three appetites for risk.
+        </p>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Note which direction is which: the <em>lower</em> the ratio, the <em>bigger</em> the instance I'll ask for. Conservative costs you more and sleeps better.</p>
+        </div>
+        <p class="caption">
+          Tiering is a <strong>selection layer, not a re-run</strong> — candidates are generated once, then
+          sorted into tiers. Balanced is the headline pick, and the rules enforce that the balanced ratio
+          always matches your headroom setting, so the tier list can never disagree with the headline
+          recommendation.
+        </p>
+        <p class="caption">ElastiCache uses the identical three ratios. The vocabulary is deliberately shared.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== 9 VERDICTS -->
+  <section class="page" data-page="9" data-slug="verdicts" data-chapter="The four verdicts">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Every recommendation carries one of these</span>
+            <div class="mock-row"><span class="mock-badge">ACTIONABLE</span></div>
+            <p class="mock-note ok">Everything measured, everything low-risk. Safe to act on.</p>
+            <div class="mock-row"><span class="mock-btn secondary">CONDITIONAL</span></div>
+            <p class="mock-note">Plausible, but something needs a human. Most real recommendations land here.</p>
+            <div class="mock-row"><span class="mock-btn amber">OPPORTUNITY</span></div>
+            <p class="mock-note">Real money, but requires migration work — Graviton, architecture changes.</p>
+            <div class="mock-row"><span class="mock-btn dead">REJECTED</span></div>
+            <p class="mock-note bad">A hard incompatibility. Not shown as a saving.</p>
+            <div class="mock-row"><span class="mock-btn dead">DEFERRED</span></div>
+            <p class="mock-note">Out of scope for this pass — e.g. managed by an ASG or ECS.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT E — THE VERDICTS</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The verdict <b>· Not just yes or no</b></div>
+        <h2 class="title title--sm">FIVE ANSWERS,<br />NOT <em>TWO</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>A tool that only says "yes" or "no" has to lie in one direction. Five verdicts let me say <em>"this is real money but it needs your judgement"</em> without either hiding it or pretending it's safe.</p>
+        </div>
+        <p class="caption">
+          The distinction that matters most: <strong>CONDITIONAL is not a weak ACTIONABLE.</strong> It means
+          the compute maths passed and something about network, storage, or capability evidence needs a human
+          who knows the workload. Treating those as equivalent is how rightsizing tools lose trust.
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>So most of my recommendations will be CONDITIONAL?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Probably — and that's the design, not a defect. The next page shows exactly how strict the bar for ACTIONABLE is.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================== 10 DECISION TABLE -->
+  <section class="page" data-page="10" data-slug="decision-table" data-chapter="The decision table">
+    <div class="spread spread--solo">
+      <div class="rail">
+        <div class="kicker">The rule <b>· No judgement calls</b></div>
+        <h2 class="title title--sm">THE <em>DECISION</em> TABLE</h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Classification reads four columns. Nothing else. Not the savings, not how much you'd like it to be actionable.</p>
+        </div>
+        <div class="rulebook-wrap">
+          <table class="rulebook">
+            <thead>
+              <tr>
+                <th scope="col">Network &amp; storage limits</th>
+                <th scope="col">Network risk</th>
+                <th scope="col">Storage risk</th>
+                <th scope="col">Warnings</th>
+                <th scope="col">Verdict</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Something would break</td><td>any</td><td>any</td><td>any</td><td><em>Rejected</em></td></tr>
+              <tr><td>Fine, but something unknown</td><td>any</td><td>any</td><td>any</td><td><em>Conditional</em></td></tr>
+              <tr><td>All clear</td><td>Low</td><td>Low</td><td>none</td><td><em>Actionable</em></td></tr>
+              <tr><td>All clear</td><td>Medium or High</td><td>any</td><td>any</td><td><em>Conditional</em></td></tr>
+              <tr><td>All clear</td><td>any</td><td>Medium or High</td><td>any</td><td><em>Conditional</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="caption">
+          Read the third row carefully: <strong>Actionable needs everything low and nothing unknown.</strong>
+          A single medium risk on either network or storage is enough to drop a recommendation to
+          Conditional. That is a deliberate choice — confidence ahead of coverage — and a setting rather
+          than a law of nature.
+        </p>
+        <p class="caption">
+          Note what is <strong>absent</strong>: the other risks you'll meet on page 12 don't appear here at
+          all. They're shown to you, but they never change the verdict — a missing measurement doesn't need
+          to block anything, because page 6's rule already guarantees it can't shrink what it couldn't see.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= 11 REFUSALS -->
+  <section class="page" data-page="11" data-slug="refusals" data-chapter="When it says no">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/rs-refusal.jpg" alt="The Sentinel raises a protective open palm in front of a hot red-glowing server box radiating heavy load." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 05 — THE REFUSAL</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Hard restrictions <b>· The interesting part</b></div>
+        <h2 class="title title--sm">WHY A BUSY BOX<br />IS <em>LEFT ALONE</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Anyone can find a cheaper instance. The work is knowing when <em>not</em> to. A hard restriction isn't a warning — the candidate is thrown out entirely.</p>
+        </div>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">The workload wouldn't fit</div><div class="ops-d">The smaller machine simply can't carry the peak that was measured.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">You'd hit a lower ceiling</div><div class="ops-d">The target's disk throughput or network capacity is below what this workload already does today.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">You're already at a limit</div><div class="ops-d">Signs of throttling or exhausted burst credit <em>right now</em> end the conversation about making anything smaller.</div></div></div>
+          <div class="ops-item"><div class="ops-num">04</div><div><div class="ops-h">A capability would be lost</div><div class="ops-d">Local disks, specialised networking — and if it can't be confirmed whether you rely on one, <strong>unknown counts against the change</strong>, not for it.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">05</div><div><div class="ops-h">Something else owns this instance</div><div class="ops-d">Instances managed by an Auto Scaling group or ECS are <strong>set aside</strong>, not resized. Changing one member behind the group's back is a bad idea — those are handled as a group instead.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================== 12 RISK -->
+  <section class="page" data-page="12" data-slug="risk" data-chapter="Risk, disclosed">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Seven dimensions on every recommendation</span>
+            <div class="mock-tiles">
+              <div class="mock-tile"><span>Network</span><strong>gates the verdict</strong></div>
+              <div class="mock-tile"><span>Storage</span><strong>gates the verdict</strong></div>
+            </div>
+            <span class="mock-label gap">Shown to you, but never blocking</span>
+            <div class="mock-row">
+              <span class="mock-pill">Measurement quality</span>
+              <span class="mock-pill">Compute</span>
+              <span class="mock-pill">Memory</span>
+              <span class="mock-pill">Compatibility</span>
+              <span class="mock-pill">Migration effort</span>
+            </div>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT F — THE RISK RECORD</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Risk <b>· Shown, not swallowed</b></div>
+        <h2 class="title title--sm">TWO GATE,<br />FIVE <em>INFORM</em></h2>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>If five of them don't affect the verdict, why compute them at all?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Because you're the one clicking the button. A HIGH memory risk won't stop me recommending — but you deserve to see it before you act, and so does whoever reviews the change afterwards.</p>
+        </div>
+        <p class="caption">
+          Alongside the seven areas, every recommendation lists <strong>exactly what was observed</strong>
+          and why the verdict landed where it did. That's what makes a recommendation reviewable months
+          later, rather than a number you have to take on faith.
+        </p>
+        <p class="caption">
+          A single Graviton recommendation can legitimately carry <strong>high migration effort, medium
+          network risk and high storage risk</strong> all at once — and still be worth showing you, as an
+          Opportunity.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= 13 GRAVITON -->
+  <section class="page" data-page="13" data-slug="graviton" data-chapter="Graviton">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">What you see on a Graviton target</span>
+            <div class="mock-row"><span class="mock-btn amber">Opportunity</span> <span class="mock-note">never Actionable</span></div>
+            <div class="mock-tile">
+              <span>Flagged as</span><strong>Architecture migration required</strong>
+            </div>
+            <p class="mock-note">"This target uses the arm64 (Graviton) architecture. Realizing this saving requires validating and migrating the application to arm64 (rebuilt binaries/images and compatible dependencies). Compatibility is not validated by this recommendation."</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT G — THE ASTERISK</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Graviton <b>· Cheapest ≠ simplest</b></div>
+        <h2 class="title title--sm">THE SAVING WITH<br />AN <em>ASTERISK</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Graviton targets are often the biggest number on the page. They are also a <em>port</em>, not a resize. I will never file that under "safe to act on" and let you find out later.</p>
+        </div>
+        <p class="caption">
+          Benchmark scoring is what makes Arm targets comparable in the first place — the upside of
+          measuring real throughput rather than counting vCPUs. But compute capacity is the only thing it
+          establishes.
+          Whether your binaries, base images and dependencies build and run on arm64 is
+          <strong>not validated</strong>, and the recommendation says so in plain language rather than
+          burying it in a risk score.
+        </p>
+        <p class="caption">
+          The same treatment applies to any target with <strong>less memory than the current instance while
+          memory is unmeasured</strong> — you get the candidate, clearly flagged, with a note that enabling
+          memory metrics is what would turn it into a real recommendation.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================== 14 TREND -->
+  <section class="page" data-page="14" data-slug="trend" data-chapter="15-month trend">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Confidence trend — up to 15 months</span>
+            <div class="mock-row">
+              <span class="mock-pill on">CPU</span>
+              <span class="mock-pill on">Memory (if discovered)</span>
+              <span class="mock-pill">Network — excluded</span>
+            </div>
+            <span class="mock-label gap">Summary buckets</span>
+            <div class="mock-row">
+              <span class="mock-pill">30d</span><span class="mock-pill">90d</span><span class="mock-pill">120d</span>
+              <span class="mock-pill">180d</span><span class="mock-pill">365d</span><span class="mock-pill">455d</span>
+            </div>
+            <p class="mock-note ok">Headline series is daily <strong>Maximum</strong> — an honest ceiling that survives CloudWatch rollup. Daily Average must never be the headline.</p>
+            <p class="mock-note">Fetched on demand when you open the detail view; never stored per scan.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT H — THE LONG VIEW</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Evidence <b>· It gates nothing</b></div>
+        <h2 class="title title--sm">FIFTEEN MONTHS<br />OF <em>PROOF</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>The trend exists so you can overrule me. It never gates a decision — it's the evidence you need to accept or reject what I said.</p>
+        </div>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>Why is network missing from the long view?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Because I'd have to lie to show it. <code>NetworkIn</code> and <code>NetworkOut</code> are byte <em>counters</em>. Past CloudWatch's 63-day fine retention, a daily maximum gets computed from one-hour sums — which smears a sharp burst into a gentle mound and understates your true peak.</p>
+        </div>
+        <p class="caption">
+          So network peak evidence stops at the 60-day decision window, and the long trend simply omits it.
+          <strong>An honest long-range network peak is not recoverable, so it isn't drawn.</strong> Memory
+          often has far less than 15 months too, and the chart tells you how many days it actually has
+          rather than padding the line out. A short memory history is expected, not a fault.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== 15 SAVINGS MATH -->
+  <section class="page" data-page="15" data-slug="savings-math" data-chapter="Savings maths">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Two floors a saving must clear</span>
+            <div class="mock-tiles">
+              <div class="mock-tile"><span>Absolute minimum</span><strong>1 cent / month</strong></div>
+              <div class="mock-tile"><span>Your minimum</span><strong>whatever you set</strong></div>
+            </div>
+            <p class="mock-note ok">A saving landing exactly on either figure counts as clearing it.</p>
+            <p class="mock-note">Below either line it is not shown at all.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT I — THE MONEY</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The money <b>· Pennies matter</b></div>
+        <h2 class="title title--sm">WHAT COUNTS<br />AS A <em>SAVING</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Two floors. It has to beat a cent, and it has to beat whatever minimum you set. Below either, it isn't a recommendation — it's noise with a price tag.</p>
+        </div>
+        <p class="caption">
+          The boundary is handled exactly rather than approximately. Money arithmetic done the ordinary way
+          can put a saving of precisely one cent on either side of the line depending on rounding luck — so
+          the comparison is made in a way that always falls the same way for the same numbers, and
+          <strong>hitting the threshold exactly counts as meeting it.</strong>
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>Why keep the old float for what's displayed?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>So the figures on your screen don't shift underneath you between releases. The exact comparison decides <em>whether</em> a recommendation appears; the amount you read is unchanged.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== 16 SAVINGS -->
+  <section class="page" data-page="16" data-slug="savings" data-chapter="The payoff">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/rs-savings.jpg" alt="The Sentinel joyfully holds up a glowing golden receipt showing a falling cost curve, confetti in the air." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 06 — THE PAYOFF</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The payoff <b>· What you actually get</b></div>
+        <h2 class="title title--sm">THE<br /><em>RECOMMENDATION</em></h2>
+        <div class="mock-tiles">
+          <div class="mock-tile"><span>Current</span><strong>m5.xlarge</strong></div>
+          <div class="mock-tile"><span>Balanced target</span><strong>m6i.large</strong></div>
+          <div class="mock-tile hero"><span>Monthly</span><strong>$62</strong></div>
+        </div>
+        <p class="caption">
+          Every recommendation arrives with the target, the tier alternatives, the verdict, the seven risk
+          dimensions, the reason codes, and 15 months of evidence behind it. Not a number — <strong>a case
+          you can review, defend, or reject.</strong>
+        </p>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>And if you disagree with me, the trend is right there to prove me wrong. That's the deal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================= 17 OTHER SERVICES -->
+  <section class="page" data-page="17" data-slug="other-services" data-chapter="Beyond EC2">
+    <div class="spread spread--solo">
+      <div class="rail">
+        <div class="kicker">Beyond EC2 <b>· Same shape, different nouns</b></div>
+        <h2 class="title title--sm">THE OTHER<br /><em>RIGHTSIZERS</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Everything you just read — percentile evidence, target ratios, tiers, a verdict with disclosed risk — is the house pattern. Only the measurements change.</p>
+        </div>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">RDS</div><div><div class="ops-h">Databases</div><div class="ops-d">Instance class recommendations plus a <strong>storage target</strong> — a dimension EC2 doesn't have — with its own confidence trend.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">EC</div><div><div class="ops-h">ElastiCache</div><div class="ops-d">The closest sibling: identical <code>0.55 / 0.70 / 0.85</code> tier ratios, plus a split between <strong>engine CPU and host CPU</strong> — a cache node can be busy in one and idle in the other — and its own memory target ratio.</div></div></div>
+          <div class="ops-item"><div class="ops-num">ASG</div><div><div class="ops-h">Auto Scaling Groups</div><div class="ops-d">Reasons about <strong>group capacity</strong> rather than one instance — which is why a single group member is set aside on page 11 instead of being resized on its own.</div></div></div>
+        </div>
+        <p class="caption">
+          Each has its own issue coming. The rack shows what's in production.
+        </p>
+        <div class="chips">
+          <a class="chip" href="./docs.html">Back to all issues</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================== 18 WHY IT SAID THAT -->
+  <section class="page" data-page="18" data-slug="reason-codes" data-chapter="Why it said that">
+    <div class="spread spread--solo">
+      <div class="rail">
+        <div class="kicker">Appendix <b>· Reading the notes</b></div>
+        <h2 class="title title--sm">WHY IT <em>SAID</em> THAT</h2>
+        <p class="caption">
+          Every recommendation carries short notes explaining what was observed. These are the ones you will
+          see most often.
+        </p>
+        <div class="trouble">
+          <article>
+            <h3>Memory metric unavailable — current capacity retained</h3>
+            <p>No usable memory readings were found, so memory was <strong>held at what you have now</strong>.
+              The saving is real; it just never came from shrinking memory. Installing the CloudWatch agent
+              unlocks more.</p>
+          </article>
+          <article>
+            <h3>CPU requirement not met</h3>
+            <p>The smaller machine can't carry the peak that was measured. Not a warning — that option was
+              discarded.</p>
+          </article>
+          <article>
+            <h3>Burst balance depleted · Throttling detected</h3>
+            <p>You are hitting storage limits <em>today</em>. Shrinking is off the table until that's
+              resolved — and it may mean this instance needs to grow, not shrink.</p>
+          </article>
+          <article>
+            <h3>Directional metrics incomplete</h3>
+            <p>Only one side of a read/write pair was recorded at some moments. What was seen is kept as a
+              <strong>floor</strong>, not treated as the whole story.</p>
+          </article>
+          <article>
+            <h3>Baseline capability unknown · Assumed baseline · Burst or "up to"</h3>
+            <p>AWS doesn't publish a firm sustained figure for the target, or quotes only an "up to" burst
+              number. Capacity is therefore approximate, which caps the verdict at Conditional.</p>
+          </article>
+          <article>
+            <h3>Network allowance metrics missing</h3>
+            <p>Some network counters weren't available. Noted for your information — <strong>this one alone
+              will not downgrade a recommendation.</strong></p>
+          </article>
+          <article>
+            <h3>Architecture migration required</h3>
+            <p>An Arm/Graviton target. Always an Opportunity, never "safe to act on" — your application has
+              to be rebuilt and validated, and that is not checked for you.</p>
+          </article>
+          <article>
+            <h3>Managed by Auto Scaling · Managed by ECS</h3>
+            <p>Something else owns this instance's lifecycle, so it is set aside here and handled as part of
+              its group instead.</p>
+          </article>
+          <article>
+            <h3>Instance store usage unknown · Specialised networking unknown</h3>
+            <p>A capability might be in use and couldn't be confirmed. <strong>Unknown counts against the
+              change</strong>, so the recommendation is held back rather than pushed through.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 19 END -->
+  <section class="page" data-page="19" data-slug="end" data-chapter="The end">
+    <div class="spread spread--solo">
+      <div class="rail" style="align-items:center; text-align:center;">
+        <div class="kicker">MaxOps Adventures <b>· Issue №2 · The End</b></div>
+        <h2 class="title">MEASURE THE PEAK.<br />NEVER SHRINK<br />THE <em>UNSEEN</em>.</h2>
+        <p class="caption" style="border:none; padding-left:0; max-width:60ch;">
+          The rightsizer's best feature is its restraint — the capacity floor, the conservative maximum across
+          three windows, and a bar for ACTIONABLE that most recommendations deliberately fail to clear.
+        </p>
+        <div class="chips" style="justify-content:center;">
+          <a class="chip" href="./docs.html">All issues</a>
+          <a class="chip alt" href="./setup-guide.html">№1 — The Onboarding Run</a>
+          <a class="chip alt" href="https://maxops.dev/docs.html" target="_blank" rel="noopener">Reference manual</a>
+          <a class="chip alt" href="https://github.com/maxopsdev/maxops" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <button class="cta" onclick="goTo(1)">◂ Back to the cover</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="navbar">
+  <button class="navbtn" id="prevBtn" aria-label="Previous page">‹</button>
+  <div class="dots" id="dots"></div>
+  <button class="navbtn" id="nextBtn" aria-label="Next page">›</button>
+</nav>
+
+<script>
+  const pager = document.getElementById('pager');
+  const pages = Array.from(document.querySelectorAll('.page'));
+  const TOTAL = pages.length;
+  const dotsWrap = document.getElementById('dots');
+  const counterNow = document.getElementById('counterNow');
+  document.getElementById('counterTotal').textContent = TOTAL;
+  let current = 1;
+
+  pages.forEach((page, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Go to page ' + (i + 1) + ': ' + (page.dataset.chapter || ''));
+    d.title = (i + 1) + '. ' + (page.dataset.chapter || '');
+    d.addEventListener('click', () => goTo(i + 1));
+    dotsWrap.appendChild(d);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function setActive(n) {
+    current = n;
+    counterNow.textContent = n;
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === n - 1));
+    const slug = pages[n - 1]?.dataset.slug;
+    if (slug && decodeURIComponent((location.hash || '').replace(/^#/, '')) !== slug) {
+      history.replaceState(null, '', n === 1 ? location.pathname : '#' + slug);
+    }
+  }
+
+  window.goTo = function (n) {
+    n = Math.min(Math.max(n, 1), TOTAL);
+    pages[n - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  // Deep links: #capacity-floor (slug) or #page-6.
+  function pageFromHash() {
+    const raw = decodeURIComponent((location.hash || '').replace(/^#/, '')).trim();
+    if (!raw) return null;
+    const byPage = /^(?:page|panel)-(\d+)$/.exec(raw);
+    if (byPage) return Math.min(Math.max(Number(byPage[1]), 1), TOTAL);
+    const idx = pages.findIndex((p) => p.dataset.slug === raw);
+    return idx >= 0 ? idx + 1 : null;
+  }
+
+  function jumpToHash(smooth) {
+    const n = pageFromHash();
+    if (n === null) return false;
+    pages[n - 1].scrollIntoView({ behavior: smooth ? 'smooth' : 'instant', block: 'start' });
+    setActive(n);
+    return true;
+  }
+
+  window.addEventListener('hashchange', () => jumpToHash(true));
+
+  document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); goTo(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goTo(current - 1); }
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+        setActive(Number(entry.target.dataset.page));
+      }
+    });
+  }, { root: pager, threshold: [0.5] });
+  pages.forEach((p) => io.observe(p));
+
+  if (!jumpToHash(false)) setActive(1);
+</script>
+
+</body>
+</html>

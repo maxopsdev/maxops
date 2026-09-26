@@ -1,0 +1,42 @@
+{
+  "FlowLogs": [
+    {
+      "CreationTime": "2026-06-14T17:25:33.943000+00:00",
+      "DeliverLogsStatus": "SUCCESS",
+      "DestinationOptions": {
+        "FileFormat": "plain-text",
+        "HiveCompatiblePartitions": false,
+        "PerHourPartition": false
+      },
+      "FlowLogId": "fl-EXPIRATION",
+      "FlowLogStatus": "ACTIVE",
+      "LogDestination": "arn:aws:s3:::maxops-payload-vpc-expiration",
+      "LogDestinationType": "s3",
+      "LogFormat": "${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstport} ${protocol} ${packets} ${bytes} ${start} ${end} ${action} ${log-status}",
+      "MaxAggregationInterval": 600,
+      "ResourceId": "vpc-EXPIRATION",
+      "Tags": [
+        {
+          "Key": "maxops_payload_capture",
+          "Value": "true"
+        }
+      ],
+      "TrafficType": "ALL"
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "cache-control": "no-cache, no-store",
+      "content-type": "text/xml;charset=UTF-8",
+      "date": "Sun, 14 Jun 2026 17:25:55 GMT",
+      "server": "AmazonEC2",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "transfer-encoding": "chunked",
+      "vary": "accept-encoding",
+      "x-amzn-requestid": "99a87352-0e64-430e-8fbd-c6a6edc80962"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "99a87352-0e64-430e-8fbd-c6a6edc80962",
+    "RetryAttempts": 0
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "CacheCluster": {
+    "ARN": "arn:aws:elasticache:us-east-1:123456789012:cluster:maxops-payload-elasticache-non-graviton",
+    "AtRestEncryptionEnabled": false,
+    "AutoMinorVersionUpgrade": true,
+    "CacheClusterCreateTime": "2026-06-14T17:59:26.573000+00:00",
+    "CacheClusterId": "maxops-payload-elasticache-non-graviton",
+    "CacheClusterStatus": "modifying",
+    "CacheNodeType": "cache.t3.micro",
+    "CacheParameterGroup": {
+      "CacheNodeIdsToReboot": [],
+      "CacheParameterGroupName": "default.redis7",
+      "ParameterApplyStatus": "in-sync"
+    },
+    "CacheSecurityGroups": [],
+    "CacheSubnetGroupName": "default",
+    "ClientDownloadLandingPage": "https://console.aws.amazon.com/elasticache/home#client-download:",
+    "Engine": "redis",
+    "EngineVersion": "7.1.0",
+    "IpDiscovery": "ipv4",
+    "LogDeliveryConfigurations": [],
+    "NetworkType": "ipv4",
+    "NumCacheNodes": 1,
+    "PendingModifiedValues": {
+      "CacheNodeType": "cache.t4g.micro"
+    },
+    "PreferredAvailabilityZone": "us-east-1d",
+    "PreferredMaintenanceWindow": "sat:04:00-sat:05:00",
+    "ReplicationGroupLogDeliveryEnabled": false,
+    "SnapshotRetentionLimit": 0,
+    "SnapshotWindow": "06:00-07:00",
+    "TransitEncryptionEnabled": false
+  },
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "2082",
+      "content-type": "text/xml",
+      "date": "Sun, 14 Jun 2026 18:13:20 GMT",
+      "x-amzn-requestid": "1c4793f6-c054-482a-aa8d-cb9c8d92f515"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "1c4793f6-c054-482a-aa8d-cb9c8d92f515",
+    "RetryAttempts": 0
+  }
+}

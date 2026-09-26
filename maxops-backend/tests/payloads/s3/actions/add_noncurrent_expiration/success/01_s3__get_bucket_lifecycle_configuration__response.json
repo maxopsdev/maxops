@@ -1,0 +1,47 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "665",
+      "date": "Sun, 14 Jun 2026 20:10:07 GMT",
+      "server": "AmazonS3",
+      "x-amz-id-2": "+whY9A5ppFd2EjsOfR/s8C1KlWtXOsUEj8XgeAWKA/ofQMLhsOH3omDyOKP4B98ewU9aE/spGI651F+OSfTEi9O3AjG4mvYG",
+      "x-amz-request-id": "ZBTHDP48TE77HC6N",
+      "x-amz-transition-default-minimum-object-size": "all_storage_classes_128K"
+    },
+    "HTTPStatusCode": 200,
+    "HostId": "+whY9A5ppFd2EjsOfR/s8C1KlWtXOsUEj8XgeAWKA/ofQMLhsOH3omDyOKP4B98ewU9aE/spGI651F+OSfTEi9O3AjG4mvYG",
+    "RequestId": "ZBTHDP48TE77HC6N",
+    "RetryAttempts": 0
+  },
+  "Rules": [
+    {
+      "AbortIncompleteMultipartUpload": {
+        "DaysAfterInitiation": 7
+      },
+      "Expiration": {
+        "Days": 60
+      },
+      "Filter": {
+        "Prefix": ""
+      },
+      "ID": "current-only-controls",
+      "Status": "Enabled",
+      "Transitions": [
+        {
+          "Days": 30,
+          "StorageClass": "GLACIER"
+        }
+      ]
+    },
+    {
+      "Expiration": {
+        "ExpiredObjectDeleteMarker": true
+      },
+      "Filter": {
+        "Prefix": ""
+      },
+      "ID": "maxops-delete-marker-cleanup-{{ANY_INT}}",
+      "Status": "Enabled"
+    }
+  ]
+}

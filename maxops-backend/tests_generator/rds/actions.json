@@ -1,0 +1,39 @@
+{
+  "rds_migrate_graviton": {
+    "scenario": "success",
+    "check_id": "rds_non_graviton_instance_class",
+    "description": "Migrate the non-Graviton capture instance to an explicitly selected Graviton class.",
+    "resource_ref": "non_graviton_capture",
+    "parameters": {
+      "target_instance_class": "db.t4g.micro",
+      "apply_immediately": false
+    },
+    "expected_status": "submitted",
+    "expected_message": "RDS Graviton migration submitted",
+    "expected_calls": [
+      {
+        "service": "rds",
+        "operation": "describe_db_instances"
+      },
+      {
+        "service": "rds",
+        "operation": "modify_db_instance"
+      }
+    ]
+  },
+  "stop": {
+    "scenario": "success",
+    "check_id": "rds_idle_databases",
+    "description": "Stop the idle RDS capture instance after all check payloads are recorded.",
+    "resource_ref": "idle_graviton_capture",
+    "parameters": {},
+    "expected_status": "submitted",
+    "expected_message": "Stop RDS instance request submitted",
+    "expected_calls": [
+      {
+        "service": "rds",
+        "operation": "stop_db_instance"
+      }
+    ]
+  }
+}

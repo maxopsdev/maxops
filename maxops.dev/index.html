@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>maxops.dev | Open Source FinOps Control Plane</title>
+  <meta name="description" content="MaxOps is an open-source FinOps control plane for cloud infrastructure visibility, optimization checks, MCP workflows, and AWS console context.">
+  <link rel="icon" type="image/svg+xml" href="./assets/brand/maxops-mark.svg">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="site-shell" id="top">
+    <nav class="nav container" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="maxops.dev home">
+        <img class="brand-mark" src="./assets/brand/maxops-mark.svg" alt="" width="28" height="28">
+        <span>maxops.dev</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#platform">Platform</a></li>
+        <li><a href="#privacy">Privacy</a></li>
+        <li><a href="#visibility">Visibility</a></li>
+        <li><a href="#automation">Automation</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="./ai.html">AI</a></li>
+        <li><a href="./docs.html">Documentation</a></li>
+        <li><a href="https://maxops.dev/docs.html" target="_blank" rel="noopener">Reference</a></li>
+      </ul>
+      <a class="btn btn-ghost nav-cta" href="#start">Run Locally</a>
+    </nav>
+
+    <section class="hero container">
+      <div class="hero-copy">
+        <p class="eyebrow">Open source FinOps control plane</p>
+        <a class="hero-badge" href="./ai.html">
+          <span class="dot" aria-hidden="true"></span>
+          <b>Agent-ready</b>
+          <span class="sep" aria-hidden="true"></span>
+          Ask your own AI assistant about your cloud spend
+          <span class="go" aria-hidden="true">›</span>
+        </a>
+        <h1>Cloud cost visibility that reaches the infrastructure layer.</h1>
+        <p class="hero-lede">
+          MaxOps gives cloud teams a local-first FinOps workflow for understanding infrastructure, finding waste, reviewing evidence, and acting with context without sending your cloud data to a hosted service.
+        </p>
+        <p class="hero-ai">
+          It speaks the open <strong>Model Context Protocol</strong>, so the assistant your team already uses can
+          answer from findings MaxOps computed and verified &mdash; not from guesses.
+          <strong>13 of 16 tools are read-only</strong>, and nothing is written until you switch it on.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#platform">Explore the Platform</a>
+          <a class="btn btn-secondary" href="./ai.html">MaxOps &amp; AI</a>
+          <a class="btn btn-ghost" href="#projects">View OSS Projects</a>
+        </div>
+      </div>
+
+      <figure class="hero-shot">
+        <img src="./assets/product/dashboard-dark.jpg"
+             alt="The MaxOps dashboard: summary tiles for total checks, resources found and potential yearly savings, above findings grouped by resource type."
+             width="1600" height="1000" loading="eager" decoding="async">
+      </figure>
+    </section>
+  </header>
+
+  <main>
+    <section class="section problem" id="platform">
+      <div class="container problem-grid">
+        <div class="section-intro">
+          <p class="eyebrow">The cloud infrastructure problem</p>
+          <h2>FinOps breaks down when cost signals are separated from operational reality.</h2>
+        </div>
+        <div class="problem-list">
+          <article>
+            <h3>Reports do not show resource context</h3>
+            <p>Cloud bills and dashboards can identify spend, but engineers still need instance type, state, region, tags, workload, and service-specific posture before they can act.</p>
+          </article>
+          <article>
+            <h3>Recommendations need evidence</h3>
+            <p>Optimization work requires defensible checks, resource-level findings, current configuration, target action, and a way to exclude or snooze legitimate exceptions.</p>
+          </article>
+          <article>
+            <h3>Actions happen in several tools</h3>
+            <p>Teams move between dashboards, AWS Console, automation clients, and code. MaxOps keeps the same FinOps context available across those surfaces.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section system">
+      <div class="container">
+        <div class="section-intro narrow">
+          <p class="eyebrow">MaxOps workflow</p>
+          <h2>Inform, Optimize, and Operate in one OSS stack.</h2>
+          <p>MaxOps follows the practical FinOps lifecycle: understand what is running, identify waste with infrastructure checks, and run repeatable workflows with audit-friendly controls.</p>
+        </div>
+        <div class="system-grid">
+          <article>
+            <span class="system-number">Inform</span>
+            <h3>Build the infrastructure picture</h3>
+            <p>Inventory views combine resource identity, service metadata, workload signals, tags, estimated cost, finding status, and region/account context.</p>
+          </article>
+          <article>
+            <span class="system-number">Optimize</span>
+            <h3>Turn checks into work</h3>
+            <p>The backend check registry evaluates cloud waste patterns such as idle compute, unattached volumes, overprovisioned capacity, missing lifecycle policies, and old snapshots.</p>
+          </article>
+          <article>
+            <span class="system-number">Operate</span>
+            <h3>Keep decisions accountable</h3>
+            <p>Snoozes, filters, check execution, action flows, and MCP write controls make optimization work explicit instead of hiding decisions in chat threads or spreadsheets.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section privacy" id="privacy">
+      <div class="container privacy-panel">
+        <div class="section-intro">
+          <p class="eyebrow">Local-first by design</p>
+          <h2>Your infrastructure data stays in your environment.</h2>
+          <p>MaxOps is built to run locally: the backend, frontend, MCP server, and browser plugin work against your local MaxOps instance. Inventory, findings, tags, cost estimates, snoozes, and check results do not need to be sent to a third-party SaaS platform for the core workflow.</p>
+        </div>
+        <div class="privacy-grid">
+          <article>
+            <h3>Local backend</h3>
+            <p>The API runs in your environment and serves the dashboard, resource pages, check workflows, and MCP endpoints from your own MaxOps data store.</p>
+          </article>
+          <article>
+            <h3>No external plugin calls</h3>
+            <p>The browser plugin is scoped to AWS Console pages and local HTTP origins such as localhost or 127.0.0.1.</p>
+          </article>
+          <article>
+            <h3>Private FinOps analysis</h3>
+            <p>Teams can inspect infrastructure cost signals, workload evidence, and optimization findings without uploading internal cloud inventory to an external service.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section visibility" id="visibility">
+      <div class="container visibility-layout">
+        <div class="section-intro">
+          <p class="eyebrow">Infrastructure visibility</p>
+          <h2>From dashboard to resource type overview to instance-level detail.</h2>
+          <p>MaxOps is designed for progressive investigation. Start with the operating picture, drill into service families, then inspect the exact resource with the evidence needed to make a change.</p>
+        </div>
+        <div class="view-stack">
+          <article>
+            <div class="view-index">Dashboard</div>
+            <h3>Cross-environment operating view</h3>
+            <p>Group checks and findings by resource type, account, region, tags, and saved filters to see where optimization work should start.</p>
+          </article>
+          <article>
+            <div class="view-index">Resource Type Overview</div>
+            <h3>Service-specific inventory pages</h3>
+            <p>Dedicated overviews for EC2, EBS, S3, RDS, DynamoDB, and ElastiCache compare health, workload, dimensions, findings, and potential actions.</p>
+          </article>
+          <article>
+            <div class="view-index">Instance Details</div>
+            <h3>Resource-level evidence</h3>
+            <p>Detail pages expose configuration, tags, usage trends, MaxOps finding context, recommended action, cost estimate, and potential savings for the selected resource.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section automation" id="automation">
+      <div class="container automation-grid">
+        <article class="automation-card">
+          <p class="eyebrow">AWS Console context</p>
+          <h2>Show MaxOps findings where operators already work.</h2>
+          <p>The browser plugin overlays local MaxOps data inside AWS Console resource tables, adding cost, savings, and finding chips without calling third-party services.</p>
+          <div class="mini-console" aria-label="Browser plugin preview">
+            <div class="mini-row head"><span>Name</span><span>MaxOps price</span><span>MaxOps findings</span></div>
+            <div class="mini-row"><span>EC2 instance</span><span>Cost chip</span><span>Idle capacity</span></div>
+            <div class="mini-row"><span>EBS volume</span><span>Cost chip</span><span>gp3 candidate</span></div>
+          </div>
+        </article>
+        <article class="automation-card">
+          <p class="eyebrow">MCP workflows</p>
+          <h2>Expose FinOps context to compatible clients.</h2>
+          <p>The MCP server runs against your local MaxOps backend and provides tools for resource types, checks, latest results, inventory queries, tag cost summaries, snoozes, and check execution when write mode is enabled.</p>
+          <div class="terminal" aria-label="MCP tool preview">
+            <span>maxops://dashboard/summary</span>
+            <span>query_inventory(resource_type="all")</span>
+            <span>get_tag_cost_savings_summary(...)</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section projects" id="projects">
+      <div class="container">
+        <div class="section-intro narrow">
+          <p class="eyebrow">OSS project stack</p>
+          <h2>Separate components, one FinOps product surface.</h2>
+        </div>
+        <div class="project-grid">
+          <article>
+            <span>API</span>
+            <h3>Local API and check engine</h3>
+            <p>FastAPI backend that runs locally for inventory, check execution, policy management, optimization APIs, onboarding, settings, scans, pricing, and MCP-facing endpoints.</p>
+          </article>
+          <article>
+            <span>UI</span>
+            <h3>FinOps operating console</h3>
+            <p>React + TypeScript operating console with dashboard, resource type overview pages, instance/resource detail pages, checks manager, notifications, security, settings, and onboarding.</p>
+          </article>
+          <article>
+            <span>MCP</span>
+            <h3>MCP automation layer</h3>
+            <p>Standalone MCP server that exposes inventory, checks, results, tag summaries, snooze workflows, and controlled write tools to desktop MCP clients.</p>
+          </article>
+          <article>
+            <span>Browser</span>
+            <h3>AWS Console overlay</h3>
+            <p>Dependency-free browser extension for Chrome, Edge, and Firefox that reads local MaxOps data only and overlays it in AWS Console resource views.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section coverage">
+      <div class="container coverage-panel">
+        <div>
+          <p class="eyebrow">AWS optimization coverage</p>
+          <h2>Checks across compute, storage, data, observability, and network cost patterns.</h2>
+        </div>
+        <div class="coverage-tags">
+          <span>EC2</span>
+          <span>EBS</span>
+          <span>S3</span>
+          <span>RDS</span>
+          <span>DynamoDB</span>
+          <span>ElastiCache</span>
+          <span>ASG</span>
+          <span>Aurora</span>
+          <span>Lambda</span>
+          <span>CloudWatch</span>
+          <span>ECS</span>
+          <span>EFS</span>
+          <span>EMR</span>
+          <span>Glue</span>
+          <span>Kinesis</span>
+          <span>OpenSearch</span>
+          <span>Redshift</span>
+          <span>Snapshots</span>
+          <span>VPC</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section start" id="start">
+      <div class="container start-panel">
+        <div>
+          <p class="eyebrow">Run it locally</p>
+          <h2>MaxOps is built as open-source infrastructure software.</h2>
+          <p>Use the repository setup guide to run the backend, frontend, MCP server, and browser plugin locally. Keep your infrastructure data private while extending checks and workflows around your own FinOps operating model.</p>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="./docs.html">Read the Documentation</a>
+          <a class="btn btn-secondary" href="https://maxops.dev/index.html#start" target="_blank" rel="noopener">Reference Manual</a>
+          <a class="btn btn-secondary" href="https://github.com/maxopsdev/maxops" target="_blank" rel="noopener">View on GitHub</a>
+          <a class="btn btn-ghost" href="mailto:team@maxops.dev">Contact team@maxops.dev</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <div class="footer-brand">
+        <p>&copy; <span id="year"></span> MaxOps. Open source FinOps tooling.</p>
+        <p class="footer-licence">
+          Released under the <strong>Apache License 2.0</strong> — free to use, modify and
+          distribute, including commercially.
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="https://www.finops.org/introduction/what-is-finops/">What is FinOps?</a>
+        <a href="#top">Back to top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>

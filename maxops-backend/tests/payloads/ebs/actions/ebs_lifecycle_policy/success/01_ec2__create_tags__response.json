@@ -1,0 +1,16 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "cache-control": "no-cache, no-store",
+      "content-length": "209",
+      "content-type": "text/xml;charset=UTF-8",
+      "date": "Sun, 14 Jun 2026 20:26:09 GMT",
+      "server": "AmazonEC2",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-amzn-requestid": "94be7f22-2646-406b-af21-f461c03f7956"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "94be7f22-2646-406b-af21-f461c03f7956",
+    "RetryAttempts": 0
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "account_id": "123456789012",
+  "action_key": "rds_migrate_graviton",
+  "calls": [
+    {
+      "kwargs": {
+        "DBInstanceIdentifier": "maxops-test-rds-instance"
+      },
+      "operation": "describe_db_instances",
+      "raises_client_error": false,
+      "response_file": "01_rds__describe_db_instances__response.json",
+      "service": "rds"
+    },
+    {
+      "kwargs": {
+        "ApplyImmediately": false,
+        "DBInstanceClass": "db.m6g.large",
+        "DBInstanceIdentifier": "maxops-test-rds-instance"
+      },
+      "operation": "modify_db_instance",
+      "raises_client_error": true,
+      "response_file": "02_rds__modify_db_instance__error.json",
+      "service": "rds"
+    }
+  ],
+  "capture_source": "hand-authored",
+  "check_id": "rds_non_graviton_instance_class",
+  "expected_error": {
+    "detail_contains": "InvalidDBInstanceState",
+    "status_code": 500
+  },
+  "parameters": {
+    "target_instance_class": "db.m6g.large"
+  },
+  "region": "us-east-1",
+  "resource_id": "maxops-test-rds-instance",
+  "scenario": "modify_fails"
+}

@@ -1,0 +1,42 @@
+{
+  "bucket_placeholders": {
+    "lifecycle_no_mpu": "maxops-payload-s3-lifecycle-no-mpu"
+  },
+  "calls": [
+    {
+      "operation": "list_buckets",
+      "response_file": "list_buckets.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "lifecycle_no_mpu",
+      "bucket_name": "maxops-payload-s3-lifecycle-no-mpu",
+      "operation": "get_bucket_location",
+      "response_file": "get_bucket_location__lifecycle_no_mpu.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "lifecycle_no_mpu",
+      "bucket_name": "maxops-payload-s3-lifecycle-no-mpu",
+      "operation": "get_bucket_tagging",
+      "response_file": "get_bucket_tagging__lifecycle_no_mpu.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "lifecycle_no_mpu",
+      "bucket_name": "maxops-payload-s3-lifecycle-no-mpu",
+      "operation": "get_bucket_lifecycle_configuration",
+      "response_file": "get_bucket_lifecycle_configuration__lifecycle_no_mpu.json",
+      "service": "s3"
+    }
+  ],
+  "check_id": "s3_no_mpu_policy",
+  "check_parameters": {
+    "region": "us-east-1"
+  },
+  "description": "Use a bucket with lifecycle rules but no AbortIncompleteMultipartUpload clause.",
+  "expected_matches": [
+    "maxops-payload-s3-lifecycle-no-mpu"
+  ],
+  "scenario": "flag_bucket_without_abort_mpu"
+}

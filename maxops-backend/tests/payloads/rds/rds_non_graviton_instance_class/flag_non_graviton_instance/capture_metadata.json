@@ -1,0 +1,28 @@
+{
+  "calls": [
+    {
+      "operation": "describe_db_instances",
+      "response_file": "describe_db_instances.json",
+      "service": "rds"
+    },
+    {
+      "db_alias": "non_graviton_capture",
+      "db_instance_identifier": "maxops-payload-rds-non-graviton",
+      "operation": "list_tags_for_resource",
+      "response_file": "list_tags_for_resource__non_graviton_capture.json",
+      "service": "rds"
+    }
+  ],
+  "check_id": "rds_non_graviton_instance_class",
+  "check_parameters": {
+    "region": "us-east-1"
+  },
+  "db_placeholders": {
+    "non_graviton_capture": "maxops-payload-rds-non-graviton"
+  },
+  "description": "Use the captured non-Graviton DB instance class for the positive path.",
+  "expected_matches": [
+    "maxops-payload-rds-non-graviton"
+  ],
+  "scenario": "flag_non_graviton_instance"
+}

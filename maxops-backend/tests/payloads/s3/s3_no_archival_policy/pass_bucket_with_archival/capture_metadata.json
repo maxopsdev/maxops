@@ -1,0 +1,41 @@
+{
+  "bucket_placeholders": {
+    "compliant_nonversioned": "maxops-payload-s3-compliant-nonversioned"
+  },
+  "calls": [
+    {
+      "operation": "list_buckets",
+      "response_file": "list_buckets.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "compliant_nonversioned",
+      "bucket_name": "maxops-payload-s3-compliant-nonversioned",
+      "operation": "get_bucket_location",
+      "response_file": "get_bucket_location__compliant_nonversioned.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "compliant_nonversioned",
+      "bucket_name": "maxops-payload-s3-compliant-nonversioned",
+      "operation": "get_bucket_tagging",
+      "response_file": "get_bucket_tagging__compliant_nonversioned.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "compliant_nonversioned",
+      "bucket_name": "maxops-payload-s3-compliant-nonversioned",
+      "operation": "get_bucket_lifecycle_configuration",
+      "response_file": "get_bucket_lifecycle_configuration__compliant_nonversioned.json",
+      "service": "s3"
+    }
+  ],
+  "check_id": "s3_no_archival_policy",
+  "check_parameters": {
+    "include_infrequent_access": false,
+    "region": "us-east-1"
+  },
+  "description": "Use a bucket with archival transitions configured.",
+  "expected_matches": [],
+  "scenario": "pass_bucket_with_archival"
+}

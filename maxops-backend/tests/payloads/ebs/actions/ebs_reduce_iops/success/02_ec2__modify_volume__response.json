@@ -1,0 +1,31 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "cache-control": "no-cache, no-store",
+      "content-type": "text/xml;charset=UTF-8",
+      "date": "Sun, 14 Jun 2026 20:23:56 GMT",
+      "server": "AmazonEC2",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "transfer-encoding": "chunked",
+      "vary": "accept-encoding",
+      "x-amzn-requestid": "e544bc18-9a3c-449f-9cce-e8fefed6aa3e"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "e544bc18-9a3c-449f-9cce-e8fefed6aa3e",
+    "RetryAttempts": 0
+  },
+  "VolumeModification": {
+    "ModificationState": "modifying",
+    "OriginalIops": 200,
+    "OriginalMultiAttachEnabled": false,
+    "OriginalSize": 4,
+    "OriginalVolumeType": "io1",
+    "Progress": 0,
+    "StartTime": "2026-06-14T20:23:56+00:00",
+    "TargetIops": 100,
+    "TargetMultiAttachEnabled": false,
+    "TargetSize": 4,
+    "TargetVolumeType": "io1",
+    "VolumeId": "vol-PROVISIONEDIO1"
+  }
+}

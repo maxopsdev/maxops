@@ -1,0 +1,42 @@
+{
+  "bucket_placeholders": {
+    "logging_target": "maxops-payload-s3-logging-target"
+  },
+  "calls": [
+    {
+      "operation": "list_buckets",
+      "response_file": "list_buckets.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "logging_target",
+      "bucket_name": "maxops-payload-s3-logging-target",
+      "operation": "get_bucket_location",
+      "response_file": "get_bucket_location__logging_target.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "logging_target",
+      "bucket_name": "maxops-payload-s3-logging-target",
+      "operation": "get_bucket_tagging",
+      "response_file": "get_bucket_tagging__logging_target.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "logging_target",
+      "bucket_name": "maxops-payload-s3-logging-target",
+      "operation": "get_bucket_lifecycle_configuration",
+      "response_file": "get_bucket_lifecycle_configuration__logging_target.json",
+      "service": "s3"
+    }
+  ],
+  "check_id": "s3_log_buckets_without_expiration_policy",
+  "check_parameters": {
+    "region": "us-east-1"
+  },
+  "description": "Use a log-like bucket name with no lifecycle expiration.",
+  "expected_matches": [
+    "maxops-payload-s3-logging-target"
+  ],
+  "scenario": "flag_log_bucket_without_expiration"
+}

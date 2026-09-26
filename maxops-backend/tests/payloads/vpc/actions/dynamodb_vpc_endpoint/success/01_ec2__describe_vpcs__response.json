@@ -1,0 +1,46 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "cache-control": "no-cache, no-store",
+      "content-length": "950",
+      "content-type": "text/xml;charset=UTF-8",
+      "date": "Sun, 14 Jun 2026 17:23:46 GMT",
+      "server": "AmazonEC2",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-amzn-requestid": "9b2cb9a7-537c-40c3-aafa-19d41b0f6aca"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "9b2cb9a7-537c-40c3-aafa-19d41b0f6aca",
+    "RetryAttempts": 0
+  },
+  "Vpcs": [
+    {
+      "CidrBlock": "10.0.0.0/24",
+      "CidrBlockAssociationSet": [
+        {
+          "AssociationId": "vpc-cidr-assoc-01f870a28a963d353",
+          "CidrBlock": "10.0.0.0/24",
+          "CidrBlockState": {
+            "State": "associated"
+          }
+        }
+      ],
+      "DhcpOptionsId": "dopt-f8bec09d",
+      "InstanceTenancy": "default",
+      "IsDefault": false,
+      "OwnerId": "123456789012",
+      "State": "available",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "maxops-payload-endpoint_vpc-1781457771"
+        },
+        {
+          "Key": "maxops_payload_capture",
+          "Value": "true"
+        }
+      ],
+      "VpcId": "vpc-ENDPOINT"
+    }
+  ]
+}

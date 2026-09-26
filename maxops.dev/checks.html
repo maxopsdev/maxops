@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Checks | MaxOps Adventures №3</title>
+  <meta name="description" content="A page-by-page comic guide to what MaxOps looks for: the catalogue of checks, what a finding tells you, grace periods, turning checks off, read-only mode, snoozing versus exempting a resource, and who silenced what.">
+  <link rel="icon" type="image/svg+xml" href="./assets/brand/maxops-mark.svg">
+  <link rel="stylesheet" href="./setup-guide.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="masthead">
+  <a class="brand" href="./docs.html"><img src="./assets/brand/maxops-mark.svg" alt="" width="26" height="26">MAXOPS <span>ADVENTURES</span></a>
+  <a class="masthead-back" href="./docs.html">‹ All issues</a>
+  <div class="counter">PAGE <b id="counterNow">1</b> / <span id="counterTotal">1</span></div>
+</header>
+
+<main class="pager" id="pager">
+
+  <!-- ============================================================ 1 COVER -->
+  <section class="page" data-page="1" data-slug="cover" data-chapter="Cover">
+    <div class="spread">
+      <div class="rail" style="align-items:center;">
+        <div class="panel" style="width:100%;">
+          <div class="panel-inner">
+            <img src="./assets/comic/cr-cover.jpg" alt="The Cost Sentinel stands beside a towering glowing card catalogue, its many drawers lit teal, with cards floating around it." />
+            <div class="halftone"></div>
+            <div class="vignette"></div>
+          </div>
+          <div class="fig-tag">FIG. 01 — COVER</div>
+        </div>
+        <div class="kicker">MaxOps Adventures <b>· Issue №3</b></div>
+        <h1 class="title">THE<br /><em>CHECKS</em></h1>
+        <div class="subtitle">What MaxOps Looks For</div>
+        <p class="caption" style="border:none; padding-left:0; max-width:58ch;">
+          A hundred and three questions asked of your account — what each finding tells you, how to quiet
+          the ones that don't apply, and how to be sure nothing changes without your say-so.
+        </p>
+        <button class="cta" onclick="goTo(2)">Begin the walkthrough ▸</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================== 2 WHAT IS A CHECK -->
+  <section class="page" data-page="2" data-slug="what-is-a-check" data-chapter="What a check is">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/cr-anatomy.jpg" alt="The Sentinel presents a floating diagram of a single card with labelled layers." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 02 — ONE QUESTION</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The idea <b>· One question at a time</b></div>
+        <h2 class="title title--sm">A CHECK IS<br />A <em>QUESTION</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Not a score, not a grade. One plain question asked of every matching resource — <em>"is this volume attached to anything?"</em> — and a list of the ones where the answer looks expensive.</p>
+        </div>
+        <p class="caption">
+          Each check covers exactly one kind of waste. That's deliberate: a single "cloud health score" tells
+          you nothing you can act on, while <strong>"eleven volumes are unattached, costing $340 a month"</strong>
+          is a task someone can pick up this afternoon.
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>Can a check change something in my account while it's looking?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>No. Checks only read and report — every one of them, without exception. Changing anything is a separate, deliberate step with its own switches, and you'll meet those on page 8.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= 3 CATALOGUE -->
+  <section class="page" data-page="3" data-slug="catalogue" data-chapter="The catalogue">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/cr-catalogue.jpg" alt="The Sentinel stands before a huge wall of glowing hexagonal tiles arranged in labelled columns." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 03 — THE WALL</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The catalogue <b>· What ships today</b></div>
+        <h2 class="title title--sm">A HUNDRED AND<br /><em>THREE</em></h2>
+        <div class="mock-tiles">
+          <div class="mock-tile hero"><span>Checks</span><strong>112</strong></div>
+          <div class="mock-tile hero"><span>Resource types</span><strong>32</strong></div>
+        </div>
+        <p class="caption">Where the weight sits:</p>
+        <div class="mock-row">
+          <span class="mock-pill on">S3 <em>12</em></span>
+          <span class="mock-pill on">Auto Scaling <em>9</em></span>
+          <span class="mock-pill on">OpenSearch <em>8</em></span>
+          <span class="mock-pill">EBS <em>6</em></span>
+          <span class="mock-pill">DynamoDB <em>6</em></span>
+          <span class="mock-pill">EMR <em>6</em></span>
+          <span class="mock-pill">Aurora <em>6</em></span>
+          <span class="mock-pill">EC2 <em>4</em></span>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Notice the biggest pile isn't compute — it's storage. Nobody gets paged about a bucket with no lifecycle policy, so that waste sits there for years. Twelve of my questions are about S3 alone.</p>
+        </div>
+        <p class="caption">
+          The full list lives under <strong>Settings → Checks</strong>, grouped by service, with a short
+          description of what each one looks for.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= 4 FINDING -->
+  <section class="page" data-page="4" data-slug="finding" data-chapter="Reading a finding">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">A finding, as it appears</span>
+            <div class="mock-tile"><span>Resource</span><strong>vol-0a1b2c3d — 500 GB gp3</strong></div>
+            <div class="mock-tile"><span>Why it matched</span><strong>Unattached: no attachments for at least 7 days</strong></div>
+            <div class="mock-tiles">
+              <div class="mock-tile"><span>Monthly</span><strong>$40</strong></div>
+              <div class="mock-tile"><span>Yearly</span><strong>$480</strong></div>
+              <div class="mock-tile"><span>Age</span><strong>63 days</strong></div>
+            </div>
+            <span class="mock-label gap">What you can do about it</span>
+            <div class="mock-row">
+              <span class="mock-btn primary">Snapshot &amp; terminate</span>
+              <span class="mock-btn secondary">Add lifecycle policy</span>
+            </div>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT A — A FINDING</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">The output <b>· Evidence, not a verdict</b></div>
+        <h2 class="title title--sm">READING A<br /><em>FINDING</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>A resource id and a dollar figure is a rumour. A finding has to say what I saw, what I suggest, what else you might do instead, and how sure I am.</p>
+        </div>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">Why it matched</div><div class="ops-d">Written in plain English, including the threshold that produced it — so you can disagree with the rule, not just the result.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">What it's costing</div><div class="ops-d">Monthly and yearly estimates, drawn from the local pricing database you unpacked during setup.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">03</div><div><div class="ops-h">More than one answer</div><div class="ops-d">An unattached volume offers <strong>both</strong> "snapshot and terminate" and "add a lifecycle policy" — because deleting it and managing it are both legitimate. You choose.</div></div></div>
+          <div class="ops-item"><div class="ops-num">04</div><div><div class="ops-h">The evidence</div><div class="ops-d">Where a check measured something — an age, a utilisation figure — the observed value travels with the finding.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================== 5 GRACE PERIODS -->
+  <section class="page" data-page="5" data-slug="grace-periods" data-chapter="Grace periods">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Minimum age before a volume is reported</span>
+            <div class="mock-row">
+              <span class="mock-pill">0 days</span>
+              <span class="mock-pill on">7 days</span>
+              <span class="mock-pill">30 days</span>
+              <span class="mock-pill">90 days</span>
+            </div>
+            <div class="mock-tiles">
+              <div class="mock-tile"><span>Detached this morning</span><strong>not reported</strong></div>
+              <div class="mock-tile"><span>Detached in March</span><strong>reported</strong></div>
+            </div>
+            <p class="mock-note ok">Set the threshold to <strong>0</strong> to switch the grace period off and see everything.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT B — THE GRACE PERIOD</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Thresholds <b>· Room to work</b></div>
+        <h2 class="title title--sm">WHY IT WAITS<br />BEFORE <em>ASKING</em></h2>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>I detached a volume an hour ago during maintenance and MaxOps didn't flag it. Is it broken?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>That's me being polite. Several checks wait before they'll call something waste — unattached volumes, stopped instances, unused file systems. You're mid-migration; I'm not going to suggest deleting your work in progress.</p>
+        </div>
+        <p class="caption">
+          Each of those checks has a <strong>minimum age</strong> you can set. The default is a week for
+          storage and a month for stopped instances — long enough to cover a maintenance window, short
+          enough that genuine waste still surfaces quickly.
+        </p>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>One thing worth knowing: if I <em>can't</em> work out how old something is, I don't report it. These recommendations end in deletion, so "couldn't tell" must never be read as "old enough."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= 6 ACTIONS -->
+  <section class="page" data-page="6" data-slug="actions" data-chapter="Why no button">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Finding with a button</span>
+            <div class="mock-tile"><span>Unattached volume</span><strong>Snapshot &amp; terminate</strong></div>
+            <div class="mock-row"><span class="mock-btn primary">Run action</span></div>
+            <span class="mock-label gap">Finding without one</span>
+            <div class="mock-tile"><span>Over-sharded stream</span><strong>Reduce shard count</strong></div>
+            <div class="mock-row"><span class="mock-btn dead">No automated action</span></div>
+            <p class="mock-note">The recommendation still stands — MaxOps just won't do this one for you.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT C — REVIEW ONLY</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Actions <b>· Advice vs automation</b></div>
+        <h2 class="title title--sm">WHY SOME FINDINGS<br />HAVE NO <em>BUTTON</em></h2>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>This one recommends reducing shard count, but there's nothing to click.</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Because I know it's wasteful, and I also know I shouldn't be the one to fix it. Roughly a quarter of my checks are marked <strong>review</strong> on purpose — the right move is a person who understands the workload.</p>
+        </div>
+        <p class="caption">
+          Every finding carries a recommendation. Only some carry an <strong>action</strong> MaxOps can
+          perform. Where no safe automated remedy exists, you get the analysis and the evidence and make the
+          change yourself — which is better than a button that does something plausible and wrong.
+        </p>
+        <p class="caption">
+          As the action library grows, findings that are advice today gain buttons. The recommendation
+          doesn't change; only who carries it out.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================== 7 ENABLEMENT -->
+  <section class="page" data-page="7" data-slug="turning-off" data-chapter="Turning a check off">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Settings › Checks</span>
+            <div class="mock-row">
+              <span class="mock-pill on">S3 lifecycle policy — on</span>
+            </div>
+            <div class="mock-row">
+              <span class="mock-pill on">Unattached volumes — on</span>
+            </div>
+            <div class="mock-row">
+              <span class="mock-pill">Cross-region replication — off</span>
+            </div>
+            <div class="mock-tile"><span>Checks tuned</span><strong>3 / 112</strong></div>
+            <p class="mock-note">A check you've never touched is <strong>on</strong>. Only an explicit "off" silences it.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT D — THE CHECK LIST</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Tuning <b>· Whole questions</b></div>
+        <h2 class="title title--sm">TURNING A CHECK<br /><em>OFF</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Some questions simply don't apply to you. If you have no compliance reason to keep cross-region replication, that check is noise on <em>every</em> bucket, forever. Turn the question off — not each answer.</p>
+        </div>
+        <p class="caption">
+          A disabled check is skipped before the scan starts, so it costs nothing and produces nothing.
+          <strong>Settings → Checks</strong> shows how many you've customised, so it's easy to see what
+          you've changed from the defaults.
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>A new check appeared after I upgraded. Was that supposed to happen?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Yes. Anything you've never expressed an opinion about runs by default — there's a difference between <em>"you haven't decided"</em> and <em>"you said no"</em>, and only the second one should keep me quiet. New checks arrive switched on.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================== 8 MASTER GATE -->
+  <section class="page" data-page="8" data-slug="read-only" data-chapter="Read-only mode">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/cr-gate.jpg" alt="The Sentinel rests a hand on a large red master switch marked OFF, with smaller individual controls glowing behind it." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 04 — MASTER GATE</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Safety <b>· Two locks, in order</b></div>
+        <h2 class="title title--sm">THE MASTER<br /><em>SWITCH</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Out of the box I change nothing. Every action is held shut until someone deliberately opens the gate — and that gate isn't in the app.</p>
+        </div>
+        <div class="ops-list">
+          <div class="ops-item active"><div class="ops-num">01</div><div><div class="ops-h">The deployment switch</div><div class="ops-d">Until <code>MAXOPS_ENABLE_ACTIONS=true</code> is set where MaxOps runs, <strong>no action runs at all</strong>. Settings will tell you plainly that actions are disabled for the environment.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">The per-action switch</div><div class="ops-d">Only once the first gate is open. Each action can be allowed or blocked individually under <strong>Settings → Actions</strong>.</div></div></div>
+        </div>
+        <p class="caption">
+          The order is the point. The master gate lives in the environment, <strong>not in the database</strong>,
+          so nobody with access to the interface can turn on changes the deployment forbade. Getting write
+          access requires someone who can change how MaxOps is run.
+        </p>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Which means you can hand me to a whole team read-only with a straight face. All the findings, all the savings, all the evidence — and not one thing I can alter.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================== 9 SNOOZE -->
+  <section class="page" data-page="9" data-slug="snooze" data-chapter="Snooze vs exempt">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/cr-snooze.jpg" alt="The Sentinel gently tucks a small sleeping server box under a teal blanket while an amber alarm clock floats nearby." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 05 — SLEEPING, NOT GONE</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Exceptions <b>· Two different promises</b></div>
+        <h2 class="title title--sm">SNOOZE<br />OR <em>EXEMPT</em>?</h2>
+        <div class="mock-tiles">
+          <div class="mock-tile"><span>Snooze</span><strong>ask me again later</strong></div>
+          <div class="mock-tile"><span>Exempt</span><strong>stop asking</strong></div>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p><strong>Exempt</strong> means this is legitimate and always will be — a volume kept deliberately for forensics. <strong>Snooze</strong> means not now: ask me again after the migration lands. One is a decision, the other is a deferral, and blurring them is how a temporary exception quietly becomes permanent.</p>
+        </div>
+        <p class="caption">
+          Both are set on a single resource for a <strong>single check</strong>. Silencing a volume for the
+          unattached question doesn't silence it for anything else — the exception stays as narrow as the
+          question it answers.
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>It asks me for a reason. Do I have to fill that in?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Not required, but write it anyway. It's for whoever finds this in six months and wonders why a $400-a-month volume was invisible. That person is usually you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================== 10 AUDIT -->
+  <section class="page" data-page="10" data-slug="audit" data-chapter="Who silenced what">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/cr-ledger.jpg" alt="The Sentinel stamps an open ledger whose lines each show an action and a timestamp, beneath an AUDIT TRAIL banner." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 06 — THE LEDGER</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Accountability <b>· Before and after</b></div>
+        <h2 class="title title--sm">WHO <em>SILENCED</em><br />WHAT</h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Every snooze and every exemption is written down, and the record is never edited afterwards. Not just what's true now — what <em>changed</em>, and who changed it.</p>
+        </div>
+        <p class="caption">
+          Each entry keeps the resource, the account and region, the date the snooze ran to
+          <strong>before and after</strong> the change, the reason <strong>before and after</strong>, who did
+          it, and when. Keeping both sides is what turns a settings screen into a history you can actually
+          investigate.
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>Isn't that a lot of bookkeeping for hiding a row in a dashboard?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Hiding a row in a dashboard is precisely how six figures of waste survives an audit. If someone quietly extended the same snooze four times, that should be a discoverable fact — not a mystery you re-litigate every quarter.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= 11 SCAN FLOW -->
+  <section class="page" data-page="11" data-slug="scan-flow" data-chapter="A scan, end to end">
+    <div class="spread spread--solo">
+      <div class="rail">
+        <div class="kicker">Putting it together <b>· One scan</b></div>
+        <h2 class="title title--sm">A SCAN, <em>END</em> TO END</h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Every control you've met gets one say, in this order.</p>
+        </div>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">Work out what to ask</div><div class="ops-d">Anything you switched off is dropped now — before a single call to AWS, so a disabled check costs you nothing.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">Apply your thresholds</div><div class="ops-d">Grace periods and tuning values from Settings, replacing the defaults.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">Look, three checks at a time</div><div class="ops-d">With retries for anything that stumbles, and a stop if the same error repeats — the run you watched during onboarding.</div></div></div>
+          <div class="ops-item"><div class="ops-num">04</div><div><div class="ops-h">Write up what was found</div><div class="ops-d">Each match becomes a finding, with its cost estimate, its reason, and its options.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">05</div><div><div class="ops-h">Set aside your exceptions</div><div class="ops-d">Snoozed and exempted resources drop out of what you're shown. They were still examined — they just aren't competing for your attention.</div></div></div>
+          <div class="ops-item"><div class="ops-num">06</div><div><div class="ops-h">Offer what can be done</div><div class="ops-d">Buttons appear only where an automated action exists <em>and</em> both switches on page 8 are open.</div></div></div>
+        </div>
+        <div class="chips">
+          <a class="chip" href="./setup-guide.html#the-scan">Watch the run — Issue №1</a>
+          <a class="chip alt" href="./rightsizer.html#verdicts">How rightsizing decides — Issue №2</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= 12 REFERENCE -->
+  <section class="page" data-page="12" data-slug="reference" data-chapter="Quick reference">
+    <div class="spread spread--solo">
+      <div class="rail">
+        <div class="kicker">Appendix <b>· What the words mean</b></div>
+        <h2 class="title title--sm">QUICK <em>REFERENCE</em></h2>
+        <div class="rulebook-wrap">
+          <table class="rulebook">
+            <thead>
+              <tr><th scope="col">Term</th><th scope="col">Where you see it</th><th scope="col">What it means</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Check</td><td><em>Settings › Checks</em></td><td>One question asked of your account. 112 of them, across 32 resource types.</td></tr>
+              <tr><td>Finding</td><td><em>Dashboard</em></td><td>One resource that answered a check badly, with cost, reason and options.</td></tr>
+              <tr><td>Recommendation</td><td><em>on a finding</em></td><td>The suggested fix. Always present, even when MaxOps can't perform it.</td></tr>
+              <tr><td>Action</td><td><em>on a finding</em></td><td>A change MaxOps can make for you. Only some recommendations have one.</td></tr>
+              <tr><td>Review</td><td><em>on a finding</em></td><td>Deliberately no automated fix — this one needs a person.</td></tr>
+              <tr><td>Minimum age</td><td><em>check settings</em></td><td>How long a resource must have been idle before it's reported. 0 disables it.</td></tr>
+              <tr><td>Snooze</td><td><em>on a resource</em></td><td>Hide this finding until a date you choose, with a reason.</td></tr>
+              <tr><td>Exempt</td><td><em>on a resource</em></td><td>Permanently accept this one. It stops being reported for that check.</td></tr>
+              <tr><td>Checks tuned</td><td><em>Settings</em></td><td>How many checks you've changed from their defaults.</td></tr>
+              <tr><td>Actions disabled</td><td><em>Settings › Actions</em></td><td>Read-only mode. Nothing can be changed until the deployment allows it.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 13 END -->
+  <section class="page" data-page="13" data-slug="end" data-chapter="The end">
+    <div class="spread spread--solo">
+      <div class="rail" style="align-items:center; text-align:center;">
+        <div class="kicker">MaxOps Adventures <b>· Issue №3 · The End</b></div>
+        <h2 class="title">A CHECK ASKS.<br />ONLY <em>YOU</em><br />ANSWER.</h2>
+        <p class="caption" style="border:none; padding-left:0; max-width:60ch;">
+          A hundred and three questions, a grace period before each one is asked in earnest, a narrow way to
+          say "not this one", and a record of every time somebody did.
+        </p>
+        <div class="chips" style="justify-content:center;">
+          <a class="chip" href="./docs.html">All issues</a>
+          <a class="chip alt" href="./setup-guide.html">№1 — The Onboarding Run</a>
+          <a class="chip alt" href="./rightsizer.html">№2 — The Rightsizer</a>
+          <a class="chip alt" href="https://github.com/maxopsdev/maxops" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <button class="cta" onclick="goTo(1)">◂ Back to the cover</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="navbar">
+  <button class="navbtn" id="prevBtn" aria-label="Previous page">‹</button>
+  <div class="dots" id="dots"></div>
+  <button class="navbtn" id="nextBtn" aria-label="Next page">›</button>
+</nav>
+
+<script>
+  const pager = document.getElementById('pager');
+  const pages = Array.from(document.querySelectorAll('.page'));
+  const TOTAL = pages.length;
+  const dotsWrap = document.getElementById('dots');
+  const counterNow = document.getElementById('counterNow');
+  document.getElementById('counterTotal').textContent = TOTAL;
+  let current = 1;
+
+  pages.forEach((page, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Go to page ' + (i + 1) + ': ' + (page.dataset.chapter || ''));
+    d.title = (i + 1) + '. ' + (page.dataset.chapter || '');
+    d.addEventListener('click', () => goTo(i + 1));
+    dotsWrap.appendChild(d);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function setActive(n) {
+    current = n;
+    counterNow.textContent = n;
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === n - 1));
+    const slug = pages[n - 1]?.dataset.slug;
+    if (slug && decodeURIComponent((location.hash || '').replace(/^#/, '')) !== slug) {
+      history.replaceState(null, '', n === 1 ? location.pathname : '#' + slug);
+    }
+  }
+
+  window.goTo = function (n) {
+    n = Math.min(Math.max(n, 1), TOTAL);
+    pages[n - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  function pageFromHash() {
+    const raw = decodeURIComponent((location.hash || '').replace(/^#/, '')).trim();
+    if (!raw) return null;
+    const byPage = /^(?:page|panel)-(\d+)$/.exec(raw);
+    if (byPage) return Math.min(Math.max(Number(byPage[1]), 1), TOTAL);
+    const idx = pages.findIndex((p) => p.dataset.slug === raw);
+    return idx >= 0 ? idx + 1 : null;
+  }
+
+  function jumpToHash(smooth) {
+    const n = pageFromHash();
+    if (n === null) return false;
+    pages[n - 1].scrollIntoView({ behavior: smooth ? 'smooth' : 'instant', block: 'start' });
+    setActive(n);
+    return true;
+  }
+
+  window.addEventListener('hashchange', () => jumpToHash(true));
+
+  document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); goTo(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goTo(current - 1); }
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+        setActive(Number(entry.target.dataset.page));
+      }
+    });
+  }, { root: pager, threshold: [0.5] });
+  pages.forEach((p) => io.observe(p));
+
+  if (!jumpToHash(false)) setActive(1);
+</script>
+
+</body>
+</html>

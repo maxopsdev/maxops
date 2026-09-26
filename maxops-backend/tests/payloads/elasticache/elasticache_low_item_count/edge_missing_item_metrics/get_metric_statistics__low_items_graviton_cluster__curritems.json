@@ -1,0 +1,15 @@
+{
+  "Datapoints": [],
+  "Label": "CurrItems",
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "490",
+      "content-type": "text/xml",
+      "date": "Sun, 19 Apr 2026 23:13:30 GMT",
+      "x-amzn-requestid": "59a1d344-3673-439b-817b-fa29df094fbd"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "59a1d344-3673-439b-817b-fa29df094fbd",
+    "RetryAttempts": 0
+  }
+}

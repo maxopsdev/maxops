@@ -1,0 +1,2 @@
+"""OpenSearch cost-optimization checks."""
+

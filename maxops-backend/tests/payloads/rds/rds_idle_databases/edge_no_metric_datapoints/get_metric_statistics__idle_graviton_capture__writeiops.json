@@ -1,0 +1,15 @@
+{
+  "Datapoints": [],
+  "Label": "WriteIOPS",
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "511",
+      "content-type": "text/xml",
+      "date": "Sun, 19 Apr 2026 22:37:02 GMT",
+      "x-amzn-requestid": "7c471adf-4054-4613-b7ef-48a9b04375fc"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "7c471adf-4054-4613-b7ef-48a9b04375fc",
+    "RetryAttempts": 0
+  }
+}

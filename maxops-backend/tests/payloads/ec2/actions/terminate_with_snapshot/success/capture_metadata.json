@@ -1,0 +1,87 @@
+{
+  "account_id": "123456789012",
+  "action_key": "terminate_with_snapshot",
+  "calls": [
+    {
+      "kwargs": {
+        "InstanceIds": [
+          "i-PLACEHOLDER-SNAPSHOT-TERMINATE"
+        ]
+      },
+      "operation": "describe_instances",
+      "raises_client_error": false,
+      "response_file": "01_ec2__describe_instances__response.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {
+        "Description": "Snapshot before terminating i-PLACEHOLDER-SNAPSHOT-TERMINATE",
+        "VolumeId": "vol-0bb12c203266a027a"
+      },
+      "operation": "create_snapshot",
+      "raises_client_error": false,
+      "response_file": "02_ec2__create_snapshot__response.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {
+        "InstanceIds": [
+          "i-PLACEHOLDER-SNAPSHOT-TERMINATE"
+        ]
+      },
+      "operation": "terminate_instances",
+      "raises_client_error": false,
+      "response_file": "03_ec2__terminate_instances__response.json",
+      "service": "ec2"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "ec2_unused_instances",
+  "expected_message": "Terminate instance with snapshots submitted",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "terminate_with_snapshot",
+    "check_id": "ec2_unused_instances",
+    "details": {
+      "snapshots": [
+        "snap-PLACEHOLDER-TERMINATION"
+      ],
+      "terminate": {
+        "ResponseMetadata": {
+          "HTTPHeaders": {
+            "cache-control": "no-cache, no-store",
+            "content-length": "426",
+            "content-type": "text/xml;charset=UTF-8",
+            "date": "Mon, 15 Jun 2026 01:23:07 GMT",
+            "server": "AmazonEC2",
+            "strict-transport-security": "max-age=31536000; includeSubDomains",
+            "x-amzn-requestid": "29548041-7a72-469b-87be-cd286ff37a1c"
+          },
+          "HTTPStatusCode": 200,
+          "RequestId": "29548041-7a72-469b-87be-cd286ff37a1c",
+          "RetryAttempts": 0
+        },
+        "TerminatingInstances": [
+          {
+            "CurrentState": {
+              "Code": 32,
+              "Name": "shutting-down"
+            },
+            "InstanceId": "i-PLACEHOLDER-SNAPSHOT-TERMINATE",
+            "PreviousState": {
+              "Code": 16,
+              "Name": "running"
+            }
+          }
+        ]
+      }
+    },
+    "message": "Terminate instance with snapshots submitted",
+    "status": "submitted"
+  },
+  "parameters": {},
+  "region": "us-east-1",
+  "resource_id": "i-PLACEHOLDER-SNAPSHOT-TERMINATE",
+  "resource_ref": "snapshot_terminate_instance",
+  "scenario": "success"
+}

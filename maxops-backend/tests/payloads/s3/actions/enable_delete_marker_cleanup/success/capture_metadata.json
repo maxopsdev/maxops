@@ -1,0 +1,76 @@
+{
+  "account_id": "123456789012",
+  "action_key": "enable_delete_marker_cleanup",
+  "calls": [
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-versioned-missing-noncurrent"
+      },
+      "operation": "get_bucket_lifecycle_configuration",
+      "raises_client_error": false,
+      "response_file": "01_s3__get_bucket_lifecycle_configuration__response.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-versioned-missing-noncurrent",
+        "LifecycleConfiguration": {
+          "Rules": [
+            {
+              "AbortIncompleteMultipartUpload": {
+                "DaysAfterInitiation": 7
+              },
+              "Expiration": {
+                "Days": 60
+              },
+              "Filter": {
+                "Prefix": ""
+              },
+              "ID": "current-only-controls",
+              "Status": "Enabled",
+              "Transitions": [
+                {
+                  "Days": 30,
+                  "StorageClass": "GLACIER"
+                }
+              ]
+            },
+            {
+              "Expiration": {
+                "ExpiredObjectDeleteMarker": true
+              },
+              "Filter": {
+                "Prefix": ""
+              },
+              "ID": "maxops-delete-marker-cleanup-{{ANY_INT}}",
+              "Status": "Enabled"
+            }
+          ]
+        }
+      },
+      "operation": "put_bucket_lifecycle_configuration",
+      "raises_client_error": false,
+      "response_file": "02_s3__put_bucket_lifecycle_configuration__response.json",
+      "service": "s3"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "s3_no_delete_marker_expiration",
+  "expected_message": "Delete marker cleanup lifecycle policy added.",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "enable_delete_marker_cleanup",
+    "check_id": "s3_no_delete_marker_expiration",
+    "details": {
+      "bucket": "maxops-payload-s3-versioned-missing-noncurrent",
+      "rule_id": "maxops-delete-marker-cleanup-{{ANY_INT}}"
+    },
+    "message": "Delete marker cleanup lifecycle policy added.",
+    "status": "submitted"
+  },
+  "parameters": {},
+  "region": "us-east-1",
+  "resource_id": "maxops-payload-s3-versioned-missing-noncurrent",
+  "resource_ref": "versioned_missing_noncurrent_controls",
+  "scenario": "success"
+}

@@ -1,0 +1,8 @@
+name: Idle EC2 Instances
+description: Find EC2 instances that have been idle (low CPU/network utilization) for 7+ days. These instances are consuming resources without providing value.
+resource: aws.ec2
+filters:
+  - type: idle
+    days: 7
+    metrics: [CPUUtilization, NetworkIn, NetworkOut]
+

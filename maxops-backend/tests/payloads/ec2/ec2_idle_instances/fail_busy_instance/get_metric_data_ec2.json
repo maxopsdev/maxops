@@ -1,0 +1,196 @@
+{
+  "Messages": [],
+  "MetricDataResults": [
+    {
+      "Id": "cpu_average",
+      "Label": "CPUUtilization Average",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [
+        "2026-06-14T01:21:00+00:00"
+      ],
+      "Values": [
+        3.8
+      ]
+    },
+    {
+      "Id": "cpu_maximum",
+      "Label": "CPUUtilization Maximum",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [
+        "2026-06-14T01:21:00+00:00"
+      ],
+      "Values": [
+        22.0
+      ]
+    },
+    {
+      "Id": "cpu_p90",
+      "Label": "CPUUtilization p90",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [
+        "2026-06-14T01:21:00+00:00"
+      ],
+      "Values": [
+        9.0
+      ]
+    },
+    {
+      "Id": "cpu_p95",
+      "Label": "CPUUtilization p95",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [
+        "2026-06-14T01:21:00+00:00"
+      ],
+      "Values": [
+        12.0
+      ]
+    },
+    {
+      "Id": "cpu_p99",
+      "Label": "CPUUtilization p99",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [
+        "2026-06-14T01:21:00+00:00"
+      ],
+      "Values": [
+        16.0
+      ]
+    },
+    {
+      "Id": "network_in_average",
+      "Label": "NetworkIn Average",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [
+        "2026-06-15T13:55:00+00:00"
+      ],
+      "Values": [
+        4096.0
+      ]
+    },
+    {
+      "Id": "network_in_maximum",
+      "Label": "NetworkIn Maximum",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [
+        "2026-06-15T13:55:00+00:00"
+      ],
+      "Values": [
+        8192.0
+      ]
+    },
+    {
+      "Id": "network_in_p90",
+      "Label": "NetworkIn p90",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [
+        "2026-06-15T13:55:00+00:00"
+      ],
+      "Values": [
+        6144.0
+      ]
+    },
+    {
+      "Id": "network_in_p95",
+      "Label": "NetworkIn p95",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [
+        "2026-06-15T13:55:00+00:00"
+      ],
+      "Values": [
+        7168.0
+      ]
+    },
+    {
+      "Id": "network_in_p99",
+      "Label": "NetworkIn p99",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [
+        "2026-06-15T13:55:00+00:00"
+      ],
+      "Values": [
+        7680.0
+      ]
+    },
+    {
+      "Id": "network_out_average",
+      "Label": "NetworkOut Average",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [
+        "2026-06-15T13:55:00+00:00"
+      ],
+      "Values": [
+        8192.0
+      ]
+    },
+    {
+      "Id": "network_out_maximum",
+      "Label": "NetworkOut Maximum",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [
+        "2026-06-15T13:55:00+00:00"
+      ],
+      "Values": [
+        12288.0
+      ]
+    },
+    {
+      "Id": "network_out_p90",
+      "Label": "NetworkOut p90",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [
+        "2026-06-15T13:55:00+00:00"
+      ],
+      "Values": [
+        11264.0
+      ]
+    },
+    {
+      "Id": "network_out_p95",
+      "Label": "NetworkOut p95",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [
+        "2026-06-15T13:55:00+00:00"
+      ],
+      "Values": [
+        11776.0
+      ]
+    },
+    {
+      "Id": "network_out_p99",
+      "Label": "NetworkOut p99",
+      "Messages": [],
+      "StatusCode": "Complete",
+      "Timestamps": [
+        "2026-06-15T13:55:00+00:00"
+      ],
+      "Values": [
+        12032.0
+      ]
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "3763",
+      "content-type": "text/xml",
+      "date": "Mon, 15 Jun 2026 01:21:14 GMT",
+      "x-amzn-requestid": "7f0e2c33-8b30-44f5-ac7d-c3330576ce74"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "7f0e2c33-8b30-44f5-ac7d-c3330576ce74",
+    "RetryAttempts": 0
+  }
+}

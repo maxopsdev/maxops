@@ -1,0 +1,23 @@
+{
+  "calls": [
+    {
+      "operation": "describe_alarms",
+      "response_file": "describe_alarms.json",
+      "service": "cloudwatch"
+    }
+  ],
+  "check_id": "cloudwatch_duplicate_alarms",
+  "check_parameters": {
+    "region": "us-east-1"
+  },
+  "description": "Use two captured alarms with the same duplicate fingerprint.",
+  "expected_matches": [
+    "maxops-payload-duplicate-delete",
+    "maxops-payload-duplicate-keeper"
+  ],
+  "resource_placeholders": {
+    "duplicate_delete_alarm": "maxops-payload-duplicate-delete",
+    "duplicate_keeper_alarm": "maxops-payload-duplicate-keeper"
+  },
+  "scenario": "flag_duplicate_alarms"
+}

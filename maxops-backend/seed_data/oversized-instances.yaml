@@ -1,0 +1,9 @@
+name: Oversized EC2 Instances
+description: Find EC2 instances with consistently low CPU utilization that could be downsized to a smaller instance type, reducing costs.
+resource: aws.ec2
+filters:
+  - type: utilization
+    metric: CPUUtilization
+    threshold: 10
+    days: 30
+

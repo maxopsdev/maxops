@@ -1,0 +1,48 @@
+{
+  "account_id": "123456789012",
+  "action_key": "release_unused_elastic_ip",
+  "calls": [
+    {
+      "kwargs": {
+        "AllocationIds": [
+          "eipalloc-PLACEHOLDER"
+        ]
+      },
+      "operation": "describe_addresses",
+      "raises_client_error": false,
+      "response_file": "01_ec2__describe_addresses__response.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {
+        "AllocationId": "eipalloc-PLACEHOLDER"
+      },
+      "operation": "release_address",
+      "raises_client_error": false,
+      "response_file": "02_ec2__release_address__response.json",
+      "service": "ec2"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "unused_elastic_ips",
+  "expected_message": "Unused Elastic IP released",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "release_unused_elastic_ip",
+    "check_id": "unused_elastic_ips",
+    "details": {
+      "allocation_id": "eipalloc-PLACEHOLDER",
+      "public_ip": "198.51.100.10",
+      "region": "us-east-1"
+    },
+    "message": "Unused Elastic IP released",
+    "status": "submitted"
+  },
+  "parameters": {
+    "confirm_release": true
+  },
+  "region": "us-east-1",
+  "resource_id": "eipalloc-PLACEHOLDER",
+  "resource_ref": "unused_elastic_ip",
+  "scenario": "success"
+}

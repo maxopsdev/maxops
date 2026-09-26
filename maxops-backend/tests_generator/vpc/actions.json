@@ -1,0 +1,82 @@
+{
+  "s3_vpc_endpoint": {
+    "scenario": "success",
+    "check_id": "vpc_no_s3_vpc_endpoint",
+    "description": "Create an S3 gateway endpoint in the isolated endpoint VPC.",
+    "resource_ref": "endpoint_vpc",
+    "parameters": {"route_table_ids": ["{{ENDPOINT_ROUTE_TABLE_ID}}"]},
+    "expected_status": "submitted",
+    "expected_message": "S3 VPC endpoint creation submitted",
+    "expected_calls": [
+      {"service": "ec2", "operation": "describe_vpcs"},
+      {"service": "ec2", "operation": "describe_vpc_endpoints"},
+      {"service": "ec2", "operation": "create_vpc_endpoint"}
+    ]
+  },
+  "dynamodb_vpc_endpoint": {
+    "scenario": "success",
+    "check_id": "vpc_no_dynamodb_vpc_endpoint",
+    "description": "Create a DynamoDB gateway endpoint in the isolated endpoint VPC.",
+    "resource_ref": "endpoint_vpc",
+    "parameters": {"route_table_ids": ["{{ENDPOINT_ROUTE_TABLE_ID}}"]},
+    "expected_status": "submitted",
+    "expected_message": "DynamoDB VPC endpoint creation submitted",
+    "expected_calls": [
+      {"service": "ec2", "operation": "describe_vpcs"},
+      {"service": "ec2", "operation": "describe_vpc_endpoints"},
+      {"service": "ec2", "operation": "create_vpc_endpoint"}
+    ]
+  },
+  "vpc_flow_logs_disabling": {
+    "scenario": "success",
+    "check_id": "vpc_flow_logs_enabled",
+    "description": "Disable flow logs without changing the destination bucket.",
+    "resource_ref": "disable_vpc",
+    "parameters": {"flow_log_ids": ["{{DISABLE_FLOW_LOG_ID}}"]},
+    "expected_status": "submitted",
+    "expected_message": "VPC flow logs deletion submitted",
+    "expected_calls": [
+      {"service": "ec2", "operation": "describe_vpcs"},
+      {"service": "ec2", "operation": "delete_flow_logs"}
+    ]
+  },
+  "vpc_flow_logs_disabling_with_bucket_expiration": {
+    "scenario": "success",
+    "check_id": "vpc_flow_logs_enabled",
+    "description": "Disable flow logs and add expiration to the approved destination.",
+    "resource_ref": "expiration_vpc",
+    "parameters": {"flow_log_ids": ["{{EXPIRATION_FLOW_LOG_ID}}"], "expiration_days": 30},
+    "expected_status": "submitted",
+    "expected_message": "VPC flow logs deletion submitted",
+    "expected_calls": [
+      {"service": "ec2", "operation": "describe_vpcs"},
+      {"service": "ec2", "operation": "describe_flow_logs"},
+      {"service": "s3", "operation": "get_bucket_lifecycle_configuration"},
+      {"service": "s3", "operation": "put_bucket_lifecycle_configuration"},
+      {"service": "ec2", "operation": "delete_flow_logs"}
+    ]
+  },
+  "vpc_flow_logs_disabling_with_bucket_deletion": {
+    "scenario": "success",
+    "check_id": "vpc_flow_logs_enabled",
+    "description": "Disable isolated flow logs and explicitly delete their disposable bucket.",
+    "resource_ref": "deletion_vpc",
+    "parameters": {
+      "flow_log_ids": ["{{DELETION_FLOW_LOG_ID}}"],
+      "bucket_names": ["{{DELETION_BUCKET}}"],
+      "confirm_delete_buckets": true
+    },
+    "expected_status": "submitted",
+    "expected_message": "VPC flow logs and approved destination buckets deleted",
+    "expected_calls": [
+      {"service": "ec2", "operation": "describe_vpcs"},
+      {"service": "ec2", "operation": "describe_flow_logs"},
+      {"service": "ec2", "operation": "describe_flow_logs"},
+      {"service": "ec2", "operation": "delete_flow_logs"},
+      {"service": "s3", "operation": "list_object_versions"},
+      {"service": "s3", "operation": "delete_objects"},
+      {"service": "s3", "operation": "list_objects_v2"},
+      {"service": "s3", "operation": "delete_bucket"}
+    ]
+  }
+}

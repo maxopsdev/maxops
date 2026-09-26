@@ -1,0 +1,8 @@
+name: Idle RDS Instances
+description: Identify RDS database instances with low connection counts and CPU utilization. These may be candidates for downsizing or deletion.
+resource: aws.rds
+filters:
+  - type: idle
+    days: 7
+    metrics: [CPUUtilization, DatabaseConnections]
+

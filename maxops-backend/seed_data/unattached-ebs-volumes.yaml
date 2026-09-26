@@ -1,0 +1,6 @@
+name: Unattached EBS Volumes
+description: Identify EBS volumes that are not attached to any EC2 instance. These volumes continue to incur storage costs without being used.
+resource: aws.ebs
+filters:
+  - type: unattached
+

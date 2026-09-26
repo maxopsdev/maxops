@@ -1,0 +1,58 @@
+{
+  "account_id": "123456789012",
+  "action_key": "add_log_retention_lifecycle",
+  "calls": [
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-logging-target"
+      },
+      "operation": "get_bucket_lifecycle_configuration",
+      "raises_client_error": true,
+      "response_file": "01_s3__get_bucket_lifecycle_configuration__error.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-logging-target",
+        "LifecycleConfiguration": {
+          "Rules": [
+            {
+              "Expiration": {
+                "Days": 90
+              },
+              "Filter": {
+                "Prefix": ""
+              },
+              "ID": "maxops-log-retention-{{ANY_INT}}",
+              "Status": "Enabled"
+            }
+          ]
+        }
+      },
+      "operation": "put_bucket_lifecycle_configuration",
+      "raises_client_error": false,
+      "response_file": "02_s3__put_bucket_lifecycle_configuration__response.json",
+      "service": "s3"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "s3_log_buckets_without_expiration_policy",
+  "expected_message": "Log retention lifecycle policy added.",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "add_log_retention_lifecycle",
+    "check_id": "s3_log_buckets_without_expiration_policy",
+    "details": {
+      "bucket": "maxops-payload-s3-logging-target",
+      "days": 90,
+      "rule_id": "maxops-log-retention-{{ANY_INT}}"
+    },
+    "message": "Log retention lifecycle policy added.",
+    "status": "submitted"
+  },
+  "parameters": {},
+  "region": "us-east-1",
+  "resource_id": "maxops-payload-s3-logging-target",
+  "resource_ref": "logging_target",
+  "scenario": "success"
+}

@@ -1,0 +1,82 @@
+{
+  "cloudwatch_log_groups_no_expiration": {
+    "scenarios": {
+      "flag_log_group_without_retention": {
+        "description": "Use the captured log group with no retention policy.",
+        "resource_refs": ["log_group_no_retention"],
+        "expected_matches": ["{{LOG_GROUP_NO_RETENTION}}"],
+        "check_parameters": {"region": "{{REGION}}"},
+        "payload_files": ["describe_log_groups.json", "capture_metadata.json"]
+      },
+      "pass_log_group_with_retention": {
+        "description": "Use the captured log group with a retention policy.",
+        "resource_refs": ["log_group_retained"],
+        "expected_matches": [],
+        "check_parameters": {"region": "{{REGION}}"},
+        "payload_files": ["describe_log_groups.json", "capture_metadata.json"]
+      }
+    }
+  },
+  "cloudwatch_alarms_no_actions": {
+    "scenarios": {
+      "flag_alarm_without_actions": {
+        "description": "Use the captured metric alarm with no alarm actions.",
+        "resource_refs": ["no_action_alarm"],
+        "expected_matches": ["{{NO_ACTION_ALARM}}"],
+        "check_parameters": {"region": "{{REGION}}"},
+        "payload_files": ["describe_alarms.json", "capture_metadata.json"]
+      },
+      "pass_alarm_with_actions": {
+        "description": "Use the captured alarm with an alarm action.",
+        "resource_refs": ["actionful_alarm"],
+        "expected_matches": [],
+        "check_parameters": {"region": "{{REGION}}"},
+        "payload_files": ["describe_alarms.json", "capture_metadata.json"]
+      }
+    }
+  },
+  "cloudwatch_duplicate_alarms": {
+    "scenarios": {
+      "flag_duplicate_alarms": {
+        "description": "Use two captured alarms with the same duplicate fingerprint.",
+        "resource_refs": ["duplicate_keeper_alarm", "duplicate_delete_alarm"],
+        "expected_matches": ["{{DUPLICATE_DELETE_ALARM}}", "{{DUPLICATE_KEEPER_ALARM}}"],
+        "check_parameters": {"region": "{{REGION}}"},
+        "payload_files": ["describe_alarms.json", "capture_metadata.json"]
+      },
+      "pass_unique_alarm": {
+        "description": "Use one captured alarm without a duplicate.",
+        "resource_refs": ["actionful_alarm"],
+        "expected_matches": [],
+        "check_parameters": {"region": "{{REGION}}"},
+        "payload_files": ["describe_alarms.json", "capture_metadata.json"]
+      }
+    }
+  },
+  "cloudwatch_high_volume_alerts_triggered": {
+    "scenarios": {
+      "flag_noisy_alarm": {
+        "description": "Use a captured alarm with a real transition into ALARM state.",
+        "resource_refs": ["noisy_alarm"],
+        "expected_matches": ["{{NOISY_ALARM}}"],
+        "check_parameters": {
+          "lookback_days": 7,
+          "trigger_count_threshold": 1,
+          "region": "{{REGION}}"
+        },
+        "payload_files": ["describe_alarms.json", "describe_alarm_history__noisy_alarm.json", "capture_metadata.json"]
+      },
+      "pass_alarm_without_triggers": {
+        "description": "Use an alarm with no captured ALARM transitions.",
+        "resource_refs": ["actionful_alarm"],
+        "expected_matches": [],
+        "check_parameters": {
+          "lookback_days": 7,
+          "trigger_count_threshold": 50,
+          "region": "{{REGION}}"
+        },
+        "payload_files": ["describe_alarms.json", "describe_alarm_history__actionful_alarm.json", "capture_metadata.json"]
+      }
+    }
+  }
+}

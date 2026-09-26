@@ -1,0 +1,49 @@
+{
+  "bucket_placeholders": {
+    "replication_source": "maxops-payload-s3-replication-source"
+  },
+  "calls": [
+    {
+      "operation": "list_buckets",
+      "response_file": "list_buckets.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "replication_source",
+      "bucket_name": "maxops-payload-s3-replication-source",
+      "operation": "get_bucket_location",
+      "response_file": "get_bucket_location__replication_source.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "replication_source",
+      "bucket_name": "maxops-payload-s3-replication-source",
+      "operation": "get_bucket_tagging",
+      "response_file": "get_bucket_tagging__replication_source.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "replication_source",
+      "bucket_name": "maxops-payload-s3-replication-source",
+      "operation": "get_bucket_lifecycle_configuration",
+      "response_file": "get_bucket_lifecycle_configuration__replication_source.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "replication_source",
+      "bucket_name": "maxops-payload-s3-replication-source",
+      "operation": "get_bucket_replication",
+      "response_file": "get_bucket_replication__replication_source.json",
+      "service": "s3"
+    }
+  ],
+  "check_id": "s3_replication_enabled",
+  "check_parameters": {
+    "region": "us-east-1"
+  },
+  "description": "Use a bucket with replication rules configured.",
+  "expected_matches": [
+    "maxops-payload-s3-replication-source"
+  ],
+  "scenario": "flag_bucket_with_replication"
+}

@@ -1,0 +1,27 @@
+{
+  "Pages": [
+    {
+      "EncodingType": "url",
+      "IsTruncated": false,
+      "KeyCount": 0,
+      "MaxKeys": 1000,
+      "Name": "maxops-payload-vpc-deletion",
+      "Prefix": "",
+      "ResponseMetadata": {
+        "HTTPHeaders": {
+          "content-type": "application/xml",
+          "date": "Sun, 14 Jun 2026 17:27:14 GMT",
+          "server": "AmazonS3",
+          "transfer-encoding": "chunked",
+          "x-amz-bucket-region": "us-east-1",
+          "x-amz-id-2": "b5V+Na3WSVJ2aRTCqf549k6NUpUlz5zp5gXjL82AI5OP4uibyeRqS2jg3RCkifYnJSJrvk6o21+vI/O//FJtT8j0s9wqAB3q",
+          "x-amz-request-id": "ZB42CXD9ANSPZ1AB"
+        },
+        "HTTPStatusCode": 200,
+        "HostId": "b5V+Na3WSVJ2aRTCqf549k6NUpUlz5zp5gXjL82AI5OP4uibyeRqS2jg3RCkifYnJSJrvk6o21+vI/O//FJtT8j0s9wqAB3q",
+        "RequestId": "ZB42CXD9ANSPZ1AB",
+        "RetryAttempts": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "date": "Thu, 16 Apr 2026 21:33:48 GMT",
+      "server": "AmazonS3",
+      "transfer-encoding": "chunked",
+      "x-amz-id-2": "/25xVs9DJN6sc3yMSR7HiL460Mbmtl/fGcfphESr79o4k90FK96nqId2O57g9F+rv4UWKd4vriQGDbBm7QoxT76WAFJZeYbB",
+      "x-amz-request-id": "GR222NZ5V7GBZEG3"
+    },
+    "HTTPStatusCode": 200,
+    "HostId": "/25xVs9DJN6sc3yMSR7HiL460Mbmtl/fGcfphESr79o4k90FK96nqId2O57g9F+rv4UWKd4vriQGDbBm7QoxT76WAFJZeYbB",
+    "RequestId": "GR222NZ5V7GBZEG3",
+    "RetryAttempts": 0
+  },
+  "TagSet": [
+    {
+      "Key": "maxops_payload_capture",
+      "Value": "true"
+    },
+    {
+      "Key": "maxops_payload_profile",
+      "Value": "logging_target"
+    },
+    {
+      "Key": "purpose",
+      "Value": "logs"
+    },
+    {
+      "Key": "Name",
+      "Value": "maxops-payload-s3-logging-target"
+    }
+  ]
+}

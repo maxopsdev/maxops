@@ -1,0 +1,72 @@
+{
+  "account_id": "123456789012",
+  "action_key": "disable_replication_and_delete_bucket",
+  "calls": [
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-replication-source"
+      },
+      "operation": "get_bucket_replication",
+      "raises_client_error": false,
+      "response_file": "01_s3__get_bucket_replication__response.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-replication-source"
+      },
+      "operation": "delete_bucket_replication",
+      "raises_client_error": false,
+      "response_file": "02_s3__delete_bucket_replication__response.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-replication-dest"
+      },
+      "operation": "list_object_versions",
+      "raises_client_error": false,
+      "response_file": "03_s3__list_object_versions__response.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-replication-dest"
+      },
+      "operation": "list_objects_v2",
+      "raises_client_error": false,
+      "response_file": "04_s3__list_objects_v2__response.json",
+      "service": "s3"
+    },
+    {
+      "kwargs": {
+        "Bucket": "maxops-payload-s3-replication-dest"
+      },
+      "operation": "delete_bucket",
+      "raises_client_error": false,
+      "response_file": "05_s3__delete_bucket__response.json",
+      "service": "s3"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "s3_replication_enabled",
+  "expected_message": "Replication disabled and replicate bucket deletion requested.",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "disable_replication_and_delete_bucket",
+    "check_id": "s3_replication_enabled",
+    "details": {
+      "source_bucket": "maxops-payload-s3-replication-source",
+      "target_buckets": [
+        "maxops-payload-s3-replication-dest"
+      ]
+    },
+    "message": "Replication disabled and replicate bucket deletion requested.",
+    "status": "submitted"
+  },
+  "parameters": {},
+  "region": "us-east-1",
+  "resource_id": "maxops-payload-s3-replication-source",
+  "resource_ref": "replication_source",
+  "scenario": "success"
+}

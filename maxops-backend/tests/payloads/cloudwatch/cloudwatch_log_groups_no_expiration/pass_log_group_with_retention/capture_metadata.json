@@ -1,0 +1,19 @@
+{
+  "calls": [
+    {
+      "operation": "describe_log_groups",
+      "response_file": "describe_log_groups.json",
+      "service": "logs"
+    }
+  ],
+  "check_id": "cloudwatch_log_groups_no_expiration",
+  "check_parameters": {
+    "region": "us-east-1"
+  },
+  "description": "Use the captured log group with a retention policy.",
+  "expected_matches": [],
+  "resource_placeholders": {
+    "log_group_retained": "/maxops/payload/retained"
+  },
+  "scenario": "pass_log_group_with_retention"
+}

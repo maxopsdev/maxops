@@ -1,0 +1,366 @@
+{
+  "ebs_unattached_volumes": {
+    "scenarios": {
+      "flag_unattached_volume": {
+        "description": "Use the captured 1 GiB unattached gp3 volume.",
+        "capture_volumes": [
+          "unattached_gp3"
+        ],
+        "expected_matches": [
+          "{{UNATTACHED_VOLUME_ID}}"
+        ],
+        "check_parameters": {
+          "min_age_days": 0,
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "describe_volumes.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_attached_volumes": {
+        "description": "Use only attached capture volumes so the unattached check has no match.",
+        "capture_volumes": [
+          "attached_gp2",
+          "provisioned_io1"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "min_age_days": 0,
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "describe_volumes.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "ebs_gp2_volumes_convertible_to_gp3": {
+    "scenarios": {
+      "flag_attached_gp2": {
+        "description": "Use the captured 1 GiB attached gp2 volume.",
+        "capture_volumes": [
+          "attached_gp2"
+        ],
+        "expected_matches": [
+          "{{ATTACHED_GP2_VOLUME_ID}}"
+        ],
+        "check_parameters": {
+          "min_size_gb": 1,
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "describe_volumes.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_non_gp2_volumes": {
+        "description": "Use non-gp2 volumes so gp2-to-gp3 has no match.",
+        "capture_volumes": [
+          "unattached_gp3",
+          "provisioned_io1"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "min_size_gb": 1,
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "describe_volumes.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "ebs_underutilized_volume": {
+    "scenarios": {
+      "flag_low_io_gp2": {
+        "description": "Use the captured attached gp2 volume and synthesize low I/O.",
+        "capture_volumes": [
+          "attached_gp2"
+        ],
+        "expected_matches": [
+          "{{ATTACHED_GP2_VOLUME_ID}}"
+        ],
+        "check_parameters": {
+          "lookback_days": 14,
+          "iops_threshold": 5.0,
+          "throughput_mb_threshold": 1.0,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "attached_gp2": {
+            "VolumeReadOps": {
+              "Average": 1.0
+            },
+            "VolumeWriteOps": {
+              "Average": 1.0
+            },
+            "VolumeReadBytes": {
+              "Average": 1024.0
+            },
+            "VolumeWriteBytes": {
+              "Average": 1024.0
+            }
+          }
+        },
+        "payload_files": [
+          "describe_volumes.json",
+          "get_metric_statistics__attached_gp2__volumereadops.json",
+          "get_metric_statistics__attached_gp2__volumewriteops.json",
+          "get_metric_statistics__attached_gp2__volumereadbytes.json",
+          "get_metric_statistics__attached_gp2__volumewritebytes.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_high_io_gp2": {
+        "description": "Use the captured attached gp2 volume and synthesize high I/O.",
+        "capture_volumes": [
+          "attached_gp2"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "lookback_days": 14,
+          "iops_threshold": 5.0,
+          "throughput_mb_threshold": 1.0,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "attached_gp2": {
+            "VolumeReadOps": {
+              "Average": 8.0
+            },
+            "VolumeWriteOps": {
+              "Average": 8.0
+            },
+            "VolumeReadBytes": {
+              "Average": 2097152.0
+            },
+            "VolumeWriteBytes": {
+              "Average": 2097152.0
+            }
+          }
+        },
+        "payload_files": [
+          "describe_volumes.json",
+          "get_metric_statistics__attached_gp2__volumereadops.json",
+          "get_metric_statistics__attached_gp2__volumewriteops.json",
+          "get_metric_statistics__attached_gp2__volumereadbytes.json",
+          "get_metric_statistics__attached_gp2__volumewritebytes.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "ebs_large_volumes_low_utilization": {
+    "scenarios": {
+      "flag_minimal_large_threshold_gp2": {
+        "description": "Use the 1 GiB attached gp2 volume and lower min_size_gb to keep capture cost minimal.",
+        "capture_volumes": [
+          "attached_gp2"
+        ],
+        "expected_matches": [
+          "{{ATTACHED_GP2_VOLUME_ID}}"
+        ],
+        "check_parameters": {
+          "lookback_days": 14,
+          "min_size_gb": 1,
+          "iops_threshold": 5.0,
+          "throughput_mb_threshold": 1.0,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "attached_gp2": {
+            "VolumeReadOps": {
+              "Average": 1.0
+            },
+            "VolumeWriteOps": {
+              "Average": 1.0
+            },
+            "VolumeReadBytes": {
+              "Average": 1024.0
+            },
+            "VolumeWriteBytes": {
+              "Average": 1024.0
+            }
+          }
+        },
+        "payload_files": [
+          "describe_volumes.json",
+          "get_metric_statistics__attached_gp2__volumereadops.json",
+          "get_metric_statistics__attached_gp2__volumewriteops.json",
+          "get_metric_statistics__attached_gp2__volumereadbytes.json",
+          "get_metric_statistics__attached_gp2__volumewritebytes.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_high_utilization_gp2": {
+        "description": "Use the 1 GiB attached gp2 volume with high utilization.",
+        "capture_volumes": [
+          "attached_gp2"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "lookback_days": 14,
+          "min_size_gb": 1,
+          "iops_threshold": 5.0,
+          "throughput_mb_threshold": 1.0,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "attached_gp2": {
+            "VolumeReadOps": {
+              "Average": 8.0
+            },
+            "VolumeWriteOps": {
+              "Average": 8.0
+            },
+            "VolumeReadBytes": {
+              "Average": 2097152.0
+            },
+            "VolumeWriteBytes": {
+              "Average": 2097152.0
+            }
+          }
+        },
+        "payload_files": [
+          "describe_volumes.json",
+          "get_metric_statistics__attached_gp2__volumereadops.json",
+          "get_metric_statistics__attached_gp2__volumewriteops.json",
+          "get_metric_statistics__attached_gp2__volumereadbytes.json",
+          "get_metric_statistics__attached_gp2__volumewritebytes.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "ebs_iops_overprovisioned_volume": {
+    "scenarios": {
+      "flag_low_iops_io1": {
+        "description": "Use the captured 4 GiB io1 volume at the minimum 100 provisioned IOPS.",
+        "capture_volumes": [
+          "provisioned_io1"
+        ],
+        "expected_matches": [
+          "{{PROVISIONED_IO1_VOLUME_ID}}"
+        ],
+        "check_parameters": {
+          "lookback_days": 14,
+          "utilization_threshold_pct": 30.0,
+          "min_provisioned_iops": 100,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "provisioned_io1": {
+            "VolumeReadOps": {
+              "Average": 5.0
+            },
+            "VolumeWriteOps": {
+              "Average": 5.0
+            }
+          }
+        },
+        "payload_files": [
+          "describe_volumes.json",
+          "get_metric_statistics__provisioned_io1__volumereadops.json",
+          "get_metric_statistics__provisioned_io1__volumewriteops.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_busy_iops_io1": {
+        "description": "Use the captured io1 volume and synthesize IOPS above the utilization threshold.",
+        "capture_volumes": [
+          "provisioned_io1"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "lookback_days": 14,
+          "utilization_threshold_pct": 30.0,
+          "min_provisioned_iops": 100,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "provisioned_io1": {
+            "VolumeReadOps": {
+              "Average": 20.0
+            },
+            "VolumeWriteOps": {
+              "Average": 20.0
+            }
+          }
+        },
+        "payload_files": [
+          "describe_volumes.json",
+          "get_metric_statistics__provisioned_io1__volumereadops.json",
+          "get_metric_statistics__provisioned_io1__volumewriteops.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "ebs_underutilized_provisioned_iops": {
+    "scenarios": {
+      "flag_low_provisioned_iops_io1": {
+        "description": "Use the captured 4 GiB io1 volume at the minimum 100 provisioned IOPS.",
+        "capture_volumes": [
+          "provisioned_io1"
+        ],
+        "expected_matches": [
+          "{{PROVISIONED_IO1_VOLUME_ID}}"
+        ],
+        "check_parameters": {
+          "lookback_days": 14,
+          "utilization_threshold_pct": 30.0,
+          "min_provisioned_iops": 100,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "provisioned_io1": {
+            "VolumeReadOps": {
+              "Average": 5.0
+            },
+            "VolumeWriteOps": {
+              "Average": 5.0
+            }
+          }
+        },
+        "payload_files": [
+          "describe_volumes.json",
+          "get_metric_statistics__provisioned_io1__volumereadops.json",
+          "get_metric_statistics__provisioned_io1__volumewriteops.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_busy_provisioned_iops_io1": {
+        "description": "Use the captured io1 volume and synthesize IOPS above the utilization threshold.",
+        "capture_volumes": [
+          "provisioned_io1"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "lookback_days": 14,
+          "utilization_threshold_pct": 30.0,
+          "min_provisioned_iops": 100,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "provisioned_io1": {
+            "VolumeReadOps": {
+              "Average": 20.0
+            },
+            "VolumeWriteOps": {
+              "Average": 20.0
+            }
+          }
+        },
+        "payload_files": [
+          "describe_volumes.json",
+          "get_metric_statistics__provisioned_io1__volumereadops.json",
+          "get_metric_statistics__provisioned_io1__volumewriteops.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  }
+}

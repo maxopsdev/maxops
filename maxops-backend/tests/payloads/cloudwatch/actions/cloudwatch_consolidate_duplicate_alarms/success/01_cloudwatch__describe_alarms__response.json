@@ -1,0 +1,70 @@
+{
+  "CompositeAlarms": [],
+  "MetricAlarms": [
+    {
+      "ActionsEnabled": true,
+      "AlarmActions": [],
+      "AlarmArn": "arn:aws:cloudwatch:us-east-1:123456789012:alarm:maxops-payload-duplicate-delete",
+      "AlarmConfigurationUpdatedTimestamp": "2026-06-14T17:02:18.689000+00:00",
+      "AlarmName": "maxops-payload-duplicate-delete",
+      "ComparisonOperator": "GreaterThanThreshold",
+      "Dimensions": [
+        {
+          "Name": "Profile",
+          "Value": "duplicate"
+        }
+      ],
+      "EvaluationPeriods": 2,
+      "InsufficientDataActions": [],
+      "MetricName": "CaptureMetric",
+      "Namespace": "MaxOps/Payload",
+      "OKActions": [],
+      "Period": 60,
+      "StateReason": "Unchecked: Initial alarm creation",
+      "StateTransitionedTimestamp": "2026-06-14T17:02:18.689000+00:00",
+      "StateUpdatedTimestamp": "2026-06-14T17:02:18.689000+00:00",
+      "StateValue": "INSUFFICIENT_DATA",
+      "Statistic": "Average",
+      "Threshold": 80.0,
+      "TreatMissingData": "missing"
+    },
+    {
+      "ActionsEnabled": true,
+      "AlarmActions": [],
+      "AlarmArn": "arn:aws:cloudwatch:us-east-1:123456789012:alarm:maxops-payload-duplicate-keeper",
+      "AlarmConfigurationUpdatedTimestamp": "2026-06-14T17:02:18.583000+00:00",
+      "AlarmName": "maxops-payload-duplicate-keeper",
+      "ComparisonOperator": "GreaterThanThreshold",
+      "Dimensions": [
+        {
+          "Name": "Profile",
+          "Value": "duplicate"
+        }
+      ],
+      "EvaluationPeriods": 2,
+      "InsufficientDataActions": [],
+      "MetricName": "CaptureMetric",
+      "Namespace": "MaxOps/Payload",
+      "OKActions": [],
+      "Period": 60,
+      "StateReason": "Unchecked: Initial alarm creation",
+      "StateTransitionedTimestamp": "2026-06-14T17:02:18.583000+00:00",
+      "StateUpdatedTimestamp": "2026-06-14T17:02:18.583000+00:00",
+      "StateValue": "INSUFFICIENT_DATA",
+      "Statistic": "Average",
+      "Threshold": 80.0,
+      "TreatMissingData": "missing"
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "3046",
+      "content-type": "text/xml",
+      "date": "Sun, 14 Jun 2026 17:02:35 GMT",
+      "x-amzn-requestid": "86ffdd5a-3b2e-4bd5-bef7-20cb36b163e6"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "86ffdd5a-3b2e-4bd5-bef7-20cb36b163e6",
+    "RetryAttempts": 0
+  }
+}

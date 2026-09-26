@@ -1,0 +1,22 @@
+{
+  "Datapoints": [
+    {
+      "Average": 0.0,
+      "Sum": 0.0,
+      "Timestamp": "2026-04-24T00:09:44.808449+00:00",
+      "Unit": "Count"
+    }
+  ],
+  "Label": "ReadThrottleEvents",
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "341",
+      "content-type": "text/xml",
+      "date": "Fri, 24 Apr 2026 00:09:46 GMT",
+      "x-amzn-requestid": "108909c3-e870-4ca7-9160-df42dbe96ab8"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "108909c3-e870-4ca7-9160-df42dbe96ab8",
+    "RetryAttempts": 0
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "elasticache_low_item_count": {
+    "scenarios": {
+      "flag_low_item_cluster": {
+        "description": "Use the captured cache.t4g.micro cluster and synthesize very low CurrItems and KeyCount.",
+        "capture_resources": [
+          "low_items_graviton_cluster"
+        ],
+        "expected_matches": [
+          "{{LOW_ITEMS_CLUSTER_ID}}"
+        ],
+        "check_parameters": {
+          "lookback_days": 7,
+          "low_item_threshold": 1000,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "low_items_graviton_cluster": {
+            "CurrItems": {
+              "Average": 12.0
+            },
+            "KeyCount": {
+              "Average": 16.0
+            }
+          }
+        },
+        "payload_files": [
+          "describe_cache_clusters.json",
+          "get_metric_statistics__low_items_graviton_cluster__curritems.json",
+          "get_metric_statistics__low_items_graviton_cluster__keycount.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_cluster_with_items": {
+        "description": "Use the captured cache.t4g.micro cluster and synthesize higher CurrItems and KeyCount values.",
+        "capture_resources": [
+          "low_items_graviton_cluster"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "lookback_days": 7,
+          "low_item_threshold": 1000,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "low_items_graviton_cluster": {
+            "CurrItems": {
+              "Average": 4200.0
+            },
+            "KeyCount": {
+              "Average": 4500.0
+            }
+          }
+        },
+        "payload_files": [
+          "describe_cache_clusters.json",
+          "get_metric_statistics__low_items_graviton_cluster__curritems.json",
+          "get_metric_statistics__low_items_graviton_cluster__keycount.json",
+          "capture_metadata.json"
+        ]
+      },
+      "edge_missing_item_metrics": {
+        "description": "Use the captured cache.t4g.micro cluster with empty CurrItems and KeyCount datapoints.",
+        "capture_resources": [
+          "low_items_graviton_cluster"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "lookback_days": 7,
+          "low_item_threshold": 1000,
+          "region": "{{REGION}}"
+        },
+        "metric_overrides": {
+          "low_items_graviton_cluster": {
+            "CurrItems": {
+              "empty": true
+            },
+            "KeyCount": {
+              "empty": true
+            }
+          }
+        },
+        "payload_files": [
+          "describe_cache_clusters.json",
+          "get_metric_statistics__low_items_graviton_cluster__curritems.json",
+          "get_metric_statistics__low_items_graviton_cluster__keycount.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "elasticache_non_graviton_instance_class": {
+    "scenarios": {
+      "flag_non_graviton_cluster": {
+        "description": "Use the captured non-Graviton cluster for the positive path.",
+        "capture_resources": [
+          "non_graviton_cluster"
+        ],
+        "expected_matches": [
+          "{{NON_GRAVITON_CLUSTER_ID}}"
+        ],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "describe_cache_clusters.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_graviton_cluster": {
+        "description": "Use the captured cache.t4g.micro cluster for the negative path.",
+        "capture_resources": [
+          "low_items_graviton_cluster"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "describe_cache_clusters.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  },
+  "elasticache_redis_convertible_to_valkey": {
+    "scenarios": {
+      "flag_redis_replication_group": {
+        "description": "Use the captured Redis replication group with an eligible engine version.",
+        "capture_resources": [
+          "redis_replication_group"
+        ],
+        "expected_matches": [
+          "{{REDIS_VALKEY_RG_ID}}"
+        ],
+        "check_parameters": {
+          "eligible_min_redis_version": "6.0",
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "describe_replication_groups.json",
+          "describe_cache_clusters.json",
+          "capture_metadata.json"
+        ]
+      },
+      "pass_ineligible_engine_version": {
+        "description": "Use the captured Redis replication group below the eligibility threshold.",
+        "capture_resources": [
+          "ineligible_redis_replication_group"
+        ],
+        "expected_matches": [],
+        "check_parameters": {
+          "eligible_min_redis_version": "6.0",
+          "region": "{{REGION}}"
+        },
+        "payload_files": [
+          "describe_replication_groups.json",
+          "describe_cache_clusters.json",
+          "capture_metadata.json"
+        ]
+      }
+    }
+  }
+}

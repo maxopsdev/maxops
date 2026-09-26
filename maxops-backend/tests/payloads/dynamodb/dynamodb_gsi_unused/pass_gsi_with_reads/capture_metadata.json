@@ -1,0 +1,47 @@
+{
+  "calls": [
+    {
+      "operation": "list_tables",
+      "response_file": "list_tables.json",
+      "service": "dynamodb"
+    },
+    {
+      "operation": "describe_table",
+      "response_file": "describe_table__provisioned_capture.json",
+      "service": "dynamodb",
+      "table_alias": "provisioned_capture",
+      "table_name": "maxops-payload-dynamodb-provisioned"
+    },
+    {
+      "gsi_id": "maxops-payload-dynamodb-provisioned/maxops_payload_unused_gsi",
+      "gsi_ref": "provisioned_capture:maxops_payload_unused_gsi",
+      "metric_name": "ConsumedReadCapacityUnits",
+      "operation": "get_metric_statistics",
+      "response_file": "get_metric_statistics__provisioned_capture__maxops_payload_unused_gsi__consumedreadcapacityunits.json",
+      "service": "cloudwatch"
+    },
+    {
+      "gsi_id": "maxops-payload-dynamodb-provisioned/maxops_payload_unused_gsi",
+      "gsi_ref": "provisioned_capture:maxops_payload_unused_gsi",
+      "metric_name": "ConsumedWriteCapacityUnits",
+      "operation": "get_metric_statistics",
+      "response_file": "get_metric_statistics__provisioned_capture__maxops_payload_unused_gsi__consumedwritecapacityunits.json",
+      "service": "cloudwatch"
+    }
+  ],
+  "check_id": "dynamodb_gsi_unused",
+  "check_parameters": {
+    "lookback_days": 30,
+    "period_seconds": 86400,
+    "region": "us-east-1"
+  },
+  "description": "Use the captured provisioned table GSI and synthesize positive read traffic.",
+  "expected_matches": [],
+  "gsi_placeholders": {
+    "provisioned_capture:maxops_payload_unused_gsi": "maxops-payload-dynamodb-provisioned/maxops_payload_unused_gsi"
+  },
+  "scenario": "pass_gsi_with_reads",
+  "table_placeholders": {
+    "provisioned_capture": "maxops-payload-dynamodb-provisioned"
+  }
+}

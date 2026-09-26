@@ -1,0 +1,362 @@
+{
+  "generator": {
+    "seed": 20260423,
+    "resource_count": 24,
+    "account_id": "999999999999",
+    "default_region": "us-east-1",
+    "output_dir": "synthetic_data/generated/dynamodb"
+  },
+  "regions": [
+    {
+      "name": "us-east-1",
+      "weight": 0.58,
+      "azs": ["us-east-1a", "us-east-1b", "us-east-1c"]
+    },
+    {
+      "name": "us-west-2",
+      "weight": 0.24,
+      "azs": ["us-west-2a", "us-west-2b", "us-west-2c"]
+    },
+    {
+      "name": "eu-west-1",
+      "weight": 0.18,
+      "azs": ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+    }
+  ],
+  "distributions": {
+    "environments": {
+      "prod": 0.38,
+      "dev": 0.18,
+      "uat": 0.12,
+      "qa": 0.1,
+      "sandbox": 0.1,
+      "shared": 0.12
+    },
+    "teams": {
+      "platform": 0.17,
+      "payments": 0.14,
+      "commerce": 0.12,
+      "data": 0.12,
+      "risk": 0.1,
+      "identity": 0.08,
+      "support": 0.08,
+      "core-infra": 0.19
+    },
+    "owners": {
+      "alice.chen": 0.08,
+      "miguel.santos": 0.08,
+      "priya.shah": 0.1,
+      "noah.reed": 0.08,
+      "fatima.khan": 0.1,
+      "jordan.kim": 0.08,
+      "sarah.lee": 0.11,
+      "olivia.ng": 0.09,
+      "liam.patel": 0.12,
+      "maya.garcia": 0.16
+    },
+    "cost_centers": {
+      "CC-1001": 0.14,
+      "CC-1014": 0.12,
+      "CC-1020": 0.12,
+      "CC-1105": 0.18,
+      "CC-1202": 0.11,
+      "CC-1308": 0.1,
+      "CC-1420": 0.12,
+      "CC-1507": 0.11
+    },
+    "business_units": {
+      "consumer": 0.33,
+      "enterprise": 0.22,
+      "operations": 0.13,
+      "risk": 0.12,
+      "data": 0.2
+    },
+    "usage_profiles": {
+      "table_low_rcu": 0.12,
+      "table_low_wcu": 0.12,
+      "table_low_item": 0.12,
+      "gsi_unused": 0.1,
+      "table_best_fit_on_demand": 0.14,
+      "table_best_fit_provisioned": 0.14,
+      "table_healthy_provisioned": 0.16,
+      "gsi_healthy": 0.05,
+      "table_healthy_on_demand": 0.05
+    }
+  },
+  "tag_dimensions": {
+    "criticality": ["tier1", "tier2", "tier3"],
+    "compliance": ["pci", "sox", "gdpr", "none"],
+    "table_class": ["STANDARD", "STANDARD_INFREQUENT_ACCESS"],
+    "data_classification": ["internal", "confidential", "restricted"]
+  },
+  "naming": {
+    "org_prefix": "maxops-demo",
+    "apps": ["payments", "catalog", "orders", "risk", "support", "billing", "profiles", "analytics"],
+    "tables": ["events", "state", "ledger", "sessions", "cache", "summary"],
+    "gsi_suffixes": ["lookup", "tenant", "status", "created", "routing"]
+  },
+  "usage_profiles": {
+    "table_low_rcu": {
+      "resource_type": "dynamodb_table",
+      "seed_profile": "table_low_rcu",
+      "billing_mode": "PROVISIONED",
+      "consumed_read_range": [0.02, 0.09],
+      "consumed_write_range": [0.4, 0.9],
+      "provisioned_read_range": [4.0, 14.0],
+      "provisioned_write_range": [2.0, 8.0],
+      "read_throttle_range": [0.0, 0.0],
+      "write_throttle_range": [0.0, 0.0],
+      "item_count_range": [120, 600],
+      "metric_pattern": "steady",
+      "finding_profile": "dynamodb_underutilized_rcu"
+    },
+    "table_low_wcu": {
+      "resource_type": "dynamodb_table",
+      "seed_profile": "table_low_wcu",
+      "billing_mode": "PROVISIONED",
+      "consumed_read_range": [0.4, 0.9],
+      "consumed_write_range": [0.02, 0.08],
+      "provisioned_read_range": [2.0, 8.0],
+      "provisioned_write_range": [4.0, 14.0],
+      "read_throttle_range": [0.0, 0.0],
+      "write_throttle_range": [0.0, 0.0],
+      "item_count_range": [160, 720],
+      "metric_pattern": "steady",
+      "finding_profile": "dynamodb_underutilized_wcu"
+    },
+    "table_low_item": {
+      "resource_type": "dynamodb_table",
+      "seed_profile": "table_low_item",
+      "billing_mode": "PAY_PER_REQUEST",
+      "consumed_read_range": [0.0, 0.05],
+      "consumed_write_range": [0.0, 0.03],
+      "provisioned_read_range": [0.0, 0.0],
+      "provisioned_write_range": [0.0, 0.0],
+      "read_throttle_range": [0.0, 0.0],
+      "write_throttle_range": [0.0, 0.0],
+      "item_count_range": [0, 32],
+      "metric_pattern": "idle",
+      "finding_profile": "dynamodb_underutilized_tables"
+    },
+    "gsi_unused": {
+      "resource_type": "dynamodb_gsi",
+      "seed_profile": "gsi_unused",
+      "billing_mode": "PROVISIONED",
+      "consumed_read_range": [0.0, 0.0],
+      "consumed_write_range": [0.1, 0.4],
+      "provisioned_read_range": [1.0, 6.0],
+      "provisioned_write_range": [1.0, 6.0],
+      "read_throttle_range": [0.0, 0.0],
+      "write_throttle_range": [0.0, 0.0],
+      "item_count_range": [0, 12],
+      "metric_pattern": "idle",
+      "finding_profile": "dynamodb_gsi_unused"
+    },
+    "table_best_fit_on_demand": {
+      "resource_type": "dynamodb_table",
+      "seed_profile": "table_best_fit_on_demand",
+      "billing_mode": "PROVISIONED",
+      "consumed_read_range": [0.4, 2.5],
+      "consumed_write_range": [0.4, 2.0],
+      "provisioned_read_range": [12.0, 36.0],
+      "provisioned_write_range": [12.0, 30.0],
+      "read_throttle_range": [0.4, 2.0],
+      "write_throttle_range": [0.4, 1.5],
+      "item_count_range": [140, 800],
+      "metric_pattern": "bursty",
+      "finding_profile": "dynamodb_best_fit_on_demand"
+    },
+    "table_best_fit_provisioned": {
+      "resource_type": "dynamodb_table",
+      "seed_profile": "table_best_fit_provisioned",
+      "billing_mode": "PAY_PER_REQUEST",
+      "consumed_read_range": [3.0, 8.0],
+      "consumed_write_range": [2.5, 6.0],
+      "provisioned_read_range": [0.0, 0.0],
+      "provisioned_write_range": [0.0, 0.0],
+      "read_throttle_range": [0.0, 0.0],
+      "write_throttle_range": [0.0, 0.0],
+      "item_count_range": [200, 1200],
+      "metric_pattern": "steady",
+      "finding_profile": "dynamodb_best_fit_provisioned"
+    },
+    "table_healthy_provisioned": {
+      "resource_type": "dynamodb_table",
+      "seed_profile": "table_healthy_provisioned",
+      "billing_mode": "PROVISIONED",
+      "consumed_read_range": [2.0, 6.0],
+      "consumed_write_range": [1.8, 5.0],
+      "provisioned_read_range": [4.0, 8.0],
+      "provisioned_write_range": [4.0, 8.0],
+      "read_throttle_range": [0.0, 0.0],
+      "write_throttle_range": [0.0, 0.0],
+      "item_count_range": [400, 2000],
+      "metric_pattern": "steady",
+      "finding_profile": null
+    },
+    "gsi_healthy": {
+      "resource_type": "dynamodb_gsi",
+      "seed_profile": "gsi_healthy",
+      "billing_mode": "PROVISIONED",
+      "consumed_read_range": [1.0, 4.0],
+      "consumed_write_range": [0.4, 1.8],
+      "provisioned_read_range": [2.0, 5.0],
+      "provisioned_write_range": [1.0, 4.0],
+      "read_throttle_range": [0.0, 0.0],
+      "write_throttle_range": [0.0, 0.0],
+      "item_count_range": [80, 600],
+      "metric_pattern": "steady",
+      "finding_profile": null
+    },
+    "table_healthy_on_demand": {
+      "resource_type": "dynamodb_table",
+      "seed_profile": "table_healthy_on_demand",
+      "billing_mode": "PAY_PER_REQUEST",
+      "consumed_read_range": [0.8, 2.4],
+      "consumed_write_range": [0.6, 1.8],
+      "provisioned_read_range": [0.0, 0.0],
+      "provisioned_write_range": [0.0, 0.0],
+      "read_throttle_range": [0.0, 0.0],
+      "write_throttle_range": [0.0, 0.0],
+      "item_count_range": [90, 900],
+      "metric_pattern": "steady",
+      "finding_profile": null
+    }
+  },
+  "finding_profiles": {
+    "dynamodb_underutilized_rcu": {
+      "check_id": "dynamodb_underutilized_rcu",
+      "title": "Underutilized DynamoDB read capacity",
+      "finding_type": "utilization",
+      "severity": "medium",
+      "confidence_range": [0.82, 0.95],
+      "risk_score_range": [0.08, 0.18],
+      "recommended_action": "reduce_rcu",
+      "alternative_actions": ["review_table"],
+      "savings_factor": 0.28
+    },
+    "dynamodb_underutilized_wcu": {
+      "check_id": "dynamodb_underutilized_wcu",
+      "title": "Underutilized DynamoDB write capacity",
+      "finding_type": "utilization",
+      "severity": "medium",
+      "confidence_range": [0.82, 0.95],
+      "risk_score_range": [0.08, 0.18],
+      "recommended_action": "reduce_wcu",
+      "alternative_actions": ["review_table"],
+      "savings_factor": 0.28
+    },
+    "dynamodb_underutilized_tables": {
+      "check_id": "dynamodb_underutilized_tables",
+      "title": "Low-item-count DynamoDB table",
+      "finding_type": "waste",
+      "severity": "medium",
+      "confidence_range": [0.84, 0.96],
+      "risk_score_range": [0.08, 0.2],
+      "recommended_action": "delete_or_archive",
+      "alternative_actions": ["review_table"],
+      "savings_factor": 0.8
+    },
+    "dynamodb_gsi_unused": {
+      "check_id": "dynamodb_gsi_unused",
+      "title": "Unused DynamoDB GSI",
+      "finding_type": "waste",
+      "severity": "medium",
+      "confidence_range": [0.86, 0.97],
+      "risk_score_range": [0.08, 0.18],
+      "recommended_action": "delete_gsi",
+      "alternative_actions": ["review_table"],
+      "savings_factor": 0.75
+    },
+    "dynamodb_best_fit_on_demand": {
+      "check_id": "dynamodb_best_fit_on_demand",
+      "title": "DynamoDB billing mode best fit: on-demand",
+      "finding_type": "billing_mode",
+      "severity": "medium",
+      "confidence_range": [0.82, 0.95],
+      "risk_score_range": [0.08, 0.18],
+      "recommended_action": "switch_to_on_demand",
+      "alternative_actions": ["review_table"],
+      "savings_factor": 0.22
+    },
+    "dynamodb_best_fit_provisioned": {
+      "check_id": "dynamodb_best_fit_provisioned",
+      "title": "DynamoDB billing mode best fit: provisioned",
+      "finding_type": "billing_mode",
+      "severity": "medium",
+      "confidence_range": [0.82, 0.95],
+      "risk_score_range": [0.08, 0.18],
+      "recommended_action": "switch_to_provisioned",
+      "alternative_actions": ["review_table"],
+      "savings_factor": 0.2
+    }
+  },
+  "action_catalog": {
+    "reduce_rcu": {
+      "label": "Reduce RCU",
+      "description": "Lower provisioned read capacity to match observed demand."
+    },
+    "reduce_wcu": {
+      "label": "Reduce WCU",
+      "description": "Lower provisioned write capacity to match observed demand."
+    },
+    "review_table": {
+      "label": "Review table",
+      "description": "Validate workload behavior before applying a billing or capacity change."
+    },
+    "delete_or_archive": {
+      "label": "Delete or archive",
+      "description": "Delete the table or archive data if the dataset is no longer needed."
+    },
+    "delete_gsi": {
+      "label": "Delete GSI",
+      "description": "Remove the secondary index after confirming it has no read traffic."
+    },
+    "switch_to_on_demand": {
+      "label": "Switch to on-demand",
+      "description": "Move the table to PAY_PER_REQUEST for bursty or lightly used traffic."
+    },
+    "switch_to_provisioned": {
+      "label": "Switch to provisioned",
+      "description": "Move the table to provisioned capacity for steady traffic."
+    }
+  },
+  "seed_profiles": {
+    "table_low_rcu": {
+      "seed_check_id": "dynamodb_underutilized_rcu",
+      "seed_scenario": "flag_low_rcu"
+    },
+    "table_low_wcu": {
+      "seed_check_id": "dynamodb_underutilized_wcu",
+      "seed_scenario": "flag_low_wcu"
+    },
+    "table_low_item": {
+      "seed_check_id": "dynamodb_underutilized_tables",
+      "seed_scenario": "flag_low_item_table"
+    },
+    "gsi_unused": {
+      "seed_check_id": "dynamodb_gsi_unused",
+      "seed_scenario": "flag_unused_gsi"
+    },
+    "table_best_fit_on_demand": {
+      "seed_check_id": "dynamodb_best_fit_on_demand",
+      "seed_scenario": "flag_low_utilization_provisioned"
+    },
+    "table_best_fit_provisioned": {
+      "seed_check_id": "dynamodb_best_fit_provisioned",
+      "seed_scenario": "flag_steady_on_demand"
+    },
+    "table_healthy_provisioned": {
+      "seed_check_id": "dynamodb_underutilized_rcu",
+      "seed_scenario": "pass_busy_rcu"
+    },
+    "gsi_healthy": {
+      "seed_check_id": "dynamodb_gsi_unused",
+      "seed_scenario": "pass_gsi_with_reads"
+    },
+    "table_healthy_on_demand": {
+      "seed_check_id": "dynamodb_best_fit_on_demand",
+      "seed_scenario": "pass_already_on_demand"
+    }
+  }
+}

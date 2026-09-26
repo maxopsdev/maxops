@@ -1,0 +1,42 @@
+{
+  "bucket_placeholders": {
+    "lifecycle_no_expiration": "maxops-payload-s3-lifecycle-no-expiration"
+  },
+  "calls": [
+    {
+      "operation": "list_buckets",
+      "response_file": "list_buckets.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "lifecycle_no_expiration",
+      "bucket_name": "maxops-payload-s3-lifecycle-no-expiration",
+      "operation": "get_bucket_location",
+      "response_file": "get_bucket_location__lifecycle_no_expiration.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "lifecycle_no_expiration",
+      "bucket_name": "maxops-payload-s3-lifecycle-no-expiration",
+      "operation": "get_bucket_tagging",
+      "response_file": "get_bucket_tagging__lifecycle_no_expiration.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "lifecycle_no_expiration",
+      "bucket_name": "maxops-payload-s3-lifecycle-no-expiration",
+      "operation": "get_bucket_lifecycle_configuration",
+      "response_file": "get_bucket_lifecycle_configuration__lifecycle_no_expiration.json",
+      "service": "s3"
+    }
+  ],
+  "check_id": "s3_no_expiration_policy",
+  "check_parameters": {
+    "region": "us-east-1"
+  },
+  "description": "Use a bucket with lifecycle rules that omit current-object expiration.",
+  "expected_matches": [
+    "maxops-payload-s3-lifecycle-no-expiration"
+  ],
+  "scenario": "flag_bucket_without_expiration"
+}

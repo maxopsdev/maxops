@@ -1,0 +1,299 @@
+{
+  "profile": "maxops",
+  "region": "us-east-1",
+  "state_file": "tests_generator/s3/.s3_capture_state.json",
+  "placeholder_values": {
+    "ACCOUNT_ID": "123456789012",
+    "REPLICATION_ROLE_NAME": "maxops-payload-s3-replication-role",
+    "REPLICATION_POLICY_NAME": "maxops-payload-s3-replication-policy",
+    "PLAIN_NO_LIFECYCLE_BUCKET": "maxops-payload-s3-plain-no-lifecycle",
+    "LIFECYCLE_NO_EXPIRATION_BUCKET": "maxops-payload-s3-lifecycle-no-expiration",
+    "LIFECYCLE_NO_ARCHIVAL_BUCKET": "maxops-payload-s3-lifecycle-no-archival",
+    "LIFECYCLE_NO_MPU_BUCKET": "maxops-payload-s3-lifecycle-no-mpu",
+    "VERSIONED_MISSING_NONCURRENT_BUCKET": "maxops-payload-s3-versioned-missing-noncurrent",
+    "COMPLIANT_NONVERSIONED_BUCKET": "maxops-payload-s3-compliant-nonversioned",
+    "COMPLIANT_VERSIONED_BUCKET": "maxops-payload-s3-compliant-versioned",
+    "LOGGING_SOURCE_BUCKET": "maxops-payload-s3-logging-source",
+    "LOGGING_TARGET_BUCKET": "maxops-payload-s3-logging-target",
+    "INVENTORY_SOURCE_BUCKET": "maxops-payload-s3-inventory-source",
+    "INVENTORY_DEST_BUCKET": "maxops-payload-s3-inventory-dest",
+    "REPLICATION_SOURCE_BUCKET": "maxops-payload-s3-replication-source",
+    "REPLICATION_DEST_BUCKET": "maxops-payload-s3-replication-dest"
+  },
+  "bucket_definitions": {
+    "plain_no_lifecycle": {
+      "name_placeholder_key": "PLAIN_NO_LIFECYCLE_BUCKET",
+      "versioning": false,
+      "tags": {
+        "Name": "{{PLAIN_NO_LIFECYCLE_BUCKET}}",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "plain_no_lifecycle"
+      }
+    },
+    "lifecycle_no_expiration": {
+      "name_placeholder_key": "LIFECYCLE_NO_EXPIRATION_BUCKET",
+      "versioning": false,
+      "tags": {
+        "Name": "{{LIFECYCLE_NO_EXPIRATION_BUCKET}}",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "lifecycle_no_expiration"
+      },
+      "lifecycle_configuration": {
+        "Rules": [
+          {
+            "ID": "archive-no-expiration",
+            "Status": "Enabled",
+            "Filter": {
+              "Prefix": ""
+            },
+            "Transitions": [
+              {
+                "Days": 30,
+                "StorageClass": "GLACIER"
+              }
+            ],
+            "AbortIncompleteMultipartUpload": {
+              "DaysAfterInitiation": 7
+            }
+          }
+        ]
+      }
+    },
+    "lifecycle_no_archival": {
+      "name_placeholder_key": "LIFECYCLE_NO_ARCHIVAL_BUCKET",
+      "versioning": false,
+      "tags": {
+        "Name": "{{LIFECYCLE_NO_ARCHIVAL_BUCKET}}",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "lifecycle_no_archival"
+      },
+      "lifecycle_configuration": {
+        "Rules": [
+          {
+            "ID": "expire-no-archive",
+            "Status": "Enabled",
+            "Filter": {
+              "Prefix": ""
+            },
+            "Expiration": {
+              "Days": 60
+            },
+            "AbortIncompleteMultipartUpload": {
+              "DaysAfterInitiation": 7
+            }
+          }
+        ]
+      }
+    },
+    "lifecycle_no_mpu": {
+      "name_placeholder_key": "LIFECYCLE_NO_MPU_BUCKET",
+      "versioning": false,
+      "tags": {
+        "Name": "{{LIFECYCLE_NO_MPU_BUCKET}}",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "lifecycle_no_mpu"
+      },
+      "lifecycle_configuration": {
+        "Rules": [
+          {
+            "ID": "expire-and-archive-no-mpu",
+            "Status": "Enabled",
+            "Filter": {
+              "Prefix": ""
+            },
+            "Expiration": {
+              "Days": 60
+            },
+            "Transitions": [
+              {
+                "Days": 30,
+                "StorageClass": "GLACIER"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "versioned_missing_noncurrent_controls": {
+      "name_placeholder_key": "VERSIONED_MISSING_NONCURRENT_BUCKET",
+      "versioning": true,
+      "tags": {
+        "Name": "{{VERSIONED_MISSING_NONCURRENT_BUCKET}}",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "versioned_missing_noncurrent_controls"
+      },
+      "lifecycle_configuration": {
+        "Rules": [
+          {
+            "ID": "current-only-controls",
+            "Status": "Enabled",
+            "Filter": {
+              "Prefix": ""
+            },
+            "Expiration": {
+              "Days": 60
+            },
+            "Transitions": [
+              {
+                "Days": 30,
+                "StorageClass": "GLACIER"
+              }
+            ],
+            "AbortIncompleteMultipartUpload": {
+              "DaysAfterInitiation": 7
+            }
+          }
+        ]
+      }
+    },
+    "compliant_nonversioned": {
+      "name_placeholder_key": "COMPLIANT_NONVERSIONED_BUCKET",
+      "versioning": false,
+      "tags": {
+        "Name": "{{COMPLIANT_NONVERSIONED_BUCKET}}",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "compliant_nonversioned"
+      },
+      "lifecycle_configuration": {
+        "Rules": [
+          {
+            "ID": "fully-managed-current",
+            "Status": "Enabled",
+            "Filter": {
+              "Prefix": ""
+            },
+            "Expiration": {
+              "Days": 60
+            },
+            "Transitions": [
+              {
+                "Days": 30,
+                "StorageClass": "GLACIER"
+              }
+            ],
+            "AbortIncompleteMultipartUpload": {
+              "DaysAfterInitiation": 7
+            }
+          }
+        ]
+      }
+    },
+    "compliant_versioned": {
+      "name_placeholder_key": "COMPLIANT_VERSIONED_BUCKET",
+      "versioning": true,
+      "tags": {
+        "Name": "{{COMPLIANT_VERSIONED_BUCKET}}",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "compliant_versioned"
+      },
+      "lifecycle_configuration": {
+        "Rules": [
+          {
+            "ID": "fully-managed-versioned",
+            "Status": "Enabled",
+            "Filter": {
+              "Prefix": ""
+            },
+            "Expiration": {
+              "Days": 60
+            },
+            "Transitions": [
+              {
+                "Days": 30,
+                "StorageClass": "GLACIER"
+              }
+            ],
+            "AbortIncompleteMultipartUpload": {
+              "DaysAfterInitiation": 7
+            },
+            "NoncurrentVersionExpiration": {
+              "NoncurrentDays": 60
+            },
+            "NoncurrentVersionTransitions": [
+              {
+                "NoncurrentDays": 30,
+                "StorageClass": "GLACIER"
+              }
+            ]
+          },
+          {
+            "ID": "delete-marker-cleanup",
+            "Status": "Enabled",
+            "Filter": {
+              "Prefix": ""
+            },
+            "Expiration": {
+              "ExpiredObjectDeleteMarker": true
+            }
+          }
+        ]
+      }
+    },
+    "logging_source": {
+      "name_placeholder_key": "LOGGING_SOURCE_BUCKET",
+      "versioning": false,
+      "tags": {
+        "Name": "{{LOGGING_SOURCE_BUCKET}}",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "logging_source"
+      },
+      "logging_target_alias": "logging_target",
+      "logging_target_prefix": "access-logs/"
+    },
+    "logging_target": {
+      "name_placeholder_key": "LOGGING_TARGET_BUCKET",
+      "versioning": false,
+      "tags": {
+        "Name": "{{LOGGING_TARGET_BUCKET}}",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "logging_target",
+        "purpose": "logs"
+      }
+    },
+    "inventory_source": {
+      "name_placeholder_key": "INVENTORY_SOURCE_BUCKET",
+      "versioning": false,
+      "tags": {
+        "Name": "{{INVENTORY_SOURCE_BUCKET}}",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "inventory_source"
+      },
+      "inventory_destination_alias": "inventory_dest",
+      "inventory_configuration_id": "daily-inventory"
+    },
+    "inventory_dest": {
+      "name_placeholder_key": "INVENTORY_DEST_BUCKET",
+      "versioning": false,
+      "tags": {
+        "Name": "{{INVENTORY_DEST_BUCKET}}",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "inventory_dest"
+      }
+    },
+    "replication_source": {
+      "name_placeholder_key": "REPLICATION_SOURCE_BUCKET",
+      "versioning": true,
+      "tags": {
+        "Name": "{{REPLICATION_SOURCE_BUCKET}}",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "replication_source"
+      },
+      "replication_destination_alias": "replication_dest"
+    },
+    "replication_dest": {
+      "name_placeholder_key": "REPLICATION_DEST_BUCKET",
+      "versioning": true,
+      "tags": {
+        "Name": "{{REPLICATION_DEST_BUCKET}}",
+        "maxops_payload_capture": "true",
+        "maxops_payload_profile": "replication_dest"
+      }
+    }
+  },
+  "replication": {
+    "role_name_placeholder_key": "REPLICATION_ROLE_NAME",
+    "policy_name_placeholder_key": "REPLICATION_POLICY_NAME",
+    "source_bucket_alias": "replication_source",
+    "destination_bucket_alias": "replication_dest"
+  }
+}

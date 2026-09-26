@@ -1,0 +1,1041 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Onboarding Run | MaxOps Adventures №1</title>
+  <meta name="description" content="A page-by-page comic walkthrough of MaxOps onboarding: the Information screen, the IAM Role step (AWS profile, Create Role, Download JSON, Use this role), and Account Settings — every field, button, and enable rule explained.">
+  <link rel="icon" type="image/svg+xml" href="./assets/brand/maxops-mark.svg">
+  <link rel="stylesheet" href="./setup-guide.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="masthead">
+  <a class="brand" href="./docs.html"><img src="./assets/brand/maxops-mark.svg" alt="" width="26" height="26">MAXOPS <span>ADVENTURES</span></a>
+  <a class="masthead-back" href="./docs.html">‹ All issues</a>
+  <div class="counter">PAGE <b id="counterNow">1</b> / <span id="counterTotal">1</span></div>
+</header>
+
+<main class="pager" id="pager">
+
+  <!-- ============================================================ 1 COVER -->
+  <section class="page" data-page="1" data-slug="cover" data-chapter="Cover">
+    <div class="spread">
+      <div class="rail" style="align-items:center;">
+        <div class="panel" style="width:100%;">
+          <div class="panel-inner">
+            <img src="./assets/comic/cover.jpg" alt="The Cost Sentinel, a small round-helmeted mascot with big friendly eyes and a teal cape, waves hello in front of a starry skyline of glowing server towers." />
+            <div class="halftone"></div>
+            <div class="vignette"></div>
+          </div>
+          <div class="fig-tag">FIG. 01 — COVER</div>
+        </div>
+        <div class="kicker" style="margin-top:22px;">MaxOps Adventures <b>· Issue №1</b></div>
+        <h1 class="title">THE ONBOARDING<br /><em>RUN</em></h1>
+        <div class="subtitle">Three Steps To A Read-Only Key</div>
+        <p class="caption" style="border:none; padding-left:0; max-width:56ch;">
+          The stack is up and the gate is open — now the Sentinel needs permission to look. Every screen,
+          every dropdown, every button, and the exact rule that decides when <strong>Continue</strong> wakes up.
+        </p>
+        <button class="cta" onclick="goTo(2)">Begin the walkthrough ▸</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================== 2 THE MAP -->
+  <section class="page" data-page="2" data-slug="step-map" data-chapter="The map">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/doors.jpg" alt="The Sentinel cheerfully holds open two browser-window doors, welcoming you into a warm golden hall of servers." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 02 — THE THREE DOORS</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Prologue <b>· Know where you are</b></div>
+        <h2 class="title title--sm">THE MAP AT<br />THE <em>TOP</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Three doors, one strip across the top of every screen. It tells you which one you're standing in.</p>
+        </div>
+        <div class="steps-strip">
+          <div class="step-chip done"><b>1</b> Information</div>
+          <div class="step-chip current"><b>2</b> IAM Role</div>
+          <div class="step-chip"><b>3</b> Account Settings</div>
+        </div>
+        <p class="caption">
+          Three states, three looks. The <strong>highlighted, solid-numbered</strong> tile is where you are.
+          A <strong>plain, full-contrast</strong> tile is behind you. A <strong>faded</strong> tile is still ahead.
+          The tiles are a progress display, <strong>not buttons</strong> — you move with <strong>Back</strong> and
+          <strong>Continue</strong> at the bottom of each screen.
+        </p>
+        <p class="caption">
+          Every move writes the step to the backend and into the URL, e.g. <code>/onboarding?step=role</code>.
+          Close the browser, come back tomorrow, and the wizard reopens exactly where you left it — profile,
+          environment, account, and regions still filled in.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================== 3 STEP 1 WELCOME -->
+  <section class="page" data-page="3" data-slug="information" data-chapter="Step 1 · Information">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/welcome.jpg" alt="The Sentinel taps a floating panel and sends a group of smiling container boxes happily launching upward." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 03 — THE WELCOME</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Step 1 of 3 <b>· Mostly reading material</b></div>
+        <h2 class="title title--sm">THE<br /><em>INFORMATION</em> SCREEN</h2>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>Three big cards — Automated Optimization, Policy-Based, Cost Savings. Do I have to pick one?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>No. They're <em>pure description</em> — not settings, not toggles. Nothing is stored when you read them.</p>
+        </div>
+        <p class="caption">
+          The cards and the <strong>About MaxOps</strong> paragraph tell you what the product does: find underused
+          resources, express rules as policies, track the savings. You configure none of it here — check tuning
+          lives in <strong>Settings</strong> once onboarding is finished.
+        </p>
+        <p class="caption">
+          This screen does exactly <strong>one</strong> piece of real work, and it's on the next panel.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================ 4 PRICING DATABASE -->
+  <section class="page" data-page="4" data-slug="pricing-database" data-chapter="Step 1 · Pricing DB">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Pricing database — state A: artifact available</span>
+            <p class="mock-note">Bundled pricing artifact found and not yet extracted.</p>
+            <div class="mock-tile">
+              <span>Artifact</span><strong>…/pricing_artifacts/pricing_db.tar.zst</strong>
+            </div>
+            <div class="mock-tile">
+              <span>Database</span><strong>…/data/pricing.db</strong>
+            </div>
+            <div class="mock-row"><span class="mock-btn secondary">Extract Pricing Database</span></div>
+            <span class="mock-label gap">State B: working</span>
+            <div class="mock-row"><span class="mock-btn dead">Extracting…</span></div>
+            <span class="mock-label gap">State C: done</span>
+            <div class="mock-row"><span class="mock-badge">✓ Pricing database ready</span></div>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT A — PRICING CARD</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Step 1 <b>· The one real control</b></div>
+        <h2 class="title title--sm">THE PRICING<br /><em>DATABASE</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>"This volume is idle" is trivia. <em>"…and it costs $41 a month"</em> is a decision. That second half comes from here.</p>
+        </div>
+        <p class="caption">
+          AWS price data ships as a compressed artifact <strong>inside the repository</strong>, so MaxOps works
+          offline — but it is never unpacked behind your back. You choose, on this screen.
+        </p>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">The status line</div><div class="ops-d">Written by the backend. It tells you which of the three states you're in.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">Artifact</div><div class="ops-d">Path to the packed file shipped with MaxOps.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">Database</div><div class="ops-d">Where it will be unpacked to on <strong>this</strong> machine.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">04</div><div><div class="ops-h">Extract Pricing Database</div><div class="ops-d">Appears <strong>only</strong> when an artifact exists and hasn't been unpacked. Purely local decompression — no network call, no AWS call.</div></div></div>
+          <div class="ops-item"><div class="ops-num">05</div><div><div class="ops-h">Pricing database ready</div><div class="ops-d">The green badge replaces the button for good.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================ EXTRACTING THE PRICING DB -->
+  <section class="page" data-page="5" data-slug="extracting-pricing" data-chapter="Extracting it">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Route 2 — Docker does it for you</span>
+            <div class="term">
+              <div class="term-bar"><i></i><i></i><i></i><span>first start</span></div>
+              <pre><span class="p">$</span> docker compose up
+<span class="c">unpacked automatically, into a named
+volume that survives restarts</span></pre>
+            </div>
+            <span class="mock-label gap">Route 3 — by hand</span>
+            <div class="term">
+              <div class="term-bar"><i></i><i></i><i></i><span>from maxops-backend/</span></div>
+              <pre><span class="p">$</span> python staging_pricing/unpack_pricing_db.py</pre>
+            </div>
+            <p class="mock-note ok">Lands at <strong>./maxops_pricing.db</strong> unless you set a different path.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT B — THE THREE ROUTES</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Step 1 <b>· If the button isn't there</b></div>
+        <h2 class="title title--sm">THREE WAYS TO<br /><em>EXTRACT</em> IT</h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>The button on the previous page is the easy route, not the only one — and on a Docker install it will already be done before you ever see that screen.</p>
+        </div>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">The button</div><div class="ops-d">On the Information screen during setup. Appears only while an artifact exists and hasn't been unpacked.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">02</div><div><div class="ops-h">Docker, automatically</div><div class="ops-d"><code>docker compose up</code> unpacks it on first start and keeps it in a named volume, so it survives restarts. Most people never think about this at all.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">By hand</div><div class="ops-d">Running the backend directly? Unpack it yourself before first start with <code>python staging_pricing/unpack_pricing_db.py</code>, from the <code>maxops-backend</code> directory.</div></div></div>
+        </div>
+        <p class="caption">
+          The unpacker checks the artifact's <strong>SHA-256</strong> before decompressing anything, so a
+          truncated or tampered download fails loudly instead of producing a half-written database.
+        </p>
+        <p class="caption">
+          It writes to <code>./maxops_pricing.db</code> by default. Set <code>PRICING_DATABASE_PATH</code> if
+          you want it elsewhere — a larger disk, or a volume you already back up. Pass <code>--force</code>
+          to overwrite an existing copy.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== 5 GET STARTED -->
+  <section class="page" data-page="6" data-slug="get-started" data-chapter="Step 1 · Get Started">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Bottom of the Information screen</span>
+            <div class="mock-row"><span class="mock-btn primary">Get Started ▸</span></div>
+            <p class="mock-note ok">Always enabled. The only ungated button in the wizard.</p>
+            <span class="mock-label gap">What the click writes</span>
+            <div class="term">
+              <div class="term-bar"><i></i><i></i><i></i><span>saved state</span></div>
+              <pre><span class="c"># 1. progress, persisted server-side</span>
+onboarding_step = <span class="k">"role"</span>
+<span class="c"># 2. then the browser navigates</span>
+<span class="p">→</span> /onboarding?step=role</pre>
+            </div>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT B — GET STARTED</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Step 1 <b>· Leaving the room</b></div>
+        <h2 class="title title--sm">GET<br /><em>STARTED</em></h2>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>The extract looks optional. Can I just… skip it?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>You can — <strong>Get Started</strong> won't stop you. But then I run blind on price: findings arrive with no cost and no savings attached. It takes seconds. Do it now.</p>
+        </div>
+        <p class="caption">
+          There is nothing on this screen you can get wrong, so nothing blocks you. If you do skip it, the button
+          and badge stay on this screen — come back any time and extract, then re-run the checks.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================= 6 STEP 2 THE ROLE -->
+  <section class="page" data-page="7" data-slug="iam-role" data-chapter="Step 2 · IAM Role">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/iam-key.jpg" alt="The Sentinel holds up a padlock badge beaming to a cloud while gently lowering a credentials folder into a container." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 04 — THE KEY</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Step 2 of 3 <b>· The long chapter</b></div>
+        <h2 class="title title--sm">THE READ-ONLY<br /><em>KEY</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>I can't peek at a single instance until AWS says I may! So let's make you a key — a friendly one that only ever turns one way: <em>read</em>.</p>
+        </div>
+        <div class="mock-tiles">
+          <div class="mock-tile"><span>Role</span><strong>MaxOps<wbr>ReadOnlyRole</strong></div>
+          <div class="mock-tile"><span>Policy</span><strong>MaxOpsReadOnly<wbr>ScanPolicy</strong></div>
+          <div class="mock-tile hero"><span>Actions</span><strong>87</strong></div>
+        </div>
+        <p class="caption">
+          <strong>Role</strong> is the identity MaxOps assumes. <strong>Policy</strong> is the inline permission
+          document attached to it. <strong>Actions</strong> counts the distinct API calls it allows — 87 of them
+          across 11 groups, and every single one is a <code>List</code>, <code>Get</code>, or <code>Describe</code>.
+          No <code>Create</code>. No <code>Modify</code>. No <code>Delete</code>. CUR export setup, S3 writes, and
+          remediation actions are deliberately left out.
+        </p>
+        <p class="caption">There are two routes to that key, and a button for each.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================== 7 THE DROPDOWN -->
+  <section class="page" data-page="8" data-slug="aws-profile" data-chapter="Step 2 · AWS profile">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">AWS profile</span>
+            <div class="mock-select"><span>maxops (123456789012)</span><span class="caret">▾</span></div>
+            <span class="mock-label gap">Other rows in the list</span>
+            <div class="mock-select"><span>default (210987654321)</span><span class="caret">▾</span></div>
+            <div class="mock-select"><span>sandbox (account unavailable)</span><span class="caret">▾</span></div>
+            <p class="mock-note bad">↳ Resolve AWS account for profile failed (ExpiredToken): …</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT C — THE DROPDOWN</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Step 2 <b>· Where the list comes from</b></div>
+        <h2 class="title title--sm">THE AWS PROFILE<br /><em>DROPDOWN</em></h2>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>Where does this list come from, and what's the number in brackets?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Your own local AWS profiles — the ones in <code>~/.aws/config</code> and <code>~/.aws/credentials</code>. I read their names, then ask AWS who each one is. That answer is the number in brackets.</p>
+        </div>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">A</div><div><div class="ops-h">"account unavailable"</div><div class="ops-d">The identity lookup failed — expired SSO session, stale keys, no network. The reason prints under the dropdown.</div></div></div>
+          <div class="ops-item"><div class="ops-num">B</div><div><div class="ops-h">No profiles at all</div><div class="ops-d">You get a single <code>default</code> entry, using whatever credentials the environment provides.</div></div></div>
+          <div class="ops-item"><div class="ops-num">C</div><div><div class="ops-h">Greyed out</div><div class="ops-d">While profiles are still loading, and while a role is being created.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== 8 WHAT IT REALLY IS -->
+  <section class="page" data-page="9" data-slug="trusted-principal" data-chapter="Step 2 · Trusted principal">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">What the selected profile becomes</span>
+            <div class="term">
+              <div class="term-bar"><i></i><i></i><i></i><span>trust policy</span></div>
+              <pre>{
+  <span class="k">"Sid"</span>: <span class="p">"AllowCurrentMaxOpsCaller"</span>,
+  <span class="k">"Effect"</span>: <span class="p">"Allow"</span>,
+  <span class="k">"Principal"</span>: {
+    <span class="k">"AWS"</span>: <span class="p">"&lt;the profile you picked&gt;"</span>
+  },
+  <span class="k">"Action"</span>: <span class="p">"sts:AssumeRole"</span>
+}</pre>
+            </div>
+            <p class="mock-note">Nobody outside this statement can assume the role.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT D — THE TRUST</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Step 2 <b>· The part people get wrong</b></div>
+        <h2 class="title title--sm">IT PICKS THE<br /><em>LOCKSMITH</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>That dropdown does <em>not</em> choose which account gets scanned. It chooses the credentials that do the setup work — the identity that <em>makes</em> the key.</p>
+        </div>
+        <div class="ops-list">
+          <div class="ops-item active"><div class="ops-num">01</div><div><div class="ops-h">It must be able to write IAM</div><div class="ops-d"><code>iam:CreateRole</code> and <code>iam:PutRolePolicy</code>, or <strong>Create Role</strong> will fail. If your day-to-day profile is read-only, take the escape hatch three pages along.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">02</div><div><div class="ops-h">It becomes the trusted principal</div><div class="ops-d">The new role's trust policy names precisely this identity as the only one permitted to assume it.</div></div></div>
+        </div>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>And if I change the dropdown after I've already made a role?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>The success card clears and <strong>Continue</strong> goes back to grey — on purpose. Different profile can mean a different account and a different trusted principal, so the key has to be cut again. Re-picking the value it already had is harmless: I compare old and new, and do nothing when they match.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================== 9 CREATE ROLE -->
+  <section class="page" data-page="10" data-slug="create-role" data-chapter="Step 2 · Create Role">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">The two buttons beside the dropdown</span>
+            <div class="mock-row">
+              <span class="mock-btn primary">✦ Create Role</span>
+              <span class="mock-btn secondary">↓ Download JSON</span>
+            </div>
+            <span class="mock-label gap">…and what lands in your AWS config</span>
+            <div class="term">
+              <div class="term-bar"><i></i><i></i><i></i><span>~/.aws/config</span></div>
+              <pre><span class="k">[profile MaxOpsReadOnlyRole]</span>
+role_arn       = arn:aws:iam::123456789012:role/MaxOpsReadOnlyRole
+region         = us-east-1
+source_profile = maxops</pre>
+            </div>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT E — CREATE ROLE</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Step 2 <b>· Route one</b></div>
+        <h2 class="title title--sm">WHAT <em>CREATE ROLE</em><br />ACTUALLY DOES</h2>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">Identify</div><div class="ops-d">Loads the selected profile and calls <code>sts:GetCallerIdentity</code> to learn who you are and which account you're in.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">Trust</div><div class="ops-d">Builds the trust policy naming that caller as the only principal allowed to assume the role.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">Create</div><div class="ops-d"><code>iam:CreateRole</code> for <code>MaxOpsReadOnlyRole</code> — 1-hour max session, a description, tags <code>ManagedBy=MaxOps</code> and <code>MaxOpsAccess=ReadOnlyScan</code>. <strong>If it already exists it is not duplicated</strong> — the trust policy is updated instead and the badge reads <em>Updated</em>.</div></div></div>
+          <div class="ops-item"><div class="ops-num">04</div><div><div class="ops-h">Attach</div><div class="ops-d">Puts the inline <code>MaxOpsReadOnlyScanPolicy</code> on it — those 87 read-only actions.</div></div></div>
+          <div class="ops-item"><div class="ops-num">05</div><div><div class="ops-h">Wire it up locally</div><div class="ops-d">Writes the <code>MaxOpsReadOnlyRole</code> profile into your <code>~/.aws/config</code>, pointing at the new ARN with your selected profile as its source.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">06</div><div><div class="ops-h">Wait</div><div class="ops-d">Up to about 20 seconds, probing until the new permissions actually answer.</div></div></div>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>IAM is <em>eventually consistent</em>. For a few seconds a brand-new role still draws <code>AccessDenied</code> from some endpoints — and onboarding is about to fire a hundred checks. If the button seems to pause at the end, that pause is doing you a favour.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================ 10 DOWNLOAD JSON -->
+  <section class="page" data-page="11" data-slug="download-json" data-chapter="Step 2 · Download JSON">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <div class="mock-row"><span class="mock-btn secondary">↓ Download JSON</span></div>
+            <p class="mock-note">Saves <strong>maxops-read-only-scan-policy.json</strong> to your Downloads folder.</p>
+            <div class="term">
+              <div class="term-bar"><i></i><i></i><i></i><span>maxops-read-only-scan-policy.json</span></div>
+              <pre>{
+  <span class="k">"Version"</span>: <span class="p">"2012-10-17"</span>,
+  <span class="k">"Statement"</span>: [
+    { <span class="k">"Sid"</span>: <span class="p">"Ec2EbsVpcRead"</span>,
+      <span class="k">"Effect"</span>: <span class="p">"Allow"</span>,
+      <span class="k">"Action"</span>: [ <span class="p">"ec2:DescribeInstances"</span>, … ],
+      <span class="k">"Resource"</span>: <span class="p">"*"</span> },
+    <span class="c">… 10 more read-only groups …</span>
+  ]
+}</pre>
+            </div>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT F — THE POLICY</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Step 2 <b>· The evidence</b></div>
+        <h2 class="title title--sm">DOWNLOAD<br /><em>JSON</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>A browser-side file save. <em>No server call, no AWS call, nothing transmitted anywhere.</em> Click it before, after, or instead of creating a role.</p>
+        </div>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>What do I do with a file full of permissions?</p>
+        </div>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">Get approval</div><div class="ops-d">Attach it to the ticket. Security reads all 87 actions and confirms nothing writes — before anyone touches your account.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">Hand it to whoever has IAM rights</div><div class="ops-d">They create the role from the exact document MaxOps would have used, then give you the ARN — the next panel's route.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">Put it in your IaC</div><div class="ops-d">Paste into Terraform or CloudFormation so the role is managed like every other role in your estate.</div></div></div>
+          <div class="ops-item"><div class="ops-num">04</div><div><div class="ops-h">Audit later</div><div class="ops-d">Keep it as the record of what MaxOps was permitted to read on the day you onboarded.</div></div></div>
+        </div>
+        <p class="caption">
+          The same document is on screen too: <strong>Permission groups</strong> lists each of the 11 blocks with
+          its actions and resource scope, and <strong>Policy JSON</strong> shows the raw text. The download is
+          simply that, as a file.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================= 11 USE EXISTING ROLE -->
+  <section class="page" data-page="12" data-slug="use-existing-role" data-chapter="Step 2 · Use this role">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">"Credentials can't create IAM roles?"</span>
+            <div class="mock-input ghost"><span>arn:aws:iam::123456789012:role/MyReadOnlyRole</span></div>
+            <div class="mock-row"><span class="mock-btn dead">Use this role</span></div>
+            <p class="mock-note">Dead while the box is empty or the text isn't a valid role ARN.</p>
+            <span class="mock-label gap">Malformed input</span>
+            <div class="mock-input bad"><span>arn:aws:iam::123456789012:user/nova</span></div>
+            <p class="mock-note bad">Enter a full IAM role ARN, e.g. arn:aws:iam::123456789012:role/MyReadOnlyRole.</p>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT G — THE ESCAPE HATCH</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Step 2 <b>· Route two</b></div>
+        <h2 class="title title--sm">USE AN<br /><em>EXISTING</em> ROLE</h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>For everyone whose credentials are read-only. Your admin cuts the key from the downloaded policy — or points you at one that already exists — and you paste its ARN here. <em>I make zero IAM writes on this path.</em> No role created, no policy attached, nothing in your account modified.</p>
+        </div>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">Shape</div><div class="ops-d">Must be a full role ARN — partition, 12-digit account, <code>:role/</code>, a name. Paths like <code>role/team/Reader</code> and partitions like <code>aws-us-gov</code> are fine. Get it wrong and a red line appears under the box while the button stays dead.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">Existence</div><div class="ops-d">Same account as your selected profile? MaxOps tries <code>iam:GetRole</code>. A definitive "no such role" is reported; a permissions failure on the lookup itself is tolerated and left to the next test.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">03</div><div><div class="ops-h">Usability</div><div class="ops-d">The real test — an actual <code>sts:AssumeRole</code> attempt. If the role's trust policy doesn't allow your selected profile, you're told <strong>now</strong>, not an hour later when every check fails.</div></div></div>
+          <div class="ops-item"><div class="ops-num">04</div><div><div class="ops-h">Wire it up</div><div class="ops-d">Writes the same local <code>MaxOpsReadOnlyRole</code> profile and waits for propagation, exactly as the create path does.</div></div></div>
+        </div>
+        <p class="caption">The result card's badge reads <strong>Using existing role</strong> for this route.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================== 12 ROLE READY -->
+  <section class="page" data-page="13" data-slug="role-ready" data-chapter="Step 2 · Role ready">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <div class="mock-row">
+              <strong style="font-family:'Bangers',cursive; font-size:1.5rem; letter-spacing:.04em;">Role ready</strong>
+              <span class="mock-badge">Created</span>
+            </div>
+            <div class="mock-tiles">
+              <div class="mock-tile"><span>Source Profile</span><strong>maxops</strong></div>
+              <div class="mock-tile"><span>MaxOps Profile</span><strong>MaxOps<wbr>ReadOnlyRole</strong></div>
+              <div class="mock-tile"><span>Account</span><strong>123456789012</strong></div>
+            </div>
+            <div class="mock-tile"><span>Role ARN</span><strong>arn:aws:iam::123456789012:<wbr>role/MaxOpsReadOnlyRole</strong></div>
+            <div class="mock-tile"><span>AWS Config</span><strong>C:\Users\you\.aws\config</strong></div>
+            <div class="mock-tile"><span>Trusted Principal</span><strong>arn:aws:iam::123456789012:<wbr>role/YourAdminRole</strong></div>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT H — ROLE READY</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Step 2 <b>· Both routes end here</b></div>
+        <h2 class="title title--sm">READING THE<br /><em>SUCCESS</em> CARD</h2>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">Badge</div><div class="ops-d"><strong>Created</strong> (new role), <strong>Updated</strong> (already existed, refreshed), or <strong>Using existing role</strong> (the paste-an-ARN route).</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">Source Profile</div><div class="ops-d">The profile you chose — the credentials that did the work.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">MaxOps Profile</div><div class="ops-d">The new local profile every scan will use from now on.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">04</div><div><div class="ops-h">Account</div><div class="ops-d">The 12-digit account this happened in. Remember it — it's about to auto-fill on the next step.</div></div></div>
+          <div class="ops-item"><div class="ops-num">05</div><div><div class="ops-h">Role ARN</div><div class="ops-d">The role's full identifier. Also copied into the ARN box above, so it's easy to select and copy.</div></div></div>
+          <div class="ops-item"><div class="ops-num">06</div><div><div class="ops-h">AWS Config</div><div class="ops-d">The exact file on disk MaxOps edited, so you can go and inspect the change.</div></div></div>
+          <div class="ops-item"><div class="ops-num">07</div><div><div class="ops-h">Trusted Principal</div><div class="ops-d">The only identity allowed to assume this role.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ 13 CONTINUE, STEP TWO -->
+  <section class="page" data-page="14" data-slug="continue-role" data-chapter="Step 2 · Continue">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">The dropdown moves by itself</span>
+            <div class="mock-select"><span>MaxOpsReadOnlyRole (123456789012)</span><span class="caret">▾</span></div>
+            <div class="mock-row"><span class="mock-btn dead">✦ Create Role</span></div>
+            <p class="mock-note">This is the read-only scan profile MaxOps just set up — it can't create or update IAM resources. Pick a different profile to re-create the role.</p>
+            <span class="mock-label gap">Bottom of the screen</span>
+            <div class="mock-row">
+              <span class="mock-btn secondary">◂ Back</span>
+              <span class="mock-btn dead">Continue ▸</span>
+              <span class="mock-note">before</span>
+            </div>
+            <div class="mock-row">
+              <span class="mock-btn secondary">◂ Back</span>
+              <span class="mock-btn primary">Continue ▸</span>
+              <span class="mock-note ok">after</span>
+            </div>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT I — THE GATE OPENS</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Step 2 <b>· When the gate opens</b></div>
+        <h2 class="title title--sm">WHY THE DROPDOWN<br /><em>MOVED</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>After success the dropdown switches itself to <strong>MaxOps<wbr>ReadOnlyRole</strong>. That's confirmation, not a glitch — the read-only scan profile now exists and is live.</p>
+        </div>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>And <strong>Create Role</strong> greyed out at the same moment.</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Because that profile is read-only by design — using it to write IAM is a guaranteed failure. The button is saving you the trip. Pick a different profile first if you need to re-cut the key.</p>
+        </div>
+        <p class="caption">
+          <strong>Continue</strong> stays grey until a role is ready. It enables when <em>any</em> of these is true:
+          <strong>Create Role</strong> succeeded this session; <strong>Use this role</strong> succeeded this session;
+          or you're returning to a session where a role was already saved — both a scan profile name and a role ARN
+          on record. It switches <strong>back off</strong> the moment you select a genuinely different AWS profile.
+        </p>
+        <p class="caption">
+          <strong>Back</strong> returns to Information and saves progress on the way. The profile you picked is
+          remembered, and a role you already created stays created.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ 14 STEP 3 ENVIRONMENT -->
+  <section class="page" data-page="15" data-slug="environment" data-chapter="Step 3 · Environment">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/scope.jpg" alt="The Sentinel gives a thumbs-up as a friendly scan beam sweeps across resource icons beside dials and a region map." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 05 — THE SCOPE</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Step 3 of 3 <b>· Naming the scope</b></div>
+        <h2 class="title title--sm">THE<br /><em>ENVIRONMENT</em></h2>
+        <div class="mock-row">
+          <span class="mock-pill">Development</span>
+          <span class="mock-pill">Staging</span>
+          <span class="mock-pill on">Production</span>
+          <span class="mock-pill">UAT</span>
+          <span class="mock-pill">QA</span>
+          <span class="mock-pill">Testing</span>
+          <span class="mock-pill">Sandbox</span>
+        </div>
+        <p class="caption">
+          Seven preset tiles, <strong>pick exactly one</strong> — clicking a second moves the selection rather than
+          adding to it. This is a <strong>label for the workspace, not a filter</strong>: it does not restrict which
+          resources get scanned. It's how you tell this MaxOps workspace apart from the next one.
+        </p>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Need something the presets don't cover — <em>"eu-payments-prod"</em>? Click <strong>Use a custom environment</strong> and the tiles become a text box; the link then reads <strong>Choose from standard environments</strong> to go back. Careful — toggling <em>clears both</em> the tile selection and the typed text, so re-enter your choice after switching.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================== 15 ACCOUNT + REGIONS -->
+  <section class="page" data-page="16" data-slug="account-regions" data-chapter="Step 3 · Account &amp; regions">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Account</span>
+            <div class="mock-input"><span>123456789012</span></div>
+            <p class="mock-note ok">Usually already filled in when you arrive.</p>
+            <span class="mock-label gap">Regions</span>
+            <div class="mock-input ghost"><span>⌕ Search by region name or code</span><span>✕</span></div>
+            <span class="mock-label">US</span>
+            <div class="mock-row">
+              <span class="mock-pill on">N. Virginia <em>us-east-1</em></span>
+              <span class="mock-pill">Ohio <em>us-east-2</em></span>
+              <span class="mock-pill on">Oregon <em>us-west-2</em></span>
+            </div>
+            <span class="mock-label">Europe</span>
+            <div class="mock-row">
+              <span class="mock-pill">Ireland <em>eu-west-1</em></span>
+              <span class="mock-pill">Frankfurt <em>eu-central-1</em></span>
+            </div>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT J — ACCOUNT &amp; REGIONS</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Step 3 <b>· Which account, which ground</b></div>
+        <h2 class="title title--sm">ACCOUNT &amp;<br /><em>REGIONS</em></h2>
+        <p class="caption">
+          <strong>Account</strong> — the 12-digit AWS account ID this workspace covers. If step 2 resolved an
+          account (it almost always does) MaxOps <strong>auto-fills it here</strong> and clears any prior error. It
+          re-applies even if you typed over it, so the field agrees with the role you just set up.
+          Validation is strict: <strong>exactly twelve digits</strong>. Anything else keeps <strong>Continue</strong>
+          grey and, on submit, shows <em>"Enter a valid 12-digit AWS account ID."</em>
+        </p>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>You <em>can</em> type a different account number — but if you do, make sure the IAM role I use actually has access to that account. Changing the digits doesn't change the key.</p>
+        </div>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">Multi-select</div><div class="ops-d">Unlike Environment, click as many as you need. Filled teal means selected; click again to remove.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">One is always kept</div><div class="ops-d">Try to deselect your last remaining region and nothing happens — a scan with no region has nothing to look at.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">us-east-1 by default</div><div class="ops-d">On a fresh setup. Returning users get whatever they saved.</div></div></div>
+          <div class="ops-item"><div class="ops-num">04</div><div><div class="ops-h">Grouped &amp; searchable</div><div class="ops-d">US, Americas, Canada, Europe, Asia Pacific, Middle East, Africa, China, GovCloud. Search filters by name, code, or group and reports the match count; <strong>✕</strong> clears it. Searching never changes your selection — a selected region filtered out of view is still selected.</div></div></div>
+        </div>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>Should I just tick everything to be safe?</p>
+        </div>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Checks run <em>per region</em> — every extra one is more API calls and a longer first scan. Start with the regions you actually run in; adding more later is one click in Settings.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== 16 AUTOSAVE + CONTINUE 3 -->
+  <section class="page" data-page="17" data-slug="autosave-continue" data-chapter="Step 3 · Continue">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Draft autosave</span>
+            <div class="term">
+              <div class="term-bar"><i></i><i></i><i></i><span>~600ms after you stop typing</span></div>
+              <pre><span class="p">→</span> draft saved
+   environment = <span class="k">"Production"</span>
+   account     = <span class="k">"123456789012"</span>
+   regions     = [<span class="k">"us-east-1"</span>, <span class="k">"us-west-2"</span>]
+<span class="c"># and once more when you navigate away</span></pre>
+            </div>
+            <span class="mock-label gap">The last gate</span>
+            <div class="mock-row">
+              <span class="mock-btn secondary">Back</span>
+              <span class="mock-btn primary">Continue ▸</span>
+            </div>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT K — AUTOSAVE</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Step 3 <b>· Nothing is lost</b></div>
+        <h2 class="title title--sm">AUTOSAVE &amp;<br />THE LAST <em>GATE</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>About half a second after you stop typing, I quietly save a draft — environment, account, regions. Once more when you navigate away. That's why <strong>Back</strong> and forward doesn't clear the form, and a reload picks up where you were.</p>
+        </div>
+        <p class="caption">
+          <strong>Continue</strong> needs all three at once:
+        </p>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">Environment</div><div class="ops-d">A tile chosen, or a non-blank custom name typed.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">Account</div><div class="ops-d">Exactly 12 digits.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">Regions</div><div class="ops-d">At least one — which the form already guarantees.</div></div></div>
+        </div>
+        <p class="caption">
+          It's also disabled while the save is in flight, so a double-click can't submit twice.
+          <strong>Back</strong> returns to the IAM Role step and is disabled during that same save.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== 17 THE SCAN -->
+  <section class="page" data-page="18" data-slug="the-scan" data-chapter="The scan">
+    <div class="spread spread--rail">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="exhibit">
+            <span class="mock-label">Checks streaming in, three at a time</span>
+            <div class="term">
+              <div class="term-bar"><i></i><i></i><i></i><span>onboarding run</span></div>
+              <pre><span class="p">✓</span> ec2-idle-instances          <span class="c">4 findings</span>
+<span class="p">✓</span> ebs-unattached-volumes      <span class="c">11 findings</span>
+<span class="k">…</span> s3-lifecycle-policy         <span class="c">running (slow ≠ broken)</span>
+<span class="p">✓</span> rds-rightsizer              <span class="c">2 findings</span>
+<span class="r">✗</span> es-domain-idle              <span class="c">attempt 1/3, retrying in 2s</span></pre>
+            </div>
+            <div class="mock-tiles">
+              <div class="mock-tile hero"><span>Concurrency</span><strong>3</strong></div>
+              <div class="mock-tile hero"><span>Attempts</span><strong>3</strong></div>
+              <div class="mock-tile hero"><span>Timeout</span><strong>120s</strong></div>
+            </div>
+          </div>
+          <div class="halftone"></div>
+        </div>
+        <div class="fig-tag amber">EXHIBIT L — THE RUN</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">After the third Continue <b>· He goes to work</b></div>
+        <h2 class="title title--sm">THE FIRST<br /><em>SCAN</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>The step strip disappears. Settings saved. I start immediately — you finish onboarding with real findings, not an empty screen.</p>
+        </div>
+        <div class="ops-list">
+          <div class="ops-item"><div class="ops-num">01</div><div><div class="ops-h">~100 checks, three at a time</div><div class="ops-d">Each card shows its result as it lands.</div></div></div>
+          <div class="ops-item"><div class="ops-num">02</div><div><div class="ops-h">Three attempts, two seconds apart</div><div class="ops-d">Absorbs the last of the IAM propagation flicker.</div></div></div>
+          <div class="ops-item"><div class="ops-num">03</div><div><div class="ops-h">Two minutes per attempt</div><div class="ops-d">Some checks are legitimately slow — S3 lifecycle across dozens of buckets. Slow is not broken.</div></div></div>
+          <div class="ops-item active"><div class="ops-num">04</div><div><div class="ops-h">Circuit breaker</div><div class="ops-d">The same error three times in a row is the signature of a real misconfiguration, so the run is cancelled rather than grinding through a hundred identical failures — and you land on the dashboard with the reason. <strong>Timeouts are exempt:</strong> a slow check never trips it.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== 18 RESULTS -->
+  <section class="page" data-page="19" data-slug="results" data-chapter="Results">
+    <div class="spread">
+      <div class="panel">
+        <div class="panel-inner">
+          <img src="./assets/comic/victory.jpg" alt="The Sentinel beams and raises the badge in triumph amid confetti, beside a completed checklist and a rising chart over a sunlit city." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="fig-tag">FIG. 06 — RESULTS</div>
+      </div>
+      <div class="rail">
+        <div class="kicker">Mission status <b>· Onboarding complete</b></div>
+        <h2 class="title title--sm">RESULTS &amp;<br /><em>VICTORY</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Savings surfaced. Evidence attached. <strong>View Dashboard</strong> is one click away — and the wizard never asks again.</p>
+        </div>
+        <p class="caption">
+          When the run finishes you get a summary of what was found and a button through to the dashboard where
+          the real work starts. Thresholds, which checks are enabled, and everything else now live under
+          <strong>Settings</strong>.
+        </p>
+        <div class="bubble ask">
+          <span class="who">Newcomer</span>
+          <p>Read-only the whole way. I can show my security team every line.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================== 19 RULEBOOK -->
+  <section class="page" data-page="20" data-slug="rulebook" data-chapter="Continue rulebook">
+    <div class="spread spread--solo">
+      <div class="rail">
+        <div class="kicker">Appendix A <b>· The grey button</b></div>
+        <h2 class="title title--sm">THE <em>CONTINUE</em> RULEBOOK</h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>One question every wizard raises: <em>why is that button grey?</em> Here's every answer.</p>
+        </div>
+        <div class="rulebook-wrap">
+          <table class="rulebook">
+            <thead>
+              <tr>
+                <th scope="col">Screen</th>
+                <th scope="col">Button</th>
+                <th scope="col">Enabled when</th>
+                <th scope="col">Greyed out when</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Information</td><td>Get Started</td>
+                <td>Always — there is no gate on this screen.</td>
+                <td>Never.</td>
+              </tr>
+              <tr>
+                <td>Information</td><td>Extract Pricing DB</td>
+                <td>A bundled artifact exists and hasn't been unpacked yet.</td>
+                <td>Hidden entirely once the database is ready, or if there's no artifact to unpack.</td>
+              </tr>
+              <tr>
+                <td>IAM Role</td><td>Create Role</td>
+                <td>Profiles have loaded and the selected profile isn't the read-only MaxOps scan profile.</td>
+                <td>While profiles load, while a creation is in flight, or when the read-only scan profile is selected.</td>
+              </tr>
+              <tr>
+                <td>IAM Role</td><td>Download JSON</td>
+                <td>Always — a local file save with no prerequisites.</td>
+                <td>Never.</td>
+              </tr>
+              <tr>
+                <td>IAM Role</td><td>Use this role</td>
+                <td>The box holds text matching a full IAM role ARN.</td>
+                <td>Empty box, malformed ARN, or a registration already running.</td>
+              </tr>
+              <tr>
+                <td>IAM Role</td><td>Continue</td>
+                <td>A role is ready — created or registered this session, or already saved from a previous one.</td>
+                <td>No role yet, or you switched to a different AWS profile, which resets readiness.</td>
+              </tr>
+              <tr>
+                <td>Account Settings</td><td>Continue</td>
+                <td>Environment chosen <em>and</em> account exactly 12 digits <em>and</em> at least one region.</td>
+                <td>Any of those unmet, or while the settings are being saved.</td>
+              </tr>
+              <tr>
+                <td>Any step</td><td>Back</td>
+                <td>Always — and your progress is saved on the way back.</td>
+                <td>During submission only.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== 20 TROUBLE -->
+  <section class="page" data-page="21" data-slug="trouble" data-chapter="When it goes wrong">
+    <div class="spread spread--solo">
+      <div class="rail">
+        <div class="kicker">Appendix B <b>· Red pages</b></div>
+        <h2 class="title title--sm">WHEN IT<br /><em>GOES WRONG</em></h2>
+        <div class="bubble">
+          <span class="who">Cost Sentinel</span>
+          <p>Every error here is telling you something specific. Read the message, not the vibe.</p>
+        </div>
+        <div class="trouble">
+          <article>
+            <h3>"account unavailable" beside a profile</h3>
+            <p>I couldn't resolve that profile's identity — expired SSO session, stale keys, or no network. Refresh
+              the credentials (<code>aws sso login</code>, or new keys) and reload the page. The precise reason is
+              printed under the dropdown.</p>
+          </article>
+          <article>
+            <h3>"Failed to create MaxOpsReadOnlyRole"</h3>
+            <p>Almost always the selected profile lacking <code>iam:CreateRole</code> or <code>iam:PutRolePolicy</code>.
+              Either pick a profile that can write IAM, or take the <strong>Download JSON → admin creates it → paste
+              the ARN</strong> route.</p>
+          </article>
+          <article>
+            <h3>"Enter a full IAM role ARN…"</h3>
+            <p>The pasted text isn't a role ARN. Look for a stray space, a truncated copy, or an ARN for something
+              other than a role. Shape: <code>arn:aws:iam::123456789012:role/MyReadOnlyRole</code>.</p>
+          </article>
+          <article>
+            <h3>"Could not assume &lt;arn&gt; with profile &lt;name&gt;"</h3>
+            <p>The role exists, but its trust policy doesn't let your selected profile in. Ask whoever owns the role
+              to add your identity as a trusted principal — or select the profile that <strong>is</strong> trusted.</p>
+          </article>
+          <article>
+            <h3>"Role &lt;name&gt; does not exist in account…"</h3>
+            <p>Well-formed ARN pointing at nothing. Usually a typo in the role name, or the wrong account number.</p>
+          </article>
+          <article>
+            <h3>"Run canceled: the same error occurred 3 times in a row"</h3>
+            <p>The circuit breaker. Three identical failures means something structural, not a blip — most often a
+              permission the role is missing, or credentials that expired mid-run. Read the repeated message, fix
+              that one thing, and re-run the checks from the dashboard. <strong>You don't have to redo onboarding.</strong></p>
+          </article>
+          <article>
+            <h3>Findings appear, but with no cost or savings figures</h3>
+            <p>The pricing database was never extracted. Go back to <code>/onboarding?step=information</code>, click
+              <strong>Extract Pricing Database</strong>, and re-run the checks.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== 21 END -->
+  <section class="page" data-page="22" data-slug="end" data-chapter="The end">
+    <div class="spread spread--solo">
+      <div class="rail" style="align-items:center; text-align:center;">
+        <div class="kicker">MaxOps Adventures <b>· Issue №1 · The End</b></div>
+        <h2 class="title">THREE STEPS.<br />ONE <em>READ-ONLY</em> KEY.<br />ZERO DATA OUT.</h2>
+        <p class="caption" style="border:none; padding-left:0; max-width:58ch;">
+          Keep this issue open beside the app the first time through — every control in the product has a page here.
+        </p>
+        <div class="chips" style="justify-content:center;">
+          <a class="chip" href="https://maxops.dev/setup-guide.html" target="_blank" rel="noopener">Onboarding Walkthrough</a>
+          <a class="chip alt" href="https://maxops.dev/setup-guide.html" target="_blank" rel="noopener">AWS Setup &amp; Permissions</a>
+          <a class="chip alt" href="https://maxops.dev/index.html#start" target="_blank" rel="noopener">Quickstart</a>
+          <a class="chip alt" href="https://github.com/maxopsdev/maxops" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <button class="cta" onclick="goTo(1)">◂ Back to the cover</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="navbar">
+  <button class="navbtn" id="prevBtn" aria-label="Previous panel">‹</button>
+  <div class="dots" id="dots"></div>
+  <button class="navbtn" id="nextBtn" aria-label="Next panel">›</button>
+</nav>
+
+<script>
+  const pager = document.getElementById('pager');
+  const pages = Array.from(document.querySelectorAll('.page'));
+  const TOTAL = pages.length;
+  const dotsWrap = document.getElementById('dots');
+  const counterNow = document.getElementById('counterNow');
+  document.getElementById('counterTotal').textContent = TOTAL;
+  let current = 1;
+
+  pages.forEach((page, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Go to page ' + (i + 1) + ': ' + (page.dataset.chapter || ''));
+    d.title = (i + 1) + '. ' + (page.dataset.chapter || '');
+    d.addEventListener('click', () => goTo(i + 1));
+    dotsWrap.appendChild(d);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function setActive(n) {
+    current = n;
+    counterNow.textContent = n;
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === n - 1));
+    const slug = pages[n - 1]?.dataset.slug;
+    if (slug && decodeURIComponent((location.hash || '').replace(/^#/, '')) !== slug) {
+      history.replaceState(null, '', n === 1 ? location.pathname : '#' + slug);
+    }
+  }
+
+  window.goTo = function (n) {
+    n = Math.min(Math.max(n, 1), TOTAL);
+    pages[n - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  // Deep links: #create-role (slug) or #page-9. The library page links
+  // straight at the page that answers a given question, so a slug has to
+  // resolve on load as well as on later hashchanges.
+  function pageFromHash() {
+    const raw = decodeURIComponent((location.hash || '').replace(/^#/, '')).trim();
+    if (!raw) return null;
+    const byPage = /^(?:page|panel)-(\d+)$/.exec(raw);
+    if (byPage) return Math.min(Math.max(Number(byPage[1]), 1), TOTAL);
+    const idx = pages.findIndex((p) => p.dataset.slug === raw);
+    return idx >= 0 ? idx + 1 : null;
+  }
+
+  function jumpToHash(smooth) {
+    const n = pageFromHash();
+    if (n === null) return false;
+    pages[n - 1].scrollIntoView({ behavior: smooth ? 'smooth' : 'instant', block: 'start' });
+    setActive(n);
+    return true;
+  }
+
+  window.addEventListener('hashchange', () => jumpToHash(true));
+
+  document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); goTo(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goTo(current - 1); }
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+        setActive(Number(entry.target.dataset.page));
+      }
+    });
+  }, { root: pager, threshold: [0.5] });
+  pages.forEach((p) => io.observe(p));
+
+  // Land on the requested page before the observer starts reporting page 1.
+  if (!jumpToHash(false)) setActive(1);
+</script>
+
+</body>
+</html>

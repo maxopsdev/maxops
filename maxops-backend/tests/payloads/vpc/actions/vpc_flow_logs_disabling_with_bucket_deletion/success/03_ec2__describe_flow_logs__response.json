@@ -1,0 +1,88 @@
+{
+  "FlowLogs": [
+    {
+      "CreationTime": "2026-06-14T17:22:57.594000+00:00",
+      "DeliverLogsStatus": "SUCCESS",
+      "DestinationOptions": {
+        "FileFormat": "plain-text",
+        "HiveCompatiblePartitions": false,
+        "PerHourPartition": false
+      },
+      "FlowLogId": "fl-039fe90b7a0c2a4df",
+      "FlowLogStatus": "ACTIVE",
+      "LogDestination": "arn:aws:s3:::maxops-payload-vpc-expiration-1781457771",
+      "LogDestinationType": "s3",
+      "LogFormat": "${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstport} ${protocol} ${packets} ${bytes} ${start} ${end} ${action} ${log-status}",
+      "MaxAggregationInterval": 600,
+      "ResourceId": "vpc-076ee5ae756aeef65",
+      "Tags": [
+        {
+          "Key": "maxops_payload_capture",
+          "Value": "true"
+        }
+      ],
+      "TrafficType": "ALL"
+    },
+    {
+      "CreationTime": "2026-06-14T17:22:58.910000+00:00",
+      "DeliverLogsStatus": "SUCCESS",
+      "DestinationOptions": {
+        "FileFormat": "plain-text",
+        "HiveCompatiblePartitions": false,
+        "PerHourPartition": false
+      },
+      "FlowLogId": "fl-03fabd33089cfd111",
+      "FlowLogStatus": "ACTIVE",
+      "LogDestination": "arn:aws:s3:::maxops-payload-vpc-deletion-1781457771",
+      "LogDestinationType": "s3",
+      "LogFormat": "${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstport} ${protocol} ${packets} ${bytes} ${start} ${end} ${action} ${log-status}",
+      "MaxAggregationInterval": 600,
+      "ResourceId": "vpc-0a942bcaab05b1c0c",
+      "Tags": [
+        {
+          "Key": "maxops_payload_capture",
+          "Value": "true"
+        }
+      ],
+      "TrafficType": "ALL"
+    },
+    {
+      "CreationTime": "2026-06-14T17:26:56.327000+00:00",
+      "DeliverLogsStatus": "SUCCESS",
+      "DestinationOptions": {
+        "FileFormat": "plain-text",
+        "HiveCompatiblePartitions": false,
+        "PerHourPartition": false
+      },
+      "FlowLogId": "fl-DELETION",
+      "FlowLogStatus": "ACTIVE",
+      "LogDestination": "arn:aws:s3:::maxops-payload-vpc-deletion",
+      "LogDestinationType": "s3",
+      "LogFormat": "${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstport} ${protocol} ${packets} ${bytes} ${start} ${end} ${action} ${log-status}",
+      "MaxAggregationInterval": 600,
+      "ResourceId": "vpc-DELETION",
+      "Tags": [
+        {
+          "Key": "maxops_payload_capture",
+          "Value": "true"
+        }
+      ],
+      "TrafficType": "ALL"
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "cache-control": "no-cache, no-store",
+      "content-type": "text/xml;charset=UTF-8",
+      "date": "Sun, 14 Jun 2026 17:27:13 GMT",
+      "server": "AmazonEC2",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "transfer-encoding": "chunked",
+      "vary": "accept-encoding",
+      "x-amzn-requestid": "0673f997-d3a4-488e-8b27-87a9dd3d0184"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "0673f997-d3a4-488e-8b27-87a9dd3d0184",
+    "RetryAttempts": 0
+  }
+}

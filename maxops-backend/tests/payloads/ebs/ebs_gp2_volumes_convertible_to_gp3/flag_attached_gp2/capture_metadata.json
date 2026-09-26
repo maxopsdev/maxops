@@ -1,0 +1,22 @@
+{
+  "calls": [
+    {
+      "operation": "describe_volumes",
+      "response_file": "describe_volumes.json",
+      "service": "ec2"
+    }
+  ],
+  "check_id": "ebs_gp2_volumes_convertible_to_gp3",
+  "check_parameters": {
+    "min_size_gb": 1,
+    "region": "us-east-1"
+  },
+  "description": "Use the captured 1 GiB attached gp2 volume.",
+  "expected_matches": [
+    "vol-ATTACHEDGP2"
+  ],
+  "scenario": "flag_attached_gp2",
+  "volume_placeholders": {
+    "attached_gp2": "vol-ATTACHEDGP2"
+  }
+}

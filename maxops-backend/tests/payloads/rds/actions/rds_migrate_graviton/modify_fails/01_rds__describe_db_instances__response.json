@@ -1,0 +1,20 @@
+{
+  "DBInstances": [
+    {
+      "AllocatedStorage": 100,
+      "DBInstanceArn": "arn:aws:rds:us-east-1:123456789012:db:maxops-test-rds-instance",
+      "DBInstanceClass": "db.m5.large",
+      "DBInstanceIdentifier": "maxops-test-rds-instance",
+      "DBInstanceStatus": "backing-up",
+      "Engine": "mysql",
+      "EngineVersion": "8.4.8",
+      "MultiAZ": false,
+      "StorageType": "gp3"
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPStatusCode": 200,
+    "RequestId": "00000000-0000-0000-0000-000000000061",
+    "RetryAttempts": 0
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "account_id": "123456789012",
+  "action_key": "rightsize",
+  "calls": [
+    {
+      "kwargs": {
+        "InstanceIds": [
+          "i-PLACEHOLDER-INSTANCE"
+        ]
+      },
+      "operation": "stop_instances",
+      "raises_client_error": false,
+      "response_file": "01_ec2__stop_instances__response.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {
+        "InstanceId": "i-PLACEHOLDER-INSTANCE",
+        "InstanceType": {
+          "Value": "m5.large"
+        }
+      },
+      "operation": "modify_instance_attribute",
+      "raises_client_error": false,
+      "response_file": "02_ec2__modify_instance_attribute__response.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {
+        "InstanceIds": [
+          "i-PLACEHOLDER-INSTANCE"
+        ]
+      },
+      "operation": "start_instances",
+      "raises_client_error": false,
+      "response_file": "03_ec2__start_instances__response.json",
+      "service": "ec2"
+    }
+  ],
+  "capture_source": "hand-authored",
+  "check_id": "ec2_rightsizer",
+  "expected_message": "Instance rightsize to m5.large submitted",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "rightsize",
+    "check_id": "ec2_rightsizer",
+    "details": {
+      "instance_id": "i-PLACEHOLDER-INSTANCE",
+      "target_instance_type": "m5.large"
+    },
+    "message": "Instance rightsize to m5.large submitted",
+    "status": "submitted"
+  },
+  "parameters": {
+    "target_instance_type": "m5.large"
+  },
+  "region": "us-east-1",
+  "resource_id": "i-PLACEHOLDER-INSTANCE",
+  "scenario": "success"
+}

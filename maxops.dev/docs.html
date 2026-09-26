@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Documentation | MaxOps Adventures</title>
+  <meta name="description" content="MaxOps documentation, drawn as comics. Every guide is an illustrated issue — onboarding, rightsizing, checks, the console overlay, and MCP automation — with a question index that jumps straight to the page that answers it.">
+  <link rel="icon" type="image/svg+xml" href="./assets/brand/maxops-mark.svg">
+  <link rel="stylesheet" href="./setup-guide.css">
+  <link rel="stylesheet" href="./docs.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="masthead">
+  <a class="brand" href="./index.html"><img src="./assets/brand/maxops-mark.svg" alt="" width="26" height="26">MAXOPS <span>ADVENTURES</span></a>
+  <a class="masthead-back" href="./index.html">‹ maxops.dev</a>
+</header>
+
+<main class="lib">
+
+  <!-- ============================================================== hero -->
+  <section class="lib-hero">
+    <div class="kicker">MaxOps Documentation <b>· The illustrated manual</b></div>
+    <h1 class="title">EVERY GUIDE,<br /><em>DRAWN</em>.</h1>
+    <p class="lib-lede">
+      MaxOps documentation is a comic series. Each guide is an <strong>issue</strong> — the same screens,
+      fields, and rules you'd find in a manual, except you can see them. Read one end to end, or use the
+      question index below to land on the exact page that answers you.
+    </p>
+    <div class="lib-stats">
+      <span class="lib-stat"><b>7</b> issues published</span>
+      <span class="lib-stat"><b>0</b> in production</span>
+      <span class="lib-stat"><b>100</b> pages drawn</span>
+    </div>
+  </section>
+
+  <!-- ============================================================== rack -->
+  <section class="lib-section" id="issues">
+    <div class="lib-section-head">
+      <h2>THE <em>RACK</em></h2>
+      <p>Every issue is published and complete — no stubs, no "TODO" sections.</p>
+    </div>
+
+    <div class="rack">
+
+      <!-- ---------------------------------------------- ISSUE 1 (published) -->
+      <a class="issue issue--feature" href="./setup-guide.html">
+        <div class="issue-cover">
+          <span class="issue-num">Issue №1</span>
+          <span class="issue-status out">Available now</span>
+          <img src="./assets/comic/cover.jpg" alt="The Cost Sentinel mascot waves hello in front of a starry skyline of server towers." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="issue-body">
+          <div class="issue-arc">Arc <b>· Getting Started</b></div>
+          <div class="issue-title">THE ONBOARDING <em>RUN</em></div>
+          <p class="issue-desc">
+            The three-step setup wizard, in full. <strong>Every</strong> field, button, and dropdown —
+            what the AWS profile picker really selects, what Create Role does to your account, why
+            Continue is greyed out, and what each error message is actually telling you.
+          </p>
+          <div class="issue-meta">
+            22 pages <span class="dot-sep">·</span> ~12 min <span class="dot-sep">·</span> Onboarding &amp; IAM
+            <span class="issue-read">Read ▸</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- ---------------------------------------------------- IN PRODUCTION -->
+      <a class="issue issue--feature" href="./rightsizer.html">
+        <div class="issue-cover">
+          <span class="issue-num">Issue №2</span>
+          <span class="issue-status out">Available now</span>
+          <img src="./assets/comic/rs-cover.jpg" alt="The Cost Sentinel holds a giant golden caliper against a huge glowing server box containing one tiny workload." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="issue-body">
+          <div class="issue-arc">Arc <b>· Optimization</b></div>
+          <div class="issue-title">THE <em>RIGHTSIZER</em></div>
+          <p class="issue-desc">
+            How MaxOps decides an instance is too big — why it measures your <strong>peak</strong> rather
+            than your average, the three levels of headroom you can choose, and
+            <strong>every reason it refuses</strong> to recommend a change.
+          </p>
+          <div class="issue-meta">
+            19 pages <span class="dot-sep">·</span> ~11 min <span class="dot-sep">·</span> EC2 rightsizing
+            <span class="issue-read">Read ▸</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="issue issue--feature" href="./checks.html">
+        <div class="issue-cover">
+          <span class="issue-num">Issue №3</span>
+          <span class="issue-status out">Available now</span>
+          <img src="./assets/comic/cr-cover.jpg" alt="The Cost Sentinel beside a towering glowing card catalogue with check cards floating around it." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="issue-body">
+          <div class="issue-arc">Arc <b>· Optimization</b></div>
+          <div class="issue-title">THE <em>CHECKS</em></div>
+          <p class="issue-desc">
+            The <strong>112 questions</strong> MaxOps asks of your account — how to read a finding, why
+            some have no button, how to quiet the ones that don't apply, and how to be certain nothing
+            changes without your say-so.
+          </p>
+          <div class="issue-meta">
+            13 pages <span class="dot-sep">·</span> ~8 min <span class="dot-sep">·</span> Checks &amp; snoozes
+            <span class="issue-read">Read ▸</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="issue issue--feature" href="./dials.html">
+        <div class="issue-cover">
+          <span class="issue-num">Issue №4</span>
+          <span class="issue-status out">Available now</span>
+          <img src="./assets/comic/dl-cover.jpg" alt="The Cost Sentinel at a curved control console covered in glowing dials and sliders." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="issue-body">
+          <div class="issue-arc">Arc <b>· Optimization</b></div>
+          <div class="issue-title">THE <em>DIALS</em></div>
+          <p class="issue-desc">
+            Tuning without losing trust — what the defaults are for, the three presets and how they move
+            every threshold at once, when to override a single check, and
+            <strong>the one setting that erases your history</strong>.
+          </p>
+          <div class="issue-meta">
+            12 pages <span class="dot-sep">·</span> ~8 min <span class="dot-sep">·</span> Settings &amp; tuning
+            <span class="issue-read">Read ▸</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="issue issue--feature" href="./mcp.html">
+        <div class="issue-cover">
+          <span class="issue-num">Issue №5</span>
+          <span class="issue-status out">Available now</span>
+          <img src="./assets/comic/mcp-cover.jpg" alt="The Cost Sentinel beside a glowing bridge of light arcing from a server tower to a floating chat window." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="issue-body">
+          <div class="issue-arc">Arc <b>· Integrations</b></div>
+          <div class="issue-title">THE AUTOMATION <em>LAYER</em></div>
+          <p class="issue-desc">
+            Ask a desktop AI assistant about your own cloud — what it can reach, why
+            <strong>thirteen of the sixteen tools only read</strong>, where your data actually goes, and
+            the switch in front of anything that writes.
+          </p>
+          <div class="issue-meta">
+            12 pages <span class="dot-sep">·</span> ~8 min <span class="dot-sep">·</span> MCP &amp; assistants
+            <span class="issue-read">Read ▸</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="issue issue--feature" href="./overlay.html">
+        <div class="issue-cover">
+          <span class="issue-num">Issue №6</span>
+          <span class="issue-status out">Available now</span>
+          <img src="./assets/comic/ov-cover.jpg" alt="The Cost Sentinel pressing a glowing price chip onto a row of a floating browser table." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="issue-body">
+          <div class="issue-arc">Arc <b>· Integrations</b></div>
+          <div class="issue-title">THE CONSOLE <em>OVERLAY</em></div>
+          <p class="issue-desc">
+            Cost and finding chips inside AWS Console tables — installing it, why it can only ever reach
+            your own machine, and <strong>exactly which five resource types it covers today</strong>.
+          </p>
+          <div class="issue-meta">
+            10 pages <span class="dot-sep">·</span> ~7 min <span class="dot-sep">·</span> Browser extension
+            <span class="issue-read">Read ▸</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="issue issue--feature" href="./cost-data.html">
+        <div class="issue-cover">
+          <span class="issue-num">Issue №7</span>
+          <span class="issue-status out">Available now</span>
+          <img src="./assets/comic/cd-cover.jpg" alt="The Cost Sentinel holding a glowing invoice whose figures resolve from pale estimates into solid gold numbers." />
+          <div class="halftone"></div>
+          <div class="vignette"></div>
+        </div>
+        <div class="issue-body">
+          <div class="issue-arc">Arc <b>· Accuracy</b></div>
+          <div class="issue-title">THE REAL <em>BILL</em></div>
+          <p class="issue-desc">
+            Why list prices overstate what you pay, what amortized cost means when you hold reservations,
+            and <strong>the four steps that price findings from your actual bill</strong>.
+          </p>
+          <div class="issue-meta">
+            12 pages <span class="dot-sep">·</span> ~9 min <span class="dot-sep">·</span> Cost data &amp; billing
+            <span class="issue-read">Read ▸</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ lookup -->
+  <section class="lib-section" id="lookup">
+    <div class="lib-section-head">
+      <h2>LOOK IT <em>UP</em></h2>
+      <p>Have a specific question? These land you on the exact page, not the top of an issue.</p>
+    </div>
+
+    <div class="lookup-tools">
+      <div class="lookup-search">
+        <label for="lookup-input" class="sr-only-label">Search the documentation</label>
+        <input id="lookup-input" type="search" placeholder="Search — try &ldquo;role&rdquo;, &ldquo;greyed out&rdquo;, &ldquo;regions&rdquo;&hellip;" autocomplete="off">
+        <span class="hint">↵</span>
+      </div>
+      <div class="lookup-count" id="lookup-count"></div>
+    </div>
+
+    <div class="lookup" id="lookup-list">
+      <a href="./setup-guide.html#step-map"><span class="q">What do the three steps at the top mean?</span><span class="where">№1 · Page 2</span></a>
+      <a href="./setup-guide.html#pricing-database"><span class="q">Do I have to extract the pricing database?</span><span class="where">№1 · Page 4</span></a>
+      <a href="./setup-guide.html#extracting-pricing"><span class="q">How do I extract the pricing database?</span><span class="where">№1 · Page 5</span></a>
+      <a href="./setup-guide.html#extracting-pricing"><span class="q">There's no Extract button &mdash; what now?</span><span class="where">№1 · Page 5</span></a>
+      <a href="./setup-guide.html#get-started"><span class="q">What happens when I click Get Started?</span><span class="where">№1 · Page 6</span></a>
+      <a href="./setup-guide.html#iam-role"><span class="q">What permissions does MaxOps ask for?</span><span class="where">№1 · Page 7</span></a>
+      <a href="./setup-guide.html#aws-profile"><span class="q">What is the AWS profile dropdown for?</span><span class="where">№1 · Page 8</span></a>
+      <a href="./setup-guide.html#aws-profile"><span class="q">Why does a profile say &ldquo;account unavailable&rdquo;?</span><span class="where">№1 · Page 8</span></a>
+      <a href="./setup-guide.html#trusted-principal"><span class="q">Which account gets scanned — and who is trusted?</span><span class="where">№1 · Page 9</span></a>
+      <a href="./setup-guide.html#create-role"><span class="q">What does Create Role actually do to my account?</span><span class="where">№1 · Page 10</span></a>
+      <a href="./setup-guide.html#create-role"><span class="q">Why does the button pause at the end?</span><span class="where">№1 · Page 10</span></a>
+      <a href="./setup-guide.html#download-json"><span class="q">What is the Download JSON button good for?</span><span class="where">№1 · Page 11</span></a>
+      <a href="./setup-guide.html#use-existing-role"><span class="q">My credentials can't create IAM roles. Now what?</span><span class="where">№1 · Page 12</span></a>
+      <a href="./setup-guide.html#use-existing-role"><span class="q">&ldquo;Could not assume role with profile&rdquo; — why?</span><span class="where">№1 · Page 12</span></a>
+      <a href="./setup-guide.html#role-ready"><span class="q">What do the fields on the Role ready card mean?</span><span class="where">№1 · Page 13</span></a>
+      <a href="./setup-guide.html#continue-role"><span class="q">Why did the profile dropdown change by itself?</span><span class="where">№1 · Page 14</span></a>
+      <a href="./setup-guide.html#environment"><span class="q">Does the environment name filter what gets scanned?</span><span class="where">№1 · Page 15</span></a>
+      <a href="./setup-guide.html#account-regions"><span class="q">How many regions should I select?</span><span class="where">№1 · Page 16</span></a>
+      <a href="./setup-guide.html#account-regions"><span class="q">Why won't it accept my account number?</span><span class="where">№1 · Page 16</span></a>
+      <a href="./setup-guide.html#autosave-continue"><span class="q">Will I lose my settings if I go back?</span><span class="where">№1 · Page 17</span></a>
+      <a href="./setup-guide.html#the-scan"><span class="q">What happens after the last Continue?</span><span class="where">№1 · Page 18</span></a>
+      <a href="./setup-guide.html#rulebook"><span class="q">Why is the Continue button greyed out?</span><span class="where">№1 · Appendix A</span></a>
+      <a href="./setup-guide.html#trouble"><span class="q">The run was cancelled after 3 errors. Why?</span><span class="where">№1 · Appendix B</span></a>
+      <a href="./setup-guide.html#trouble"><span class="q">My findings have no cost or savings figures.</span><span class="where">№1 · Appendix B</span></a>
+      <a href="./rightsizer.html#the-formula"><span class="q">How is a rightsizing recommendation calculated?</span><span class="where">№2 · Page 3</span></a>
+      <a href="./rightsizer.html#why-not-vcpus"><span class="q">Why doesn't it just compare vCPU counts?</span><span class="where">№2 · Page 4</span></a>
+      <a href="./rightsizer.html#peak-not-average"><span class="q">Does it use average CPU or peak?</span><span class="where">№2 · Page 5</span></a>
+      <a href="./rightsizer.html#peak-not-average"><span class="q">What observation window does it look at?</span><span class="where">№2 · Page 5</span></a>
+      <a href="./rightsizer.html#capacity-floor"><span class="q">What happens if a metric is missing?</span><span class="where">№2 · Page 6</span></a>
+      <a href="./rightsizer.html#memory-discovery"><span class="q">Why is my memory utilisation blank?</span><span class="where">№2 · Page 7</span></a>
+      <a href="./rightsizer.html#tiers"><span class="q">What are the conservative / balanced / aggressive tiers?</span><span class="where">№2 · Page 8</span></a>
+      <a href="./rightsizer.html#tiers"><span class="q">How much headroom does it leave?</span><span class="where">№2 · Page 8</span></a>
+      <a href="./rightsizer.html#verdicts"><span class="q">What do &ldquo;Actionable&rdquo; and &ldquo;Conditional&rdquo; mean?</span><span class="where">№2 · Page 9</span></a>
+      <a href="./rightsizer.html#decision-table"><span class="q">Why is this recommendation only Conditional?</span><span class="where">№2 · Page 10</span></a>
+      <a href="./rightsizer.html#refusals"><span class="q">Why was my instance left alone?</span><span class="where">№2 · Page 11</span></a>
+      <a href="./rightsizer.html#refusals"><span class="q">Why does it skip instances in an Auto Scaling group?</span><span class="where">№2 · Page 11</span></a>
+      <a href="./rightsizer.html#graviton"><span class="q">Why is the Graviton saving never actionable?</span><span class="where">№2 · Page 13</span></a>
+      <a href="./rightsizer.html#trend"><span class="q">Why is network missing from the 15-month trend?</span><span class="where">№2 · Page 14</span></a>
+      <a href="./rightsizer.html#savings-math"><span class="q">Why don't small savings show up at all?</span><span class="where">№2 · Page 15</span></a>
+      <a href="./rightsizer.html#other-services"><span class="q">Does rightsizing work for RDS and ElastiCache?</span><span class="where">№2 · Page 17</span></a>
+      <a href="./rightsizer.html#reason-codes"><span class="q">What does this note on my recommendation mean?</span><span class="where">№2 · Appendix</span></a>
+      <a href="./checks.html#what-is-a-check"><span class="q">What is a check, exactly?</span><span class="where">№3 · Page 2</span></a>
+      <a href="./checks.html#catalogue"><span class="q">How many checks are there?</span><span class="where">№3 · Page 3</span></a>
+      <a href="./checks.html#grace-periods"><span class="q">How do I change a check's thresholds?</span><span class="where">№3 · Page 5</span></a>
+      <a href="./checks.html#grace-periods"><span class="q">Why wasn't my just-detached volume reported?</span><span class="where">№3 · Page 5</span></a>
+      <a href="./checks.html#finding"><span class="q">What information does a finding carry?</span><span class="where">№3 · Page 4</span></a>
+      <a href="./checks.html#actions"><span class="q">Why is there no button for this recommendation?</span><span class="where">№3 · Page 6</span></a>
+      <a href="./checks.html#actions"><span class="q">What does an action of &ldquo;review&rdquo; mean?</span><span class="where">№3 · Page 6</span></a>
+      <a href="./checks.html#turning-off"><span class="q">How do I turn a check off?</span><span class="where">№3 · Page 7</span></a>
+      <a href="./checks.html#turning-off"><span class="q">Why did a new check appear after upgrading?</span><span class="where">№3 · Page 7</span></a>
+      <a href="./checks.html#read-only"><span class="q">How do I run MaxOps fully read-only?</span><span class="where">№3 · Page 8</span></a>
+      <a href="./checks.html#snooze"><span class="q">Should I snooze or exempt this resource?</span><span class="where">№3 · Page 9</span></a>
+      <a href="./checks.html#snooze"><span class="q">Why did a finding disappear from my dashboard?</span><span class="where">№3 · Page 9</span></a>
+      <a href="./checks.html#audit"><span class="q">Who snoozed this, and when?</span><span class="where">№3 · Page 10</span></a>
+      <a href="./checks.html#scan-flow"><span class="q">What happens during a scan, in order?</span><span class="where">№3 · Page 11</span></a>
+      <a href="./dials.html#presets"><span class="q">What do Conservative, Normal and Aggressive do?</span><span class="where">№4 · Page 3</span></a>
+      <a href="./dials.html#how-presets-work"><span class="q">What does changing the preset actually change?</span><span class="where">№4 · Page 4</span></a>
+      <a href="./dials.html#presets-vs-tiers"><span class="q">Is the Settings preset the same as a rightsizing tier?</span><span class="where">№4 · Page 5</span></a>
+      <a href="./dials.html#overrides"><span class="q">How do I change one check without changing the rest?</span><span class="where">№4 · Page 6</span></a>
+      <a href="./dials.html#reading-a-threshold"><span class="q">Do a check's thresholds all have to be true at once?</span><span class="where">№4 · Page 7</span></a>
+      <a href="./dials.html#too-aggressive"><span class="q">I'm getting far too many findings. What now?</span><span class="where">№4 · Page 8</span></a>
+      <a href="./dials.html#unsaved-changes"><span class="q">Why was I warned about losing my tuning?</span><span class="where">№4 · Page 9</span></a>
+      <a href="./dials.html#changing-account"><span class="q">What happens if I change the AWS account number?</span><span class="where">№4 · Page 10</span></a>
+      <a href="./dials.html#which-dials"><span class="q">Which settings are actually worth changing?</span><span class="where">№4 · Page 11</span></a>
+      <a href="./mcp.html#what-it-is"><span class="q">Can I ask an AI assistant about my cloud costs?</span><span class="where">№5 · Page 2</span></a>
+      <a href="./mcp.html#what-to-ask"><span class="q">What kind of questions can I ask it?</span><span class="where">№5 · Page 3</span></a>
+      <a href="./mcp.html#the-tools"><span class="q">What can the assistant actually reach?</span><span class="where">№5 · Page 4</span></a>
+      <a href="./mcp.html#stays-local"><span class="q">Does my cloud data get sent anywhere?</span><span class="where">№5 · Page 6</span></a>
+      <a href="./mcp.html#read-only"><span class="q">Can the assistant change things in my account?</span><span class="where">№5 · Page 7</span></a>
+      <a href="./mcp.html#write-mode"><span class="q">How do I let the assistant snooze findings?</span><span class="where">№5 · Page 8</span></a>
+      <a href="./mcp.html#run-check"><span class="q">Why is running a check treated as a write?</span><span class="where">№5 · Page 9</span></a>
+      <a href="./mcp.html#connecting"><span class="q">How do I connect MaxOps to my assistant?</span><span class="where">№5 · Page 10</span></a>
+      <a href="./mcp.html#testing"><span class="q">My assistant can't see MaxOps. How do I debug it?</span><span class="where">№5 · Page 11</span></a>
+      <a href="./overlay.html#what-it-does"><span class="q">Can I see findings inside the AWS Console?</span><span class="where">№6 · Page 2</span></a>
+      <a href="./overlay.html#the-chips"><span class="q">What do the chips on a Console row mean?</span><span class="where">№6 · Page 3</span></a>
+      <a href="./overlay.html#install"><span class="q">How do I install the browser extension?</span><span class="where">№6 · Page 4</span></a>
+      <a href="./overlay.html#local-only"><span class="q">Can the extension send my Console data anywhere?</span><span class="where">№6 · Page 6</span></a>
+      <a href="./overlay.html#coverage"><span class="q">Which resource types does the overlay cover?</span><span class="where">№6 · Page 7</span></a>
+      <a href="./overlay.html#which-five"><span class="q">Why are there no chips on my S3 buckets?</span><span class="where">№6 · Page 8</span></a>
+      <a href="./overlay.html#no-chips"><span class="q">No chips appeared at all. What's wrong?</span><span class="where">№6 · Page 9</span></a>
+      <a href="./cost-data.html#the-problem"><span class="q">Why are my savings numbers different from my bill?</span><span class="where">№7 · Page 2</span></a>
+      <a href="./cost-data.html#the-problem"><span class="q">Does MaxOps know about my Reserved Instances?</span><span class="where">№7 · Page 2</span></a>
+      <a href="./cost-data.html#what-is-cur"><span class="q">What is a Cost and Usage Report?</span><span class="where">№7 · Page 3</span></a>
+      <a href="./cost-data.html#amortized"><span class="q">What does amortized cost mean?</span><span class="where">№7 · Page 4</span></a>
+      <a href="./cost-data.html#amortized"><span class="q">Why does a reserved instance show as costing nothing?</span><span class="where">№7 · Page 4</span></a>
+      <a href="./cost-data.html#four-steps"><span class="q">How do I price findings from my actual bill?</span><span class="where">№7 · Page 5</span></a>
+      <a href="./cost-data.html#two-keys"><span class="q">Why does cost data ask for different AWS credentials?</span><span class="where">№7 · Page 6</span></a>
+      <a href="./cost-data.html#two-keys"><span class="q">What is MaxOpsCostDataRole and why was it created?</span><span class="where">№7 · Page 6</span></a>
+      <a href="./cost-data.html#the-wait"><span class="q">Cost data says waiting on AWS. How long?</span><span class="where">№7 · Page 7</span></a>
+      <a href="./cost-data.html#summarise"><span class="q">Will connecting my bill cost me money?</span><span class="where">№7 · Page 8</span></a>
+      <a href="./cost-data.html#switch-on"><span class="q">I turned cost data on but nothing changed</span><span class="where">№7 · Page 9</span></a>
+      <a href="./cost-data.html#honest"><span class="q">Why doesn't this match Cost Explorer?</span><span class="where">№7 · Page 10</span></a>
+      <a href="./cost-data.html#when-red"><span class="q">A cost data step has turned red. What now?</span><span class="where">№7 · Page 11</span></a>
+    </div>
+
+    <div class="lookup-empty" id="lookup-empty" hidden>
+      Nothing matches that yet — it may be waiting on an issue still in production.
+      <br>Try the <a href="https://maxops.dev/docs.html" target="_blank" rel="noopener">reference manual</a>.
+    </div>
+  </section>
+
+  <!-- ============================================================ footer -->
+  <section class="lib-foot">
+    <h3>LOOKING FOR THE REFERENCE MANUAL?</h3>
+    <p>
+      The comics are the guided path — the best way to learn a workflow the first time. For API endpoints,
+      configuration keys, and the full check catalogue, the written docs go deeper.
+    </p>
+    <div class="chips">
+      <a class="chip alt" href="./ai.html">MaxOps &amp; AI</a>
+      <a class="chip" href="https://maxops.dev/docs.html" target="_blank" rel="noopener">Reference manual</a>
+      <a class="chip alt" href="https://maxops.dev/index.html#start" target="_blank" rel="noopener">Quickstart</a>
+      <a class="chip alt" href="https://maxops.dev/setup-guide.html" target="_blank" rel="noopener">AWS setup &amp; permissions</a>
+      <a class="chip alt" href="https://github.com/maxopsdev/maxops" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Live filter over the question index. Matches the question text and the
+  // "where" label, so typing "appendix" or "page 9" narrows too.
+  (function () {
+    const input = document.getElementById('lookup-input');
+    const list = document.getElementById('lookup-list');
+    const empty = document.getElementById('lookup-empty');
+    const count = document.getElementById('lookup-count');
+    const items = Array.from(list.querySelectorAll('a')).map((el) => ({
+      el, text: (el.textContent || '').toLowerCase().replace(/\s+/g, ' ')
+    }));
+
+    function render(q) {
+      const needle = q.trim().toLowerCase();
+      let shown = 0;
+      for (const it of items) {
+        const hit = !needle || it.text.includes(needle);
+        it.el.hidden = !hit;
+        if (hit) shown++;
+      }
+      empty.hidden = shown !== 0;
+      count.textContent = needle
+        ? shown + ' of ' + items.length + ' entries'
+        : items.length + ' entries across 6 published issues';
+    }
+
+    input.addEventListener('input', () => render(input.value));
+    // Enter opens the first visible match — keyboard-only lookup.
+    input.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return;
+      const first = items.find((it) => !it.el.hidden);
+      if (first) { e.preventDefault(); window.location.href = first.el.getAttribute('href'); }
+    });
+    render('');
+  })();
+</script>
+
+</body>
+</html>

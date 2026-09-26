@@ -1,0 +1,58 @@
+{
+  "account_id": "123456789012",
+  "placeholder_map": {
+    "123456789012": "123456789012",
+    "fl-DELETION": "fl-0d13457a58e7755b3",
+    "fl-DISABLE": "fl-05d818dbd99092a51",
+    "fl-EXPIRATION": "fl-01ea6d4eeae254db7",
+    "maxops-payload-vpc-deletion": "maxops-payload-vpc-deletion-1781458009",
+    "maxops-payload-vpc-disable": "maxops-payload-vpc-disable-1781458009",
+    "maxops-payload-vpc-expiration": "maxops-payload-vpc-expiration-1781458009",
+    "rtb-ENDPOINT": "rtb-02feb84c8691dd645",
+    "vpc-DELETION": "vpc-0b3057aded016a4b9",
+    "vpc-DISABLE": "vpc-0245b9ad2c7ffb063",
+    "vpc-ENDPOINT": "vpc-0be7d6a43d9e3bba2",
+    "vpc-EXPIRATION": "vpc-0cf9a4080c201d8e3"
+  },
+  "region": "us-east-1",
+  "resources": {
+    "deletion_vpc": {
+      "bucket_name": "maxops-payload-vpc-deletion-1781458009",
+      "flow_log_ids": [
+        "fl-0d13457a58e7755b3"
+      ],
+      "placeholder_key": "DELETION_VPC_ID",
+      "resource_id": "vpc-0b3057aded016a4b9",
+      "route_table_id": "rtb-06a12c41df296bf35"
+    },
+    "disable_vpc": {
+      "bucket_name": "maxops-payload-vpc-disable-1781458009",
+      "flow_log_ids": [
+        "fl-05d818dbd99092a51"
+      ],
+      "placeholder_key": "DISABLE_VPC_ID",
+      "resource_id": "vpc-0245b9ad2c7ffb063",
+      "route_table_id": "rtb-0e9d711d999a0cb9e"
+    },
+    "endpoint_vpc": {
+      "flow_log_ids": [],
+      "placeholder_key": "ENDPOINT_VPC_ID",
+      "resource_id": "vpc-0be7d6a43d9e3bba2",
+      "route_table_id": "rtb-02feb84c8691dd645"
+    },
+    "expiration_vpc": {
+      "bucket_name": "maxops-payload-vpc-expiration-1781458009",
+      "flow_log_ids": [
+        "fl-01ea6d4eeae254db7"
+      ],
+      "placeholder_key": "EXPIRATION_VPC_ID",
+      "resource_id": "vpc-0cf9a4080c201d8e3",
+      "route_table_id": "rtb-04246e642931752fc"
+    }
+  },
+  "service": "vpc",
+  "vpc_endpoints": [
+    "vpce-062eb355e2bfa2d64",
+    "vpce-09d97020673e4d06b"
+  ]
+}

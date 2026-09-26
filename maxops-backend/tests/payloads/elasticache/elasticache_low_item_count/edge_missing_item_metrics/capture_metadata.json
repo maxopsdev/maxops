@@ -1,0 +1,42 @@
+{
+  "calls": [
+    {
+      "operation": "describe_cache_clusters",
+      "response_file": "describe_cache_clusters.json",
+      "service": "elasticache"
+    },
+    {
+      "metric_name": "CurrItems",
+      "operation": "get_metric_statistics",
+      "resource_alias": "low_items_graviton_cluster",
+      "resource_id": "maxops-payload-elasticache-low-items",
+      "resource_type": "elasticache_cluster",
+      "response_file": "get_metric_statistics__low_items_graviton_cluster__curritems.json",
+      "service": "cloudwatch"
+    },
+    {
+      "metric_name": "KeyCount",
+      "operation": "get_metric_statistics",
+      "resource_alias": "low_items_graviton_cluster",
+      "resource_id": "maxops-payload-elasticache-low-items",
+      "resource_type": "elasticache_cluster",
+      "response_file": "get_metric_statistics__low_items_graviton_cluster__keycount.json",
+      "service": "cloudwatch"
+    }
+  ],
+  "check_id": "elasticache_low_item_count",
+  "check_parameters": {
+    "lookback_days": 7,
+    "low_item_threshold": 1000,
+    "region": "us-east-1"
+  },
+  "description": "Use the captured cache.t4g.micro cluster with empty CurrItems and KeyCount datapoints.",
+  "expected_matches": [],
+  "resource_placeholders": {
+    "low_items_graviton_cluster": "maxops-payload-elasticache-low-items"
+  },
+  "resource_types": {
+    "low_items_graviton_cluster": "elasticache_cluster"
+  },
+  "scenario": "edge_missing_item_metrics"
+}

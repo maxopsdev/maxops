@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "maxops-mcp"
+version = "0.1.0"
+description = "MCP server for MaxOps"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]>=1.9.0",
+    "httpx>=0.25.0",
+    "pydantic>=2.5.0,<3.0.0",
+    "pydantic-settings>=2.1.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.scripts]
+maxops-mcp = "maxops_mcp.server:main"
+maxops-mcp-client = "maxops_mcp.test_client:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+

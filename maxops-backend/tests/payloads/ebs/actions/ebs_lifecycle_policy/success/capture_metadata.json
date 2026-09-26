@@ -1,0 +1,91 @@
+{
+  "account_id": "123456789012",
+  "action_key": "ebs_lifecycle_policy",
+  "calls": [
+    {
+      "kwargs": {
+        "Resources": [
+          "vol-UNATTACHED"
+        ],
+        "Tags": [
+          {
+            "Key": "maxops_payload_lifecycle",
+            "Value": "enabled"
+          }
+        ]
+      },
+      "operation": "create_tags",
+      "raises_client_error": false,
+      "response_file": "01_ec2__create_tags__response.json",
+      "service": "ec2"
+    },
+    {
+      "kwargs": {
+        "Description": "MaxOps policy for vol-UNATTACHED",
+        "ExecutionRoleArn": "arn:aws:iam::123456789012:role/maxops-payload-ebs-dlm-role",
+        "PolicyDetails": {
+          "ResourceTypes": [
+            "VOLUME"
+          ],
+          "Schedules": [
+            {
+              "CopyTags": true,
+              "CreateRule": {
+                "Interval": 24,
+                "IntervalUnit": "HOURS"
+              },
+              "Name": "maxops-payload-ebs-lifecycle",
+              "RetainRule": {
+                "Count": 2
+              }
+            }
+          ],
+          "TargetTags": [
+            {
+              "Key": "maxops_payload_lifecycle",
+              "Value": "enabled"
+            }
+          ]
+        },
+        "State": "ENABLED",
+        "Tags": {
+          "CreatedBy": "maxops"
+        }
+      },
+      "operation": "create_lifecycle_policy",
+      "raises_client_error": false,
+      "response_file": "02_dlm__create_lifecycle_policy__response.json",
+      "service": "dlm"
+    }
+  ],
+  "capture_source": "aws",
+  "check_id": "ebs_unattached_volumes",
+  "expected_message": "EBS lifecycle policy created.",
+  "expected_status": "submitted",
+  "handler_response": {
+    "action": "ebs_lifecycle_policy",
+    "check_id": "ebs_unattached_volumes",
+    "details": {
+      "interval_hours": 24,
+      "policy_id": "policy-PLACEHOLDER",
+      "policy_name": "maxops-payload-ebs-lifecycle",
+      "retain_count": 2,
+      "tag_key": "maxops_payload_lifecycle",
+      "tag_value": "enabled"
+    },
+    "message": "EBS lifecycle policy created.",
+    "status": "submitted"
+  },
+  "parameters": {
+    "interval_hours": 24,
+    "policy_name": "maxops-payload-ebs-lifecycle",
+    "retain_count": 2,
+    "role_arn": "arn:aws:iam::123456789012:role/maxops-payload-ebs-dlm-role",
+    "tag_key": "maxops_payload_lifecycle",
+    "tag_value": "enabled"
+  },
+  "region": "us-east-1",
+  "resource_id": "vol-UNATTACHED",
+  "resource_ref": "unattached_gp3",
+  "scenario": "success"
+}

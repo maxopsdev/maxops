@@ -1,0 +1,51 @@
+{
+  "bucket_placeholders": {
+    "versioned_missing_noncurrent_controls": "maxops-payload-s3-versioned-missing-noncurrent"
+  },
+  "calls": [
+    {
+      "operation": "list_buckets",
+      "response_file": "list_buckets.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "versioned_missing_noncurrent_controls",
+      "bucket_name": "maxops-payload-s3-versioned-missing-noncurrent",
+      "operation": "get_bucket_location",
+      "response_file": "get_bucket_location__versioned_missing_noncurrent_controls.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "versioned_missing_noncurrent_controls",
+      "bucket_name": "maxops-payload-s3-versioned-missing-noncurrent",
+      "operation": "get_bucket_tagging",
+      "response_file": "get_bucket_tagging__versioned_missing_noncurrent_controls.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "versioned_missing_noncurrent_controls",
+      "bucket_name": "maxops-payload-s3-versioned-missing-noncurrent",
+      "operation": "get_bucket_lifecycle_configuration",
+      "response_file": "get_bucket_lifecycle_configuration__versioned_missing_noncurrent_controls.json",
+      "service": "s3"
+    },
+    {
+      "bucket_alias": "versioned_missing_noncurrent_controls",
+      "bucket_name": "maxops-payload-s3-versioned-missing-noncurrent",
+      "operation": "get_bucket_versioning",
+      "response_file": "get_bucket_versioning__versioned_missing_noncurrent_controls.json",
+      "service": "s3"
+    }
+  ],
+  "check_id": "s3_no_noncurrent_version_transition",
+  "check_parameters": {
+    "include_infrequent_access": false,
+    "region": "us-east-1",
+    "require_versioning_enabled": true
+  },
+  "description": "Use a versioned bucket missing NoncurrentVersionTransition.",
+  "expected_matches": [
+    "maxops-payload-s3-versioned-missing-noncurrent"
+  ],
+  "scenario": "flag_versioned_bucket_missing_noncurrent_transition"
+}

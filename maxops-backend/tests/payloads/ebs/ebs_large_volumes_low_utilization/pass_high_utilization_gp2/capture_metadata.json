@@ -1,0 +1,55 @@
+{
+  "calls": [
+    {
+      "operation": "describe_volumes",
+      "response_file": "describe_volumes.json",
+      "service": "ec2"
+    },
+    {
+      "metric_name": "VolumeReadOps",
+      "operation": "get_metric_statistics",
+      "response_file": "get_metric_statistics__attached_gp2__volumereadops.json",
+      "service": "cloudwatch",
+      "volume_alias": "attached_gp2",
+      "volume_id": "vol-ATTACHEDGP2"
+    },
+    {
+      "metric_name": "VolumeWriteOps",
+      "operation": "get_metric_statistics",
+      "response_file": "get_metric_statistics__attached_gp2__volumewriteops.json",
+      "service": "cloudwatch",
+      "volume_alias": "attached_gp2",
+      "volume_id": "vol-ATTACHEDGP2"
+    },
+    {
+      "metric_name": "VolumeReadBytes",
+      "operation": "get_metric_statistics",
+      "response_file": "get_metric_statistics__attached_gp2__volumereadbytes.json",
+      "service": "cloudwatch",
+      "volume_alias": "attached_gp2",
+      "volume_id": "vol-ATTACHEDGP2"
+    },
+    {
+      "metric_name": "VolumeWriteBytes",
+      "operation": "get_metric_statistics",
+      "response_file": "get_metric_statistics__attached_gp2__volumewritebytes.json",
+      "service": "cloudwatch",
+      "volume_alias": "attached_gp2",
+      "volume_id": "vol-ATTACHEDGP2"
+    }
+  ],
+  "check_id": "ebs_large_volumes_low_utilization",
+  "check_parameters": {
+    "iops_threshold": 5.0,
+    "lookback_days": 14,
+    "min_size_gb": 1,
+    "region": "us-east-1",
+    "throughput_mb_threshold": 1.0
+  },
+  "description": "Use the 1 GiB attached gp2 volume with high utilization.",
+  "expected_matches": [],
+  "scenario": "pass_high_utilization_gp2",
+  "volume_placeholders": {
+    "attached_gp2": "vol-ATTACHEDGP2"
+  }
+}

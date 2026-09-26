@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MaxOps</title>
+    <link rel="stylesheet" href="src/popup.css">
+  </head>
+  <body>
+    <main class="panel">
+      <header>
+        <h1>MaxOps</h1>
+        <span id="status" class="status">Checking</span>
+      </header>
+      <dl class="metrics">
+        <div>
+          <dt>Instances</dt>
+          <dd id="instances">-</dd>
+        </div>
+        <div>
+          <dt>Actionable</dt>
+          <dd id="actionable">-</dd>
+        </div>
+        <div>
+          <dt>Monthly Cost</dt>
+          <dd id="monthlyCost">-</dd>
+        </div>
+        <div>
+          <dt>Yearly Savings</dt>
+          <dd id="yearlySavings">-</dd>
+        </div>
+      </dl>
+      <p id="message" class="message"></p>
+      <a class="settings-link" href="options.html" target="_blank" rel="noreferrer">Settings</a>
+    </main>
+    <script src="src/browser-api.js"></script>
+    <script src="src/popup.js"></script>
+  </body>
+</html>

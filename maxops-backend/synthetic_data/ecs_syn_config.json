@@ -1,0 +1,112 @@
+{
+  "generator": {
+    "seed": 20260716,
+    "resource_count": 18,
+    "account_id": "999999999999",
+    "output_dir": "synthetic_data/generated/ecs"
+  },
+  "regions": [
+    "us-east-1",
+    "us-west-2",
+    "eu-west-1"
+  ],
+  "environments": [
+    "prod",
+    "dev",
+    "uat",
+    "sandbox"
+  ],
+  "teams": [
+    "platform",
+    "payments",
+    "commerce",
+    "data",
+    "risk",
+    "identity"
+  ],
+  "apps": [
+    "checkout",
+    "orders",
+    "billing",
+    "fraud",
+    "catalog",
+    "analytics"
+  ],
+  "profiles": [
+    {
+      "name": "low_cpu_service",
+      "resource_type": "ecs_service",
+      "check_id": "ecs_service_low_cpu_reservation",
+      "finding_type": "underutilized",
+      "severity": "medium",
+      "desired_count": 8,
+      "running_count": 8,
+      "cpu_reservation": 1024,
+      "memory_reservation": 2048,
+      "avg_cpu_utilization": 7.5,
+      "avg_memory_utilization": 34.0,
+      "monthly_cost": 620.0,
+      "monthly_savings": 210.0
+    },
+    {
+      "name": "idle_cluster",
+      "resource_type": "ecs_cluster",
+      "check_id": "ecs_idle_cluster",
+      "finding_type": "unused",
+      "severity": "low",
+      "desired_count": 0,
+      "running_count": 0,
+      "cpu_reservation": 0,
+      "memory_reservation": 0,
+      "avg_cpu_utilization": 0.0,
+      "avg_memory_utilization": 0.0,
+      "monthly_cost": 75.0,
+      "monthly_savings": 75.0
+    },
+    {
+      "name": "memory_heavy_service",
+      "resource_type": "ecs_service",
+      "check_id": "ecs_service_memory_rightsize",
+      "finding_type": "underutilized",
+      "severity": "medium",
+      "desired_count": 5,
+      "running_count": 5,
+      "cpu_reservation": 512,
+      "memory_reservation": 4096,
+      "avg_cpu_utilization": 22.0,
+      "avg_memory_utilization": 41.5,
+      "monthly_cost": 480.0,
+      "monthly_savings": 130.0
+    },
+    {
+      "name": "task_definition_oversized",
+      "resource_type": "ecs",
+      "check_id": "ecs_task_definition_oversized",
+      "finding_type": "underutilized",
+      "severity": "medium",
+      "desired_count": 12,
+      "running_count": 12,
+      "cpu_reservation": 2048,
+      "memory_reservation": 4096,
+      "avg_cpu_utilization": 14.0,
+      "avg_memory_utilization": 28.0,
+      "monthly_cost": 980.0,
+      "monthly_savings": 330.0
+    },
+    {
+      "name": "healthy_service",
+      "resource_type": "ecs_service",
+      "check_id": null,
+      "finding_type": null,
+      "severity": null,
+      "desired_count": 6,
+      "running_count": 6,
+      "cpu_reservation": 1024,
+      "memory_reservation": 2048,
+      "avg_cpu_utilization": 48.0,
+      "avg_memory_utilization": 62.0,
+      "monthly_cost": 540.0,
+      "monthly_savings": 0.0
+    }
+  ]
+}

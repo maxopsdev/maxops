@@ -1,0 +1,27 @@
+{
+  "Pages": [
+    {
+      "EncodingType": "url",
+      "IsTruncated": false,
+      "KeyCount": 0,
+      "MaxKeys": 1000,
+      "Name": "maxops-payload-s3-inventory-dest",
+      "Prefix": "",
+      "ResponseMetadata": {
+        "HTTPHeaders": {
+          "content-type": "application/xml",
+          "date": "Sun, 14 Jun 2026 20:10:09 GMT",
+          "server": "AmazonS3",
+          "transfer-encoding": "chunked",
+          "x-amz-bucket-region": "us-east-1",
+          "x-amz-id-2": "m8YqPXLH9jUB6jX1H3InJCCIp+VXaNp/8xS3lM3jBgHzhSF++QrK3a/FFFG5vXHJOJeN68J2jrE=",
+          "x-amz-request-id": "S1V3357YQ395X45B"
+        },
+        "HTTPStatusCode": 200,
+        "HostId": "m8YqPXLH9jUB6jX1H3InJCCIp+VXaNp/8xS3lM3jBgHzhSF++QrK3a/FFFG5vXHJOJeN68J2jrE=",
+        "RequestId": "S1V3357YQ395X45B",
+        "RetryAttempts": 0
+      }
+    }
+  ]
+}

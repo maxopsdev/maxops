@@ -1,0 +1,17 @@
+{
+  "account_id": "123456789012",
+  "action_key": "rds_migrate_graviton",
+  "calls": [],
+  "capture_source": "hand-authored",
+  "check_id": "rds_non_graviton_instance_class",
+  "expected_error": {
+    "detail_contains": "target_instance_class must be a Graviton RDS class.",
+    "status_code": 400
+  },
+  "parameters": {
+    "target_instance_class": "db.m5.large"
+  },
+  "region": "us-east-1",
+  "resource_id": "maxops-test-rds-instance",
+  "scenario": "non_graviton_target"
+}

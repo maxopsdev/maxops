@@ -1,0 +1,23 @@
+{
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "content-length": "441",
+      "content-type": "application/x-amz-json-1.1",
+      "date": "Sun, 14 Jun 2026 17:02:34 GMT",
+      "x-amzn-requestid": "5a643fd0-fac5-4606-b081-609926dcd838"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "5a643fd0-fac5-4606-b081-609926dcd838",
+    "RetryAttempts": 0
+  },
+  "logGroups": [
+    {
+      "arn": "arn:aws:logs:us-east-1:123456789012:log-group:/maxops/payload/no-retention:*",
+      "creationTime": 1781456537861,
+      "logGroupClass": "STANDARD",
+      "logGroupName": "/maxops/payload/no-retention",
+      "metricFilterCount": 0,
+      "storedBytes": 0
+    }
+  ]
+}
