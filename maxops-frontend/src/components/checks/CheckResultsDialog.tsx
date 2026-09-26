@@ -1145,7 +1145,8 @@ const replicationTargetBuckets = actionDialog?.action === 'Disable replication a
               setActionResult(
                 `Migration completed successfully!\n` +
                 `Data copied: ${status.files_transferred || 0} files, ${formatBytes(status.bytes_transferred || 0)}\n` +
-                `âš ï¸ Failed to delete old file system: ${deleteMessage}\n` +
+                `Warning: failed to delete old file system: ${deleteMessage}
+` +
                 `Please delete ${efsMigrationStatus.oldFileSystemId} manually.\n` +
                 `New file system: ${efsMigrationStatus.newFileSystemId}`
               );
