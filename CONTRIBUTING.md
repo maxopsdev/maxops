@@ -48,6 +48,13 @@ Keep it that way. If you're changing rightsizer logic, ask: does this belong in 
 
 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) covers the backend's layered structure and the end-to-end flow from onboarding through scan, view, rightsize, tune, and act.
 
+## Asking questions
+
+Use [Discussions](https://github.com/maxopsdev/maxops/discussions) for questions
+about using MaxOps, AWS setup, or whether some behaviour is intended. Issues are
+for things that are broken or missing, so keeping questions out of the tracker
+keeps it a usable list of work.
+
 ## Reporting bugs / suggesting features
 
 Open a GitHub issue with:
@@ -60,7 +67,7 @@ Security issues should **not** go through a public issue — see [SECURITY.md](S
 
 1. Fork the repository and create a feature branch.
 2. Make your changes, with tests where applicable (see "Running tests safely" above).
-3. Run `pytest` (backend) and `npm run type-check && npm test` (frontend) before opening the PR.
+3. Run `pytest` (backend) and `npm run lint && npm run type-check && npm test` (frontend) before opening the PR.
 4. Use clear commit messages (`feat: ...`, `fix: ...`, `docs: ...`, `refactor: ...`, `test: ...`).
 5. Open the PR against `main` and describe what changed and why.
 

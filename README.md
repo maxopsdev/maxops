@@ -75,6 +75,15 @@ Full docs: **[maxops.dev/docs.html](https://maxops.dev/docs.html)**
 - [CONTRIBUTING.md](CONTRIBUTING.md) — contributing guidelines, including license terms
 - [maxops-mcp/README.md](maxops-mcp/README.md) — MCP server setup for AI-assistant integrations
 
+## Getting help
+
+- **Questions, ideas, "is this supposed to work like this?"** —
+  [Discussions](https://github.com/maxopsdev/maxops/discussions). Answers there
+  are public and searchable, so the next person with the same question finds it.
+- **Bugs and feature requests** —
+  [Issues](https://github.com/maxopsdev/maxops/issues).
+- **Security vulnerabilities** — not a public issue. See [SECURITY.md](SECURITY.md).
+
 ## License
 
 MaxOps is licensed under the **Apache License 2.0** — free to use, modify and distribute, including commercially, with an express patent grant. See [LICENSE](LICENSE) for the full text and [NOTICE](NOTICE) for attribution.
