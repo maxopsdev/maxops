@@ -5,6 +5,10 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  # Lets a maintainer re-run the suite without pushing -- after a flaky
+  # failure, or to confirm a green build on the current tip. Deploy docs
+  # already offers this.
+  workflow_dispatch:
 
 jobs:
   backend-tests:
