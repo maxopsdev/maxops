@@ -600,7 +600,6 @@ def build_ec2_payload_adapter(check_id: str, scenario: str, default_region: str 
 
     adapter = AWSAdapter.__new__(AWSAdapter)
     adapter._default_region = default_region
-    adapter._use_simulator = False
     adapter.session = session
     adapter.ec2_client = ec2_client
     adapter.cloudwatch_client = cloudwatch_client
@@ -642,7 +641,6 @@ def build_sagemaker_payload_adapter(check_id: str, scenario: str, default_region
     })
     adapter = AWSAdapter.__new__(AWSAdapter)
     adapter._default_region = default_region
-    adapter._use_simulator = False
     adapter.session = session
     adapter.cloudwatch_client = cloudwatch_client
     adapter._ec2_metric_discovery_cache = {}
@@ -717,7 +715,6 @@ def build_s3_payload_adapter(check_id: str, scenario: str, default_region: str =
 
     adapter = AWSAdapter.__new__(AWSAdapter)
     adapter._default_region = default_region
-    adapter._use_simulator = False
     adapter.session = session
     adapter.ec2_client = None
     adapter.cloudwatch_client = None
@@ -757,7 +754,6 @@ def build_rds_payload_adapter(check_id: str, scenario: str, default_region: str 
 
     adapter = AWSAdapter.__new__(AWSAdapter)
     adapter._default_region = default_region
-    adapter._use_simulator = False
     adapter.session = session
     adapter.ec2_client = None
     adapter.cloudwatch_client = cloudwatch_client
@@ -811,7 +807,6 @@ def build_cloudwatch_payload_adapter(
     )
     adapter = AWSAdapter.__new__(AWSAdapter)
     adapter._default_region = default_region
-    adapter._use_simulator = False
     adapter.session = session
     adapter.cloudwatch_client = cloudwatch_client
     adapter.ec2_client = None
@@ -835,7 +830,6 @@ def build_vpc_payload_adapter(
     session = StaticSession({"ec2": ec2_client})
     adapter = AWSAdapter.__new__(AWSAdapter)
     adapter._default_region = default_region
-    adapter._use_simulator = False
     adapter.session = session
     adapter.ec2_client = ec2_client
     adapter.cloudwatch_client = None
@@ -904,7 +898,6 @@ def build_elasticache_payload_adapter(check_id: str, scenario: str, default_regi
 
     adapter = AWSAdapter.__new__(AWSAdapter)
     adapter._default_region = default_region
-    adapter._use_simulator = False
     adapter.session = session
     adapter.ec2_client = None
     adapter.cloudwatch_client = cloudwatch_client
@@ -962,7 +955,6 @@ def build_dynamodb_payload_adapter(check_id: str, scenario: str, default_region:
 
     adapter = AWSAdapter.__new__(AWSAdapter)
     adapter._default_region = default_region
-    adapter._use_simulator = False
     adapter.session = session
     adapter.ec2_client = None
     adapter.cloudwatch_client = cloudwatch_client
@@ -994,7 +986,6 @@ def build_ebs_payload_adapter(check_id: str, scenario: str, default_region: str 
 
     adapter = AWSAdapter.__new__(AWSAdapter)
     adapter._default_region = default_region
-    adapter._use_simulator = False
     adapter.session = session
     adapter.ec2_client = ec2_client
     adapter.cloudwatch_client = cloudwatch_client

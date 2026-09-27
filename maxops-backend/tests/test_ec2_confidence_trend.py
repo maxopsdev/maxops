@@ -38,7 +38,6 @@ class AdapterSession:
 
 def _adapter(client):
     adapter = object.__new__(AWSAdapter)
-    adapter._use_simulator = False
     adapter.session = AdapterSession(client)
     adapter.cloudwatch_client = client
     return adapter

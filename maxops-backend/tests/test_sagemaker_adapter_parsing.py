@@ -173,7 +173,6 @@ def _adapter(
     )
     adapter.cloudwatch_client = cloudwatch
     adapter._default_region = "us-east-1"
-    adapter._use_simulator = False
     adapter._ec2_metric_discovery_cache = {}
     return adapter
 
