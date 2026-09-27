@@ -28,6 +28,28 @@ class Settings(BaseSettings):
         validation_alias=AliasChoices("AWS_PROFILE", "AWS_DEFAULT_PROFILE", "aws_profile"),
     )  # AWS CLI profile name to use
 
+    # Browser origins allowed to call the API. The frontend and backend are
+    # separate origins, so anything not listed here is blocked by CORS and the
+    # UI reports a bare "Network Error" with no clue why.
+    #
+    # localhost and 127.0.0.1 are DIFFERENT origins to a browser even though
+    # they are the same machine, and docker-compose publishes on 127.0.0.1 --
+    # so both spellings must be present or whichever one the user types fails.
+    # Override with MAXOPS_CORS_ORIGINS as a comma-separated list when serving
+    # the UI from another hostname or behind a reverse proxy.
+    cors_allowed_origins: str = Field(
+        default=(
+            "http://localhost:3000,http://127.0.0.1:3000,"
+            "http://localhost:5173,http://127.0.0.1:5173"
+        ),
+        validation_alias=AliasChoices("MAXOPS_CORS_ORIGINS", "cors_allowed_origins"),
+    )
+
+    @property
+    def cors_origin_list(self) -> list[str]:
+        """The configured origins, trimmed and with blanks dropped."""
+        return [o.strip() for o in self.cors_allowed_origins.split(",") if o.strip()]
+
     # Feature flags
     test_action: bool = False  # Enable test actions from UI (env-controlled)
     actions_enabled: bool = Field(
