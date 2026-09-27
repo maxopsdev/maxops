@@ -28,6 +28,12 @@ Pick **one** option:
 | `AWS_USE_IAM_ROLE=true` + `AWS_ROLE_ARN` + `AWS_ROLE_SESSION_NAME` | For running the backend itself on EC2/ECS |
 | `AWS_REGION` | Default `us-east-1` |
 
+!!! warning "Omit what you don't use — don't leave it blank"
+    In `.env`, `AWS_PROFILE=` with nothing after it defines a profile *named*
+    empty rather than leaving it unset, and every AWS call then fails with
+    `ProfileNotFound: The config profile () could not be found`. Comment the
+    line out or delete it.
+
 You can also configure or override AWS credentials from the onboarding wizard's IAM role step — see [AWS Setup & Permissions](aws-setup.md).
 
 ## Feature flags — the two that matter most

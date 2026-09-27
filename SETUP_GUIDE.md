@@ -18,7 +18,7 @@ Open **http://localhost:3000** for the UI and **http://localhost:8000/docs** for
 Edit `.env` before starting (or restart with `docker compose up` again after editing) to set AWS credentials:
 
 ```bash
-# .env
+# .env -- uncomment only the option you use
 AWS_PROFILE=default        # if you want to use a local AWS CLI profile
 AWS_CONFIG_HOST_DIR=/Users/you/.aws   # required alongside AWS_PROFILE -- see below
 # or
@@ -26,7 +26,12 @@ AWS_ACCESS_KEY_ID=...
 AWS_SECRET_ACCESS_KEY=...
 ```
 
-`AWS_PROFILE` alone isn't enough in Docker — the container needs your `~/.aws` files mounted in to actually read that profile. Set `AWS_CONFIG_HOST_DIR` to your local AWS config directory (macOS/Linux: `/Users/you/.aws`; Windows: `C:/Users/you/.aws`) and `docker-compose.yml` mounts it read-only automatically — no editing the compose file needed. Leave it blank and an empty placeholder is mounted instead, which is harmless if you're using access keys or configuring credentials from the onboarding UI.
+Comment out or delete the settings you aren't using rather than leaving them
+blank. `AWS_PROFILE=` with nothing after it is not "unset" — it names a profile
+called empty, and every AWS call then fails with
+`ProfileNotFound: The config profile () could not be found`.
+
+`AWS_PROFILE` alone isn't enough in Docker — the container needs your `~/.aws` files mounted in to actually read that profile. Set `AWS_CONFIG_HOST_DIR` to your local AWS config directory (macOS/Linux: `/Users/you/.aws`; Windows: `C:/Users/you/.aws`) and `docker-compose.yml` mounts it read-only automatically — no editing the compose file needed. Omit it and an empty placeholder is mounted instead, which is harmless if you're using access keys or configuring credentials from the onboarding UI.
 
 To stop: `docker compose down` (add `-v` to also delete the persisted database/pricing-DB volume and start fully fresh).
 

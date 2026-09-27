@@ -21,6 +21,7 @@ The pricing database and app database are created/unpacked automatically on firs
 Edit `.env` before starting (or restart with `docker compose up` again after editing):
 
 ```bash title=".env"
+# uncomment only the option you use
 AWS_PROFILE=default
 AWS_CONFIG_HOST_DIR=/Users/you/.aws   # macOS/Linux; Windows: C:/Users/you/.aws
 # or
@@ -28,7 +29,13 @@ AWS_ACCESS_KEY_ID=...
 AWS_SECRET_ACCESS_KEY=...
 ```
 
-`AWS_PROFILE` alone isn't enough — the container needs your `~/.aws` files mounted in to read that profile. Set `AWS_CONFIG_HOST_DIR` and `docker-compose.yml` mounts it read-only automatically; leave it blank (the default) and a harmless empty placeholder is mounted instead.
+!!! warning "Don't leave settings blank"
+    Comment out or delete what you aren't using. `AWS_PROFILE=` with nothing
+    after it names a profile called empty rather than meaning "unset", and
+    every AWS call fails with
+    `ProfileNotFound: The config profile () could not be found`.
+
+`AWS_PROFILE` alone isn't enough — the container needs your `~/.aws` files mounted in to read that profile. Set `AWS_CONFIG_HOST_DIR` and `docker-compose.yml` mounts it read-only automatically; omit it (the default) and a harmless empty placeholder is mounted instead.
 
 You can skip this entirely and configure AWS credentials from the onboarding wizard's IAM role step instead. See [AWS Setup & Permissions](aws-setup.md).
 

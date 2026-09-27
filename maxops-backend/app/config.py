@@ -1,7 +1,24 @@
 """Application configuration."""
+import os
+
 from pydantic_settings import BaseSettings
 from pydantic import Field, AliasChoices, field_validator
 from typing import Optional
+
+
+def _drop_blank_aws_profile() -> None:
+    """Treat a blank AWS_PROFILE as unset.
+
+    botocore reads AWS_PROFILE from os.environ and takes "" as a profile named
+    empty, failing every AWS call with ProfileNotFound.
+    """
+    for name in ("AWS_PROFILE", "AWS_DEFAULT_PROFILE"):
+        value = os.environ.get(name)
+        if value is not None and not value.strip():
+            del os.environ[name]
+
+
+_drop_blank_aws_profile()
 
 
 class Settings(BaseSettings):
@@ -28,15 +45,8 @@ class Settings(BaseSettings):
         validation_alias=AliasChoices("AWS_PROFILE", "AWS_DEFAULT_PROFILE", "aws_profile"),
     )  # AWS CLI profile name to use
 
-    # Browser origins allowed to call the API. The frontend and backend are
-    # separate origins, so anything not listed here is blocked by CORS and the
-    # UI reports a bare "Network Error" with no clue why.
-    #
-    # localhost and 127.0.0.1 are DIFFERENT origins to a browser even though
-    # they are the same machine, and docker-compose publishes on 127.0.0.1 --
-    # so both spellings must be present or whichever one the user types fails.
-    # Override with MAXOPS_CORS_ORIGINS as a comma-separated list when serving
-    # the UI from another hostname or behind a reverse proxy.
+    # localhost and 127.0.0.1 are distinct origins to a browser; compose
+    # publishes on 127.0.0.1, so both spellings must be listed.
     cors_allowed_origins: str = Field(
         default=(
             "http://localhost:3000,http://127.0.0.1:3000,"

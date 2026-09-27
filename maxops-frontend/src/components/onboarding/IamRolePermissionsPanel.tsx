@@ -38,9 +38,13 @@ const formatProfileLabel = (profile: OnboardingAwsProfile) => {
 };
 
 const getErrorMessage = (error: any) => {
-  return error?.response?.data?.detail ||
-    error?.message ||
-    'Failed to load AWS profiles.';
+  if (error?.response?.data?.detail) return error.response.data.detail;
+  if (!error?.response) {
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    return `Can't reach the MaxOps backend at ${apiUrl}. Check that it's running ` +
+      `(docker compose ps) and that you opened this page on an allowed address.`;
+  }
+  return error?.message || 'Failed to load AWS profiles.';
 };
 
 const isAwsAccountId = (value?: string | null) => /^\d{12}$/.test(String(value ?? '').trim());

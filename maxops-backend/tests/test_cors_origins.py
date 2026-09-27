@@ -1,13 +1,4 @@
-"""The UI's origin must be allowed, or every API call fails as "Network Error".
-
-The allowlist was hardcoded to localhost:3000 and localhost:5173. docker-compose
-publishes the UI on 127.0.0.1:3000, and a browser treats 127.0.0.1 and localhost
-as different origins even though they are the same machine -- so a user who
-opened the address the compose file suggests had every request blocked. axios
-reports a CORS block as a bare "Network Error", and the onboarding profile
-dropdown then falls back to its "default (account unavailable)" placeholder, so
-the symptom pointed at AWS rather than at the browser.
-"""
+"""The UI's origin must be allowed or every API call fails as "Network Error"."""
 
 from __future__ import annotations
 
@@ -39,9 +30,9 @@ def _preflight(client, origin: str):
     "origin",
     [
         "http://localhost:3000",
-        "http://127.0.0.1:3000",   # what docker-compose publishes
+        "http://127.0.0.1:3000",
         "http://localhost:5173",
-        "http://127.0.0.1:5173",   # vite dev server, same trap
+        "http://127.0.0.1:5173",
     ],
 )
 def test_default_allowlist_covers_both_spellings_of_the_local_host(client, origin):
@@ -58,8 +49,6 @@ def test_unlisted_origins_are_still_refused(client):
 
 
 def test_origins_are_configurable_for_other_hostnames(monkeypatch):
-    # Anyone serving the UI from a hostname or behind a proxy needs this;
-    # without it they hit exactly the same dead end.
     monkeypatch.setenv("MAXOPS_CORS_ORIGINS", "https://maxops.corp.example, http://10.0.0.5:3000")
 
     assert Settings().cors_origin_list == [

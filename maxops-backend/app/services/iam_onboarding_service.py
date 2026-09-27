@@ -537,9 +537,9 @@ def _session_for_profile_lookup(profile_name: Optional[str]) -> boto3.Session:
     return boto3.Session(region_name=settings.aws_region)
 
 
-def _profile_summary(profile_name: Optional[str]) -> Dict[str, Any]:
+def _profile_summary_shell(profile_name: Optional[str]) -> Dict[str, Any]:
     selected_profile = _normalize_profile_name(profile_name)
-    summary: Dict[str, Any] = {
+    return {
         "profile_name": selected_profile,
         "display_name": selected_profile or DEFAULT_AWS_PROFILE_NAME,
         "account_id": None,
@@ -547,6 +547,11 @@ def _profile_summary(profile_name: Optional[str]) -> Dict[str, Any]:
         "is_default": selected_profile is None,
         "error": None,
     }
+
+
+def _profile_summary(profile_name: Optional[str]) -> Dict[str, Any]:
+    selected_profile = _normalize_profile_name(profile_name)
+    summary = _profile_summary_shell(selected_profile)
 
     try:
         session = _session_for_profile_lookup(selected_profile)
@@ -564,7 +569,12 @@ def _profile_summary(profile_name: Optional[str]) -> Dict[str, Any]:
 
 
 def list_available_aws_profiles() -> List[Dict[str, Any]]:
-    profile_names = boto3.Session().available_profiles
+    try:
+        profile_names = boto3.Session().available_profiles
+    except (BotoCoreError, ClientError) as exc:
+        summary = _profile_summary_shell(None)
+        summary["error"] = _aws_error_message("List AWS profiles", exc)
+        return [summary]
     if not profile_names:
         return [_profile_summary(None)]
     with ThreadPoolExecutor(max_workers=min(8, len(profile_names))) as executor:
