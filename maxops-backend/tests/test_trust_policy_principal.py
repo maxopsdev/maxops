@@ -104,3 +104,36 @@ def test_unrelated_malformed_policy_errors_get_no_principal_hint():
 def test_other_error_codes_get_no_hint():
     denied = ClientError({"Error": {"Code": "AccessDenied", "Message": "principal"}}, "CreateRole")
     assert svc._principal_error_hint(denied, SSO_CALLER, SSO_REAL_ARN) == ""
+
+
+FEDERATED_CALLER = f"arn:aws:sts::{ACCOUNT}:federated-user/Bob"
+ACCOUNT_ROOT = f"arn:aws:iam::{ACCOUNT}:root"
+
+
+def test_federated_user_falls_back_to_the_account_root():
+    """A federated-user ARN names a session, not an entity; IAM rejects it."""
+    iam = FakeIam()
+    assert svc._iam_principal_from_caller(FEDERATED_CALLER, ACCOUNT, iam) == ACCOUNT_ROOT
+    assert iam.calls == []
+
+
+def test_federated_user_keeps_a_non_default_partition():
+    caller = f"arn:aws-cn:sts::{ACCOUNT}:federated-user/Bob"
+    assert svc._iam_principal_from_caller(caller, ACCOUNT) == f"arn:aws-cn:iam::{ACCOUNT}:root"
+
+
+def test_federated_user_error_states_the_sts_limitation():
+    hint = svc._principal_error_hint(_malformed(), FEDERATED_CALLER, ACCOUNT_ROOT)
+    assert "federated-user session" in hint
+    assert "assume a role" in hint
+
+
+def test_federated_user_is_explained_for_any_error_code():
+    """The limitation surfaces as AccessDenied too, so do not gate on one code."""
+    denied = ClientError({"Error": {"Code": "AccessDenied", "Message": "no"}}, "CreateRole")
+    assert "federated-user session" in svc._principal_error_hint(denied, FEDERATED_CALLER, ACCOUNT_ROOT)
+
+
+def test_non_federated_callers_are_unaffected_by_the_federated_branch():
+    denied = ClientError({"Error": {"Code": "AccessDenied", "Message": "no"}}, "CreateRole")
+    assert svc._principal_error_hint(denied, SSO_CALLER, SSO_REAL_ARN) == ""
