@@ -42,6 +42,25 @@ def _prime_cur_pricing_preference() -> None:
 
 _prime_cur_pricing_preference()
 
+
+def _sync_host_aws_profiles() -> None:
+    """Make the host's ~/.aws/config profiles visible when AWS_CONFIG_FILE is redirected.
+
+    Best effort: profile discovery is an onboarding convenience, so a failure
+    here must not stop the API from starting.
+    """
+    import logging
+
+    try:
+        from app.services.iam_onboarding_service import sync_host_aws_profiles
+
+        sync_host_aws_profiles()
+    except Exception as exc:  # noqa: BLE001
+        logging.getLogger(__name__).warning("Could not sync host AWS profiles. %s", exc)
+
+
+_sync_host_aws_profiles()
+
 # Create FastAPI app
 app = FastAPI(
     title="MaxOps API",

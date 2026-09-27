@@ -16,12 +16,13 @@ services:
       - AWS_REGION=${AWS_REGION:-us-east-1}
       # The onboarding wizard writes a MaxOpsReadOnlyRole profile back to an
       # AWS config file once a role is created/registered (see aws-setup.md).
-      # /root/.aws is mounted read-only above (on purpose -- the container
+      # /root/.aws is mounted read-only below (on purpose -- the container
       # shouldn't be able to rewrite your real ~/.aws), so redirect the write
       # target into the backend-data volume, where it persists like the DBs.
-      # Read lookups for existing profiles (AWS_PROFILE, source_profile
-      # chaining) still resolve through the read-only /root/.aws mount as
-      # normal -- this only affects where MaxOps writes the new profile.
+      # AWS_CONFIG_FILE REPLACES ~/.aws/config, it does not add to it, so the
+      # backend copies the mounted config into this file on startup and before
+      # listing profiles. Without that copy botocore sees only the profiles in
+      # ~/.aws/credentials and the picker shows `default` alone.
       - AWS_CONFIG_FILE=/app/data/aws/config
       - DATABASE_URL=sqlite:////app/data/maxops.db
       - PRICING_DATABASE_PATH=/app/data/maxops_pricing.db

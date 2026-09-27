@@ -2,10 +2,11 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
 import re
 import time
-from configparser import ConfigParser
+from configparser import ConfigParser, Error as ConfigParserError
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -15,6 +16,8 @@ from botocore.config import Config
 from botocore.exceptions import BotoCoreError, ClientError
 
 from app.config import settings
+
+logger = logging.getLogger("uvicorn.error")
 
 MAXOPS_READ_ONLY_ROLE_NAME = "MaxOpsReadOnlyRole"
 MAXOPS_READ_ONLY_POLICY_NAME = "MaxOpsReadOnlyScanPolicy"
@@ -429,6 +432,62 @@ def _profile_section_name(profile_name: str) -> str:
     return "default" if profile_name == DEFAULT_AWS_PROFILE_NAME else f"profile {profile_name}"
 
 
+def _host_aws_config_path() -> Path:
+    return Path.home() / ".aws" / "config"
+
+
+def sync_host_aws_profiles() -> Optional[Dict[str, Any]]:
+    """Mirror the host's ~/.aws/config into the config file MaxOps reads.
+
+    Returns None when no copy is needed or the host file is unreadable.
+
+    AWS_CONFIG_FILE replaces ~/.aws/config rather than adding to it, so
+    redirecting it -- which the container does, to keep the mounted ~/.aws
+    read-only while still being able to write the role profile -- hides every
+    profile the user has defined there. Only ~/.aws/credentials stays visible,
+    which is why such a setup lists `default` and nothing else.
+    """
+    target = _aws_config_path()
+    source = _host_aws_config_path()
+    if target.resolve() == source.resolve() or not source.is_file():
+        return None
+
+    host_config = ConfigParser()
+    existing = ConfigParser()
+    try:
+        host_config.read(source, encoding="utf-8")
+        if target.is_file():
+            existing.read(target, encoding="utf-8")
+    except (OSError, UnicodeDecodeError, ConfigParserError) as exc:
+        logger.warning("Could not read AWS config files to sync profiles: %s", exc)
+        return None
+
+    merged = ConfigParser()
+    for section in host_config.sections():
+        merged[section] = dict(host_config.items(section))
+
+    # Profiles the wizard wrote live only in the target; the host copy has no
+    # record of them, so carry them over unless the host defines them itself.
+    for managed_name in (MAXOPS_READ_ONLY_PROFILE_NAME, MAXOPS_COST_DATA_PROFILE_NAME):
+        section = _profile_section_name(managed_name)
+        if existing.has_section(section) and not merged.has_section(section):
+            merged[section] = dict(existing.items(section))
+
+    try:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        with target.open("w", encoding="utf-8") as config_file:
+            merged.write(config_file)
+    except OSError as exc:
+        logger.warning("Could not write the synced AWS config at %s: %s", target, exc)
+        return None
+
+    return {
+        "source": str(source),
+        "target": str(target),
+        "sections": merged.sections(),
+    }
+
+
 def _source_profile_settings(
     source_profile_name: Optional[str],
     managed_profile_name: str = MAXOPS_READ_ONLY_PROFILE_NAME,
@@ -569,6 +628,7 @@ def _profile_summary(profile_name: Optional[str]) -> Dict[str, Any]:
 
 
 def list_available_aws_profiles() -> List[Dict[str, Any]]:
+    sync_host_aws_profiles()
     try:
         profile_names = boto3.Session().available_profiles
     except (BotoCoreError, ClientError) as exc:
