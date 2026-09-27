@@ -627,6 +627,34 @@ def _profile_summary(profile_name: Optional[str]) -> Dict[str, Any]:
     return summary
 
 
+def _ambient_credential_label() -> str:
+    """Name the credential source in play when no named profile exists.
+
+    Falls back to "default" when nothing more specific can be determined.
+    """
+    if os.environ.get("AWS_ACCESS_KEY_ID") and os.environ.get("AWS_SECRET_ACCESS_KEY"):
+        return "environment credentials"
+    if os.environ.get("AWS_CONTAINER_CREDENTIALS_RELATIVE_URI") or os.environ.get(
+        "AWS_CONTAINER_CREDENTIALS_FULL_URI"
+    ):
+        return "container credentials"
+    if settings.aws_use_iam_role:
+        return "instance role"
+    return DEFAULT_AWS_PROFILE_NAME
+
+
+def _missing_aws_config_hint() -> Optional[str]:
+    """Explain an empty profile list, or None when a config file does exist."""
+    host_config = _host_aws_config_path()
+    if host_config.is_file():
+        return None
+    return (
+        f"No AWS config file found at {host_config}, so there are no profiles to list. "
+        "Under Docker that path is the read-only ~/.aws mount: set AWS_CONFIG_HOST_DIR "
+        "in .env to your local ~/.aws directory and restart to pick a profile."
+    )
+
+
 def list_available_aws_profiles() -> List[Dict[str, Any]]:
     sync_host_aws_profiles()
     try:
@@ -636,7 +664,15 @@ def list_available_aws_profiles() -> List[Dict[str, Any]]:
         summary["error"] = _aws_error_message("List AWS profiles", exc)
         return [summary]
     if not profile_names:
-        return [_profile_summary(None)]
+        # No profile is selected here, so credentials come from the ambient
+        # chain. Labelling that "default" reads as the [default] profile and
+        # hides both the real source and the fact that nothing was found.
+        summary = _profile_summary(None)
+        summary["display_name"] = _ambient_credential_label()
+        hint = _missing_aws_config_hint()
+        if hint:
+            summary["error"] = f"{summary['error']} {hint}" if summary["error"] else hint
+        return [summary]
     with ThreadPoolExecutor(max_workers=min(8, len(profile_names))) as executor:
         return list(executor.map(_profile_summary, profile_names))
 
