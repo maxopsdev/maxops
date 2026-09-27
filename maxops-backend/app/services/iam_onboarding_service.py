@@ -364,16 +364,55 @@ def _assume_role_session(profile_name: Optional[str] = None) -> boto3.Session:
     )
 
 
-def _iam_principal_from_caller(caller_arn: str, account_id: str) -> str:
+def _resolve_role_arn(iam_client, role_name: str) -> Optional[str]:
+    """Look up a role's real ARN, or None when it cannot be read.
+
+    An assumed-role ARN drops the role's path, so the ARN rebuilt from it names
+    a role that does not exist for anything stored under one -- Identity Center
+    roles above all, which live at /aws-reserved/sso.amazonaws.com/<region>/.
+    IAM rejects a principal that does not resolve with MalformedPolicyDocument.
+    """
+    if iam_client is None or not role_name:
+        return None
+    try:
+        return str(iam_client.get_role(RoleName=role_name)["Role"]["Arn"]) or None
+    except (BotoCoreError, ClientError) as exc:
+        logger.warning("Could not resolve the ARN for role %s: %s", role_name, exc)
+        return None
+
+
+def _iam_principal_from_caller(caller_arn: str, account_id: str, iam_client=None) -> str:
     assumed_role_marker = ":assumed-role/"
     if assumed_role_marker in caller_arn:
         prefix, suffix = caller_arn.split(assumed_role_marker, 1)
         role_name = suffix.split("/", 1)[0]
         partition = prefix.split(":", 2)[1]
-        return f"arn:{partition}:iam::{account_id}:role/{role_name}"
+        resolved = _resolve_role_arn(iam_client, role_name)
+        return resolved or f"arn:{partition}:iam::{account_id}:role/{role_name}"
     if caller_arn:
         return caller_arn
     return f"arn:aws:iam::{account_id}:root"
+
+
+def _principal_error_hint(exc: Exception, caller_arn: str, principal_arn: str) -> str:
+    """Add the derived principal to an invalid-principal rejection, else "".
+
+    IAM reports only "invalid principal in policy", never which one, so the
+    ARN MaxOps derived from the caller is the whole diagnosis.
+    """
+    if not isinstance(exc, ClientError):
+        return ""
+    error = exc.response.get("Error", {})
+    if error.get("Code") != "MalformedPolicyDocument":
+        return ""
+    if "principal" not in str(error.get("Message", "")).lower():
+        return ""
+    return (
+        f" MaxOps trusted {principal_arn}, derived from the signed-in identity {caller_arn}. "
+        "IAM could not resolve it, which usually means the caller's role sits under a path "
+        "and MaxOps lacks iam:GetRole to read its full ARN. Grant iam:GetRole, or sign in "
+        "with a profile whose role has no path."
+    )
 
 
 def _trust_policy(principal_arn: str) -> Dict[str, Any]:
@@ -813,7 +852,7 @@ def create_or_update_read_only_role(profile_name: Optional[str] = None) -> Dict[
 
     account_id = str(caller.get("Account") or "")
     caller_arn = str(caller.get("Arn") or "")
-    trusted_principal_arn = _iam_principal_from_caller(caller_arn, account_id)
+    trusted_principal_arn = _iam_principal_from_caller(caller_arn, account_id, iam_client)
     trust_document = _trust_policy(trusted_principal_arn)
 
     role: Optional[Dict[str, Any]] = None
@@ -838,7 +877,10 @@ def create_or_update_read_only_role(profile_name: Optional[str] = None) -> Dict[
             pass
     except ClientError as exc:
         if exc.response.get("Error", {}).get("Code") != "EntityAlreadyExists":
-            raise IamRoleCreationError(_aws_error_message("Create IAM role", exc)) from exc
+            raise IamRoleCreationError(
+                _aws_error_message("Create IAM role", exc)
+                + _principal_error_hint(exc, caller_arn, trusted_principal_arn)
+            ) from exc
         try:
             role = iam_client.get_role(RoleName=MAXOPS_READ_ONLY_ROLE_NAME).get("Role")
             iam_client.update_assume_role_policy(
@@ -848,6 +890,7 @@ def create_or_update_read_only_role(profile_name: Optional[str] = None) -> Dict[
         except ClientError as update_exc:
             raise IamRoleCreationError(
                 _aws_error_message("Update existing IAM role trust policy", update_exc)
+                + _principal_error_hint(update_exc, caller_arn, trusted_principal_arn)
             ) from update_exc
 
     try:
@@ -957,7 +1000,7 @@ def create_or_update_cost_data_role(profile_name: Optional[str] = None) -> Dict[
 
     account_id = str(caller.get("Account") or "")
     caller_arn = str(caller.get("Arn") or "")
-    trusted_principal_arn = _iam_principal_from_caller(caller_arn, account_id)
+    trusted_principal_arn = _iam_principal_from_caller(caller_arn, account_id, iam_client)
     trust_document = _trust_policy(trusted_principal_arn)
 
     role: Optional[Dict[str, Any]] = None
@@ -982,7 +1025,10 @@ def create_or_update_cost_data_role(profile_name: Optional[str] = None) -> Dict[
             pass
     except ClientError as exc:
         if exc.response.get("Error", {}).get("Code") != "EntityAlreadyExists":
-            raise IamRoleCreationError(_aws_error_message("Create IAM role", exc)) from exc
+            raise IamRoleCreationError(
+                _aws_error_message("Create IAM role", exc)
+                + _principal_error_hint(exc, caller_arn, trusted_principal_arn)
+            ) from exc
         try:
             role = iam_client.get_role(RoleName=MAXOPS_COST_DATA_ROLE_NAME).get("Role")
             iam_client.update_assume_role_policy(
@@ -992,6 +1038,7 @@ def create_or_update_cost_data_role(profile_name: Optional[str] = None) -> Dict[
         except ClientError as update_exc:
             raise IamRoleCreationError(
                 _aws_error_message("Update existing IAM role trust policy", update_exc)
+                + _principal_error_hint(update_exc, caller_arn, trusted_principal_arn)
             ) from update_exc
 
     try:
