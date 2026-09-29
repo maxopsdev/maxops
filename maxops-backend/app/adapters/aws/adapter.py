@@ -515,12 +515,6 @@ class AWSAdapter(CloudAdapter):
     def _sagemaker_client(self, region: Optional[str]) -> Any:
         """Return a SageMaker client scoped to the requested region."""
         query_region = region or getattr(self, "_default_region", None) or settings.aws_region
-        if self._use_simulator:
-            return self.session.client(
-                "sagemaker",
-                endpoint_url=settings.aws_simulator_endpoint,
-                region_name=query_region,
-            )
         return self.session.client("sagemaker", region_name=query_region)
 
     def _sagemaker_application_autoscaling_client(self, region: Optional[str]) -> Any:

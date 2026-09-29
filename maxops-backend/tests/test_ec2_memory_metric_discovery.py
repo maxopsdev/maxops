@@ -66,7 +66,6 @@ class MemoryCloudWatchClient:
 def _adapter(client):
     adapter = object.__new__(AWSAdapter)
     adapter._default_region = "us-east-1"
-    adapter._use_simulator = False
     adapter.cloudwatch_client = client
     return adapter
 

@@ -560,7 +560,6 @@ def test_rds_inventory_and_pi_adapters_paginate_and_use_dbi_resource_id():
             return rds_client if name == "rds" else pi_client
 
     adapter = AWSAdapter.__new__(AWSAdapter)
-    adapter._use_simulator = False
     adapter.session = Session()
     instances = adapter._get_rds_instances(region="us-west-2")
     assert [item["resource_id"] for item in instances] == ["db-a", "db-b"]
@@ -615,7 +614,6 @@ def test_rds_context_collects_paginated_connection_limit_and_proves_explicit_tar
             return client
 
     adapter = AWSAdapter.__new__(AWSAdapter)
-    adapter._use_simulator = False
     adapter.session = Session()
     adapter._resolve_region = lambda region: region or "us-east-1"
     context = adapter.get_rds_rightsizing_context(
@@ -716,7 +714,6 @@ def test_price_list_fallback_paginates_and_persists_decimal_dimensions():
             return pricing
 
     adapter = AWSAdapter.__new__(AWSAdapter)
-    adapter._use_simulator = False
     adapter.session = Session()
     result = adapter.get_rds_rightsizing_prices(
         {"Engine": "sqlserver-se", "LicenseModel": "license-included", "MultiAZ": False},

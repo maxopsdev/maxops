@@ -322,7 +322,6 @@ class CloudWatch:
 def test_trend_adapter_emits_fifteen_query_ids_per_series_and_chunks_at_500():
     cloudwatch = CloudWatch()
     adapter = AWSAdapter.__new__(AWSAdapter)
-    adapter._use_simulator = False
     adapter.cloudwatch_client = cloudwatch
     descriptor = lambda index, reason: {
         "cache_cluster_id": f"cache-{index:03d}",
@@ -618,7 +617,6 @@ def test_member_inventory_is_one_bulk_call_and_failure_does_not_drop_group():
     for fail_members in (False, True):
         client = _ElastiCacheInventoryClient(fail_members=fail_members)
         adapter = AWSAdapter.__new__(AWSAdapter)
-        adapter._use_simulator = False
         adapter.session = _InventorySession(client)
         resources = adapter._get_elasticache_resources(
             "elasticache_replication_group", {}, "us-east-1"
