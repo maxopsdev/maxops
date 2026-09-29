@@ -381,7 +381,22 @@ def _resolve_role_arn(iam_client, role_name: str) -> Optional[str]:
         return None
 
 
+def _partition_from_arn(caller_arn: str) -> str:
+    """Read the partition out of an ARN, defaulting to "aws"."""
+    parts = caller_arn.split(":")
+    return parts[1] if len(parts) > 2 and parts[1] else "aws"
+
+
+def _account_root_principal(account_id: str, partition: str = "aws") -> str:
+    return f"arn:{partition}:iam::{account_id}:root"
+
+
 def _iam_principal_from_caller(caller_arn: str, account_id: str, iam_client=None) -> str:
+    """Pick a trust-policy principal IAM will accept for the current caller.
+
+    Falls back to the account root, which always resolves, when the caller has
+    no ARN that can name a principal.
+    """
     assumed_role_marker = ":assumed-role/"
     if assumed_role_marker in caller_arn:
         prefix, suffix = caller_arn.split(assumed_role_marker, 1)
@@ -389,17 +404,34 @@ def _iam_principal_from_caller(caller_arn: str, account_id: str, iam_client=None
         partition = prefix.split(":", 2)[1]
         resolved = _resolve_role_arn(iam_client, role_name)
         return resolved or f"arn:{partition}:iam::{account_id}:role/{role_name}"
+    if ":federated-user/" in caller_arn:
+        # GetFederationToken identities have no IAM principal to name -- the
+        # federated-user ARN is a session, not an entity, and IAM rejects it.
+        # The account root is the only principal that resolves; which callers
+        # may then assume the role is decided by their own IAM permissions.
+        return _account_root_principal(account_id, _partition_from_arn(caller_arn))
     if caller_arn:
         return caller_arn
-    return f"arn:aws:iam::{account_id}:root"
+    return _account_root_principal(account_id)
 
 
 def _principal_error_hint(exc: Exception, caller_arn: str, principal_arn: str) -> str:
-    """Add the derived principal to an invalid-principal rejection, else "".
+    """Explain a failed role setup in terms of the caller, or "" if unexplained.
 
-    IAM reports only "invalid principal in policy", never which one, so the
-    ARN MaxOps derived from the caller is the whole diagnosis.
+    IAM reports only "invalid principal in policy", never which principal, so
+    the ARN MaxOps derived from the caller is the whole diagnosis.
     """
+    if ":federated-user/" in caller_arn:
+        # Documented STS limitation, not a permissions gap: GetFederationToken
+        # credentials cannot call any IAM operation, nor any STS operation but
+        # GetCallerIdentity. No trust policy makes this flow work.
+        return (
+            f" The signed-in identity {caller_arn} is a federated-user session from "
+            "sts:GetFederationToken. AWS does not allow these credentials to call IAM "
+            "operations, or to assume a role, so MaxOps cannot create a scan role with "
+            "them. Scan with this profile directly, or run role setup once with an IAM "
+            "user or an assumed role."
+        )
     if not isinstance(exc, ClientError):
         return ""
     error = exc.response.get("Error", {})
