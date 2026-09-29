@@ -1,5 +1,5 @@
 """API routes for OSS account settings."""
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from fastapi import APIRouter, HTTPException, Depends, status
 from pydantic import BaseModel
@@ -17,8 +17,11 @@ from app.schemas.settings import (
 from app.services.settings_service import (
     build_account_settings_summary,
     build_settings_catalog,
+    clear_account_inventory_state,
     ensure_account_settings,
+    get_account_settings,
     get_or_create_onboarding_settings,
+    reseed_default_policies,
     save_action_settings,
     save_onboarding_account_draft,
     save_check_settings,
@@ -190,6 +193,141 @@ def update_setup_credentials(
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     return {"profile": profile, "using_scan_profile": profile is None}
+
+
+class ScanCredentialsRequest(BaseModel):
+    """`profile` of None or "" resets to the default credential chain.
+
+    `confirm_account_change` acknowledges that the chosen profile belongs to a
+    different AWS account, which wipes everything scanned so far.
+    """
+
+    profile: Optional[str] = None
+    confirm_account_change: bool = False
+
+
+def _scan_credentials_state(db: Session) -> Dict[str, Any]:
+    """Current scan profile plus what the picker needs to offer alternatives."""
+    from app.services.aws_credentials import get_scan_aws_profile_name
+    from app.services.iam_onboarding_service import list_available_aws_profiles
+
+    try:
+        available = list_available_aws_profiles()
+    except Exception:  # noqa: BLE001 - the dropdown is a convenience, not a gate
+        available = []
+
+    configured = get_scan_aws_profile_name(db)
+    resolved_account = next(
+        (
+            entry.get("account_id")
+            for entry in available
+            if entry.get("profile_name") == configured
+        ),
+        None,
+    )
+    return {
+        "profile": configured,
+        "using_default_chain": configured is None,
+        "resolved_account_id": resolved_account,
+        "available_profiles": available,
+    }
+
+
+@router.get("/scan-credentials")
+def get_scan_credentials(db: Session = Depends(get_db)):
+    """The AWS profile every scan, check and action runs as.
+
+    Separate from the setup profile: this one is read-only and does the
+    routine work, while the setup profile exists only for privileged
+    operations such as creating a Cost and Usage Report export.
+    """
+    state = _scan_credentials_state(db)
+    account_settings = get_account_settings(db)
+    state["settings_account_id"] = getattr(account_settings, "account", None)
+    state["account_mismatch"] = bool(
+        state["resolved_account_id"]
+        and state["settings_account_id"]
+        and state["resolved_account_id"] != state["settings_account_id"]
+    )
+    return state
+
+
+def _account_for_profile(profile: Optional[str]) -> Optional[str]:
+    """The AWS account a profile resolves to, or None if it cannot be read."""
+    from app.services.iam_onboarding_service import list_available_aws_profiles
+
+    try:
+        available = list_available_aws_profiles()
+    except Exception:  # noqa: BLE001 - treated as "unknown", never as a mismatch
+        return None
+    return next(
+        (
+            entry.get("account_id")
+            for entry in available
+            if entry.get("profile_name") == profile
+        ),
+        None,
+    )
+
+
+@router.put("/scan-credentials")
+def update_scan_credentials(
+    request: ScanCredentialsRequest,
+    db: Session = Depends(get_db),
+):
+    """Change or reset the AWS profile used for scanning.
+
+    Switching between roles in the same account is routine. Switching to a
+    different account is not: everything already scanned describes resources
+    that the new credentials cannot see, so it is refused with 409 until the
+    caller confirms, and confirming stops running scans and clears that data.
+    """
+    from app.services.aws_credentials import set_scan_aws_profile
+    from app.services.scan_service import cancel_running_scans, count_running_scans
+
+    account_settings = get_account_settings(db)
+    current_account = getattr(account_settings, "account", None)
+    new_account = _account_for_profile(request.profile)
+    # An unreadable account is not a mismatch -- refusing on "unknown" would
+    # block every profile whose STS call timed out.
+    account_changing = bool(current_account and new_account and new_account != current_account)
+
+    if account_changing and not request.confirm_account_change:
+        raise HTTPException(
+            status_code=409,
+            detail={
+                "code": "account_change_requires_confirmation",
+                "current_account_id": current_account,
+                "new_account_id": new_account,
+                "running_scans": count_running_scans(db),
+                "message": (
+                    f"Profile '{request.profile}' belongs to account {new_account}, not "
+                    f"{current_account}. Switching stops any running scan and clears every "
+                    "finding, inventory row and snooze collected from "
+                    f"{current_account}. Confirm to start fresh."
+                ),
+            },
+        )
+
+    try:
+        set_scan_aws_profile(db, request.profile)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+    if account_changing:
+        stopped = cancel_running_scans(db)
+        cleared = clear_account_inventory_state(db)
+        reseed_default_policies(db)
+        account_settings.account = new_account
+        db.add(account_settings)
+        db.commit()
+        state = get_scan_credentials(db)
+        state["account_changed"] = True
+        state["stopped_scans"] = stopped
+        state["cleared_rows"] = sum(cleared.values())
+        return state
+
+    return get_scan_credentials(db)
 
 
 class CreateSetupRoleRequest(BaseModel):

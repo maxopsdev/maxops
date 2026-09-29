@@ -33,6 +33,23 @@ export interface SetupCredentials {
   available_profiles: AwsProfileOption[];
 }
 
+/**
+ * Credentials every scan, check and action runs as. Distinct from
+ * SetupCredentials, which covers privileged setup work only.
+ */
+export interface ScanCredentials {
+  profile: string | null;
+  using_default_chain: boolean;
+  resolved_account_id: string | null;
+  settings_account_id: string | null;
+  account_mismatch: boolean;
+  available_profiles: AwsProfileOption[];
+  /** Present only on a confirmed account switch, which resets scanned data. */
+  account_changed?: boolean;
+  stopped_scans?: number;
+  cleared_rows?: number;
+}
+
 export interface SetupRolePolicy {
   role_name: string;
   policy_name: string;
@@ -62,6 +79,22 @@ export const settingsApi = {
 
   updateSetupCredentials: async (profile: string | null): Promise<SetupCredentials> => {
     const response = await apiClient.put('/settings/setup-credentials', { profile });
+    return response.data;
+  },
+
+  getScanCredentials: async (): Promise<ScanCredentials> => {
+    const response = await apiClient.get('/settings/scan-credentials');
+    return response.data;
+  },
+
+  updateScanCredentials: async (
+    profile: string | null,
+    confirmAccountChange = false,
+  ): Promise<ScanCredentials> => {
+    const response = await apiClient.put('/settings/scan-credentials', {
+      profile,
+      confirm_account_change: confirmAccountChange,
+    });
     return response.data;
   },
 
