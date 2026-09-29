@@ -1,6 +1,8 @@
 """Account settings storage, catalog generation, and effective check parameters."""
 from __future__ import annotations
 
+import logging
+
 from collections import defaultdict
 from copy import deepcopy
 from typing import Any, Dict, Iterable, List, Optional
@@ -10,19 +12,10 @@ from sqlalchemy.orm import Session
 from app.actions.registry import action_registry
 from app.checks.registry import CheckMetadata, check_registry
 from app.config import settings as app_settings
-from app.models.inventory import (
-    DynamoDbInventory,
-    EbsInventory,
-    Ec2Inventory,
-    ElasticacheInventory,
-    MaxOpsInventory,
-    RdsInventory,
-    S3Inventory,
-    SageMakerInventory,
-)
-from app.models.policy import PolicyCostSavings, PolicyExecution, PolicyExecutionResult
+from app.database import Base
+
+logger = logging.getLogger(__name__)
 from app.models.settings import AccountSettings, ActionSetting, CheckSetting, UserSettings
-from app.models.settings import OnboardingCheckResult, OnboardingExecution, ResourceExemption
 
 
 def is_s3_optimizer_enabled() -> bool:
@@ -251,28 +244,43 @@ def _normalize_environment(value: Optional[str]) -> str:
     return str(value or "").strip()
 
 
+# The account settings row survives: it carries the account and profile being
+# switched to, and every other table hangs off it.
+PRESERVED_TABLES = {"account_settings"}
+
+
+def reseed_default_policies(db: Session) -> int:
+    """Put the default check policies back after a reset. Does not commit.
+
+    The wipe empties `policies` along with everything else, and seeding only
+    runs at startup, so without this a reset would leave the account with no
+    checks to run until the container was restarted.
+    """
+    from app.utils.seed_data import seed_policies
+
+    try:
+        return seed_policies(db)
+    except Exception as exc:  # noqa: BLE001 - a reset must not fail on reseeding
+        logger.warning("Could not reseed default policies after a reset: %s", exc)
+        return 0
+
+
 def clear_account_inventory_state(db: Session) -> Dict[str, int]:
-    """Remove account-specific inventory, scan results, and derived resource state."""
+    """Empty every table but the account settings row. Does not commit.
+
+    Driven off the table metadata rather than a hand-written model list, so a
+    table added later is covered without anyone remembering to add it. The
+    list this replaced had already fallen four tables behind, leaving tags,
+    snooze audits and action history describing resources from an account the
+    user had moved off. Deletion runs children-first so foreign keys hold.
+    """
+    import app.models  # noqa: F401 - registers every table on the metadata
+
     deleted: Dict[str, int] = {}
-
-    for model in (
-        OnboardingCheckResult,
-        OnboardingExecution,
-        PolicyCostSavings,
-        PolicyExecutionResult,
-        PolicyExecution,
-        ResourceExemption,
-        MaxOpsInventory,
-        Ec2Inventory,
-        S3Inventory,
-        RdsInventory,
-        ElasticacheInventory,
-        EbsInventory,
-        DynamoDbInventory,
-        SageMakerInventory,
-    ):
-        deleted[model.__tablename__] = db.query(model).delete(synchronize_session=False)
-
+    for table in reversed(Base.metadata.sorted_tables):
+        if table.name in PRESERVED_TABLES:
+            continue
+        deleted[table.name] = db.execute(table.delete()).rowcount
     return deleted
 
 
@@ -848,6 +856,7 @@ def upsert_account_settings(
         account_changed = _normalize_account(settings.account) != normalized_account
         if account_changed:
             clear_account_inventory_state(db)
+            reseed_default_policies(db)
         settings.environment = normalized_environment
         settings.account = normalized_account
         settings.environment_options = normalized_environment_options

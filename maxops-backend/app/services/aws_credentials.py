@@ -11,29 +11,41 @@ from app.database import SessionLocal
 from app.models.settings import AccountSettings
 
 
+def _scan_profile_from_settings(account_settings: Any) -> Optional[str]:
+    """Read the scan profile off an AccountSettings row, or None if unset."""
+    onboarding_data: Any = account_settings.onboarding_data if account_settings else None
+    if not isinstance(onboarding_data, dict):
+        return None
+
+    iam_role_data = onboarding_data.get("iam_role")
+    if not isinstance(iam_role_data, dict):
+        return None
+
+    profile_name = iam_role_data.get("scan_profile_name")
+    if not isinstance(profile_name, str):
+        return None
+
+    return profile_name.strip() or None
+
+
+def _latest_account_settings(db) -> Any:
+    return (
+        db.query(AccountSettings)
+        .order_by(AccountSettings.updated_at.desc(), AccountSettings.id.desc())
+        .first()
+    )
+
+
+def get_scan_aws_profile_name(db) -> Optional[str]:
+    """Return the scan profile using a caller-supplied session."""
+    return _scan_profile_from_settings(_latest_account_settings(db))
+
+
 def get_onboarding_scan_profile_name() -> Optional[str]:
     """Return the IAM role profile created during onboarding, when available."""
     db = SessionLocal()
     try:
-        account_settings = (
-            db.query(AccountSettings)
-            .order_by(AccountSettings.updated_at.desc(), AccountSettings.id.desc())
-            .first()
-        )
-        onboarding_data: Any = account_settings.onboarding_data if account_settings else None
-        if not isinstance(onboarding_data, dict):
-            return None
-
-        iam_role_data = onboarding_data.get("iam_role")
-        if not isinstance(iam_role_data, dict):
-            return None
-
-        profile_name = iam_role_data.get("scan_profile_name")
-        if not isinstance(profile_name, str):
-            return None
-
-        normalized = profile_name.strip()
-        return normalized or None
+        return _scan_profile_from_settings(_latest_account_settings(db))
     except SQLAlchemyError:
         return None
     finally:
@@ -111,6 +123,38 @@ def create_setup_boto3_session(region_name: Optional[str] = None) -> boto3.Sessi
         profile_name=profile_name,
         region_name=region_name or settings.aws_region,
     )
+
+
+def set_scan_aws_profile(db, profile_name: Optional[str]) -> Optional[str]:
+    """Persist the scan profile. Passing None or "" clears it.
+
+    Clearing falls back to MAXOPS_AWS_PROFILE and then the default credential
+    chain, matching a machine that never ran onboarding.
+    """
+    account_settings = _latest_account_settings(db)
+    if account_settings is None:
+        raise ValueError("No account settings exist yet; complete onboarding first.")
+
+    normalized = (profile_name or "").strip() or None
+    onboarding_data = (
+        account_settings.onboarding_data
+        if isinstance(account_settings.onboarding_data, dict)
+        else {}
+    )
+    iam_role = (
+        onboarding_data.get("iam_role")
+        if isinstance(onboarding_data.get("iam_role"), dict)
+        else {}
+    )
+
+    # Reassign rather than mutate: SQLAlchemy does not track in-place edits to
+    # a plain JSON column, so a nested write would be silently dropped.
+    account_settings.onboarding_data = {
+        **onboarding_data,
+        "iam_role": {**iam_role, "scan_profile_name": normalized},
+    }
+    db.commit()
+    return normalized
 
 
 def set_setup_aws_profile(db, profile_name: Optional[str]) -> Optional[str]:

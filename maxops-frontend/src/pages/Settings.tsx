@@ -23,6 +23,7 @@ import { ControlRenderer } from '@/components/settings/ControlRenderer';
 import { ToggleControl } from '@/components/settings/ToggleControl';
 import { formatControlValue } from '@/components/settings/controlUtils';
 import { PRESET_ACCENTS, PRESET_OPTIONS, type PresetKey } from '@/components/settings/PresetConfig';
+import { ScanCredentialsCard } from '@/components/settings/ScanCredentialsCard';
 import { SegmentedPreset } from '@/components/settings/SegmentedPreset';
 import { useOptimizationProfile } from '@/contexts/OptimizationProfileContext';
 import { Layout } from '@/components/layout/Layout';
@@ -725,6 +726,8 @@ export const SettingsPage: React.FC = () => {
             </Link>
           </div>
         </Card>
+
+        <ScanCredentialsCard />
 
         <Card className="rounded-[1.75rem] border border-gray-200 bg-white p-0 shadow-sm dark:border-gray-800 dark:bg-gray-900">
           <div className="border-b border-gray-200 px-5 py-4 dark:border-gray-800">

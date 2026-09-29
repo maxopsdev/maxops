@@ -9,6 +9,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, Iterable, List, Optional, Tuple, Type
 
 from sqlalchemy import func
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 from botocore.exceptions import ClientError
 
@@ -2314,6 +2315,55 @@ def get_scan_status(db: Session, execution_id: int) -> Dict[str, Any]:
     return _build_scan_status(db, execution)
 
 
+CANCELED_SCAN_STATUS = "canceled"
+
+
+def cancel_running_scans(db: Session) -> int:
+    """Mark every in-progress scan canceled and return how many were signalled.
+
+    Scans run in a background thread with no handle to interrupt, so this is
+    cooperative: run_inventory_scan re-reads its own row between checks and
+    stops when it sees this status.
+    """
+    running = (
+        db.query(OnboardingExecution)
+        .filter(OnboardingExecution.status == "running")
+        .all()
+    )
+    now = datetime.now(timezone.utc)
+    for execution in running:
+        execution.status = CANCELED_SCAN_STATUS
+        execution.completed_at = now
+        execution.error_message = "Scan stopped because the AWS account changed."
+        db.add(execution)
+    db.commit()
+    return len(running)
+
+
+def count_running_scans(db: Session) -> int:
+    """How many scans are in progress right now."""
+    return (
+        db.query(OnboardingExecution)
+        .filter(OnboardingExecution.status == "running")
+        .count()
+    )
+
+
+def _scan_was_canceled(db: Session, execution: Optional[OnboardingExecution]) -> bool:
+    """True once another session has marked this run canceled.
+
+    The status is expired first: the cancelling request commits on a different
+    session, so the copy held here is stale until it is re-read.
+    """
+    if execution is None:
+        return False
+    try:
+        db.expire(execution, ["status"])
+        return execution.status == CANCELED_SCAN_STATUS
+    except SQLAlchemyError:
+        return False
+
+
 def mark_scan_failed(db: Session, execution_id: int, error: str) -> None:
     execution = (
         db.query(OnboardingExecution)
@@ -2420,7 +2470,11 @@ def run_inventory_scan(
     response_results: Dict[str, Dict[str, Any]] = {}
     error_details: List[Dict[str, str]] = []
 
+    canceled = False
     for check_index, (check, parameters) in enumerate(check_entries, start=1):
+        if _scan_was_canceled(db, execution):
+            canceled = True
+            break
         check_id = check.check_id
         try:
             resources = _execute_check_across_settings(
@@ -2603,7 +2657,10 @@ def run_inventory_scan(
                 "execution_time": generated_at.isoformat(),
             }
 
-    execution.status = "completed" if failed == 0 else "failed"
+    if canceled or _scan_was_canceled(db, execution):
+        execution.status = CANCELED_SCAN_STATUS
+    else:
+        execution.status = "completed" if failed == 0 else "failed"
     execution.completed_checks = completed
     execution.failed_checks = failed
     execution.completed_at = generated_at
