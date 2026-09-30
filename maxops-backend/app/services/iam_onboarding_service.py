@@ -461,9 +461,37 @@ def _trust_policy(principal_arn: str) -> Dict[str, Any]:
     }
 
 
+# botocore raises these when an SSO profile has no usable cached token. The
+# name is the only reliable signal: the classes moved between botocore
+# versions, and the messages are not stable either.
+_SSO_TOKEN_ERROR_NAMES = {
+    "SSOTokenLoadError",
+    "UnauthorizedSSOTokenError",
+    "SSOError",
+    "PendingAuthorizationExpiredError",
+}
+
+
+def _sso_token_hint(exc: Exception) -> str:
+    """Tell an SSO user what to do about a missing token, else "".
+
+    The raw error is "Token for <session> does not exist", which does not say
+    that the login has to happen on the host: there is no browser in the
+    container, and it reads the token through the mounted ~/.aws.
+    """
+    if type(exc).__name__ not in _SSO_TOKEN_ERROR_NAMES:
+        return ""
+    return (
+        " This is an AWS IAM Identity Center (SSO) profile with no valid cached token. "
+        "Run `aws sso login --profile <name>` on the machine hosting Docker, not in the "
+        "container, then set AWS_CONFIG_HOST_DIR in .env to your ~/.aws directory so the "
+        "container can read the token."
+    )
+
+
 def _aws_error_message(operation: str, exc: Exception) -> str:
     if not isinstance(exc, ClientError):
-        return f"{operation} failed: {exc}"
+        return f"{operation} failed: {exc}{_sso_token_hint(exc)}"
     error = exc.response.get("Error", {})
     code = error.get("Code", "AWSClientError")
     message = error.get("Message", str(exc))
@@ -631,7 +659,7 @@ def _write_role_profile(
     }
 
 
-def _wait_for_role_permissions_ready(profile_name: str, timeout_seconds: float = 20.0) -> None:
+def _wait_for_role_permissions_ready(profile_name: str, timeout_seconds: float = 20.0) -> bool:
     """Best-effort wait for a freshly created/updated role's permissions to propagate.
 
     IAM role and inline-policy changes are eventually consistent -- using a
@@ -644,20 +672,66 @@ def _wait_for_role_permissions_ready(profile_name: str, timeout_seconds: float =
     frontend ever starts running checks -- avoids that failure mode instead of
     relying on the caller to retry.
 
-    Deliberately swallows failures once the timeout elapses: the role is very
-    likely fine and just still propagating in a slower account/region, and
-    onboarding shouldn't hard-fail over a best-effort readiness probe.
+    Returns True once the role answers, False if it never did. Never raises:
+    the role is usually fine and merely propagating in a slower account, and
+    onboarding should not hard-fail on a best-effort probe. The caller uses
+    the False case to avoid adopting a profile that does not work -- an
+    Identity Center permission set with no sts:AssumeRole permission fails
+    here permanently, and looks exactly like slow propagation.
     """
     deadline = time.monotonic() + timeout_seconds
     delay = 1.0
+    last_error: Optional[Exception] = None
     while time.monotonic() < deadline:
         try:
             session = boto3.Session(profile_name=profile_name, region_name=settings.aws_region)
             session.client("ec2", region_name=settings.aws_region).describe_instances(MaxResults=5)
-            return
-        except (BotoCoreError, ClientError):
+            return True
+        except (BotoCoreError, ClientError) as exc:
+            last_error = exc
             time.sleep(delay)
             delay = min(delay * 1.5, 4.0)
+    logger.warning(
+        "Scan profile %s never became usable within %ss: %s",
+        profile_name,
+        timeout_seconds,
+        last_error,
+    )
+    return False
+
+
+def _usable_scan_profile(
+    scan_profile_name: str,
+    source_profile_name: Optional[str],
+    caller_arn: str,
+) -> Dict[str, Any]:
+    """Decide which profile scans should use, and say so if it is not the role.
+
+    Adopting the role unchecked is how an Identity Center user ends up worse
+    off than before onboarding: their own profile scans fine, the role they
+    cannot assume does not, and the switch happens silently. Falling back
+    keeps them on what already works.
+    """
+    if _wait_for_role_permissions_ready(scan_profile_name):
+        return {"scan_profile_name": scan_profile_name, "scan_profile_warning": None}
+
+    detail = (
+        " IAM Identity Center permission sets do not grant sts:AssumeRole unless an "
+        "administrator adds it, and re-provisioning a permission set also invalidates "
+        "the role's trust policy. Scanning with your SSO profile directly needs neither."
+        if "AWSReservedSSO_" in caller_arn
+        else " Grant the signed-in identity sts:AssumeRole on this role, or keep scanning "
+        "with the profile you signed in as."
+    )
+    return {
+        "scan_profile_name": source_profile_name,
+        "scan_profile_warning": (
+            f"The role was set up, but {scan_profile_name} could not be assumed, so scans "
+            f"still use {source_profile_name or 'your existing credentials'}."
+            + detail
+            + " You can change this under Settings, Scan Credentials."
+        ),
+    }
 
 
 def _session_for_profile_lookup(profile_name: Optional[str]) -> boto3.Session:
@@ -831,6 +905,7 @@ def use_existing_read_only_role(role_arn: str, profile_name: Optional[str] = Non
         raise IamRoleCreationError(_aws_error_message("Resolve AWS caller identity", exc)) from exc
 
     account_id = str(caller.get("Account") or "")
+    caller_arn = str(caller.get("Arn") or "")
 
     _validate_existing_role(session, caller, normalized_role_arn, selected_profile)
 
@@ -843,7 +918,9 @@ def use_existing_read_only_role(role_arn: str, profile_name: Optional[str] = Non
     except OSError as exc:
         raise IamRoleCreationError(f"Create local AWS profile failed: {exc}") from exc
 
-    _wait_for_role_permissions_ready(scan_profile["profile_name"])
+    usable = _usable_scan_profile(
+        scan_profile["profile_name"], selected_profile, caller_arn
+    )
 
     return {
         "role_name": MAXOPS_READ_ONLY_ROLE_NAME,
@@ -852,7 +929,8 @@ def use_existing_read_only_role(role_arn: str, profile_name: Optional[str] = Non
         "trusted_principal_arn": None,
         "aws_profile_name": selected_profile,
         "aws_account_id": account_id,
-        "scan_profile_name": scan_profile["profile_name"],
+        "scan_profile_name": usable["scan_profile_name"],
+        "scan_profile_warning": usable["scan_profile_warning"],
         "scan_profile_config_path": scan_profile["config_path"],
         "scan_profile_source_profile": scan_profile.get("source_profile"),
         "scan_profile_credential_source": scan_profile.get("credential_source"),
@@ -950,7 +1028,9 @@ def create_or_update_read_only_role(profile_name: Optional[str] = None) -> Dict[
     except OSError as exc:
         raise IamRoleCreationError(f"Create local AWS profile failed: {exc}") from exc
 
-    _wait_for_role_permissions_ready(scan_profile["profile_name"])
+    usable = _usable_scan_profile(
+        scan_profile["profile_name"], selected_profile, caller_arn
+    )
 
     status = "created" if created else "updated_existing"
     return {
@@ -960,7 +1040,8 @@ def create_or_update_read_only_role(profile_name: Optional[str] = None) -> Dict[
         "trusted_principal_arn": trusted_principal_arn,
         "aws_profile_name": selected_profile,
         "aws_account_id": account_id,
-        "scan_profile_name": scan_profile["profile_name"],
+        "scan_profile_name": usable["scan_profile_name"],
+        "scan_profile_warning": usable["scan_profile_warning"],
         "scan_profile_config_path": scan_profile["config_path"],
         "scan_profile_source_profile": scan_profile.get("source_profile"),
         "scan_profile_credential_source": scan_profile.get("credential_source"),

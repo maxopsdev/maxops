@@ -30,11 +30,17 @@ services:
       - TEST_ACTION=${TEST_ACTION:-false}
     volumes:
       - backend-data:/app/data
-      # Mounts your local AWS config/credentials read-only so AWS_PROFILE works
-      # inside the container. Defaults to an empty placeholder dir (harmless) so
+      # Mounts your local AWS config/credentials into the container so
+      # AWS_PROFILE works. Defaults to an empty placeholder dir (harmless) so
       # `docker compose up` works out of the box; set AWS_CONFIG_HOST_DIR in .env
       # to your real ~/.aws path to enable it — no editing this file required.
-      - ${AWS_CONFIG_HOST_DIR:-./.aws-empty}:/root/.aws:ro
+      #
+      # Read-only by default: MaxOps should not be able to rewrite your real
+      # ~/.aws, and it never needs to (AWS_CONFIG_FILE above redirects its one
+      # write). IAM Identity Center (SSO) is the exception -- botocore renews
+      # the cached SSO token in place and cannot do that on a read-only mount,
+      # so those users set AWS_CONFIG_MOUNT_MODE=rw in .env.
+      - ${AWS_CONFIG_HOST_DIR:-./.aws-empty}:/root/.aws:${AWS_CONFIG_MOUNT_MODE:-ro}
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=3)"]
       interval: 10s

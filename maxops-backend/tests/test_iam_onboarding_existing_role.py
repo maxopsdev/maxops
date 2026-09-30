@@ -28,8 +28,10 @@ def _fake_session(account_id: str = "123456789012") -> MagicMock:
 @pytest.fixture(autouse=True)
 def _skip_propagation_wait(monkeypatch):
     """The post-write readiness probe retries against real AWS for up to 20s;
-    pointless (and slow) against mocked sessions."""
-    monkeypatch.setattr(svc, "_wait_for_role_permissions_ready", lambda *a, **k: None)
+    pointless (and slow) against mocked sessions. It returns True because a
+    False now means "the role could not be assumed", which makes onboarding
+    keep the source profile instead of adopting the role."""
+    monkeypatch.setattr(svc, "_wait_for_role_permissions_ready", lambda *a, **k: True)
 
 
 def test_use_existing_role_registers_local_profile_without_iam_writes(tmp_path: Path, monkeypatch) -> None:
