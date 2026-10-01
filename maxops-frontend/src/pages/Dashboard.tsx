@@ -12,6 +12,7 @@ import { ResourceTypeIcon } from '@/components/icons/ResourceTypeIcon';
 import { TrendingUp, DollarSign, FileText, AlertCircle, Loader2, XCircle, X, Filter, ChevronDown, ChevronRight, Play } from 'lucide-react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { checksApi, type CheckState } from '@/services/checks';
+import { summariseYearlySavings } from '@/utils/savings';
 import { inventoryApi } from '@/services/inventory';
 import { policiesApi } from '@/services/policies';
 import type { CheckMetadata, CheckTestResponse } from '@/services/checks';
@@ -450,6 +451,7 @@ export const DashboardPage: React.FC = () => {
               resources_found: latestResult.resources_found || 0,
               potential_savings_yearly: latestResult.potential_savings_yearly || 
                 (latestResult.potential_savings_monthly ? latestResult.potential_savings_monthly * 12 : 0),
+              savings_by_resource: latestResult.savings_by_resource,
               last_run: latestResult.execution_time || lastRun || undefined,
               status: latestResult.status === 'completed' ? 'completed' : (latestResult.status === 'failed' ? 'failed' : 'idle')
             });
@@ -746,13 +748,16 @@ export const DashboardPage: React.FC = () => {
     return adjustOptimizationCount(rawResources, profile);
   }, [filteredChecks, checkStates, profile]);
 
-  const totalSavings = useMemo(() => {
-    const rawSavings = filteredChecks.reduce((sum, check) => {
-      const state = checkStates.get(check.check_id);
-      return sum + (state?.potential_savings_yearly || 0);
-    }, 0);
-    return adjustOptimizationSavings(rawSavings, profile);
-  }, [filteredChecks, checkStates, profile]);
+  // One resource can be flagged by several checks; see summariseYearlySavings.
+  const savingsSummary = useMemo(() => {
+    const states = filteredChecks.map((check) => checkStates.get(check.check_id));
+    return summariseYearlySavings(states);
+  }, [filteredChecks, checkStates]);
+
+  const totalSavings = useMemo(
+    () => adjustOptimizationSavings(savingsSummary.total, profile),
+    [savingsSummary, profile],
+  );
 
   const groupedChecks = useMemo(() => {
     const groups = new Map<string, CheckMetadata[]>();
@@ -1072,6 +1077,14 @@ export const DashboardPage: React.FC = () => {
                 <div className="mt-2 text-3xl font-bold text-gray-900 dark:text-white">
                   ${totalSavings.toFixed(2)}
                 </div>
+                {savingsSummary.sharedResourceCount > 0 && (
+                  <div className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                    {savingsSummary.sharedResourceCount} resource
+                    {savingsSummary.sharedResourceCount === 1 ? ' is' : 's are'} flagged by more
+                    than one check and counted once. Adding every check separately would read
+                    ${savingsSummary.rawTotal.toFixed(2)}.
+                  </div>
+                )}
               </div>
               <div className="p-3 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
                 <DollarSign className="text-primary-600 dark:text-primary-400" size={24} />

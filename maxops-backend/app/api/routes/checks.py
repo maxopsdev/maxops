@@ -227,6 +227,31 @@ def get_check_last_runs(db: Session = Depends(get_db)):
     return last_runs
 
 
+def _savings_by_resource(resources: List[Dict[str, Any]]) -> Dict[str, float]:
+    """Yearly savings keyed by resource id, for the resources a check flagged.
+
+    The dashboard needs this to deduplicate: several checks can flag the same
+    resource, and each one reports the saving available from fixing that
+    resource, not an additional saving. Summing check totals multiplies one
+    opportunity by however many checks noticed it.
+    """
+    by_resource: Dict[str, float] = {}
+    for resource in resources:
+        metadata = resource.get("metadata") or {}
+        yearly = metadata.get("potential_savings_yearly") or 0
+        if not yearly:
+            yearly = (metadata.get("potential_savings_monthly") or 0) * 12
+        if not yearly:
+            continue
+        resource_id = resource.get("resource_id")
+        if not resource_id:
+            continue
+        # One check can only describe a resource once; a repeat is a duplicate
+        # row, not extra saving.
+        by_resource[resource_id] = max(by_resource.get(resource_id, 0.0), float(yearly))
+    return by_resource
+
+
 @router.get("/checks/latest-results")
 def get_latest_check_results(db: Session = Depends(get_db)):
     """
@@ -262,6 +287,7 @@ def get_latest_check_results(db: Session = Depends(get_db)):
             # Extract resource count and potential savings, excluding exempted/snoozed resources
             resource_count = check_result.resources_found
             potential_savings_yearly = 0
+            savings_by_resource: Dict[str, float] = {}
             if check_result.metadata_json and "resources" in check_result.metadata_json:
                 resources = check_result.metadata_json.get("resources", [])
 
@@ -274,11 +300,8 @@ def get_latest_check_results(db: Session = Depends(get_db)):
                 ]
 
                 resource_count = len(filtered_resources)
-                potential_savings_yearly = sum(
-                    r.get("metadata", {}).get("potential_savings_yearly", 0) or
-                    (r.get("metadata", {}).get("potential_savings_monthly", 0) * 12)
-                    for r in filtered_resources
-                )
+                savings_by_resource = _savings_by_resource(filtered_resources)
+                potential_savings_yearly = sum(savings_by_resource.values())
             elif check_result.metadata_json:
                 potential_savings_yearly = check_result.metadata_json.get(
                     "potential_savings_yearly",
@@ -293,6 +316,7 @@ def get_latest_check_results(db: Session = Depends(get_db)):
                 "status": check_result.status,
                 "resources_found": resource_count,
                 "potential_savings_yearly": round(potential_savings_yearly, 6),
+                "savings_by_resource": savings_by_resource,
                 "error": check_result.error,
                 "execution_time": execution_time.isoformat() if execution_time else None,
             }
@@ -311,6 +335,9 @@ def get_latest_check_results(db: Session = Depends(get_db)):
             "status": summary.status,
             "resources_found": summary.resources_found,
             "potential_savings_yearly": round(summary.potential_savings_yearly, 6),
+            # Imported summaries carry no per-resource breakdown, so they
+            # cannot take part in deduplication and are counted as they are.
+            "savings_by_resource": {},
             "error": None,
             "execution_time": imported_time,
         }

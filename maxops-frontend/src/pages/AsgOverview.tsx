@@ -12,6 +12,7 @@ import { rightsizingApi, type AsgRightsizingResponse } from '@/services/recommen
 import { useSharedOverviewFilters } from '@/stores/sharedOverviewFilters';
 import { buildSharedTagOptions, matchesSharedTagSelections, parseSharedTagQuery } from '@/utils/sharedOverviewFilters';
 import { downloadCsv } from '@/utils/csv';
+import { resolveAsgSavings } from '@/utils/savings';
 
 const formatCurrency = (value: number) =>
   new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value);
@@ -205,7 +206,21 @@ export const AsgOverviewPage: React.FC = () => {
     });
   }, [filteredRows, inventorySearch, inventorySort]);
 
-  const visibleSavings = filteredRows.reduce((sum, row) => sum + (row.recommendation?.tiers.balanced?.yearly_savings ?? row.resource.maxops.potential_savings_yearly ?? 0), 0);
+  const visibleSavings = filteredRows.reduce(
+    (sum, row) =>
+      sum +
+      resolveAsgSavings(
+        row.recommendation?.tiers.balanced?.yearly_savings,
+        row.resource.maxops.potential_savings_yearly,
+      ).value,
+    0,
+  );
+  // The dashboard prices every group with the checks' flat share of cost. Here
+  // a rightsizer recommendation, where one exists, is priced from a specific
+  // target configuration instead -- so the two totals legitimately differ.
+  const refinedRowCount = filteredRows.filter(
+    (row) => row.recommendation?.tiers.balanced?.yearly_savings != null,
+  ).length;
   const visibleDesiredCapacity = filteredRows.reduce((sum, row) => sum + row.resource.capacity.desired_capacity, 0);
 
   const regionFilterLabel = selectedRegions.length === 0 ? 'All regions' : selectedRegions.length === 1 ? selectedRegions[0] : `${selectedRegions.length} regions`;
@@ -456,7 +471,16 @@ export const AsgOverviewPage: React.FC = () => {
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           <SummaryTile label="Groups" value={formatNumber(summary?.total_groups ?? 0)} sublabel={`${formatNumber(summary?.active_groups ?? 0)} active groups`} icon={<ShieldCheck className="h-5 w-5" />} />
           <SummaryTile label="Desired Capacity" value={formatNumber(visibleDesiredCapacity)} sublabel={`${formatNumber(summary?.total_max_size ?? 0)} total max size`} icon={<Cpu className="h-5 w-5" />} />
-          <SummaryTile label="Annual Savings" value={formatCurrency(visibleSavings)} sublabel={`${formatCurrency(summary?.monthly_cost_estimate ?? 0)} current monthly cost`} icon={<TrendingDown className="h-5 w-5" />} />
+          <SummaryTile
+            label="Annual Savings"
+            value={formatCurrency(visibleSavings)}
+            sublabel={
+              refinedRowCount > 0
+                ? `${refinedRowCount} priced from a rightsizer target, so this differs from the dashboard`
+                : `${formatCurrency(summary?.monthly_cost_estimate ?? 0)} current monthly cost`
+            }
+            icon={<TrendingDown className="h-5 w-5" />}
+          />
           <SummaryTile label="Healthy" value={formatNumber(summary?.healthy_groups ?? 0)} sublabel={`${formatNumber(summary?.actionable_groups ?? 0)} flagged groups`} icon={<Wallet className="h-5 w-5" />} />
         </div>
 
@@ -513,7 +537,7 @@ export const AsgOverviewPage: React.FC = () => {
           renderItem={(item) => {
             const { resource, recommendation } = item;
             const balanced = recommendation?.tiers.balanced;
-            const effectiveSavings = balanced?.yearly_savings ?? resource.maxops.potential_savings_yearly ?? 0;
+            const effectiveSavings = resolveAsgSavings(balanced?.yearly_savings, resource.maxops.potential_savings_yearly).value;
 
             return (
               <div

@@ -34,6 +34,8 @@ export interface CheckState {
   resources_found: number;
   potential_savings_monthly?: number;
   potential_savings_yearly?: number;
+  /** Yearly savings per resource id, so totals can deduplicate across checks. */
+  savings_by_resource?: Record<string, number>;
   last_run?: string;
   status?: 'idle' | 'running' | 'completed' | 'failed';
 }
@@ -75,6 +77,7 @@ export const checksApi = {
     status: string;
     resources_found: number;
     potential_savings_yearly: number;
+    savings_by_resource?: Record<string, number>;
     error: string | null;
     execution_time: string | null;
   }>> => {

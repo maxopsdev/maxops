@@ -6,6 +6,7 @@ import { Layout } from '@/components/layout/Layout';
 import { Card } from '@/components/common/Card';
 import { inventoryApi } from '@/services/inventory';
 import { rightsizingApi } from '@/services/recommendations';
+import { resolveAsgSavings } from '@/utils/savings';
 
 const formatCurrency = (value: number) =>
   new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value);
@@ -29,12 +30,18 @@ const titleCase = (value: string) =>
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join(' ');
 
-const DetailMetric: React.FC<{ label: string; value: string; icon: React.ReactNode }> = ({ label, value, icon }) => (
+const DetailMetric: React.FC<{
+  label: string;
+  value: string;
+  icon: React.ReactNode;
+  hint?: string;
+}> = ({ label, value, icon, hint }) => (
   <div className="rounded-2xl border border-gray-200 bg-white/95 p-5 dark:border-gray-700 dark:bg-gray-900/95">
     <div className="flex items-center justify-between gap-4">
       <div className="min-w-0">
         <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">{label}</div>
         <div className="mt-3 truncate text-2xl font-semibold text-gray-900 dark:text-white">{value}</div>
+        {hint && <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">{hint}</div>}
       </div>
       <div className="rounded-2xl bg-warning-50 p-3 text-warning-700 dark:bg-warning-950/50 dark:text-warning-300">{icon}</div>
     </div>
@@ -90,7 +97,11 @@ export const AsgInstanceDetailsPage: React.FC = () => {
   }
 
   const balanced = recommendation?.tiers.balanced;
-  const effectiveSavings = balanced?.yearly_savings ?? resource.maxops.potential_savings_yearly ?? 0;
+  const savings = resolveAsgSavings(
+    balanced?.yearly_savings,
+    resource.maxops.potential_savings_yearly,
+  );
+  const effectiveSavings = savings.value;
   const generatedAt = recommendation?.current_capacity_evidence.inventory_generated_at || overviewQuery.data.generated_at;
   const availabilityZones = recommendation?.current_configuration.availability_zones || resource.metadata.availability_zones || [];
   const classification = recommendation?.classification || resource.maxops.status || 'UNKNOWN';
@@ -137,7 +148,20 @@ export const AsgInstanceDetailsPage: React.FC = () => {
           <DetailMetric label="Min Size" value={String(resource.capacity.min_size)} icon={<Layers size={20} />} />
           <DetailMetric label="Max Size" value={String(resource.capacity.max_size)} icon={<Layers size={20} />} />
           <DetailMetric label="Balanced Target" value={balanced ? String(balanced.target_desired_capacity) : 'N/A'} icon={<Target size={20} />} />
-          <DetailMetric label="Potential Savings" value={formatCurrency(effectiveSavings)} icon={<Wallet size={20} />} />
+          <DetailMetric
+            label="Potential Savings"
+            value={formatCurrency(effectiveSavings)}
+            icon={<Wallet size={20} />}
+            hint={
+              savings.source === 'rightsizer'
+                ? savings.alternative !== null
+                  ? `Priced from the recommended target configuration. The dashboard uses a flat share of this group's cost, which comes to ${formatCurrency(savings.alternative)}.`
+                  : 'Priced from the recommended target configuration.'
+                : savings.source === 'heuristic'
+                  ? "A flat share of this group's cost. Run the rightsizer for a figure priced from a specific target configuration."
+                  : undefined
+            }
+          />
           <DetailMetric label="Status" value={titleCase(classification)} icon={<ShieldAlert size={20} />} />
         </section>
 
